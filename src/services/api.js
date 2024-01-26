@@ -13,6 +13,7 @@ const clearToken = () => {
 // User apis
 export const getCurrentUser = async (userId) => {
   const {data} = await waterTrackerInstance.get(`/users/current`);
+  return data
 };
 
 export const userLogin = async (userData) => {
@@ -31,16 +32,18 @@ export const userRegister = async(userData) => {
 
 export const userLogOut = async (userData) => {
   const {data} = await waterTrackerInstance.post('/users/logout', userData);
-  clearToken()
+  clearToken();
+  return data;
 }
 
 export const uploadUserAvatar = async(userData) => {
-  const {data} = await waterTrackerInstance.patch('/users/udateAvatar', userData)
-  return data
+  const {data} = await waterTrackerInstance.patch('/users/udateAvatar', userData);
+  return data;
 }
 
 export const updateUser = async(userData) => {
-  const {data} = await waterTrackerInstance.patch('/users/updateUser', userData)
+  const {data} = await waterTrackerInstance.patch('/users/updateUser', userData);
+  return data;
 }
 // Today water portions apis
 
