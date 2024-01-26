@@ -7,6 +7,7 @@ export const SectionCss = styled.div`
   padding: 8px 20px 40px;
   background-color: var(--primery-White);
   background-image: url(${BottleImg});
+  background-size: cover;
 
   @media (min-width: 768px) {
     padding: 16px 32px 50px;
@@ -19,41 +20,75 @@ export const SectionCss = styled.div`
   }
 `;
 
+/* advicer styled */
 export const AdvicerCss = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
 `;
 
-export const NavCss = styled.nav`
-  display: flex;
-  flex-direction: row;
-  gap: 94px;
-  /* margin-left: 94; */
-  /* margin-right: 94; */
-
+export const WrapCss = styled.div`
+  width: 246px;
   @media (min-width: 768px) {
-    gap: 512px;
-  }
-
-  @media (min-width: 1440px) {
-    gap: 1024px;
+    width: 436px;
   }
 `;
-export const LogoBox = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
-
-export const LogoText = styled.div`
-  color: var(--primery-blue);
-  font-family: var(--primery-font);
-  font-size: 12px;
+export const TitleCss = styled.h1`
+  color: var(--primery-black);
+  font-family: Roboto;
+  font-size: 28px;
   font-style: normal;
   font-weight: 700;
-  line-height: normal;
-  text-transform: uppercase;
-  width: 58px;
-  height: 28px;
+  line-height: 1.14;
+  margin-bottom: 16px;
+
+  @media (min-width: 768px) {
+    font-size: 32px;
+  }
+`;
+
+export const TextCss = styled.div`
+  color: var(--primery-black);
+  font-family: Roboto;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.25;
+
+  @media (min-width: 768px) {
+    font-size: 26px;
+  }
+`;
+export const IconBoxCss = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+`;
+export const GridBoxcss = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+`;
+export const ButtonCss = styled.button`
+  display: flex;
+  padding: 10px 30px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  background: var(--primery-blue);
+  box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.34);
+  width: 336px;
+`;
+export const BtnText = styled.p`
+  color: var(--primery-white);
+  text-align: center;
+  font-family: var(--primery-font);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.33;
 `;
