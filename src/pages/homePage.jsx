@@ -1,13 +1,12 @@
+import { Advicer } from 'components/Advicer/advicer';
 import React from 'react';
+import { SectionCss } from '../components/Advicer/advicer.styled';
 
 const Home = () => {
   return (
-    <div>
-      <ul>
-        <li>Home</li>
-        <li>page</li>
-      </ul>
-    </div>
+    <SectionCss>
+      <Advicer />
+    </SectionCss>
   );
 };
 export default Home;

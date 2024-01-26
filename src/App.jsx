@@ -1,6 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
 import { Suspense } from 'react';
-// import { Navigation } from 'components/Navigation/navigation';
 import Navigation from 'components/Navigation/navigation';
 import Home from 'pages/homePage';
 
@@ -9,7 +8,7 @@ export const App = () => {
     <Suspense>
       <Routes>
         <Route path="/" element={<Navigation />}>
-          <Route path="/" element={<Home />}></Route>
+          <Route index element={<Home />} />
         </Route>
       </Routes>
     </Suspense>
