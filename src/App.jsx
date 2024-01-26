@@ -8,8 +8,9 @@ export const App = () => {
   return (
     <Suspense>
       <Routes>
-        <Route path="/" element={<Navigation />}></Route>
-        <Route path="/" element={<Home />}></Route>
+        <Route path="/" element={<Navigation />}>
+          <Route path="/" element={<Home />}></Route>
+        </Route>
       </Routes>
     </Suspense>
   );
