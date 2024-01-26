@@ -1,13 +1,7 @@
+import { Advicer } from 'components/Advicer/advicer';
 import React from 'react';
 
 const Home = () => {
-  return (
-    <div>
-      <ul>
-        <li>Home</li>
-        <li>page</li>
-      </ul>
-    </div>
-  );
+  return <Advicer />;
 };
 export default Home;
