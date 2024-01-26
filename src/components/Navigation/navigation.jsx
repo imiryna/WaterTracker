@@ -4,11 +4,11 @@ import { Outlet, NavLink } from 'react-router-dom';
 const Navigation = () => {
   return (
     <>
-      <Section>
-        <NavCss>
-          <Navlink to="/">Home</Navlink>
-        </NavCss>
-      </Section>
+      <div>
+        <div>
+          <NavLink to="/">Home</NavLink>
+        </div>
+      </div>
       <Outlet />
     </>
   );
