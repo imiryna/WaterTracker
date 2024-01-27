@@ -1,8 +1,10 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import { AuthStyledForm, AuthDiv, FormName, InputDiv, StyledInput, FormButton } from './signIn.styled';
  import { useFormik } from 'formik';
  import { loginThunk } from '../../Redux/auth/authThank';
  import { useDispatch } from 'react-redux';
+
 
  
  export const AuthForm = () => {
@@ -54,8 +56,10 @@ import { AuthStyledForm, AuthDiv, FormName, InputDiv, StyledInput, FormButton } 
        </InputDiv>
        
        <FormButton type="submit">Sign In</FormButton>
-
+        <NavLink to="/signup">Sign Up</NavLink>
      </AuthStyledForm>
+
+    
      </AuthDiv>
    );
  };

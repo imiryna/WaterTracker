@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { userLogin } from "services/api";
+import { userLogin, userRegister } from "services/api";
 
 export const loginThunk = createAsyncThunk(
     'auth/login',
@@ -14,5 +14,17 @@ export const loginThunk = createAsyncThunk(
     }
 );
 
+export const registerThunk = createAsyncThunk(
+    'auth/register',
+    async (formData, thunkAPI) => {
+        try {
+            const authData = await userRegister(formData);
+            
+            return authData;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.message);
+        }
+    }
+);
 
 

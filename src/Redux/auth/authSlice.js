@@ -1,14 +1,12 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { loginThunk } from './authThank';
+import { loginThunk, registerThunk } from './authThank';
 
 const INITIAL_STATE = {
   user: {
     token: null,
     email: null,
-    name: null,
   },
   authenticated: false,
-  isLoading: false,
   error: null,
 };
 
@@ -23,29 +21,35 @@ const authSlice = createSlice({
 
   .addCase(loginThunk.fulfilled, (state, action) => {
       state.user = action.payload.user;
-      state.isLoading = false;
       state.authenticated = true;
       state.token = action.payload.token;
      
   })
 
+  .addCase(registerThunk.fulfilled, (state, action) => {
+    state.user = action.payload.user;
+    state.authenticated = true;
+    state.token = action.payload.token;
+    
+})
+
  
 
   .addMatcher(
       isAnyOf(
-        loginThunk.pending
+        loginThunk.pending,
+        registerThunk.pending
         
       ),
       state => {
-        state.isLoading = true;
         state.error = null;
       }
     )
     .addMatcher(isAnyOf(
       loginThunk.rejected,
+      registerThunk.rejected
 
     ), (state, action) => {
-      state.isLoading = false;
       state.error = action.payload;
     }),
 }

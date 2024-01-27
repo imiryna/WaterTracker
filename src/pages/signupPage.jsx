@@ -1,7 +1,10 @@
 import React from 'react';
-import { SectionCss } from '../components/Advicer/advicer.styled';
+import { AuthPageDiv } from 'components/SignIn/signIn.styled'
+import AuthRegForm from 'components/SignUp/signUp';
 
-const SignupPage = () => {
-  return <SectionCss>You have to registretion here &#128540;</SectionCss>;
+const SigninPage = () => {
+  return <AuthPageDiv>
+    <AuthRegForm />
+  </AuthPageDiv>
 };
-export default SignupPage;
+export default SigninPage;
