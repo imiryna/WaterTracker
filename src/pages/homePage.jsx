@@ -1,12 +1,7 @@
-import { Advicer } from 'components/Advicer/advicer';
 import React from 'react';
 import { SectionCss } from '../components/Advicer/advicer.styled';
 
-const Home = () => {
-  return (
-    <SectionCss>
-      <Advicer />
-    </SectionCss>
-  );
+const HomePage = () => {
+  return <SectionCss>Thes is a Home page &#128540;</SectionCss>;
 };
-export default Home;
+export default HomePage;

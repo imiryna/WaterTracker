@@ -1,25 +1,26 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 
-import { NavCss, LogoBox, LogoText, TextCss } from './navigation.styled';
+import { NavCss, NavLinkCss, LogoText, TextCss } from './navigation.styled';
 
 const Navigation = () => {
-  const openUserSetting = e => {
-    // here should be called function of modal component to <open> modal
-    alert('User settings modal');
-  };
+  // const openUserSetting = e => {
+  //   // here should be called function of modal component to <open> modal
+  //   alert('User settings modal');
+  // };
 
   return (
     <>
       <NavCss>
-        <LogoBox>
+        <NavLinkCss to={'/home'}>
           <Logo />
           <LogoText>Tracker of water</LogoText>
-        </LogoBox>
-        <LogoBox onClick={openUserSetting}>
+        </NavLinkCss>
+
+        <NavLinkCss to={'/signin'}>
           <TextCss>Sign in</TextCss>
           <Signin />
-        </LogoBox>
+        </NavLinkCss>
       </NavCss>
       <Outlet />
     </>

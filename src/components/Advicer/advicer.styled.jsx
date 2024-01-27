@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import BottleImg from '../Images/Backgrounds/bottle-home-screen-mobile.png';
 import BottleImgTab from '../Images/Backgrounds/background-bubbles-main-page-tablet.png';
 import BottleImgDes from '../Images/Backgrounds/background-main-page.png';
+import { NavLink } from 'react-router-dom';
 
 export const SectionCss = styled.div`
   padding: 8px 20px 40px;
@@ -73,7 +74,7 @@ export const GridBoxcss = styled.div`
     flex-direction: row;
   }
 `;
-export const ButtonCss = styled.button`
+export const NavLinkBtn = styled(NavLink)`
   display: flex;
   padding: 10px 30px;
   justify-content: center;

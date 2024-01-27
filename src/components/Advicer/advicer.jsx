@@ -7,16 +7,11 @@ import {
   WrapCss,
   IconBoxCss,
   GridBoxcss,
-  ButtonCss,
+  NavLinkBtn,
   BtnText,
 } from './advicer.styled';
 
 export const Advicer = () => {
-  const openHomeTrackingPage = e => {
-    // here should be called function of modal component to <open> modal
-    alert('Open Home Tracking page');
-  };
-
   return (
     <div>
       <AdvicerCss>
@@ -40,9 +35,9 @@ export const Advicer = () => {
           </IconBoxCss>
         </GridBoxcss>
 
-        <ButtonCss onClick={openHomeTrackingPage}>
+        <NavLinkBtn to={'/signin'}>
           <BtnText>Try tracker</BtnText>
-        </ButtonCss>
+        </NavLinkBtn>
       </AdvicerCss>
       <div>
         <div>
