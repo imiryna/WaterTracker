@@ -1,5 +1,5 @@
 import { Formik } from 'formik';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 
 import {
   FlexWrapper,
@@ -13,15 +13,16 @@ import {
   Button,
 } from './UserForm.styled';
 import { FormError } from './FormError';
-import { logIn } from 'redux/auth-operations';
+// import { logIn } from 'redux/auth-operations';
 
 export const UserForm = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   //Submit function
   const handleSubmit = (values, { resetForm }) => {
-    const { email, password } = values;
+    // const { email, password } = values;
     // todo - state
-    dispatch(logIn({ email, password }));
+    console.log(values);
+    // dispatch(logIn({ email, password }));
     resetForm();
     return;
   };

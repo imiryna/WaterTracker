@@ -63,7 +63,7 @@ export const Button = styled.button`
   padding: 5px 20px 5px 20px;
   border: 0px solid black;
   border-radius: 5px;
-  background-color: #438dee;
+  background-color: var(--primery-blue);
   color: #fff;
   font-size: 12px;
 `;

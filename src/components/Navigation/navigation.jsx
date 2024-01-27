@@ -2,8 +2,18 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 
 import { NavCss, NavLinkCss, LogoText, TextCss } from './navigation.styled';
+// temp section ZooBeeN
+import { useState } from 'react';
+// import { Button } from 'components/common';
+import { Modal } from 'components/Modal';
+import { Setting } from 'components/Setting';
 
 const Navigation = () => {
+  // temp section ZooBeeN
+  const [showModal, setShowModal] = useState(false);
+  const togleModal = () => setShowModal(pshowModal => !pshowModal);
+  // END OF Temp section
+
   // const openUserSetting = e => {
   //   // here should be called function of modal component to <open> modal
   //   alert('User settings modal');
@@ -11,6 +21,21 @@ const Navigation = () => {
 
   return (
     <>
+      <button
+        type="button"
+        onClick={() => {
+          console.log('Button click');
+          togleModal();
+        }}
+      >
+        Modalochka ;)
+      </button>
+
+      {showModal && (
+        <Modal togleModal={togleModal}>
+          <Setting />
+        </Modal>
+      )}
       <NavCss>
         <NavLinkCss to={'/home'}>
           <Logo />
