@@ -1,4 +1,5 @@
 import { Formik } from 'formik';
+import { object, string, ref } from 'yup';
 // import { useDispatch } from 'react-redux';
 
 import {
@@ -21,24 +22,40 @@ export const UserForm = () => {
   const handleSubmit = (values, { resetForm }) => {
     // const { email, password } = values;
     // todo - state
-    console.log(values);
+    console.log('Form was Submit: ', values);
     // dispatch(logIn({ email, password }));
     resetForm();
     return;
   };
+
   const INITIAL_VALUES = {
-    gender: '',
+    gender: 'woman',
     name: '',
     email: '',
     password: '',
     newpass: '',
-    repit: '',
+    repitpass: '',
   };
+  //Formik Validation schema
+  const userSchema = object().shape({
+    gender: string().required('Gender is required'),
+    name: string().min(5).max(40).required('Name is required'),
+    email: string().email().required('Email is required'),
+    password: string().matches(
+      /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,}$/gu,
+      'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character'
+    ),
+    newpass: string().matches(
+      /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,}$/gu,
+      'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character'
+    ),
+    repitpass: string().oneOf([ref('newpass'), null], 'Passwords must match'),
+  });
   return (
     <Formik
       initialValues={INITIAL_VALUES}
       onSubmit={handleSubmit}
-      // validationSchema={schema}
+      validationSchema={userSchema}
     >
       <FormStyled>
         <FlexWrapper>
@@ -54,27 +71,25 @@ export const UserForm = () => {
                 Man
               </RadioLabel>
             </div>
-            <FormError name="name" />
+            <FormError name="gender" />
+
             <Label htmlFor="name">Your name</Label>
             <Input
               type="text"
               name="name"
               id="name"
-              pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
               title="Enter your name"
               placeholder="Your name"
-              required
             />
             <FormError name="name" />
+
             <Label htmlFor="email">Email</Label>
             <Input
               type="text"
               name="email"
               id="email"
-              pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-              title="Enter email"
+              title="Enter your email"
               placeholder="Email"
-              required
             />
             <FormError name="email" />
           </Wrapper>
@@ -84,34 +99,32 @@ export const UserForm = () => {
               type="text"
               name="password"
               id="password"
-              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-              title="Enter password"
-              placeholder="Password"
-              required
+              title="Enter your current password"
+              placeholder="Current password"
             />
             <FormError name="password" />
-            <Label htmlFor="new-pass">New password</Label>
+
+            <Label htmlFor="newpass">New password</Label>
             <Input
               type="text"
-              name="new-pass"
-              id="new-pass"
-              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+              name="newpass"
+              id="newpass"
+              // pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
               title="Enter new password"
               placeholder="New password"
-              required
             />
-            <FormError name="new-pass" />
+            <FormError name="newpass" />
+
             <Label htmlFor="repit">Repit password</Label>
             <Input
               type="text"
-              name="repit"
-              id="repit"
+              name="repitpass"
+              id="repitpass"
               pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
               title="Repit new password"
               placeholder="Repit password"
-              required
             />
-            <FormError name="repit" />
+            <FormError name="repitpass" />
           </Wrapper>
         </FlexWrapper>
         <Button type="submit" mt={3}>
