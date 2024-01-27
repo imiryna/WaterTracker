@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 export const NavCss = styled.nav`
   display: flex;
@@ -19,7 +20,7 @@ export const NavCss = styled.nav`
     margin-bottom: 49px;
   }
 `;
-export const LogoBox = styled.div`
+export const NavLinkCss = styled(NavLink)`
   display: flex;
   flex-direction: row;
   align-items: center;
