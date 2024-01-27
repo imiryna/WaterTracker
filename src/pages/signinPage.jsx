@@ -1,6 +1,10 @@
 import React from 'react';
+import AuthForm from 'components/SignIn/signIn';
+import { AuthPageDiv } from 'components/SignIn/signIn.styled';
 
 const SigninPage = () => {
-  return <div>You shouid be to registret here &#128540;</div>;
+  return <AuthPageDiv>
+    <AuthForm />
+  </AuthPageDiv>
 };
 export default SigninPage;
