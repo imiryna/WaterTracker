@@ -38,7 +38,7 @@ export const UserForm = () => {
   };
   //Formik Validation schema
   const userSchema = object().shape({
-    gender: string().required('Gender is required'),
+    // gender: string().required('Gender is required'),
     name: string().min(5).max(40).required('Name is required'),
     email: string().email().required('Email is required'),
     password: string().matches(
@@ -71,7 +71,7 @@ export const UserForm = () => {
                 Man
               </RadioLabel>
             </div>
-            <FormError name="gender" />
+            {/* <FormError name="gender" /> */}
 
             <Label htmlFor="name">Your name</Label>
             <Input
