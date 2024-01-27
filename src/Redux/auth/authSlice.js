@@ -1,29 +1,54 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, isAnyOf } from '@reduxjs/toolkit';
+import { loginThunk } from './authThank';
 
-export const authSlice = createSlice({
-  name: 'auth',
-  initialState: {
-    value: 0,
+const INITIAL_STATE = {
+  user: {
+    token: null,
+    email: null,
+    name: null,
   },
-  reducers: {
-    increment: state => {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      // doesn't actually mutate the state because it uses the Immer library,
-      // which detects changes to a "draft state" and produces a brand new
-      // immutable state based off those changes.
-      // Also, no return statement is required from these functions.
-      state.value += 1;
-    },
-    decrement: state => {
-      state.value -= 1;
-    },
-    incrementByAmount: (state, action) => {
-      state.value += action.payload;
-    },
-  },
-});
+  authenticated: false,
+  isLoading: false,
+  error: null,
+};
 
-// Action creators are generated for each case reducer function
-export const { increment, decrement, incrementByAmount } = authSlice.actions;
+
+const authSlice = createSlice({
+  name: 'auth', 
+
+  initialState: INITIAL_STATE,
+
+  extraReducers: builder =>
+  builder
+
+  .addCase(loginThunk.fulfilled, (state, action) => {
+      state.user = action.payload.user;
+      state.isLoading = false;
+      state.authenticated = true;
+      state.token = action.payload.token;
+     
+  })
+
+ 
+
+  .addMatcher(
+      isAnyOf(
+        loginThunk.pending
+        
+      ),
+      state => {
+        state.isLoading = true;
+        state.error = null;
+      }
+    )
+    .addMatcher(isAnyOf(
+      loginThunk.rejected,
+
+    ), (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    }),
+}
+)
 
 export default authSlice.reducer;
