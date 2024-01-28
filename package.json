@@ -4,6 +4,8 @@
   "private": true,
   "homepage": "https://imiryna.github.io/WaterTracker/",
   "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.15.6",
     "@mui/styled-engine-sc": "^6.0.0-alpha.13",
     "@reduxjs/toolkit": "^2.1.0",
