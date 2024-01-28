@@ -5,18 +5,18 @@ import BottleImgDes from 'Images/Backgrounds/background-main-page.png';
 import { NavLink } from 'react-router-dom';
 
 export const SectionCss = styled.div`
-  padding: 8px 20px 40px;
+  padding: 72px 20px 40px;
   background-color: var(--primery-White);
   background-image: url(${BottleImg});
   background-size: cover;
 
   @media (min-width: 768px) {
-    padding: 16px 32px 50px;
+    padding: 104px 32px 50px;
     background-image: url(${BottleImgTab});
   }
 
   @media (min-width: 1440px) {
-    padding: 12px 18px 40px;
+    padding: 109px 18px 40px;
     background-image: url(${BottleImgDes});
   }
 `;
@@ -82,7 +82,11 @@ export const NavLinkBtn = styled(NavLink)`
   border-radius: 10px;
   background: var(--primery-blue);
   box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.34);
-  width: 336px;
+  width: 280px;
+
+  @media (min-width: 768px;) {
+    width: 336px;
+  }
 `;
 export const BtnText = styled.p`
   color: var(--primery-white);

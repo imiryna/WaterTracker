@@ -44,7 +44,7 @@ export const Navigation = () => {
           <LogoText>Tracker of water</LogoText>
         </NavLinkCss>
 
-        <NavLinkCss to={'/signin'}>
+        <NavLinkCss to={'/signup'}>
           <TextCss>Sign in</TextCss>
           <Signin />
         </NavLinkCss>
