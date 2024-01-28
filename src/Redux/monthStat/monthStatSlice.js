@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { fetchMonthStat } from "services/api"
+import { getMonthStat } from "./monthStatThunk";
 
 const monthStatSlice = createSlice({
     name: 'monthStat',
@@ -20,15 +20,15 @@ const monthStatSlice = createSlice({
         }
     }, 
     extraReducers: (builder) => {
-        builder.addCase(fetchMonthStat.pending, (state) => {
+        builder.addCase(getMonthStat.pending, (state) => {
             state.isLoading = true;
             state.error = null;
-        }).addCase(fetchMonthStat.fulfilled, (state, action) => {
+        }).addCase(getMonthStat.fulfilled, (state, action) => {
             state.isLoading = false;
             state.owner = action.payload.owner;
             state.month = action.payload.month;
             state.monthStat = action.payload.monthStat;
-        }).addCase(fetchMonthStat.rejected, (state, action) => {
+        }).addCase(getMonthStat.rejected, (state, action) => {
             state.isLoading = false;
             state.error = action.payload;
         })
