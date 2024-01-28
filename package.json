@@ -4,6 +4,8 @@
   "private": true,
   "homepage": "https://imiryna.github.io/WaterTracker/",
   "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.15.6",
     "@mui/styled-engine-sc": "^6.0.0-alpha.13",
     "@reduxjs/toolkit": "^2.1.0",
@@ -19,7 +21,8 @@
     "react-scripts": "5.0.1",
     "redux-persist": "^6.0.0",
     "styled-components": "^6.1.8",
-    "web-vitals": "^2.1.3"
+    "web-vitals": "^2.1.3",
+    "yup": "^1.3.3"
   },
   "scripts": {
     "start": "react-scripts start",

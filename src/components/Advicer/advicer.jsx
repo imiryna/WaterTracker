@@ -9,6 +9,7 @@ import {
   GridBoxcss,
   NavLinkBtn,
   BtnText,
+  ContentTextCss,
 } from './advicer.styled';
 
 export const Advicer = () => {
@@ -23,15 +24,15 @@ export const Advicer = () => {
         <GridBoxcss>
           <IconBoxCss>
             <Calendar />
-            <div>Habit drive</div>
+            <ContentTextCss>Habit drive</ContentTextCss>
           </IconBoxCss>
           <IconBoxCss>
             <ChatBar />
-            <div>View statistics</div>
+            <ContentTextCss>View statistics</ContentTextCss>
           </IconBoxCss>
           <IconBoxCss>
             <Screwdriver />
-            <div>Personal rate setting</div>
+            <ContentTextCss>Personal rate setting</ContentTextCss>
           </IconBoxCss>
         </GridBoxcss>
 

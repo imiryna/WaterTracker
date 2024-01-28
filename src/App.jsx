@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import { Suspense } from 'react';
-import Navigation from 'components/Navigation/navigation';
+import { Navigation } from 'components/Navigation';
 import Welcome from 'pages/welcomePage';
 import Home from 'pages/homePage';
 import Signup from 'pages/signupPage';

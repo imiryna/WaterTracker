@@ -10,14 +10,13 @@ const INITIAL_STATE = {
   error: null,
 };
 
-
 const authSlice = createSlice({
-  name: 'auth', 
+  name: 'auth',
 
   initialState: INITIAL_STATE,
 
   extraReducers: builder =>
-  builder
+    builder
 
   .addCase(loginThunk.fulfilled, (state, action) => {
       state.user = action.payload.user;
@@ -56,3 +55,4 @@ const authSlice = createSlice({
 )
 
 export default authSlice.reducer;
+export const authReducer = authSlice.reducer;

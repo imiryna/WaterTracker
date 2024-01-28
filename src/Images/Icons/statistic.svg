@@ -1,0 +1,17 @@
+<svg fill="none" stroke="#407bff" strokeLinejoin="round" strokeLinecap="round" strokeMiterlimit="4" strokeWidth="51.2" xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <title>statistic</title>
+  <path d="M160 128v480c0 53.019 42.981 96 96 96v0h96"/>
+  <path d="M160 128h-64"/>
+  <path d="M160 128h704"/>
+  <path d="M352 704h320"/>
+  <path d="M352 704l-42.675 128"/>
+  <path d="M864 128h64"/>
+  <path d="M864 128v480c0 53.019-42.981 96-96 96v0h-96"/>
+  <path d="M672 704l42.675 128"/>
+  <path d="M309.325 832h405.35"/>
+  <path d="M309.325 832l-21.325 64"/>
+  <path d="M714.675 832l21.325 64"/>
+  <path d="M384 480v64"/>
+  <path d="M512 384v160"/>
+  <path d="M640 288v256"/>
+</svg>

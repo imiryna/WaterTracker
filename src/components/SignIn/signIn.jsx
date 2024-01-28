@@ -26,21 +26,20 @@ import { useDispatch } from 'react-redux';
   
 
 
-   return (
+  return (
     <AuthDiv>
-    
-     <AuthStyledForm onSubmit={formik.handleSubmit}>
+      <AuthStyledForm onSubmit={formik.handleSubmit}>
         <FormName>Sign in</FormName>
         <InputDiv>
-            <label htmlFor="email">Enter your email</label>
-            <StyledInput
-                id="email"
-                name="email"
-                type="email"
-                onChange={formik.handleChange}
-                value={formik.values.email}
-                placeholder='E-mail'
-            />
+          <label htmlFor="email">Enter your email</label>
+          <StyledInput
+            id="email"
+            name="email"
+            type="email"
+            onChange={formik.handleChange}
+            value={formik.values.email}
+            placeholder="E-mail"
+          />
         </InputDiv>
        
        <InputDiv>
