@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 // Import slices
 import { authReducer } from './auth/authSlice';
-// import { userReducer } from './user/userSlice';
+// import { usersReducer } from './users/usersSlice';
 //!Persist block *********************
 import storage from 'redux-persist/lib/storage';
 import {
