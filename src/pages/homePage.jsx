@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { SectionCss } from '../components/Advicer/advicer.styled';
 import { TodayList } from 'components/TodayWaterList/TodayList';
 import { DailyNorma } from 'components/DailyNorma/dailyNorma';
@@ -11,5 +12,6 @@ const HomePage = () => {
     <Calendar/>
     <DailyNorma/>
   </SectionCss>;
+
 };
 export default HomePage;
