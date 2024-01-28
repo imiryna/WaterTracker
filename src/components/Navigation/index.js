@@ -1,1 +1,1 @@
-export { Navigation, Logo, Signin } from './navigation';
+export { Navigation, Logo, Signin } from './Navigation';

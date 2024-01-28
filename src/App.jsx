@@ -3,8 +3,8 @@ import { Suspense } from 'react';
 import { Navigation } from 'components/Navigation';
 import Welcome from 'pages/WelcomePage';
 import Home from 'pages/HomePage';
-import Signup from 'pages/SignupPage';
-import Signin from 'pages/SigninPage';
+import Signup from 'pages/SignUpPage';
+import Signin from 'pages/SignInPage';
 
 export const App = () => {
   return (

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 
-import { NavCss, NavLinkCss, LogoText, TextCss } from './navigation.styled';
+import { NavCss, NavLinkCss, LogoText, TextCss } from './Navigation.styled';
 // temp section ZooBeeN for modal
 import { useState } from 'react';
 import { Modal } from 'components/Modal';

@@ -2,8 +2,8 @@ import React from 'react';
 
 import { SectionCss } from '../components/Advicer/Advicer.styled';
 import { TodayList } from 'components/TodayWaterList/TodayList';
-import { DailyNorma } from 'components/DailyNorma/dailyNorma';
-import { Calendar } from 'components/Advicer/advicer';
+import { DailyNorma } from 'components/DailyNorma/DailyNorma';
+import { Calendar } from 'components/Calendar/Calendar';
 
 
 const HomePage = () => {
