@@ -1,7 +1,5 @@
-import {
-  changeWaterThunk,
-  delWaterThunk,
-} from '../../Redux/water/waterReducer';
+import { Button } from 'primereact/button';
+import { changeWaterThunk, delWaterThunk } from '../../Redux/water/waterThunks';
 import { TodayListIcons } from './TodayListIcons';
 
 const WaterBtn = ({ children, onClick }) => {
@@ -11,6 +9,7 @@ export const createWaterCardMarcup = ({
   waterCardId,
   waterQuantity,
   waterAddTime,
+  setDialogStatus,
   dispatch,
 }) => {
   return (
@@ -36,9 +35,10 @@ export const createWaterCardMarcup = ({
           children={<TodayListIcons id="edit-icon" width="16" height="16" />}
         />
         {/* remove btn */}
-        <WaterBtn
-          onClick={() => dispatch(delWaterThunk(waterCardId))}
-          children={<TodayListIcons id="delete-icon" width="16" height="16" />}
+        <Button
+          label={<TodayListIcons id="delete-icon" width={16} height={16} />}
+          icon="pi pi-info-circle"
+          onClick={() => setDialogStatus({ visible: true, idToDelete: waterCardId })}
         />
       </div>
     </div>

@@ -1,14 +1,15 @@
 import React from 'react';
 import { StyledDalyNorma } from './dailyNorma.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeDalyNormaThunk } from '../../Redux/water/waterReducer';
+import { changeDailyNormaThunk } from '../../Redux/water/waterThunks';
+import { todayNormaSelector, totalWaterAmmountSelector } from '../../Redux/water/waterSelectors';
 
 export const DailyNorma = () => {
   const dispatch = useDispatch();
 
-  const dailyNorma = useSelector(state => state.todayWater.todayNorma);
+  const dailyNorma = useSelector(todayNormaSelector);
   const totalTodayWater = useSelector(
-    state => state.todayWater.totalWaterAmmount
+    totalWaterAmmountSelector
   );
 
   return (
@@ -19,7 +20,7 @@ export const DailyNorma = () => {
       </span>
       <button
         onClick={() =>
-          dispatch(changeDalyNormaThunk(prompt('Change daly norma')))
+          dispatch(changeDailyNormaThunk(prompt('Change daly norma')))
         }
       >
         {' '}

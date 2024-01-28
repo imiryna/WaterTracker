@@ -5,7 +5,7 @@ export const StyledWaterList = styled.div`
   flex-direction: column;
   height: 212px;
   overflow: auto;
-  &::-webkit-scrollbar{
+  &::-webkit-scrollbar {
     width: 4px;
   }
   &::-webkit-scrollbar-track {

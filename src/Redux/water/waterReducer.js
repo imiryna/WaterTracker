@@ -1,69 +1,14 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import water from 'components/TodayWaterList/water.json';
+import { createSlice } from '@reduxjs/toolkit';
+import { addWaterThunk, changeDailyNormaThunk, changeWaterThunk, delWaterThunk } from './waterThunks';
 
 const INITIAL_STATE = {
-  waterArr: water || [],
+  waterArr:  [{_id: "1", quantity: 100, time: new Date()}],
   isLoading: false,
   error: null,
   totalWaterAmmount: 0,
   todayNorma: 1500,
 };
 
-// DEL WATER
-export const delWaterThunk = createAsyncThunk(
-  'todayWater/delete',
-  async (waterId, thunkAPI) => {
-    try {
-      return waterId;
-    } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
-    }
-  }
-);
-
-// CHENGE WATER
-export const changeWaterThunk = createAsyncThunk(
-  'todayWater/change',
-  async ({ waterId, newQuantity, newTime }, thunkAPI) => {
-    try {
-      newQuantity = parseInt(newQuantity);
-      if (newQuantity <= 0 || Number.isNaN(newQuantity))
-        throw new Error('Water quantity must be more then 0ml and be a number');
-      return { waterId, newQuantity, newTime };
-    } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
-    }
-  }
-);
-
-// ADD WATER
-export const addWaterThunk = createAsyncThunk(
-  'todayWater/add',
-  async ({ quantity, time }, thunkAPI) => {
-    try {
-      quantity = parseInt(quantity);
-      console.log(`quantity:`, quantity);
-      if (quantity <= 0 || Number.isNaN(quantity))
-        throw new Error('Water quantity must be more then 0ml and be a number');
-
-      return { quantity, time };
-    } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
-    }
-  }
-);
-
-//CHANGE DALY NORMA
-export const changeDalyNormaThunk = createAsyncThunk(
-  'waterNorma/change',
-  async (newNorma, thunkAPI) => {
-    try {
-      return newNorma;
-    } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
-    }
-  }
-);
 
 export const waterSlice = createSlice({
   name: 'waterArr',
@@ -90,6 +35,10 @@ export const waterSlice = createSlice({
         );
         // Recalculating total today drinked water
         state.totalWaterAmmount = recalculateTodayDrinkedWater(state.waterArr);
+      })
+      .addCase(delWaterThunk.rejected, (state, action) => {
+        state.isLoading = false
+        state.error = action.payload
       })
       //?CHANGE WATER
       .addCase(changeWaterThunk.pending, state => {
@@ -138,20 +87,23 @@ export const waterSlice = createSlice({
         state.error = action.payload;
       })
       //?CHANGE DALY NORMA
-      .addCase(changeDalyNormaThunk.pending, state => {
+      .addCase(changeDailyNormaThunk.pending, state => {
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(changeDalyNormaThunk.fulfilled, (state, action) => {
+      .addCase(changeDailyNormaThunk.fulfilled, (state, action) => {
         state.isLoading = false;
         state.todayNorma = action.payload;
+      }).addCase(changeDailyNormaThunk.rejected, (state, action) =>{
+        state.isLoading = false
+        state.error = action.payload
       }),
 });
 
 const recalculateTodayDrinkedWater = waterArr => {
   let totalWaterAmmount = 0;
   waterArr.forEach(item => (totalWaterAmmount += item.quantity));
-  console.log(`totalWaterAmmount:`, totalWaterAmmount);
+
   return totalWaterAmmount;
 };
 
