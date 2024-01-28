@@ -82,6 +82,7 @@ export const updateUser = async(userData) => {
 
 // // Month info
 
-// const getWaterPerMonth = async(month) => {
-//   return await waterTrackerInstance.get(`/water/${month}`)
-// }
+export const fetchMonthStat = async(month) => {
+  setToken()
+  return await waterTrackerInstance.get(`/monthStat/${month}`)
+}
