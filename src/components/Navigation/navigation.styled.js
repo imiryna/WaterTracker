@@ -7,15 +7,22 @@ export const NavCss = styled.nav`
   gap: 94px;
   align-items: center;
   margin-bottom: 24px;
-  /* margin-left: 94; */
-  /* margin-right: 94; */
+  position: fixed;
+  top: 8px;
+  right: 50%;
+  transform: translate(50%);
+  width: 280px;
+  border: 3px transparent;
 
   @media (min-width: 768px) {
+    top: 16px;
+    width: 704px;
     gap: 512px;
     margin-bottom: 40px;
   }
 
   @media (min-width: 1440px) {
+    width: 1216px;
     gap: 1024px;
     margin-bottom: 49px;
   }
@@ -45,6 +52,7 @@ export const TextCss = styled.p`
   font-style: normal;
   font-weight: 400;
   line-height: 1.25;
+  width: 54px;
   margin-right: 8px;
 
   @media (min-width: 768px) {
