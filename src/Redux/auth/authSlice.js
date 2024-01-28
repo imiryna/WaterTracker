@@ -1,5 +1,5 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { loginThunk, registerThunk } from './authThank';
+import { loginThunk, registerThunk } from './authOperations';
 
 const INITIAL_STATE = {
   user: {
