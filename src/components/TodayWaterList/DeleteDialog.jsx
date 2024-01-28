@@ -1,5 +1,3 @@
-import { Button } from 'primereact/button';
-import { Dialog } from 'primereact/dialog';
 import { StyledDeleteDialog } from './DeleteDialog.styled';
 
 export const DeleteConfirmDialog = ({

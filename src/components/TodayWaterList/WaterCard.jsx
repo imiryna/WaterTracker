@@ -1,5 +1,5 @@
 import { Button } from 'primereact/button';
-import { TodayListIcons } from './TodayListIcons';
+import { CupSvg, DeleteSvg, EditSvg } from './StyledTodayListIcons';
 
 const WaterBtn = ({ children, onClick }) => {
   return <button onClick={onClick}>{children}</button>;
@@ -15,7 +15,7 @@ export const createWaterCardMarcup = ({
   return (
     <div className="water-card" key={waterCardId}>
       <div className="water-card-left-side">
-        <TodayListIcons id="cup-icon" width={36} height={36} />
+        <CupSvg/>
         <div className="water-info">
           <span className="water-quantity">{waterQuantity} ml</span>
           <span className="water-add-time">{waterAddTime}</span>
@@ -27,11 +27,11 @@ export const createWaterCardMarcup = ({
             setCurrentEditObj({_id: waterCardId, quantity: waterQuantity, time: waterAddTime});
             togleEditModal();
           }}
-          children={<TodayListIcons id="edit-icon" width="16" height="16" />}
+          children={<EditSvg/>}
         />
         {/* remove btn */}
         <Button
-          label={<TodayListIcons id="delete-icon" width={16} height={16} />}
+          label={<DeleteSvg/>}
           icon="pi pi-info-circle"
           onClick={() =>
             setDialogStatus({ visible: true, idToDelete: waterCardId })

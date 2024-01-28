@@ -2,7 +2,6 @@ import { delWaterThunk } from '../../Redux/water/waterThunks';
 import { useDispatch, useSelector } from 'react-redux';
 import { StyledWaterList } from './TodayList.styled';
 import { createWaterCardMarcup } from './WaterCard';
-import { TodayListIcons } from './TodayListIcons';
 import { waterArrSelector } from '../../Redux/water/waterSelectors';
 import { useState } from 'react';
 import { DeleteConfirmDialog } from './DeleteDialog';
@@ -10,6 +9,7 @@ import { StyledBackdrop } from './DeleteDialog.styled';
 import { Modal } from 'components/Modal';
 import { AddWaterModal } from './modals/addWaterModal';
 import { EditWaterModal } from './modals/editWaterModal';
+import { PlusSvg } from './StyledTodayListIcons';
 // import { Dialog } from '@mui/material';
 
 export const TodayList = () => {
@@ -71,7 +71,7 @@ export const TodayList = () => {
             <EditWaterModal prevVal={currentEditObj} togleModal={togleEditModal} />
           </Modal>
         )}
-        <TodayListIcons id="plus-icon" width={24} height={24} />
+        <PlusSvg />
         Add Water
       </button>
       {dialogStatus.visible && <StyledBackdrop></StyledBackdrop>}

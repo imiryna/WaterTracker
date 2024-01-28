@@ -1,22 +1,22 @@
 import { Container } from 'components/SettingModal/SettingModal.styled';
 import { StyledWaterModal } from './waterModal.styled';
 import { useState } from 'react';
-import { TodayListIcons } from '../TodayListIcons';
 import { useDispatch } from 'react-redux';
 import { addWaterThunk } from '../../../Redux/water/waterThunks';
+import { MinusSvg, PlusSvg } from '../StyledTodayListIcons';
 
-export const AddWaterModal = ({togleModal}) => {
+export const AddWaterModal = ({ togleModal }) => {
   const [amount, setAmount] = useState(50);
   const [time, setTime] = useState(new Date());
   const dispatch = useDispatch();
 
   const addWater = () => {
     dispatch(addWaterThunk({ quantity: amount, time: time }));
-    
+
     setAmount(50);
     setTime(new Date());
 
-    togleModal(true)
+    togleModal(true);
   };
   return (
     <Container onClick={e => e.stopPropagation()}>
@@ -27,7 +27,6 @@ export const AddWaterModal = ({togleModal}) => {
             e.preventDefault();
             addWater();
           }}
-
         >
           <p className="title2">Choose a value:</p>
           <label>
@@ -39,7 +38,7 @@ export const AddWaterModal = ({togleModal}) => {
                 onClick={() => setAmount(amount - 50)}
                 disabled={amount <= 0}
               >
-                {<TodayListIcons id="minus-icon" width={24} height={24} />}
+                {<MinusSvg />}
               </button>
               <span className="current-water">{amount}ml</span>
               <button
@@ -48,7 +47,7 @@ export const AddWaterModal = ({togleModal}) => {
                 onClick={() => setAmount(amount + 50)}
                 disabled={amount >= 5000}
               >
-                {<TodayListIcons id="plus-icon" width={24} height={24} />}
+                {<PlusSvg />}
               </button>
             </div>
           </label>
