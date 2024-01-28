@@ -51,6 +51,7 @@ padding: 12px 10px;
 border-radius: 6px;
 border: 1px solid #D7E3FF;
 background: #FFF);
+transition: border-color 0.3s;
 
 &::placeholder {
 color: #9EBBFF;
@@ -60,7 +61,46 @@ font-style: normal;
 font-weight: 400;
 line-height: 20px; 
 }
-`;
+
+&.error::placeholder {
+  color: #EF5050;
+}
+
+&.error {
+  border: 1px solid #EF5050;
+  color: #EF5050;
+}
+
+&:focus {
+  outline: none:
+  border-color: #D7E3FF;
+  border-width: 1px; 
+  border-style: solid; 
+  color: #407BFF;
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; 
+}
+
+&:active {
+  outline: none;
+  border-color: #D7E3FF;
+  border-width: 1px; 
+  border-style: solid; 
+  color: #407BFF;
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; 
+}
+
+&:not(:focus):not(:active) {
+  
+}
+`
 
 export const FormButton = styled.button`
   padding: 10px 30px;
@@ -76,3 +116,13 @@ export const FormButton = styled.button`
   font-weight: 500;
   line-height: 24px;
 `;
+
+export const AuthDataError = styled.div`
+color: #EF5050;
+font-family: Roboto;
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: 18px;
+margin-top: 4px;
+`

@@ -1,14 +1,12 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { loginThunk } from './authThunk';
+import { loginThunk, registerThunk } from './authOperations';
 
 const INITIAL_STATE = {
   user: {
     token: null,
     email: null,
-    name: null,
   },
   authenticated: false,
-  isLoading: false,
   error: null,
 };
 
@@ -20,22 +18,41 @@ const authSlice = createSlice({
   extraReducers: builder =>
     builder
 
-      .addCase(loginThunk.fulfilled, (state, action) => {
-        state.user = action.payload.user;
-        state.isLoading = false;
-        state.authenticated = true;
-        state.token = action.payload.token;
-      })
+  .addCase(loginThunk.fulfilled, (state, action) => {
+      state.user = action.payload.user;
+      state.authenticated = true;
+      state.token = action.payload.token;
+     
+  })
 
-      .addMatcher(isAnyOf(loginThunk.pending), state => {
-        state.isLoading = true;
+  .addCase(registerThunk.fulfilled, (state, action) => {
+    state.user = action.payload.user;
+    state.authenticated = true;
+    state.token = action.payload.token;
+    
+})
+
+ 
+
+  .addMatcher(
+      isAnyOf(
+        loginThunk.pending,
+        registerThunk.pending
+        
+      ),
+      state => {
         state.error = null;
-      })
-      .addMatcher(isAnyOf(loginThunk.rejected), (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
-      }),
-});
+      }
+    )
+    .addMatcher(isAnyOf(
+      loginThunk.rejected,
+      registerThunk.rejected
+
+    ), (state, action) => {
+      state.error = action.payload;
+    }),
+}
+)
 
 export default authSlice.reducer;
 export const authReducer = authSlice.reducer;
