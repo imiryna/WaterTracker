@@ -53,6 +53,7 @@ img {
 
 input {
   display: block;
+  outline: none;
 }
 /* Root styles */
 
