@@ -1,8 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { addWaterThunk, changeDailyNormaThunk, changeWaterThunk, delWaterThunk } from './waterThunks';
 
+/*
+  water card exemple:
+  {
+    _id: *id*,
+    quantity: 0 < number <= 5000,
+    time: *time obj*
+  }
+*/
 const INITIAL_STATE = {
-  waterArr:  [{_id: "1", quantity: 100, time: new Date()}],
+  waterArr:  [],
   isLoading: false,
   error: null,
   totalWaterAmmount: 0,
@@ -26,7 +34,6 @@ export const waterSlice = createSlice({
         state.error = null;
       })
       .addCase(delWaterThunk.fulfilled, (state, action) => {
-        console.log('hello');
         state.isLoading = false;
 
         // Searching for item to delete

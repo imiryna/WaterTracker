@@ -24,7 +24,7 @@ export const StyledWaterList = styled.div`
     .water-card-left-side {
       display: flex;
       gap: 12px;
-      stroke: var(--primery-blue);
+      fill: var(--primery-blue);
       .water-info {
         display: flex;
         gap: 16px;
@@ -58,6 +58,7 @@ export const StyledWaterList = styled.div`
     display: flex;
     font-size: 18px;
     line-height: 1.3;
+    align-items: center;
     color: var(--primery-blue);
     font-weight: 500;
     width: fit-content;

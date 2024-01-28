@@ -4,6 +4,7 @@ import { TodayList } from 'components/TodayWaterList/TodayList';
 import { DailyNorma } from 'components/DailyNorma/dailyNorma';
 import { Calendar } from 'components/Advicer/advicer';
 
+
 const HomePage = () => {
   return <SectionCss>Thes is a Home page &#128540;
     <TodayList/>

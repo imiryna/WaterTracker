@@ -34,7 +34,6 @@ export const delWaterThunk = createAsyncThunk(
     async ({ quantity, time }, thunkAPI) => {
       try {
         quantity = parseInt(quantity);
-        console.log(`quantity:`, quantity);
         if (quantity <= 0 || quantity > 5000 || Number.isNaN(quantity))
           throw new Error('Water quantity must be more then 0ml, less then 5000ml and be a number');
   
