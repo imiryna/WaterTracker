@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ProgressBarStyled } from './QrogressBar.styled';
+import { ProgressBarStyled } from './ProgressBar.styled';
 
 export const ProgressBar = () => {
   const [progress, setProgress] = useState(0);
