@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { monthStat } from 'services/helpers/tempDataForCalendar';
 import { useMediaQuery } from '@mui/material';
 
+
 import {
   StyledDay,
   StyledDiv,
@@ -21,6 +22,7 @@ import {
   StyledLeftArrow,
   StyledRightArrow,
 } from './Calendar.styled.jsx';
+
 
 export const Calendar = () => {
   // PopOver logic
