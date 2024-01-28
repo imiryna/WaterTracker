@@ -1,5 +1,5 @@
 import { UserForm } from './UserForm';
-import { Img, ImgLabel, Container } from './Setting.styled';
+import { Img, ImgLabel, Container } from './SettingModal.styled';
 
 export const Setting = imgData => {
   // tmp image data

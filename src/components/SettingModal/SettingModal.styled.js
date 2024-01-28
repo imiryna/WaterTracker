@@ -1,7 +1,8 @@
 import styled from 'styled-components';
+
 export const Container = styled.div`
   display: inline-flex;
-  margin: 50px 50px 50px 50px;
+  /* margin: 50px 50px 50px 50px; */
   padding: 32px 24px;
   flex-direction: column;
   background-color: #c8e6c9;

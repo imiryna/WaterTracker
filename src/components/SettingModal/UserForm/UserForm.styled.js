@@ -16,13 +16,9 @@ export const RadioLabel = styled.label`
 
 export const Radio = styled(Field)`
   display: inline;
-  /* padding: 8px; */
   margin-top: 15px;
   margin-bottom: 15px;
   margin-right: 5px;
-  /* border: 1px solid #ccc; */
-  /* border-radius: 4px; */
-  /* width: 100%; */
 `;
 export const Input = styled(Field)`
   display: block;
@@ -63,7 +59,7 @@ export const Button = styled.button`
   padding: 5px 20px 5px 20px;
   border: 0px solid black;
   border-radius: 5px;
-  background-color: #438dee;
+  background-color: var(--primery-blue);
   color: #fff;
   font-size: 12px;
 `;
