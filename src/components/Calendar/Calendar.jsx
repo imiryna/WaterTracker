@@ -20,7 +20,7 @@ import {
     StyledArrowButton,
     StyledLeftArrow,
     StyledRightArrow,
-} from "./Calendar.styled";
+} from "./Calendar.styled.jsx";
 
 
 export const Calendar = () => {  

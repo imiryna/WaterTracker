@@ -14,6 +14,7 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
+import { waterReducer } from './water/waterReducer';
 
 const persistConfig = {
   key: 'auth',
@@ -26,6 +27,7 @@ const persistedAuthReducer = persistReducer(persistConfig, authReducer);
 export const store = configureStore({
   reducer: {
     auth: persistedAuthReducer,
+    todayWater: waterReducer,
     // auth: authReducer,
     // user: userReducer,
   },
