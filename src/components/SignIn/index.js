@@ -1,1 +1,1 @@
-export { AuthForm } from './signIn';
+export { AuthForm } from './SignIn.styled';

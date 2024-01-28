@@ -1,10 +1,10 @@
 import { Routes, Route } from 'react-router-dom';
 import { Suspense } from 'react';
 import { Navigation } from 'components/Navigation';
-import Welcome from 'pages/welcomePage';
-import Home from 'pages/homePage';
-import Signup from 'pages/signupPage';
-import Signin from 'pages/signinPage';
+import Welcome from 'pages/WelcomePage';
+import Home from 'pages/HomePage';
+import Signup from 'pages/SignupPage';
+import Signin from 'pages/SigninPage';
 
 export const App = () => {
   return (

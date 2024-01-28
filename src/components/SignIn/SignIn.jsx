@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { AuthStyledForm, AuthDiv, FormName, InputDiv, StyledInput, FormButton, AuthDataError } from './signIn.styled';
+import { AuthStyledForm, AuthDiv, FormName, InputDiv, StyledInput, FormButton, AuthDataError } from './SignIn.styled';
 import { useFormik } from 'formik';
 import { loginThunk } from '../../Redux/auth/authOperations';
 import { useDispatch } from 'react-redux';

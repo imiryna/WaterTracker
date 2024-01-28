@@ -1,5 +1,5 @@
 import { Container } from 'components/SettingModal/SettingModal.styled';
-import { StyledWaterModal } from './waterModal.styled';
+import { StyledWaterModal } from './WaterModal.styled';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { changeWaterThunk } from '../../../Redux/water/waterThunks';
