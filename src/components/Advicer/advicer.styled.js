@@ -82,11 +82,7 @@ export const NavLinkBtn = styled(NavLink)`
   border-radius: 10px;
   background: var(--primery-blue);
   box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.34);
-  width: 280px;
-
-  @media (min-width: 768px;) {
-    width: 336px;
-  }
+  width: 336px;
 `;
 export const BtnText = styled.p`
   color: var(--primery-white);
@@ -96,4 +92,12 @@ export const BtnText = styled.p`
   font-style: normal;
   font-weight: 500;
   line-height: 1.33;
+`;
+export const ContentTextCss = styled.div`
+  color: var(--primery-black);
+  font-family: var(--primery-font);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.25;
 `;

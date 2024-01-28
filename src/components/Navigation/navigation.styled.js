@@ -2,32 +2,29 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
 export const NavCss = styled.nav`
-  position: fixed;
-  top: 8px;
-  left: 20px;
-  width: 280px;
-  border: 3px solid #73ad21;
   display: flex;
   flex-direction: row;
   gap: 94px;
   align-items: center;
   margin-bottom: 24px;
-  /* margin-left: 94; */
-  /* margin-right: 94; */
+  position: fixed;
+  top: 8px;
+  right: 50%;
+  transform: translate(50%);
+  width: 280px;
+  border: 3px transparent;
 
   @media (min-width: 768px) {
     top: 16px;
-    left: 32px;
+    width: 704px;
     gap: 512px;
     margin-bottom: 40px;
-    width: 704px;
   }
 
   @media (min-width: 1440px) {
-    left: 94px;
+    width: 1216px;
     gap: 1024px;
     margin-bottom: 49px;
-    width: 1226px;
   }
 `;
 export const NavLinkCss = styled(NavLink)`
@@ -55,8 +52,8 @@ export const TextCss = styled.p`
   font-style: normal;
   font-weight: 400;
   line-height: 1.25;
+  width: 54px;
   margin-right: 8px;
-  /* font-weight: normal; */
 
   @media (min-width: 768px) {
     font-size: 18px;
