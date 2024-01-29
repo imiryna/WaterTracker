@@ -6,7 +6,7 @@ import { waterArrSelector } from '../../Redux/water/waterSelectors';
 import { useState } from 'react';
 import { DeleteConfirmDialog } from './DeleteDialog';
 import { StyledBackdrop } from './DeleteDialog.styled';
-import { Modal } from 'components/Modal';
+import { Modal } from 'components/Modal/Modal';
 import { AddWaterModal } from './modals/AddWaterModal';
 import { EditWaterModal } from './modals/EditWaterModal';
 import { PlusSvg } from './StyledTodayListIcons';
@@ -23,7 +23,8 @@ export const TodayList = () => {
 
   const [showAddModal, setShowAddModal] = useState(false);
   const togleAddModal = () => {
-    setShowAddModal(!showAddModal)};
+    setShowAddModal(!showAddModal);
+  };
 
   const [showEditModal, setShowEditModal] = useState(false);
   const togleEditModal = () => setShowEditModal(!showEditModal);
@@ -68,7 +69,10 @@ export const TodayList = () => {
         )}
         {showEditModal && (
           <Modal togleModal={togleEditModal}>
-            <EditWaterModal prevVal={currentEditObj} togleModal={togleEditModal} />
+            <EditWaterModal
+              prevVal={currentEditObj}
+              togleModal={togleEditModal}
+            />
           </Modal>
         )}
         <PlusSvg />

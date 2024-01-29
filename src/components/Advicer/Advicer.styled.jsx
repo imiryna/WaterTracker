@@ -3,7 +3,24 @@ import BottleImg from 'Images/Backgrounds/bottle-home-screen-mobile.png';
 import BottleImgTab from 'Images/Backgrounds/background-bubbles-main-page-tablet.png';
 import BottleImgDes from 'Images/Backgrounds/background-main-page.png';
 import { NavLink } from 'react-router-dom';
+import { ReactComponent as CalendarArrow } from 'Images/Icons/calendar.svg';
+import { ReactComponent as ChatBarArrow } from 'Images/Icons/statistic.svg';
+import { ReactComponent as PersonalSettingsArrow } from 'Images/Icons/personal-settings.svg';
 
+export const PersonalSettingsArr = styled(PersonalSettingsArrow)`
+  width: 32px;
+  height: 32px;
+`;
+
+export const ChatBarArrowCss = styled(ChatBarArrow)`
+  width: 32px;
+  height: 32px;
+`;
+
+export const CalendarArrowCss = styled(CalendarArrow)`
+  width: 32px;
+  height: 32px;
+`;
 export const SectionCss = styled.div`
   padding: 72px 20px 40px;
   background-color: var(--primery-White);
