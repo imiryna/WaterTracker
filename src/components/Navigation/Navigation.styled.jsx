@@ -1,5 +1,18 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
+import { ReactComponent as Logo } from 'Images/Icons/logo.svg';
+import { ReactComponent as User } from 'Images/Icons/user.svg';
+
+export const LogoIco = styled(Logo)`
+  width: 40px;
+  height: 48px;
+`;
+export const UserIco = styled(User)`
+  width: 28px;
+  height: 28px;
+  /* fill: var(--primery-black); */
+  stroke: var(--primery-black);
+`;
 
 export const NavCss = styled.nav`
   display: flex;

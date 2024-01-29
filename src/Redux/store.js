@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 // Import slices
 import { authReducer } from './auth/authSlice';
+import { monthStatReducer } from './monthStat/monthStatSlice';
 // import { usersReducer } from './users/usersSlice';
 //!Persist block *********************
 import storage from 'redux-persist/lib/storage';
@@ -28,6 +29,7 @@ export const store = configureStore({
   reducer: {
     auth: persistedAuthReducer,
     todayWater: waterReducer,
+    monthStat: monthStatReducer,
     // auth: authReducer,
     // user: userReducer,
   },
