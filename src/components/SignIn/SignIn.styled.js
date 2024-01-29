@@ -107,7 +107,7 @@ export const FormButton = styled.button`
   border-radius: 10px;
   background: #407bff;
   box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.34);
-
+  width: 384px;
   color: #fff;
   text-align: center;
   font-family: Roboto;

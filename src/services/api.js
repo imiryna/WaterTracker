@@ -29,7 +29,7 @@ export const userRegister = async userData => {
 };
 
 export const userLogOut = async userData => {
-  const { data } = await waterTrackerInstance.post('/users/logout', userData);
+  const { data } = await waterTrackerInstance.post('/user/logout', userData);
   clearToken();
   return data;
 };
