@@ -16,13 +16,13 @@ export const getCurrentUser = async () => {
 };
 
 export const userLogin = async userData => {
-  const { data } = await waterTrackerInstance.post('/users/login', userData);
+  const { data } = await waterTrackerInstance.post('/user/login', userData);
   setToken(data.token);
   return data;
 };
 
 export const userRegister = async userData => {
-  const { data } = await waterTrackerInstance.post('/users/register', userData);
+  const { data } = await waterTrackerInstance.post('/user/register', userData);
   setToken(data.token);
   localStorage.clear();
   return data;

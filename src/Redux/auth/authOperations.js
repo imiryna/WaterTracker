@@ -2,10 +2,10 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { userLogin, userRegister } from "services/api";
 
 export const loginThunk = createAsyncThunk(
-    'auth/login',
-    async (formData, thunkAPI) => {
+    'users/login',
+    async (userData, thunkAPI) => {
         try {
-            const response = await userLogin(formData);
+            const response = await userLogin(userData);
             
             return response;
         } catch (error) {
@@ -15,10 +15,10 @@ export const loginThunk = createAsyncThunk(
 );
 
 export const registerThunk = createAsyncThunk(
-    'auth/register',
-    async (formData, thunkAPI) => {
+    'user/register',
+    async (userData, thunkAPI) => {
         try {
-            const authData = await userRegister(formData);
+            const authData = await userRegister(userData);
             
             return authData;
         } catch (error) {
