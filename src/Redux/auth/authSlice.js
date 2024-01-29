@@ -1,9 +1,9 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { loginThunk, registerThunk } from './authOperations';
+import { loginThunk, registerThunk, logOutThunk } from './authOperations';
 
 const INITIAL_STATE = {
+  token: null,
   user: {
-    token: null,
     email: null,
   },
   authenticated: false,
@@ -32,12 +32,17 @@ const authSlice = createSlice({
     
 })
 
+  .addCase(logOutThunk.fulfilled, () => {
+    return INITIAL_STATE;
+  })
+
  
 
   .addMatcher(
       isAnyOf(
         loginThunk.pending,
-        registerThunk.pending
+        registerThunk.pending,
+        logOutThunk.pending
         
       ),
       state => {
@@ -46,7 +51,8 @@ const authSlice = createSlice({
     )
     .addMatcher(isAnyOf(
       loginThunk.rejected,
-      registerThunk.rejected
+      registerThunk.rejected,
+      logOutThunk.rejected
 
     ), (state, action) => {
       state.error = action.payload;
@@ -54,5 +60,5 @@ const authSlice = createSlice({
 }
 )
 
-export default authSlice.reducer;
+// export default authSlice.reducer;
 export const authReducer = authSlice.reducer;
