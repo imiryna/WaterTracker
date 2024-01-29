@@ -15,7 +15,11 @@ import { AuthStyledForm, AuthDiv, FormName, InputDiv, StyledInput, FormButton, A
     .min(8, 'Password should be of minimum 8 characters length')
     .max(64, 'Password should be of maximum 64 characters length')
     .required('Password is required'),
-
+    repeatPassword: Yup
+    .string('Enter your password')
+    .min(8, 'Password should be of minimum 8 characters length')
+    .max(64, 'Password should be of maximum 64 characters length')
+    .required('Password is required'),
 });
  
  export const AuthRegForm = () => {
@@ -82,7 +86,7 @@ import { AuthStyledForm, AuthDiv, FormName, InputDiv, StyledInput, FormButton, A
                 placeholder='Repeat password'
             />
             {formik.errors.password && formik.touched.password ? (
-            <AuthDataError>{formik.errors.password}</AuthDataError>
+            <AuthDataError>{formik.errors.repeatPassword}</AuthDataError>
           ) : null}
        </InputDiv> 
        
