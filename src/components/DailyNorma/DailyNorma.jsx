@@ -36,10 +36,13 @@ export const DailyNorma = () => {
   return (
     <StyledDalyNorma>
       <p className="title">Today daily norma</p>
-      <span>
-        {totalTodayWater / 1000} L / {dailyNorma / 1000} L
-      </span>
-      <button onClick={() => togleModal()}>Edit</button>
+      <div className="norma-edit-box">
+        
+        <span className='norma-amount'>
+          {totalTodayWater / 1000} L / {dailyNorma / 1000} L
+        </span>
+        <button class="edit-btn" onClick={() => togleModal()}>Edit</button>
+      </div>
       {showModal && (
         <Modal togleModal={togleModal}>
           <EditDailyNormaModal

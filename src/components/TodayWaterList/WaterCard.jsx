@@ -31,7 +31,7 @@ export const createWaterCardMarcup = ({
         />
         {/* remove btn */}
         <Button
-          label={<DeleteSvg/>}
+          label={<DeleteSvg data-place="card"/>}
           icon="pi pi-info-circle"
           onClick={() =>
             setDialogStatus({ visible: true, idToDelete: waterCardId })
