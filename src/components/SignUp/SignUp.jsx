@@ -1,5 +1,5 @@
 import React from 'react';
-import { AuthStyledForm, AuthDiv, FormName, InputDiv, StyledInput, FormButton } from '../SignIn/signIn.styled';
+import { AuthStyledForm, AuthDiv, FormName, InputDiv, StyledInput, FormButton } from '../SignIn/SignIn.styled';
  import { useFormik } from 'formik';
  import { registerThunk } from '../../Redux/auth/authOperations';
  import { useDispatch } from 'react-redux';

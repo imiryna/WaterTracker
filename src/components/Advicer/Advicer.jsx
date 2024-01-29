@@ -10,7 +10,7 @@ import {
   NavLinkBtn,
   BtnText,
   ContentTextCss,
-} from './advicer.styled';
+} from './Advicer.styled';
 
 export const Advicer = () => {
   return (

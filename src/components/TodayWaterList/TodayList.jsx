@@ -7,8 +7,8 @@ import { useState } from 'react';
 import { DeleteConfirmDialog } from './DeleteDialog';
 import { StyledBackdrop } from './DeleteDialog.styled';
 import { Modal } from 'components/Modal';
-import { AddWaterModal } from './modals/addWaterModal';
-import { EditWaterModal } from './modals/editWaterModal';
+import { AddWaterModal } from './modals/AddWaterModal';
+import { EditWaterModal } from './modals/EditWaterModal';
 import { PlusSvg } from './StyledTodayListIcons';
 // import { Dialog } from '@mui/material';
 
