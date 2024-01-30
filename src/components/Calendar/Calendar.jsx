@@ -77,7 +77,7 @@ export const Calendar = () => {
         closePopOver();
       }
     };
-    document.addEventListener('click', handleClickOutside);
+    document.body.addEventListener('click', handleClickOutside);
     window.addEventListener('keydown', handleEscPress);
 
 
@@ -87,7 +87,10 @@ export const Calendar = () => {
     };
   }, [anchor]);
 
-
+  // close popover via button handlers
+  const handleCloseButtonClick = event => {
+    closePopOver();
+  }
  
 
     //* Pagination logic */
@@ -155,12 +158,12 @@ export const Calendar = () => {
               vertical: 'bottom',
               horizontal: isDesktop ? 'right' : 'center',
             }}
-            disableRestoreFocus
+            disableRestoreFocus = {true}
           >
             
             {popOverData && (
               <StyledPopOverContainer>
-                <StyledCloseButton>
+                <StyledCloseButton onClick={handleCloseButtonClick}>
                   <StyledCloseIcon/>
                 </StyledCloseButton>
                 <StyledPopOverDate>
