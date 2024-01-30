@@ -60,28 +60,29 @@ export const getWaterServings = async (token) => {
 
 export const getWaterServingById = async(servingId, token) => {
   setToken(token);
-  return await waterTrackerInstance.get(`/water/today/${servingId}`)
+  return {data} = waterTrackerInstance.get(`/water/today/${servingId}`)
 }
 
-export const addWaterServing = async(data, token) => {
+export const addWaterServing = async(servingData, token) => {
   setToken(token);
-  return await waterTrackerInstance.post('/water', data);
+  return {data} = waterTrackerInstance.post('/water', servingData);
 }
 
 export const removeWaterServing = async(servingId, token) => {
   setToken(token);
-  return await waterTrackerInstance.delete(`/water/${servingId}`)
+  return {data} = waterTrackerInstance.delete(`/water/${servingId}`)
 }
 
-export const editWaterServing = async(servingId, data, token) => {
+export const editWaterServing = async(servingId, servingData, token) => {
   setToken(token);
   const water = await getWaterServingById(servingId);
-  const updatedWater = {...water, ...data}
+  const updatedWater = {...water, ...servingData};
+  return {data} = waterTrackerInstance.put(`/water/${servingId}`, updatedWater)
 }
 
 // // Daily norma apis
 
-export const getDailyNorma = async() => {
+export const getDailyNorma = async(token) => {
   setToken(token);
   return await waterTrackerInstance.get('/water')
 }
