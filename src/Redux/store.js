@@ -17,6 +17,7 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
+import { currentUserReducer } from './currentUser/currentUserSlice';
 
 const persistConfig = {
   key: 'auth',
@@ -31,6 +32,7 @@ export const store = configureStore({
     auth: persistedAuthReducer,
     todayWater: waterReducer,
     monthStat: monthStatReducer,
+    currentUser: currentUserReducer,
     modal: modalReducer,
     // user: userReducer,
   },
