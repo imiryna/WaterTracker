@@ -13,6 +13,7 @@ export const AuthDiv = styled.div`
   padding-bottom: 109px;
   padding-left: 18px;
   padding-right: 18px;
+  width: 1404px;
 `;
 export const AuthStyledForm = styled.form`
   padding-top: 113px;
@@ -22,6 +23,7 @@ export const AuthStyledForm = styled.form`
   display: flex;
   flex-direction: column;
   gap: 16px;
+  
 `;
 
 export const FormName = styled.h2`

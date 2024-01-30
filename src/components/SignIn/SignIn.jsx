@@ -1,18 +1,14 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import { Navigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
-import {
-  AuthStyledForm,
-  AuthDiv,
-  FormName,
-  InputDiv,
-  StyledInput,
-  FormButton,
-  AuthDataError,
-} from './SignIn.styled';
+import { AuthStyledForm, AuthDiv, FormName, InputDiv, StyledInput, FormButton, AuthDataError } from './SignIn.styled';
+import { selectAuthError, selectAuthAuthenticated } from '../../Redux/auth/authSelector';
 import { useFormik } from 'formik';
 import { loginThunk } from '../../Redux/auth/authOperations';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 const validationSchema = Yup.object({
   email: Yup.string('Enter your email')
@@ -24,19 +20,44 @@ const validationSchema = Yup.object({
     .required('Password is required'),
 });
 
-export const AuthForm = () => {
-  const dispatch = useDispatch();
-  const formik = useFormik({
-    initialValues: {
-      email: '',
-      password: '',
-    },
-    validationSchema: validationSchema,
-    onSubmit: values => {
-      dispatch(loginThunk(values));
-      formik.resetForm();
-    },
-  });
+
+
+ export const AuthForm = () => {
+
+ const dispatch = useDispatch();
+ const authError = useSelector(selectAuthError);
+ const isAuthenticated = useSelector(selectAuthAuthenticated);
+ 
+
+ const [openSnackbar, setOpenSnackbar] = useState(false);
+
+   const formik = useFormik({
+     initialValues: {
+       email: '',
+       password: '', 
+      },
+      validationSchema: validationSchema,
+      onSubmit: values => {
+        dispatch(loginThunk(values));
+        formik.resetForm();
+     }
+   });
+
+   useEffect(() => {
+    if (authError) {
+      setOpenSnackbar(true);
+    }
+  }, [authError]);
+
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar(false);
+  };
+
+  if (isAuthenticated) {
+    return <Navigate to="/home" />;
+  }
+  
+
 
   return (
     <AuthDiv>
@@ -78,12 +99,18 @@ export const AuthForm = () => {
             <AuthDataError>{formik.errors.password}</AuthDataError>
           ) : null}
         </InputDiv>
-
         <FormButton type="submit">Sign In</FormButton>
         <NavLink to="/signup">Sign Up</NavLink>
-      </AuthStyledForm>
-    </AuthDiv>
-  );
-};
+          </AuthStyledForm>
+
+     <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
+          <Alert onClose={handleCloseSnackbar} severity="error">
+            {authError}
+          </Alert>
+        </Snackbar>
+
+     </AuthDiv>
+   );
+ };
 
 export default AuthForm;
