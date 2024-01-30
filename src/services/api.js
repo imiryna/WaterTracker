@@ -60,41 +60,48 @@ export const getWaterServings = async (token) => {
 
 export const getWaterServingById = async(servingId, token) => {
   setToken(token);
-  return {data} = waterTrackerInstance.get(`/water/today/${servingId}`)
+  const {data} = waterTrackerInstance.get(`/water/today/${servingId}`);
+  return data;
 }
 
 export const addWaterServing = async(servingData, token) => {
   setToken(token);
-  return {data} = waterTrackerInstance.post('/water', servingData);
+  const {data} = waterTrackerInstance.post('/water', servingData);
+  return data;
 }
 
 export const removeWaterServing = async(servingId, token) => {
   setToken(token);
-  return {data} = waterTrackerInstance.delete(`/water/${servingId}`)
+  const {data} = waterTrackerInstance.delete(`/water/${servingId}`);
+  return data;
 }
 
 export const editWaterServing = async(servingId, servingData, token) => {
   setToken(token);
   const water = await getWaterServingById(servingId);
   const updatedWater = {...water, ...servingData};
-  return {data} = waterTrackerInstance.put(`/water/${servingId}`, updatedWater)
+  const {data} = waterTrackerInstance.put(`/water/${servingId}`, updatedWater);
+  return data;
 }
 
 // // Daily norma apis
 
 export const getDailyNorma = async(token) => {
   setToken(token);
-  return await waterTrackerInstance.get('/water')
+  const {data} = await waterTrackerInstance.get('/water');
+  return data;
 }
 
 export const updateDailyNorma = async(data, token) => {
   setToken(token);
-  return await waterTrackerInstance.patch('/user/upDateWaterRate', data)
+  const {data} = await waterTrackerInstance.patch('/user/upDateWaterRate', data);
+  return data;
 }
 
 // // Month info
 
 export const fetchMonthStat = async (month, year, token) => {
   setToken(token);
-  return await waterTrackerInstance.get(`/monthStat/${month}`);
+  const {data} = await waterTrackerInstance.get(`/monthStat/${year}/${month}`);
+  return data;
 };
