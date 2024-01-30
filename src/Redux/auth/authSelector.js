@@ -9,3 +9,5 @@ export const selectAuthAuthenticated = createSelector(
   selectAuth,
   auth => auth.authenticated
 );
+export const selectAuthIsRefreshing = createSelector(selectAuth, auth => auth.isRefreshing);
+export const selectAuthIsLoading = createSelector(selectAuth,auth => auth.isLoading);
