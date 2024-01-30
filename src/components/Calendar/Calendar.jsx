@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMediaQuery } from '@mui/material';
@@ -81,8 +81,12 @@ export const Calendar = () => {
     window.addEventListener('keydown', handleEscPress);
 
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // console.log(anchor)
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     return () => {
-      document.removeEventListener('click', handleClickOutside);
+      document.body.removeEventListener('click', handleClickOutside);
       window.removeEventListener('keydown', handleEscPress);
     };
   }, [anchor]);
@@ -90,6 +94,17 @@ export const Calendar = () => {
   // close popover via button handlers
   const handleCloseButtonClick = event => {
     closePopOver();
+  }
+
+  // handle clicks on popove
+  const handlePopoverClick = event => {
+    console.log('click inside')
+    // console.log(event.currentTarget.id);
+    console.log(event.target.closest('calendar-popover-parent'))
+    if (!event.currentTarget) {
+      closePopOver();
+    }
+    // closePopOver();
   }
  
 
@@ -162,7 +177,8 @@ export const Calendar = () => {
           >
             
             {popOverData && (
-              <StyledPopOverContainer>
+              <StyledPopOverContainer id='calendar-popover-parent' onClick={handlePopoverClick}
+              >
                 <StyledCloseButton onClick={handleCloseButtonClick}>
                   <StyledCloseIcon/>
                 </StyledCloseButton>
@@ -186,4 +202,4 @@ export const Calendar = () => {
           </StyledPopOver>
       </StyledDiv>
   );
-};
+}
