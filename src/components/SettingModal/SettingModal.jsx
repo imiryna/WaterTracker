@@ -1,4 +1,4 @@
-import { UserForm } from './UserForm';
+import { UserForm } from './UserForm/UserForm';
 import { Img, ImgLabel, Container } from './SettingModal.styled';
 
 export const Setting = imgData => {
