@@ -1,13 +1,26 @@
 import React from 'react';
+import {
+  MenuCss,
+  DropdownCss,
+  OutlineCss,
+  BoxCss,
+  ArrowCss,
+} from './DropdownMenu.styled';
 
-export const DtopdownMenu = () => {
+export const DropdownMenu = () => {
   return (
-    <div>
-      <select>
-        <option value="setting">Setting</option>
+    <DropdownCss>
+      <MenuCss>
+        <BoxCss>
+          <OutlineCss />
+          <div>Setting</div>
+        </BoxCss>
 
-        <option value="logout">Log out</option>
-      </select>
-    </div>
+        <BoxCss>
+          <ArrowCss />
+          <div>Log out</div>
+        </BoxCss>
+      </MenuCss>
+    </DropdownCss>
   );
 };
