@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyledDalyNorma } from './dailyNorma.styled';
+import { StyledDalyNorma } from './DailyNorma.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeDailyNormaThunk } from '../../Redux/water/waterThunks';
 import {

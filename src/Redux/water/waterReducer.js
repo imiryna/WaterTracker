@@ -38,7 +38,7 @@ export const waterSlice = createSlice({
 
         // Searching for item to delete
         state.waterArr = state.waterArr.filter(
-          item => item._id !== action.payload
+          item => item._id !== action.payload._id
         );
         // Recalculating total today drinked water
         state.totalWaterAmmount = recalculateTodayDrinkedWater(state.waterArr);
@@ -57,11 +57,11 @@ export const waterSlice = createSlice({
 
         // Searching for water card to change
         state.waterArr = state.waterArr.map(item => {
-          if (item._id === action.payload.waterId) {
+          if (item._id === action.payload._id) {
             
             // Rewriting water card info
-            item.quantity = action.payload.newQuantity || item.quantity;
-            item.time = action.payload.newTime || item.time;
+            item.quantity = action.payload.amount || item.quantity;
+            item.time = action.payload.time || item.time;
           }
           return item;
         });
@@ -83,7 +83,7 @@ export const waterSlice = createSlice({
         state.isLoading = false;
 
         // Generating new wter card (using Math.random qz we don`t have backend now)
-        const newWater = { _id: Math.random() * 1000, ...action.payload };
+        const newWater = { ...action.payload };
         state.waterArr.push(newWater);
 
         // Recalculating total today drinked water

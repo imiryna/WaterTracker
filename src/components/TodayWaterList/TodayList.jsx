@@ -10,6 +10,7 @@ import { Modal } from 'components/Modal/Modal';
 import { AddWaterModal } from './modals/AddWaterModal';
 import { EditWaterModal } from './modals/EditWaterModal';
 import { PlusSvg } from './StyledTodayListIcons';
+import { parseUtcTime } from 'services/helpers/getUtcTime';
 // import { Dialog } from '@mui/material';
 
 export const TodayList = () => {
@@ -34,7 +35,7 @@ export const TodayList = () => {
     const waterCardId = item._id;
 
     // Calculating adding time
-    const waterAddTime = calculateTime(item);
+    const waterAddTime = item;
 
     const waterQuantity = item.quantity;
 
