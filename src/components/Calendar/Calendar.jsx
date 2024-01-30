@@ -96,23 +96,23 @@ export const Calendar = () => {
     const monthName = month.toLocaleString('en-US', { month: 'long' }); 
 
     //Fetch information when month changes
-    useEffect(() => {
-      dispatch(getMonthStat({month, year}))
-    }, [dispatch, month, year])
+    // useEffect(() => {
+    //   dispatch(getMonthStat({month, year}))
+    // }, [dispatch, month, year])
 
     // Pagination handlers
     const handlePreviousMonth = () => {
         const previousMonth = month - 1 < 0 ? 11 : month - 1; 
         const newYear = previousMonth === 11 ? year - 1 : year;
-        dispatch(setMonth(previousMonth));
-        dispatch(setYear(newYear));
+        // dispatch(setMonth(previousMonth));
+        // dispatch(setYear(newYear));
     };
     
     const handleNextMonth = () => {
         const nextMonth = month + 1 > 11 ? 0 : month + 1;
         const newYear = nextMonth === 0 ? year + 1 : year;
-        dispatch(setMonth(nextMonth));
-        dispatch(setYear(newYear));
+        // dispatch(setMonth(nextMonth));
+        // dispatch(setYear(newYear));
     };
     
     return(
