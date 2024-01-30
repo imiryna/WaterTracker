@@ -52,41 +52,48 @@ export const updateUser = async userData => {
 };
 // Today water portions apis
 
-// export const getTodayWater = async () => {
-//   const {data} = await waterTrackerInstance.get('/');
-//   return data;
-// }
+export const getWaterServings = async (token) => {
+  setToken(token);
+  const {data} = await waterTrackerInstance.get('/water/today');
+  return data;
+}
 
-// export const getTodayWaterById = async(waterId) => {
-//   return await waterTrackerInstance.get(`/${waterId}`)
-// }
+export const getWaterServingById = async(servingId, token) => {
+  setToken(token);
+  return await waterTrackerInstance.get(`/water/today/${servingId}`)
+}
 
-// export const addTodayWater = async(data) => {
-//   return await waterTrackerInstance.post('/');
-// }
+export const addWaterServing = async(data, token) => {
+  setToken(token);
+  return await waterTrackerInstance.post('/water', data);
+}
 
-// export const removeTodayWater = async(waterId) => {
-//   return await waterTrackerInstance.delete(`/${waterId}`)
-// }
+export const removeWaterServing = async(servingId, token) => {
+  setToken(token);
+  return await waterTrackerInstance.delete(`/water/${servingId}`)
+}
 
-// export const editTodayWater = async(waterId, value) => {
-//   const water = await getTodayWaterById(waterId);
-//   const updatedWater = {...water, ...value}
-// }
+export const editWaterServing = async(servingId, data, token) => {
+  setToken(token);
+  const water = await getWaterServingById(servingId);
+  const updatedWater = {...water, ...data}
+}
 
 // // Daily norma apis
 
-// export const getDailyNorma = async() => {
-//   return await waterTrackerInstance.get('/dailyNorma')
-// }
+export const getDailyNorma = async() => {
+  setToken(token);
+  return await waterTrackerInstance.get('/water')
+}
 
-// export const createDailyNorma = async(data) => {
-// return await waterTrackerInstance.post('/dailyNorma', data)
-// }
+export const updateDailyNorma = async(data, token) => {
+  setToken(token);
+  return await waterTrackerInstance.patch('/user/upDateWaterRate', data)
+}
 
 // // Month info
 
-export const fetchMonthStat = async month => {
-  setToken();
+export const fetchMonthStat = async (month, year, token) => {
+  setToken(token);
   return await waterTrackerInstance.get(`/monthStat/${month}`);
 };
