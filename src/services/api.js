@@ -1,16 +1,17 @@
 import { waterTrackerInstance } from './baseURL';
 
 // Set and clear token
-const setToken = token => {
+export const setToken = token => {
   waterTrackerInstance.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
-const clearToken = () => {
+export const clearToken = () => {
   waterTrackerInstance.defaults.headers.common.Authorization = '';
 };
 
 // User apis
-export const getCurrentUser = async () => {
+export const getCurrentUser = async (token) => {
+  setToken(token)
   const data = await waterTrackerInstance.get(`/user/current`);
   return data;
 };
