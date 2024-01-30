@@ -25,9 +25,9 @@ import {
     StyledCloseButton,
 } from "./Calendar.styled";
 
-import { setMonth, setYear } from "Redux/monthStat/monthStatSlice";
-import { selectMonth, selectMonthStat, selectYear } from "Redux/monthStat/monthStatSelectors";
-import { getMonthStat } from "Redux/monthStat/monthStatThunk";
+// import { setMonth, setYear } from "Redux/monthStat/monthStatSlice";
+// import { selectMonth, selectMonthStat, selectYear } from "Redux/monthStat/monthStatSelectors";
+// import { getMonthStat } from "Redux/monthStat/monthStatThunk";
 
 export const Calendar = () => {
 
