@@ -86,7 +86,6 @@ border-color: ${(props) => {
 `
 
 export const StyledPopOver = styled(Popover)`
-pointer-events: none;
 box-shadow: 0px 4px 4px 0px rgba(64, 123, 255, 0.30);
 border-radius: 10px;
 font-family: var(--primery-font);
