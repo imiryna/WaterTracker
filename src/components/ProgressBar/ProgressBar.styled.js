@@ -32,7 +32,7 @@ export const ProgressBarStyled = styled.div`
   }
 
   .progress-bar-title {
-    font-family: 'Roboto', sans-serif;
+    font-family: var(--primery-font);
     font-size: 18px;
     font-weight: 400;
     line-height: 24px;
@@ -209,7 +209,7 @@ export const ProgressBarStyled = styled.div`
     border-radius: 10px;
     gap: 10px;
     color: var(--primery-white);
-    font-family: Roboto;
+    font-family: var(--primery-font);
     font-size: 16px;
     font-weight: 500;
     line-height: 20px;
