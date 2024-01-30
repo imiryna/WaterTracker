@@ -2,6 +2,8 @@ import { configureStore } from '@reduxjs/toolkit';
 // Import slices
 import { authReducer } from './auth/authSlice';
 import { monthStatReducer } from './monthStat/monthStatSlice';
+import { modalReducer } from './modals/modalSlice';
+import { waterReducer } from './water/waterReducer';
 // import { usersReducer } from './users/usersSlice';
 //!Persist block *********************
 import storage from 'redux-persist/lib/storage';
@@ -15,7 +17,6 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-import { waterReducer } from './water/waterReducer';
 
 const persistConfig = {
   key: 'auth',
@@ -30,7 +31,7 @@ export const store = configureStore({
     auth: persistedAuthReducer,
     todayWater: waterReducer,
     monthStat: monthStatReducer,
-    // auth: authReducer,
+    modal: modalReducer,
     // user: userReducer,
   },
   middleware: getDefaultMiddleware =>
