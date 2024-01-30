@@ -65,7 +65,7 @@ export const Calendar = () => {
     setPopOverData(null);
   };
 
-  // close popover handlers and Month stat fetching
+  // close popover handlers and eventlisteners clear
   useEffect(() => {
     const handleClickOutside = event => {
       if (anchor && !anchor.contains(event.target)) {
