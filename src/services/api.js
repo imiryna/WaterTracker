@@ -92,9 +92,9 @@ export const getDailyNorma = async(token) => {
   return data;
 }
 
-export const updateDailyNorma = async(data, token) => {
+export const updateDailyNorma = async(dailyNorma, token) => {
   setToken(token);
-  const {data} = await waterTrackerInstance.patch('/user/upDateWaterRate', data);
+  const {data} = await waterTrackerInstance.patch('/user/upDateWaterRate', dailyNorma);
   return data;
 }
 
