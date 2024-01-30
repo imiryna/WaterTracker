@@ -6,16 +6,16 @@ const initialState = {
   error: null,
 };
 
-const handlePending = state => {
-  state.isLoading = true;
-};
-const handleRejected = (state, { payload }) => {
-  state.isLoading = false;
-  state.error = payload;
-};
-const usersSlice = createSlice({
-  name: 'users',
-  initialState,
+// const handlePending = state => {
+//   state.isLoading = true;
+// };
+// const handleRejected = (state, { payload }) => {
+//   state.isLoading = false;
+//   state.error = payload;
+// };
+// const usersSlice = createSlice({
+//   name: 'users',
+//   initialState,
 
   // extraReducers: builder => {
   //   builder
@@ -65,4 +65,4 @@ const usersSlice = createSlice({
 });
 
 // export const { setFilter } = usersSlice.actions;
-export const usersReducer = usersSlice.reducer;
+// export const usersReducer = usersSlice.reducer;
