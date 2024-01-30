@@ -1,5 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
+import { selectAuthUserData } from '../../Redux/auth/authSelector';
+import { useSelector } from 'react-redux';
 
 import {
   NavCss,
@@ -9,6 +11,7 @@ import {
   LogoIcon,
   UserIcon,
 } from './Navigation.styled';
+
 // temp section ZooBeeN for modal
 import { useState } from 'react';
 import { Modal } from 'components/Modal/Modal';
@@ -21,6 +24,8 @@ export const Navigation = () => {
   // temp section ZooBeeN for modal
   const [showModal, setShowModal] = useState(false);
   const [openDropbox, setOpenDropbox] = useState(false);
+
+  const { email } = useSelector(selectAuthUserData);
 
   const toggleDropbox = () => {
     setOpenDropbox(!openDropbox);
@@ -56,7 +61,12 @@ export const Navigation = () => {
         </NavLinkCss> */}
 
         <NavLinkCss>
-          <TextCss>Sign in</TextCss>
+          {email ? (
+            <TextCss>{email.split('@')[0]}</TextCss>
+          ) : (
+            <TextCss>Sign in</TextCss>
+          )}
+
           <UserIcon onClick={toggleDropbox} />
           {openDropbox ? <DropdownMenu /> : null}
         </NavLinkCss>
