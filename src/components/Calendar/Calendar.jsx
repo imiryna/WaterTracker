@@ -73,10 +73,8 @@ export const Calendar = () => {
   const dispatch = useDispatch();
   const month = useSelector(selectMonth);
   const year = useSelector(selectYear);
-  console.log(month);
   // Get month name
   const monthName = month.toLocaleString('en-US', { month: 'long' });
-  console.log(monthName);
 
   const handlePreviousMonth = () => {
     const previousMonth = month - 1 < 0 ? 11 : month - 1;
