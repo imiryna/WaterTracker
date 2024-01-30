@@ -5,6 +5,9 @@ const INITIAL_STATE = {
   token: null,
   user: {
     email: null,
+    name: null,
+    avatarUrl: null, 
+    gender: null,
   },
   authenticated: false,
   error: null,
