@@ -7,9 +7,6 @@ export const ProgressBar = () => {
   const handleButtonClick = () => {
     setProgress(progress + 10);
   };
-  const handleButtonReset = () => {
-    setProgress(0);
-  };
   const getColor = () => {
     if (progress === 0) {
       return '#d7e3ff';
@@ -48,7 +45,6 @@ export const ProgressBar = () => {
           </span>
           <span className="button-text">Add water</span>
         </button>
-        {/* <button onClick={handleButtonReset}>Reset</button> */}
       </div>
     </ProgressBarStyled>
   );
