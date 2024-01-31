@@ -1,12 +1,12 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 // selectors
-import { selectAuthUserData } from '../../Redux/auth/authSelector';
-import { selectUserSettings } from '../../Redux/modals/modalSelector';
+import { selectAuthUserData } from 'Store/auth/authSelector';
+import { selectUserSettings } from 'Store/modals/modalSelector';
 import { useDispatch, useSelector } from 'react-redux';
 
 // actions
-import { toggleSettingsVisibility } from '../../Redux/modals/modalSlice';
+import { toggleSettingsVisibility } from 'Store/modals/modalSlice';
 
 import {
   NavCss,
@@ -51,7 +51,7 @@ export const Navigation = () => {
         Modalochka ;)
       </button>
       {userSettingsModalShown && (
-        <Modal>
+        <Modal toggleModal={toggleModal}>
           <Setting />
         </Modal>
       )}

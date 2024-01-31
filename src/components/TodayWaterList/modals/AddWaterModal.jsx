@@ -1,8 +1,9 @@
-import { Container } from 'components/SettingModal/SettingModal.styled';
-import { StyledWaterModal } from './WaterModal.styled';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addWaterThunk } from '../../../Redux/water/waterThunks';
+
+import { Container } from 'components/SettingModal/SettingModal.styled';
+import { StyledWaterModal } from './WaterModal.styled';
+import { addWaterThunk } from 'Store/water/waterThunks';
 import { MinusSvg, PlusSvg } from '../StyledTodayListIcons';
 
 export const AddWaterModal = ({ togleModal }) => {
