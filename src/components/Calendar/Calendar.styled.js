@@ -45,9 +45,11 @@ flex-direction: column;
 justify-content: center;
 font-size: 14px;
 font-family: var(--primery-font);
+max-width: 32px;
 
 @media (min-width: 768px){
     font-size: 16px;
+    max-width: 34px;
 }
 `
 
@@ -75,15 +77,12 @@ width: 34px;
 height: 34px;
 background-color: var(--primery-white);
 
-border-color: ${(props) => {
-    if(props.percentage < 100 ){
-        return 'orange';
-
-    }else{
-        return 'transparent';
-    }
-}}
+${({ percentage }) => `
+        border-color: ${percentage < 100 ? 'var(--secondary-color-5)' : 'transparent'};
+    `};
 `
+
+
 
 export const StyledPopOver = styled(Popover)`
 box-shadow: 0px 4px 4px 0px rgba(64, 123, 255, 0.30);
