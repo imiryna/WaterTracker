@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import BottleImgDes from 'Images/Backgrounds/bottle-sign-in.png';
 import BubblesDes from 'Images/Backgrounds/background-bubbles-main-page.png';
+import { NavLink } from 'react-router-dom';
 
 export const AuthPageDiv = styled.div`
   background-color: #fff;
@@ -38,7 +39,7 @@ export const FormName = styled.h2`
 export const InputDiv = styled.div`
 display: flex;
 flex-direction: column;
-gap: 8px
+gap: 8px;
 
 color: #2F2F2F;
 font-family: Roboto;
@@ -52,7 +53,7 @@ width: 384px;
 padding: 12px 10px;
 border-radius: 6px;
 border: 1px solid #D7E3FF;
-background: #FFF);
+background: #FFF;
 transition: border-color 0.3s;
 
 &::placeholder {
@@ -74,7 +75,7 @@ line-height: 20px;
 }
 
 &:focus {
-  outline: none:
+  outline: none;
   border-color: #D7E3FF;
   border-width: 1px; 
   border-style: solid; 
@@ -118,6 +119,19 @@ export const FormButton = styled.button`
   font-weight: 500;
   line-height: 24px;
 `;
+
+export const NavigationLink = styled(NavLink)`
+  color: #407BFF;
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+`
+export const NavDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
 
 export const AuthDataError = styled.div`
 color: #EF5050;

@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { Navigate } from 'react-router-dom';
-import { NavLink } from 'react-router-dom';
-import { AuthStyledForm, AuthDiv, FormName, InputDiv, StyledInput, FormButton, AuthDataError } from './SignIn.styled';
+import { AuthStyledForm, AuthDiv, FormName, InputDiv, StyledInput, FormButton, AuthDataError, NavigationLink, NavDiv } from './SignIn.styled';
 import { selectAuthError, selectAuthAuthenticated } from '../../Redux/auth/authSelector';
 import { useFormik } from 'formik';
 import { loginThunk } from '../../Redux/auth/authOperations';
@@ -100,7 +99,10 @@ const validationSchema = Yup.object({
           ) : null}
         </InputDiv>
         <FormButton type="submit">Sign In</FormButton>
-        <NavLink to="/signup">Sign Up</NavLink>
+        <NavDiv>
+          <NavigationLink to="/signup">Sign Up</NavigationLink>
+          <NavigationLink to="/forgotpassword">Forgot password</NavigationLink>
+        </NavDiv>
           </AuthStyledForm>
 
      <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>

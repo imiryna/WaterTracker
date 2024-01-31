@@ -14,19 +14,10 @@ import Alert from '@mui/material/Alert';
   email: Yup
     .string('Enter your email')
     .email('Enter a valid email')
-    .required('Email is required'),
-  password: Yup
-    .string('Enter your password')
-    .min(8, 'Password should be of minimum 8 characters length')
-    .max(64, 'Password should be of maximum 64 characters length')
-    .required('Password is required'),
-    repeatPassword: Yup
-    .string('Enter your password')
-    .oneOf([Yup.ref('password'), null], 'Passwords must match')
-    .required('Password is required'),
+    .required('Email is required')
 });
  
- export const AuthRegForm = () => {
+ export const ForgotPasswordForm = () => {
 
  const dispatch = useDispatch();
  const authError = useSelector(selectAuthError);
@@ -36,9 +27,7 @@ import Alert from '@mui/material/Alert';
 
    const formik = useFormik({
      initialValues: {
-       email: '',
-       password: '', 
-       repeatPassword: ''
+       email: ''
       },
 
       validationSchema: validationSchema,
@@ -71,9 +60,9 @@ import Alert from '@mui/material/Alert';
     <AuthDiv>
     
      <AuthStyledForm onSubmit={formik.handleSubmit}>
-        <FormName>Sign Up</FormName>
+        <FormName>Forgot password</FormName>
         <InputDiv>
-            <label htmlFor="email">Enter your email</label>
+            <label htmlFor="email">Enter your email and we'll send a link to reset your password</label>
             <StyledInput
                 id="email"
                 name="email"
@@ -85,37 +74,8 @@ import Alert from '@mui/material/Alert';
             {formik.errors.email && formik.touched.email ? <AuthDataError>{formik.errors.email}</AuthDataError> : null} 
         </InputDiv>
        
-       <InputDiv>
-            <label htmlFor="password">Enter your password</label>
-             <StyledInput
-                id="password"
-                name="password"
-                type="password"
-                onChange={formik.handleChange}
-                value={formik.values.password}
-                placeholder='Password'
-            />
-            {formik.errors.password && formik.touched.password ? (
-            <AuthDataError>{formik.errors.password}</AuthDataError>
-          ) : null}
-       </InputDiv>
-
-       <InputDiv>
-            <label htmlFor="repeatPassword">Repeat your password</label>
-             <StyledInput
-                id="repeatPassword"
-                name="repeatPassword"
-                type="password"
-                onChange={formik.handleChange}
-                value={formik.values.repeatPassword}
-                placeholder='Repeat password'
-            />
-            {formik.errors.repeatPassword && formik.touched.repeatPassword ? (
-    <AuthDataError>{formik.errors.repeatPassword}</AuthDataError>
-  ) : null}
-       </InputDiv> 
        
-       <FormButton type="submit">Sign Up</FormButton>
+       <FormButton type="submit">Send</FormButton>
        <NavigationLink to="/signin">Sign In</NavigationLink>
      </AuthStyledForm>
      <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
@@ -127,4 +87,4 @@ import Alert from '@mui/material/Alert';
    );
  };
 
-export default AuthRegForm;
+export default ForgotPasswordForm;
