@@ -24,6 +24,7 @@ import {
   StyledCloseIcon,
   StyledCloseButton,
 } from './Calendar.styled';
+import { tempMonthStat } from 'services/helpers/tempDataForCalendar';
 
 // import { setMonth, setYear } from "Store/monthStat/monthStatSlice";
 // import { selectMonth, selectMonthStat, selectYear } from "Store/monthStat/monthStatSelectors";
@@ -45,7 +46,7 @@ export const Calendar = () => {
   const [year, setYear] = useState(2024); //temp data
 
   // const monthStat = useSelector(selectMonthStat);
-  const monthStat = [{ id: 1, day: 1, norma: 2, percentage: 100, servings: 3 }];
+  const monthStat = tempMonthStat;
 
   //check device screen width
   const isDesktop = useMediaQuery('(min-width: 768px)');
@@ -101,7 +102,6 @@ export const Calendar = () => {
 
   // handle clicks on popove
   const handlePopoverClick = event => {
-    console.log('click inside');
     // console.log(event.currentTarget.id);
     console.log(event.target.closest('calendar-popover-parent'));
     if (!event.currentTarget) {
@@ -166,7 +166,7 @@ export const Calendar = () => {
                 openPopOver(event, day);
               }}
             >
-              <StyledDay percentage={day.percentage}>{day.day}</StyledDay>
+              <StyledDay percentage={day.percentage}>{day.date}</StyledDay>
               <StyledPercentage>{day.percentage}</StyledPercentage>
             </StyledItem>
           );
