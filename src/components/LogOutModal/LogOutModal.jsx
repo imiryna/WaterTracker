@@ -1,6 +1,6 @@
 import React from 'react';
 import { ConfirmDialog } from 'primereact/confirmdialog';
-import { logOutThunk } from '../../Redux/auth/authOperations';
+import { logOutThunk } from 'Store/auth/authOperations';
 import { useDispatch } from 'react-redux';
 import { GlobalConfirmDialogStyles } from './LogOutModal.styled';
 
