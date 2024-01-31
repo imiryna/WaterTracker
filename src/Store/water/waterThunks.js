@@ -11,13 +11,13 @@ import { getUtcTime } from 'services/helpers/getUtcTime';
 // GET WATER ARR
 export const getDailyWaterThunk = createAsyncThunk(
   'todayWater/getArr',
-  async (_,thunkAPI) => {
-    try{
-      const token = thunkAPI.getState().auth.token
-      const waterArr = await getWaterServings(token)
-      return waterArr
-    }catch(e){
-      return thunkAPI.rejectWithValue(e.message)
+  async (_, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.token;
+      const waterArr = await getWaterServings(token);
+      return waterArr;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
     }
   }
 );
@@ -99,8 +99,10 @@ export const changeDailyNormaThunk = createAsyncThunk(
         throw new Error(
           'Water norma must be more then 0ml, less then 15000ml and be a number'
         );
-      const updatedDaliyNorma = await updateDailyNorma(newNorma, token);
-
+      // ~ Наразі не доступно
+      // const updatedDaliyNorma = await updateDailyNorma(newNorma, token);
+      // ! Тимчасове рішення, поки не з'явиться можливість використати бекенд
+      const updatedDaliyNorma = newNorma;
       return updatedDaliyNorma;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
