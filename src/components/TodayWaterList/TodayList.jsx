@@ -1,17 +1,17 @@
-import { useState } from 'react';
+import { delWaterThunk, getDailyWaterThunk } from 'Store/water/waterThunks';
 import { useDispatch, useSelector } from 'react-redux';
-// import { Dialog } from '@mui/material';
-
-import { delWaterThunk } from 'Store/water/waterThunks';
 import { StyledWaterList } from './TodayList.styled';
 import { createWaterCardMarcup } from './WaterCard';
 import { waterArrSelector } from 'Store/water/waterSelectors';
+import { useEffect, useState } from 'react';
 import { DeleteConfirmDialog } from './DeleteDialog';
 import { StyledBackdrop } from './DeleteDialog.styled';
 import { Modal } from 'components/Modal/Modal';
 import { AddWaterModal } from './modals/AddWaterModal';
 import { EditWaterModal } from './modals/EditWaterModal';
 import { PlusSvg } from './StyledTodayListIcons';
+import { parseUtcTime } from 'services/helpers/getUtcTime';
+// import { Dialog } from '@mui/material';
 
 export const TodayList = () => {
   const dispatch = useDispatch();
@@ -27,6 +27,10 @@ export const TodayList = () => {
     setShowAddModal(!showAddModal);
   };
 
+  useEffect(()=>{
+    dispatch(getDailyWaterThunk())
+  }, [])
+
   const [showEditModal, setShowEditModal] = useState(false);
   const togleEditModal = () => setShowEditModal(!showEditModal);
   const [currentEditObj, setCurrentEditObj] = useState(null);
@@ -35,9 +39,9 @@ export const TodayList = () => {
     const waterCardId = item._id;
 
     // Calculating adding time
-    const waterAddTime = calculateTime(item);
+    const waterAddTime = item.time;
 
-    const waterQuantity = item.quantity;
+    const waterQuantity = item.amount;
 
     return createWaterCardMarcup({
       waterAddTime,

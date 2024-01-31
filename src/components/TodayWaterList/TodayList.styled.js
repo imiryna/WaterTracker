@@ -25,6 +25,7 @@ export const StyledWaterList = styled.div`
       display: flex;
       gap: 12px;
       fill: var(--primery-blue);
+
       .water-info {
         display: flex;
         gap: 16px;
