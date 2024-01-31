@@ -22,7 +22,7 @@ import { useState } from 'react';
 import { Modal } from 'components/Modal/Modal';
 import { DropdownMenu } from 'components/DropdownMenu/DropdownMenu';
 import { Setting } from 'components/SettingModal/SettingModal';
-import { selectUser } from 'Redux/currentUser/currentUserSelectors';
+import { selectUser } from 'Store/currentUser/currentUserSelectors';
 // import { getCurrentUser } from 'services/api';
 // END OF Temp section
 
