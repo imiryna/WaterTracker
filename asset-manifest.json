@@ -1,13 +1,31 @@
 {
   "files": {
-    "main.css": "/react-homework-template/static/css/main.7acaea2f.css",
-    "main.js": "/react-homework-template/static/js/main.07d3183d.js",
-    "index.html": "/react-homework-template/index.html",
-    "main.7acaea2f.css.map": "/react-homework-template/static/css/main.7acaea2f.css.map",
-    "main.07d3183d.js.map": "/react-homework-template/static/js/main.07d3183d.js.map"
+    "main.css": "/WaterTracker/static/css/main.94357195.css",
+    "main.js": "/WaterTracker/static/js/main.756aa891.js",
+    "static/media/bottle-sign-in.png": "/WaterTracker/static/media/bottle-sign-in.abfbe239550c8bdcad14.png",
+    "static/media/background-main-page.png": "/WaterTracker/static/media/background-main-page.f64e661baefac36f8e09.png",
+    "static/media/logo.svg": "/WaterTracker/static/media/logo.a01ead97ea79f55a00efe1db363da4fb.svg",
+    "static/media/background-bubbles-main-page-tablet.png": "/WaterTracker/static/media/background-bubbles-main-page-tablet.ed9b398e7408b3f2f03e.png",
+    "static/media/bottle-home-screen-mobile.png": "/WaterTracker/static/media/bottle-home-screen-mobile.67bfbdf7fb46f03c7cdc.png",
+    "static/media/background-bubbles-main-page.png": "/WaterTracker/static/media/background-bubbles-main-page.aebdcb013b3a8eef40c4.png",
+    "static/media/cup.svg": "/WaterTracker/static/media/cup.e6df3a4263d2c80fbf5c9a39968edc71.svg",
+    "static/media/personal-settings.svg": "/WaterTracker/static/media/personal-settings.0c67631d1500ffc5d5a3b155daf57cf6.svg",
+    "static/media/user.svg": "/WaterTracker/static/media/user.a01445b2508838d309d550c0e05fe325.svg",
+    "static/media/delete.svg": "/WaterTracker/static/media/delete.265909c9021e18f1cf779e78f564dc29.svg",
+    "index.html": "/WaterTracker/index.html",
+    "static/media/calendar.svg": "/WaterTracker/static/media/calendar.ce74b80c51a2c81d2dc47cf7dcb2295f.svg",
+    "static/media/edit.svg": "/WaterTracker/static/media/edit.eec7cea8da5acabcdbbb345ea3bc71ad.svg",
+    "static/media/statistic.svg": "/WaterTracker/static/media/statistic.87779631b9f7a6cee1bab4228949cb8c.svg",
+    "static/media/arrow-down.svg": "/WaterTracker/static/media/arrow-down.5815603b211e8540899ef8b9194d3119.svg",
+    "static/media/minus.svg": "/WaterTracker/static/media/minus.c2f5c7ab1efd3f7179492c7d9b472519.svg",
+    "static/media/progressBar-icon.svg": "/WaterTracker/static/media/progressBar-icon.bd32c1f491f1f89ffc30c808a89357ac.svg",
+    "static/media/plus.svg": "/WaterTracker/static/media/plus.e230c17eccfc72c82b63b96575ac344a.svg",
+    "static/media/close.svg": "/WaterTracker/static/media/close.2d39ebec4a0b09e9a5de64dc02d5c5f2.svg",
+    "main.94357195.css.map": "/WaterTracker/static/css/main.94357195.css.map",
+    "main.756aa891.js.map": "/WaterTracker/static/js/main.756aa891.js.map"
   },
   "entrypoints": [
-    "static/css/main.7acaea2f.css",
-    "static/js/main.07d3183d.js"
+    "static/css/main.94357195.css",
+    "static/js/main.756aa891.js"
   ]
 }
