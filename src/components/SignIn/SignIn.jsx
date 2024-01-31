@@ -44,10 +44,14 @@ export const AuthForm = () => {
       password: '',
     },
     validationSchema: validationSchema,
-    onSubmit: values => {
-      dispatch(loginThunk(values));
-      formik.resetForm();
-    },
+    onSubmit: async values => {
+        try {
+          await dispatch(loginThunk(values));
+          formik.resetForm();
+        } catch (error) {
+          setOpenSnackbar(true);
+        }
+      },
   });
 
   useEffect(() => {
