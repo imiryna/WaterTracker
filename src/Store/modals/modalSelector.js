@@ -1,4 +1,3 @@
-export const selectUserSettings = state => {
-  console.log(state.modal.settingShowing);
-  return state.modal.settingShowing;
-};
+export const selectUserSettings = state => state.modal.settingShowing;
+export const selectDropdown = state => state.modal.dropdownShowing;
+export const selectLogout = state => state.modal.confirmLogoutShowing;
