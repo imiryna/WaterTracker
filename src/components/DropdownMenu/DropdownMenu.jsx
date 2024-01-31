@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   MenuCss,
   DropdownCss,
@@ -6,8 +6,21 @@ import {
   BoxCss,
   ArrowCss,
 } from './DropdownMenu.styled';
+import LogoutConfirmationDialog from 'components/LogOutModal/LogOutModal';
 
 export const DropdownMenu = () => {
+
+  const [confirmationVisible, setConfirmationVisible] = useState(false);
+
+  const openLogoutDialog = () => {
+    setConfirmationVisible(true);
+  };
+
+  const closeLogoutDialog = () => {
+    setConfirmationVisible(false);
+  };
+
+
   return (
     <DropdownCss>
       <MenuCss>
@@ -18,7 +31,14 @@ export const DropdownMenu = () => {
 
         <BoxCss>
           <ArrowCss />
-          <div>Log out</div>
+          
+            <div onClick={openLogoutDialog}>Log out</div>
+            <LogoutConfirmationDialog
+              visible={confirmationVisible}
+              onHide={closeLogoutDialog}
+            />
+          
+          
         </BoxCss>
       </MenuCss>
     </DropdownCss>
