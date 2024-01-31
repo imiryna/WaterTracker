@@ -4,8 +4,14 @@ import { getCurrentUserThunk } from './currentUserThunk';
 const currentUserSlice = createSlice({
     name: 'currentUserSlice',
     initialState: {
-        user: null,
+        user: {
+            name: '',
+            email: '',
+            gender: '',
+            dailyNorm: '',
+        },
         error: null,
+        token: null,
         isLoading: true,
     },
     extraReducers: builder => {
