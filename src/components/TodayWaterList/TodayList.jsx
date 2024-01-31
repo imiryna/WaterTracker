@@ -1,17 +1,17 @@
-import { delWaterThunk } from 'Store/water/waterThunks';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+// import { Dialog } from '@mui/material';
+
+import { delWaterThunk } from 'Store/water/waterThunks';
 import { StyledWaterList } from './TodayList.styled';
 import { createWaterCardMarcup } from './WaterCard';
 import { waterArrSelector } from 'Store/water/waterSelectors';
-import { useState } from 'react';
 import { DeleteConfirmDialog } from './DeleteDialog';
 import { StyledBackdrop } from './DeleteDialog.styled';
 import { Modal } from 'components/Modal/Modal';
 import { AddWaterModal } from './modals/AddWaterModal';
 import { EditWaterModal } from './modals/EditWaterModal';
 import { PlusSvg } from './StyledTodayListIcons';
-import { parseUtcTime } from 'services/helpers/getUtcTime';
-// import { Dialog } from '@mui/material';
 
 export const TodayList = () => {
   const dispatch = useDispatch();
@@ -35,7 +35,7 @@ export const TodayList = () => {
     const waterCardId = item._id;
 
     // Calculating adding time
-    const waterAddTime = item;
+    const waterAddTime = calculateTime(item);
 
     const waterQuantity = item.quantity;
 
@@ -63,6 +63,19 @@ export const TodayList = () => {
           togleAddModal();
         }}
       >
+        {showAddModal && (
+          <Modal togleModal={togleAddModal}>
+            <AddWaterModal togleModal={togleAddModal} />
+          </Modal>
+        )}
+        {showEditModal && (
+          <Modal togleModal={togleEditModal}>
+            <EditWaterModal
+              prevVal={currentEditObj}
+              togleModal={togleEditModal}
+            />
+          </Modal>
+        )}
         <PlusSvg />
         Add Water
       </button>
@@ -73,19 +86,6 @@ export const TodayList = () => {
         setDialogStatus={setDialogStatus}
         deleteWater={delWaterById}
       />
-      {showAddModal && (
-        <Modal togleModal={togleAddModal}>
-          <AddWaterModal togleModal={togleAddModal} />
-        </Modal>
-      )}
-      {showEditModal && (
-        <Modal togleModal={togleEditModal}>
-          <EditWaterModal
-            prevVal={currentEditObj}
-            togleModal={togleEditModal}
-          />
-        </Modal>
-      )}
     </StyledWaterList>
   );
 };

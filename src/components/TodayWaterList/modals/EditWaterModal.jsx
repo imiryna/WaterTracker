@@ -1,10 +1,10 @@
-import { Container } from 'components/SettingModal/SettingModal.styled';
-import { StyledWaterModal } from './WaterModal.styled';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+
+import { Container } from 'components/SettingModal/SettingModal.styled';
+import { StyledWaterModal } from './WaterModal.styled';
 import { changeWaterThunk } from 'Store/water/waterThunks';
 import { CupSvg, MinusSvg, PlusSvg } from '../StyledTodayListIcons';
-import { parseUtcTime } from 'services/helpers/getUtcTime';
 
 export const EditWaterModal = ({ togleModal, prevVal }) => {
   const [amount, setAmount] = useState(prevVal.quantity);
@@ -23,15 +23,6 @@ export const EditWaterModal = ({ togleModal, prevVal }) => {
     setTime(new Date());
     togleModal(true);
   };
-
-  const prevTime = parseUtcTime(prevVal.time);
-
-  if (prevTime.hours >= 12) {
-    prevTime.hours = prevTime.hours - 12;
-    prevTime.dayPart = 'PM';
-  } else {
-    prevTime.dayPart = 'AM';
-  }
   return (
     <Container onClick={e => e.stopPropagation()}>
       <StyledWaterModal>
@@ -40,7 +31,7 @@ export const EditWaterModal = ({ togleModal, prevVal }) => {
           <CupSvg />
           <div className="water-info">
             <span className="amount">{prevVal.quantity} ml</span>
-            <span className="time">{`${prevTime.hours}:${prevTime.minutes} ${prevTime.dayPart}`}</span>
+            <span className="time">{prevVal.time}</span>
           </div>
         </div>
         <form
