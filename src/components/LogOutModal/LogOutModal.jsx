@@ -12,7 +12,7 @@ const LogoutConfirmationDialog = ({ visible, onHide }) => {
     onHide();
   };
 
-  const onKeyDown = (e) => {
+  const onKeyDown = e => {
     if (e.key === 'Enter') {
       onHide();
     }

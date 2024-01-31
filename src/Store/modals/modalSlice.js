@@ -4,6 +4,8 @@ const INITIAL_STATE = {
   addWaterShowing: false,
   settingShowing: false,
   myDailyNormaShowing: false,
+  dropdownShowing: false,
+  confirmLogoutShowing: false,
 };
 
 const modalSlice = createSlice({
@@ -21,6 +23,12 @@ const modalSlice = createSlice({
     toggleMyDailyNormaVisibility(state) {
       state.myDailyNormaShowing = !state.myDailyNormaShowing;
     },
+    toggleDropdownVisibility(state) {
+      state.dropdownShowing = !state.dropdownShowing;
+    },
+    toggleLogoutVisibility(state) {
+      state.confirmLogoutShowing = !state.confirmLogoutShowing;
+    },
   },
 });
 
@@ -28,6 +36,8 @@ export const {
   toggleAddWateVisibility,
   toggleSettingsVisibility,
   toggleMyDailyNormaVisibility,
+  toggleDropdownVisibility,
+  toggleLogoutVisibility,
 } = modalSlice.actions;
 
 export const modalReducer = modalSlice.reducer;

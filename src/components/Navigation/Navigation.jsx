@@ -1,12 +1,23 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
-// selectors
-// import { selectAuthUserData } from 'Store/auth/authSelector';
-import { selectUserSettings } from 'Store/modals/modalSelector';
 import { useDispatch, useSelector } from 'react-redux';
+import { Outlet } from 'react-router-dom';
+
+// selectors
+import {
+  selectAuthenticated,
+  selectAuthUserData,
+} from 'Store/auth/authSelector';
+import { selectUserSettings, selectDropdown } from 'Store/modals/modalSelector';
+// import { selectUser } from 'Store/currentUser/currentUserSelectors';
+// import { getCurrentUserThunk } from 'Store/currentUser/currentUserThunk';
+import { selectLogout } from 'Store/modals/modalSelector';
+import { toggleLogoutVisibility } from 'Store/modals/modalSlice';
 
 // actions
-import { toggleSettingsVisibility } from 'Store/modals/modalSlice';
+import {
+  toggleSettingsVisibility,
+  toggleDropdownVisibility,
+} from 'Store/modals/modalSlice';
 
 import {
   NavCss,
@@ -20,26 +31,32 @@ import {
 } from './Navigation.styled';
 
 // temp section ZooBeeN for modal
-import { useState } from 'react';
 import { Modal } from 'components/Modal/Modal';
 import { DropdownMenu } from 'components/DropdownMenu/DropdownMenu';
 import { Setting } from 'components/SettingModal/SettingModal';
-import { selectUser } from 'Store/currentUser/currentUserSelectors';
+import LogoutConfirmationDialog from 'components/LogOutModal/LogOutModal';
 // import { getCurrentUser } from 'services/api';
 // END OF Temp section
 
 export const Navigation = () => {
   // temp section ZooBeeN for modal
-  // const [showModal, setShowModal] = useState(false);
-  const [openDropbox, setOpenDropbox] = useState(false);
-  const userSettingsModalShown = useSelector(selectUserSettings);
   const dispatcher = useDispatch();
 
-  // const { email } = useSelector(selectAuthUserData);
-  const currentUser = useSelector(selectUser);
+  // selectors
+  const dropdownShown = useSelector(selectDropdown);
+  const userSettingsModalShown = useSelector(selectUserSettings);
+  const isAuth = useSelector(selectAuthenticated);
+  const currentUser = useSelector(selectAuthUserData);
+  const isConfirmLogoutShown = useSelector(selectLogout);
+
+  // local variables
+  console.log(`cuser: ${currentUser}`);
   const email = currentUser.email.split('@')[0];
+  console.log(`email: ${email}`);
   const name = currentUser.name?.split(' ')[0];
+  console.log(`name: ${name}`);
   const shownName = name ? name : email;
+  console.log(`sname: ${shownName}`);
 
   const getRandomHexColor = () =>
     `#${Math.floor(Math.random() * 16777215)
@@ -47,9 +64,13 @@ export const Navigation = () => {
       .padStart(6, 0)}`;
 
   const toggleDropbox = () => {
-    setOpenDropbox(!openDropbox);
+    dispatcher(toggleDropdownVisibility());
   };
   const toggleModal = () => dispatcher(toggleSettingsVisibility());
+
+  const closeLogoutDialog = () => {
+    dispatcher(toggleLogoutVisibility());
+  };
   // END OF Temp section
 
   // const openUserSetting = e => {
@@ -58,10 +79,14 @@ export const Navigation = () => {
   // };
   return (
     <>
-      {/* // temp section ZooBeeN for modal */}
-      <button type="button" onClick={toggleModal}>
-        Modalochka ;)
-      </button>
+      {/* Confirmation window to confirm Logout */}
+      {isConfirmLogoutShown && (
+        <LogoutConfirmationDialog
+          visible={isConfirmLogoutShown}
+          onHide={closeLogoutDialog}
+        />
+      )}
+
       {userSettingsModalShown && (
         <Modal toggleModal={toggleModal}>
           <Setting />
@@ -80,16 +105,14 @@ export const Navigation = () => {
           <UserIco />
         </NavLinkCss> */}
 
-        <UserSettingCss>
-          <button onClick={toggleDropbox}>
-            {openDropbox ? <DropdownMenu /> : null}
-          </button>
+        <UserSettingCss onClick={toggleDropbox}>
+          {isAuth ? 'TRUE' : 'FALSE'}
           <TextCss>{shownName}</TextCss>
           <UserAvatarCss
             style={{ backgroundColor: getRandomHexColor() }}
           ></UserAvatarCss>
-
           <ArrowIcon />
+          {dropdownShown ? <DropdownMenu /> : null}
         </UserSettingCss>
       </NavCss>
       <Outlet />

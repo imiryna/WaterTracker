@@ -1,4 +1,6 @@
-import React, {useState} from 'react';
+import React from 'react';
+
+import { useDispatch } from 'react-redux';
 import {
   MenuCss,
   DropdownCss,
@@ -6,39 +8,32 @@ import {
   BoxCss,
   ArrowCss,
 } from './DropdownMenu.styled';
-import LogoutConfirmationDialog from 'components/LogOutModal/LogOutModal';
+
+import {
+  toggleLogoutVisibility,
+  toggleSettingsVisibility,
+} from 'Store/modals/modalSlice';
 
 export const DropdownMenu = () => {
-
-  const [confirmationVisible, setConfirmationVisible] = useState(false);
+  const dispatcher = useDispatch();
 
   const openLogoutDialog = () => {
-    setConfirmationVisible(true);
+    dispatcher(toggleLogoutVisibility());
   };
 
-  const closeLogoutDialog = () => {
-    setConfirmationVisible(false);
-  };
-
+  const toggleModal = () => dispatcher(toggleSettingsVisibility());
 
   return (
     <DropdownCss>
       <MenuCss>
         <BoxCss>
           <OutlineCss />
-          <div>Setting</div>
+          <div onClick={toggleModal}>Setting</div>
         </BoxCss>
 
         <BoxCss>
           <ArrowCss />
-          
-            <div onClick={openLogoutDialog}>Log out</div>
-            <LogoutConfirmationDialog
-              visible={confirmationVisible}
-              onHide={closeLogoutDialog}
-            />
-          
-          
+          <div onClick={openLogoutDialog}>Log out</div>
         </BoxCss>
       </MenuCss>
     </DropdownCss>

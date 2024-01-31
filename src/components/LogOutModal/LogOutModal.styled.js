@@ -1,6 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
 
-
 export const GlobalConfirmDialogStyles = createGlobalStyle`
    body {
     overflow: ${({ overlayVisible }) => (overlayVisible ? 'hidden' : 'auto')};
@@ -13,7 +12,7 @@ export const GlobalConfirmDialogStyles = createGlobalStyle`
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5); /* Adjust the alpha value for the desired transparency */
-    z-index:4000;
+    z-index:40;
     display: ${({ overlayVisible }) => (overlayVisible ? 'block' : 'none')};
   }
   .custom-confirm-dialog {
@@ -34,4 +33,4 @@ export const GlobalConfirmDialogStyles = createGlobalStyle`
   }
 
  
-`
+`;
