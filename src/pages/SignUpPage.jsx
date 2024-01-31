@@ -1,10 +1,10 @@
 import React from 'react';
 import { AuthPageDiv } from 'components/SignIn/SignIn.styled'
-import AuthRegForm from 'components/SignUp/SignUp';
+import { AuthRegForm } from 'components/SignUp/SignUp';
 
 const SigninPage = () => {
   return <AuthPageDiv>
-    <AuthRegForm />
+   <AuthRegForm/>
   </AuthPageDiv>
 };
 export default SigninPage;

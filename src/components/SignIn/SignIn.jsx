@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
-import { NavLink } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
@@ -14,6 +13,7 @@ import {
   StyledInput,
   FormButton,
   AuthDataError,
+  RedirectButton
 } from './SignIn.styled';
 import {
   selectAuthError,
@@ -109,7 +109,7 @@ export const AuthForm = () => {
           ) : null}
         </InputDiv>
         <FormButton type="submit">Sign In</FormButton>
-        <NavLink to="/signup">Sign Up</NavLink>
+        <RedirectButton to="/signup">Sign Up</RedirectButton>
       </AuthStyledForm>
 
       <Snackbar
