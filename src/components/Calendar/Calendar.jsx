@@ -124,8 +124,8 @@ export const Calendar = () => {
 
     // Pagination handlers
     const handlePreviousMonth = () => {
-        const previousMonth = month - 1 < 0 ? 11 : month - 1; 
-        const newYear = previousMonth === 11 ? year - 1 : year;
+        const previousMonth = month - 1 <= 0 ? 12 : month - 1; 
+        const newYear = previousMonth === 12 ? year - 1 : year;
         // dispatch(setMonth(previousMonth));
         // dispatch(setYear(newYear));
         setMonth(previousMonth);
@@ -133,8 +133,8 @@ export const Calendar = () => {
     };
     
     const handleNextMonth = () => {
-        const nextMonth = month + 1 > 11 ? 0 : month + 1;
-        const newYear = nextMonth === 0 ? year + 1 : year;
+        const nextMonth = month + 1 > 12 ? 1 : month + 1;
+        const newYear = nextMonth === 1 ? year + 1 : year;
         // dispatch(setMonth(nextMonth));
         // dispatch(setYear(newYear));
         setMonth(nextMonth);
@@ -150,7 +150,7 @@ export const Calendar = () => {
             <StyledDate>{monthName}, {year}</StyledDate>
             <StyledArrowButton onClick={handleNextMonth}><StyledRightArrow/></StyledArrowButton>
           </StyledPaginationContainer>
-          
+          </StyledContainer>
           <StyledList>
           {monthStat.map(day => {
             return(
@@ -164,10 +164,9 @@ export const Calendar = () => {
                 <StyledPercentage>{day.percentage}</StyledPercentage>
               </StyledItem>
             )
-          })};
+          })}
 
             </StyledList>
-          </StyledContainer>
           <StyledPopOver
             id="calendar-popover"
             open={isOpen}
