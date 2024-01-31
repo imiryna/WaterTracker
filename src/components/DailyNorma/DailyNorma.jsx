@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { StyledDalyNorma } from './DailyNorma.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeDailyNormaThunk } from '../../Redux/water/waterThunks';
+import { changeDailyNormaThunk } from 'Store/water/waterThunks';
 import {
   todayNormaSelector,
   totalWaterAmmountSelector,
-} from '../../Redux/water/waterSelectors';
+} from 'Store/water/waterSelectors';
 import { Modal } from 'components/Modal/Modal';
 import { EditDailyNormaModal } from './EditNormaModal';
 

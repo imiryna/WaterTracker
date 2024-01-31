@@ -1,8 +1,8 @@
-import { delWaterThunk } from '../../Redux/water/waterThunks';
+import { delWaterThunk } from 'Store/water/waterThunks';
 import { useDispatch, useSelector } from 'react-redux';
 import { StyledWaterList } from './TodayList.styled';
 import { createWaterCardMarcup } from './WaterCard';
-import { waterArrSelector } from '../../Redux/water/waterSelectors';
+import { waterArrSelector } from 'Store/water/waterSelectors';
 import { useState } from 'react';
 import { DeleteConfirmDialog } from './DeleteDialog';
 import { StyledBackdrop } from './DeleteDialog.styled';
@@ -63,19 +63,6 @@ export const TodayList = () => {
           togleAddModal();
         }}
       >
-        {showAddModal && (
-          <Modal togleModal={togleAddModal}>
-            <AddWaterModal togleModal={togleAddModal} />
-          </Modal>
-        )}
-        {showEditModal && (
-          <Modal togleModal={togleEditModal}>
-            <EditWaterModal
-              prevVal={currentEditObj}
-              togleModal={togleEditModal}
-            />
-          </Modal>
-        )}
         <PlusSvg />
         Add Water
       </button>
@@ -86,6 +73,19 @@ export const TodayList = () => {
         setDialogStatus={setDialogStatus}
         deleteWater={delWaterById}
       />
+      {showAddModal && (
+        <Modal togleModal={togleAddModal}>
+          <AddWaterModal togleModal={togleAddModal} />
+        </Modal>
+      )}
+      {showEditModal && (
+        <Modal togleModal={togleEditModal}>
+          <EditWaterModal
+            prevVal={currentEditObj}
+            togleModal={togleEditModal}
+          />
+        </Modal>
+      )}
     </StyledWaterList>
   );
 };
