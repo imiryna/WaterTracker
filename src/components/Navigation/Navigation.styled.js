@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { ReactComponent as Logo } from 'Images/Icons/logo.svg';
 import { ReactComponent as User } from 'Images/Icons/user.svg';
+import { ReactComponent as Arrow } from 'Images/Icons/arrow-down.svg';
 
 export const LogoIcon = styled(Logo)`
   width: 40px;
@@ -12,6 +13,11 @@ export const UserIcon = styled(User)`
   height: 28px;
   /* fill: var(--primery-black); */
   stroke: var(--primery-black);
+`;
+export const ArrowIcon = styled(Arrow)`
+  width: 16px;
+  height: 16px;
+  fill: var(--primery-blue);
 `;
 
 export const NavCss = styled.nav`
@@ -71,4 +77,19 @@ export const TextCss = styled.p`
   @media (min-width: 768px) {
     font-size: 18px;
   }
+`;
+
+export const UserSettingCss = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const UserAvatarCss = styled.div`
+  display: block;
+  border-radius: 28px;
+  margin-left: 4px;
+  margin-right: 8px;
+  width: 28px;
+  height: 28px;
 `;

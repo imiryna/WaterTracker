@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 // selectors
-import { selectAuthUserData } from 'Store/auth/authSelector';
+// import { selectAuthUserData } from 'Store/auth/authSelector';
 import { selectUserSettings } from 'Store/modals/modalSelector';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -14,7 +14,9 @@ import {
   LogoText,
   TextCss,
   LogoIcon,
-  UserIcon,
+  ArrowIcon,
+  UserSettingCss,
+  UserAvatarCss,
 } from './Navigation.styled';
 
 // temp section ZooBeeN for modal
@@ -35,8 +37,15 @@ export const Navigation = () => {
 
   // const { email } = useSelector(selectAuthUserData);
   const currentUser = useSelector(selectUser);
-  const email = currentUser.email
-  
+  const email = currentUser.email.split('@')[0];
+  const name = currentUser.name?.split(' ')[0];
+  const shownName = name ? name : email;
+
+  const getRandomHexColor = () =>
+    `#${Math.floor(Math.random() * 16777215)
+      .toString(16)
+      .padStart(6, 0)}`;
+
   const toggleDropbox = () => {
     setOpenDropbox(!openDropbox);
   };
@@ -59,6 +68,7 @@ export const Navigation = () => {
         </Modal>
       )}
       {/* // END OF Temp section */}
+
       <NavCss>
         <NavLinkCss to={'/home'}>
           <LogoIcon />
@@ -70,16 +80,17 @@ export const Navigation = () => {
           <UserIco />
         </NavLinkCss> */}
 
-        <NavLinkCss>
-          {email ? (
-            <TextCss>{email.split('@')[0]}</TextCss>
-          ) : (
-            <TextCss>Sign in</TextCss>
-          )}
+        <UserSettingCss>
+          <button onClick={toggleDropbox}>
+            {openDropbox ? <DropdownMenu /> : null}
+          </button>
+          <TextCss>{shownName}</TextCss>
+          <UserAvatarCss
+            style={{ backgroundColor: getRandomHexColor() }}
+          ></UserAvatarCss>
 
-          <UserIcon onClick={toggleDropbox} />
-          {openDropbox ? <DropdownMenu /> : null}
-        </NavLinkCss>
+          <ArrowIcon />
+        </UserSettingCss>
       </NavCss>
       <Outlet />
     </>
