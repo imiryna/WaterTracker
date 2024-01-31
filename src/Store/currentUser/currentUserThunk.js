@@ -6,7 +6,7 @@ export const getCurrentUserThunk = createAsyncThunk(
     'user/current', async (_, thunkAPI) => {
         const token =  thunkAPI.getState().auth.token;
         try {
-            const res = getCurrentUser(token);
+            const res = await getCurrentUser(token);
             return res
 
         } catch (error) {
