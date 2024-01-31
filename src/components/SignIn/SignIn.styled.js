@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 import BottleImgDes from 'Images/Backgrounds/bottle-sign-in.png';
 import BubblesDes from 'Images/Backgrounds/background-bubbles-main-page.png';
+import {ReactComponent as ShowPass} from "Images/Icons/show-pass.svg";
+import {ReactComponent as HidePass} from "Images/Icons/hide-pass.svg";
+import { NavLink } from 'react-router-dom';
+
 
 export const AuthPageDiv = styled.div`
   background-color: #fff;
@@ -34,75 +38,65 @@ export const FormName = styled.h2`
   font-weight: 500;
   line-height: 32px;
 `;
-
 export const InputDiv = styled.div`
-display: flex;
-flex-direction: column;
-gap: 8px
-
-color: #2F2F2F;
-font-family: Roboto;
-font-size: 18px;
-font-style: normal;
-font-weight: 400;
-line-height: 24px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #2F2F2F;
+  font-family: Roboto;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
 `;
+
 export const StyledInput = styled.input`
-width: 384px;
-padding: 12px 10px;
-border-radius: 6px;
-border: 1px solid #D7E3FF;
-background: #FFF);
-transition: border-color 0.3s;
-
-&::placeholder {
-color: #9EBBFF;
-font-family: Roboto;
-font-size: 16px;
-font-style: normal;
-font-weight: 400;
-line-height: 20px; 
-}
-
-&.error::placeholder {
-  color: #EF5050;
-}
-
-&.error {
-  border: 1px solid #EF5050;
-  color: #EF5050;
-}
-
-&:focus {
-  outline: none:
-  border-color: #D7E3FF;
-  border-width: 1px; 
-  border-style: solid; 
+  position: relative;
+  width: 384px;
+  padding: 12px 30px 12px 10px; 
+  border-radius: 6px;
+  border: 1px solid #D7E3FF;
+  background: #FFF;
+  transition: border-color 0.3s;
   color: #407BFF;
-  font-family: Roboto;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 20px; 
-}
 
-&:active {
-  outline: none;
-  border-color: #D7E3FF;
-  border-width: 1px; 
-  border-style: solid; 
-  color: #407BFF;
-  font-family: Roboto;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 20px; 
-}
+  &:focus {
+    outline: none;
+    border-color: #D7E3FF;
+  }
 
-&:not(:focus):not(:active) {
+  &::placeholder {
+    color: #9EBBFF;
+  }
+
+  &.error {
+    border: 1px solid #EF5050;
+    color: #EF5050;
+  }
+`;
+
+export const IconContainer = styled.div`
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
   
-}
-`
+`;
+
+export const ShowPassIcon = styled(ShowPass)`
+  width: 16px;
+  height: 16px;
+  fill: #407BFF;
+`;
+
+export const HidePassIcon = styled(HidePass)`
+  width: 16px;
+  height: 16px;
+  fill: #407BFF;
+`;
+
 
 export const FormButton = styled.button`
   padding: 10px 30px;
@@ -128,3 +122,14 @@ font-weight: 400;
 line-height: 18px;
 margin-top: 4px;
 `
+
+export const RedirectButton = styled(NavLink)`
+color: #407BFF;
+font-family: Roboto;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 20px; 
+`
+
+

@@ -11,8 +11,7 @@ const INITIAL_STATE = {
   user: {
     email: null,
     name: null,
-    avatarUrl: null,
-    gender: null,
+    avatarUrl: null, 
   },
   authenticated: false,
   error: null,
