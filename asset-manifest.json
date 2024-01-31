@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/WaterTracker/static/css/main.94357195.css",
-    "main.js": "/WaterTracker/static/js/main.a1234f33.js",
+    "main.js": "/WaterTracker/static/js/main.a579f800.js",
     "static/media/bottle-sign-in.png": "/WaterTracker/static/media/bottle-sign-in.abfbe239550c8bdcad14.png",
     "static/media/background-main-page.png": "/WaterTracker/static/media/background-main-page.f64e661baefac36f8e09.png",
     "static/media/logo.svg": "/WaterTracker/static/media/logo.a01ead97ea79f55a00efe1db363da4fb.svg",
@@ -15,8 +15,10 @@
     "static/media/delete.svg": "/WaterTracker/static/media/delete.265909c9021e18f1cf779e78f564dc29.svg",
     "index.html": "/WaterTracker/index.html",
     "static/media/calendar.svg": "/WaterTracker/static/media/calendar.ce74b80c51a2c81d2dc47cf7dcb2295f.svg",
+    "static/media/hide-pass.svg": "/WaterTracker/static/media/hide-pass.684f1b434d43589e1b1bed0fdadaf534.svg",
     "static/media/edit.svg": "/WaterTracker/static/media/edit.eec7cea8da5acabcdbbb345ea3bc71ad.svg",
     "static/media/statistic.svg": "/WaterTracker/static/media/statistic.87779631b9f7a6cee1bab4228949cb8c.svg",
+    "static/media/show-pass.svg": "/WaterTracker/static/media/show-pass.3fca2525de58860b3eb754050e63bceb.svg",
     "static/media/arrow-down.svg": "/WaterTracker/static/media/arrow-down.5815603b211e8540899ef8b9194d3119.svg",
     "static/media/logout.svg": "/WaterTracker/static/media/logout.f9152e69002d1ed97dd108b70e3be2b9.svg",
     "static/media/minus.svg": "/WaterTracker/static/media/minus.c2f5c7ab1efd3f7179492c7d9b472519.svg",
@@ -24,10 +26,10 @@
     "static/media/plus.svg": "/WaterTracker/static/media/plus.e230c17eccfc72c82b63b96575ac344a.svg",
     "static/media/close.svg": "/WaterTracker/static/media/close.2d39ebec4a0b09e9a5de64dc02d5c5f2.svg",
     "main.94357195.css.map": "/WaterTracker/static/css/main.94357195.css.map",
-    "main.a1234f33.js.map": "/WaterTracker/static/js/main.a1234f33.js.map"
+    "main.a579f800.js.map": "/WaterTracker/static/js/main.a579f800.js.map"
   },
   "entrypoints": [
     "static/css/main.94357195.css",
-    "static/js/main.a1234f33.js"
+    "static/js/main.a579f800.js"
   ]
 }
