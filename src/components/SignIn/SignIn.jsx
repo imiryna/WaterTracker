@@ -1,14 +1,25 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
-import { AuthStyledForm, AuthDiv, FormName, InputDiv, StyledInput, FormButton, AuthDataError } from './SignIn.styled';
-import { selectAuthError, selectAuthAuthenticated } from '../../Redux/auth/authSelector';
 import { useFormik } from 'formik';
-import { loginThunk } from '../../Redux/auth/authOperations';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+import {
+  AuthStyledForm,
+  AuthDiv,
+  FormName,
+  InputDiv,
+  StyledInput,
+  FormButton,
+  AuthDataError,
+} from './SignIn.styled';
+import {
+  selectAuthError,
+  selectAuthAuthenticated,
+} from 'Store/auth/authSelector';
+import { loginThunk } from 'Store/auth/authOperations';
 
 const validationSchema = Yup.object({
   email: Yup.string('Enter your email')
@@ -20,30 +31,26 @@ const validationSchema = Yup.object({
     .required('Password is required'),
 });
 
+export const AuthForm = () => {
+  const dispatch = useDispatch();
+  const authError = useSelector(selectAuthError);
+  const isAuthenticated = useSelector(selectAuthAuthenticated);
 
+  const [openSnackbar, setOpenSnackbar] = useState(false);
 
- export const AuthForm = () => {
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema: validationSchema,
+    onSubmit: values => {
+      dispatch(loginThunk(values));
+      formik.resetForm();
+    },
+  });
 
- const dispatch = useDispatch();
- const authError = useSelector(selectAuthError);
- const isAuthenticated = useSelector(selectAuthAuthenticated);
- 
-
- const [openSnackbar, setOpenSnackbar] = useState(false);
-
-   const formik = useFormik({
-     initialValues: {
-       email: '',
-       password: '', 
-      },
-      validationSchema: validationSchema,
-      onSubmit: values => {
-        dispatch(loginThunk(values));
-        formik.resetForm();
-     }
-   });
-
-   useEffect(() => {
+  useEffect(() => {
     if (authError) {
       setOpenSnackbar(true);
     }
@@ -56,8 +63,6 @@ const validationSchema = Yup.object({
   if (isAuthenticated) {
     return <Navigate to="/home" />;
   }
-  
-
 
   return (
     <AuthDiv>
@@ -101,16 +106,19 @@ const validationSchema = Yup.object({
         </InputDiv>
         <FormButton type="submit">Sign In</FormButton>
         <NavLink to="/signup">Sign Up</NavLink>
-          </AuthStyledForm>
+      </AuthStyledForm>
 
-     <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
-          <Alert onClose={handleCloseSnackbar} severity="error">
-            {authError}
-          </Alert>
-        </Snackbar>
-
-     </AuthDiv>
-   );
- };
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+      >
+        <Alert onClose={handleCloseSnackbar} severity="error">
+          {authError}
+        </Alert>
+      </Snackbar>
+    </AuthDiv>
+  );
+};
 
 export default AuthForm;

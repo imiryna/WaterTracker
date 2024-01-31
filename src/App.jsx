@@ -6,33 +6,31 @@ import Home from 'pages/HomePage';
 import Signup from 'pages/SignUpPage';
 import Signin from 'pages/SignInPage';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectAuthIsRefreshing } from 'Redux/auth/authSelector';
+import { selectAuthIsRefreshing } from 'Store/auth/authSelector';
 import { useEffect } from 'react';
-import { refreshUserThunk } from 'Redux/auth/authOperations';
+import { refreshUserThunk } from 'Store/auth/authOperations';
 
 export const App = () => {
-
   const dispatch = useDispatch();
-  const isRefreshing = useSelector(selectAuthIsRefreshing); 
+  const isRefreshing = useSelector(selectAuthIsRefreshing);
   useEffect(() => {
-    dispatch(refreshUserThunk())
-  }, [dispatch])
+    dispatch(refreshUserThunk());
+  }, [dispatch]);
 
   return (
     <>
       {!isRefreshing && (
         <Suspense>
-        <Routes>
-          <Route path="/" element={<Navigation />}>
-            <Route index element={<Welcome />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/signin" element={<Signin />} />
-          </Route>
-        </Routes>
-      </Suspense>
+          <Routes>
+            <Route path="/" element={<Navigation />}>
+              <Route index element={<Welcome />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/signin" element={<Signin />} />
+            </Route>
+          </Routes>
+        </Suspense>
       )}
     </>
-  
   );
 };

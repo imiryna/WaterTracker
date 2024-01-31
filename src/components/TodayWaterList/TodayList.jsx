@@ -1,16 +1,17 @@
-import { delWaterThunk } from '../../Redux/water/waterThunks';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+// import { Dialog } from '@mui/material';
+
+import { delWaterThunk } from 'Store/water/waterThunks';
 import { StyledWaterList } from './TodayList.styled';
 import { createWaterCardMarcup } from './WaterCard';
-import { waterArrSelector } from '../../Redux/water/waterSelectors';
-import { useState } from 'react';
+import { waterArrSelector } from 'Store/water/waterSelectors';
 import { DeleteConfirmDialog } from './DeleteDialog';
 import { StyledBackdrop } from './DeleteDialog.styled';
 import { Modal } from 'components/Modal/Modal';
 import { AddWaterModal } from './modals/AddWaterModal';
 import { EditWaterModal } from './modals/EditWaterModal';
 import { PlusSvg } from './StyledTodayListIcons';
-// import { Dialog } from '@mui/material';
 
 export const TodayList = () => {
   const dispatch = useDispatch();
