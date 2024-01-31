@@ -1,3 +1,3 @@
-export const selectUser = state => state.currentUserSlice.user;
-export const selectIsLoading = state => state.currentUserSlice.isLoading;
-export const selectError = state => state.currentUserSlice.error;
+export const selectUser = state => state.currentUser.user;
+export const selectIsLoading = state => state.currentUser.isLoading;
+export const selectError = state => state.currentUser.error;

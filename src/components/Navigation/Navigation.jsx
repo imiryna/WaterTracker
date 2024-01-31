@@ -22,6 +22,7 @@ import { useState } from 'react';
 import { Modal } from 'components/Modal/Modal';
 import { DropdownMenu } from 'components/DropdownMenu/DropdownMenu';
 import { Setting } from 'components/SettingModal/SettingModal';
+import { selectUser } from 'Store/currentUser/currentUserSelectors';
 // import { getCurrentUser } from 'services/api';
 // END OF Temp section
 
@@ -32,8 +33,10 @@ export const Navigation = () => {
   const userSettingsModalShown = useSelector(selectUserSettings);
   const dispatcher = useDispatch();
 
-  const { email } = useSelector(selectAuthUserData);
-
+  // const { email } = useSelector(selectAuthUserData);
+  const currentUser = useSelector(selectUser);
+  const email = currentUser.email
+  
   const toggleDropbox = () => {
     setOpenDropbox(!openDropbox);
   };

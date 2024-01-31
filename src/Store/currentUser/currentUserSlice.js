@@ -24,6 +24,8 @@ const currentUserSlice = createSlice({
             state.isLoading = false;
             state.user = action.payload.user;
             state.error = null;
+            state.token = action.payload.token;
+
         })
         .addCase(getCurrentUserThunk.rejected, (state, action) => {
             state.isLoading = false;
