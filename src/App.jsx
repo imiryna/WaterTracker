@@ -12,6 +12,8 @@ const Home = lazy(() => import('pages/HomePage'));
 const Welcome = lazy(() => import('pages/WelcomePage'));
 const Signin = lazy(() => import('pages/SignInPage'));
 const Signup = lazy(() => import('pages/SignUpPage'));
+const ForgotPassword = lazy(() => import('pages/ForgotPasswordPage'));
+const UpdatePassword = lazy(() => import('pages/UpdatePasswordPage'));
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -40,6 +42,8 @@ export const App = () => {
             path="/signin"
             element={!isAuthed ? <Signin /> : <Navigate to={'/'} />}
           />
+          <Route path="/forgotpassword" element={<ForgotPassword />} />
+          <Route path="/updatepassword" element={<UpdatePassword/>} />
         </Route>
       </Routes>
     </Suspense>
