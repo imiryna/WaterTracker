@@ -60,29 +60,30 @@ export const getWaterServings = async token => {
 
 export const getWaterServingById = async (servingId, token) => {
   setToken(token);
-  const { data } = waterTrackerInstance.get(`/water/today/${servingId}`);
+  const { data } = await waterTrackerInstance.get(`/water/today/${servingId}`);
   return data;
 };
 
 export const addWaterServing = async (servingData, token) => {
   setToken(token);
-  const { data } = waterTrackerInstance.post('/water', servingData);
+  const { data } = await waterTrackerInstance.post('/water', servingData);
   return data;
 };
 
 export const removeWaterServing = async (servingId, token) => {
   setToken(token);
-  const { data } = waterTrackerInstance.delete(`/water/${servingId}`);
+  const { data } = await waterTrackerInstance.delete(`/water/${servingId}`);
   return data;
 };
 
 export const editWaterServing = async (servingId, servingData, token) => {
+  console.log(`Id:`, servingId)
   setToken(token);
-  const water = await getWaterServingById(servingId);
-  const updatedWater = { ...water, ...servingData };
-  const { data } = waterTrackerInstance.put(
+  // const water = await getWaterServingById(servingId);
+  // const updatedWater = { ...water, ...servingData };
+  const { data } = await waterTrackerInstance.put(
     `/water/${servingId}`,
-    updatedWater
+    servingData
   );
   return data;
 };

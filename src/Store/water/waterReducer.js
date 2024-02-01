@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addWaterThunk, changeDailyNormaThunk, changeWaterThunk, delWaterThunk } from './waterThunks';
+import { addWaterThunk, changeDailyNormaThunk, changeWaterThunk, delWaterThunk, getDailyWaterThunk } from './waterThunks';
 
 /*
   water card exemple:
@@ -28,6 +28,19 @@ export const waterSlice = createSlice({
   },
   extraReducers: builder =>
     builder
+    //? GET WATER
+    .addCase(getDailyWaterThunk.pending, state => {
+      state.isLoading = true;
+        state.error = null;
+    })
+    .addCase(getDailyWaterThunk.fulfilled, (state, action) => {
+      state.waterArr = action.payload.dailyList
+      state.isLoading = false
+    })
+    .addCase(getDailyWaterThunk.rejected, (state, action) => {
+      state.isLoading = false
+      state.error = action.payload
+    })
       //?DEL WATER
       .addCase(delWaterThunk.pending, state => {
         state.isLoading = true;
@@ -38,7 +51,7 @@ export const waterSlice = createSlice({
 
         // Searching for item to delete
         state.waterArr = state.waterArr.filter(
-          item => item._id !== action.payload
+          item => item._id !== action.payload["Removed waterId"]
         );
         // Recalculating total today drinked water
         state.totalWaterAmmount = recalculateTodayDrinkedWater(state.waterArr);
@@ -57,11 +70,11 @@ export const waterSlice = createSlice({
 
         // Searching for water card to change
         state.waterArr = state.waterArr.map(item => {
-          if (item._id === action.payload.waterId) {
+          if (item._id === action.payload._id) {
             
             // Rewriting water card info
-            item.quantity = action.payload.newQuantity || item.quantity;
-            item.time = action.payload.newTime || item.time;
+            item.amount = action.payload.amount || item.amount;
+            item.time = action.payload.time || item.time;
           }
           return item;
         });
@@ -83,7 +96,7 @@ export const waterSlice = createSlice({
         state.isLoading = false;
 
         // Generating new wter card (using Math.random qz we don`t have backend now)
-        const newWater = { _id: Math.random() * 1000, ...action.payload };
+        const newWater = { ...action.payload };
         state.waterArr.push(newWater);
 
         // Recalculating total today drinked water
@@ -109,7 +122,7 @@ export const waterSlice = createSlice({
 
 const recalculateTodayDrinkedWater = waterArr => {
   let totalWaterAmmount = 0;
-  waterArr.forEach(item => (totalWaterAmmount += item.quantity));
+  waterArr.forEach(item => (totalWaterAmmount += item.amount));
 
   return totalWaterAmmount;
 };
