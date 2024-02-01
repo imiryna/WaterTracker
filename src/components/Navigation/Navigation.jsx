@@ -108,9 +108,15 @@ export const Navigation = () => {
         ) : (
           <UserSettingCss onClick={toggleDropbox}>
             <TextCss>{shownName}</TextCss>
-            <UserAvatarCss
-              style={{ backgroundColor: getRandomHexColor() }}
-            ></UserAvatarCss>
+            {!currentUser.avatarUrl ? (
+              <UserAvatarCss
+                style={{ backgroundColor: getRandomHexColor() }}
+              ></UserAvatarCss>
+            ) : (
+              <UserAvatarCss
+                style={{ backgroundImage: `url(${currentUser.avatarUrl})` }}
+              ></UserAvatarCss>
+            )}
             <ArrowIcon />
             {dropdownShown ? <DropdownMenu /> : null}
           </UserSettingCss>
