@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useMediaQuery } from '@mui/material';
 
 import {
@@ -25,23 +25,26 @@ import {
   StyledCloseButton,
 } from './Calendar.styled';
 
-import { tempMonthStat } from 'services/helpers/tempDataForCalendar';
+// import { tempMonthStat } from 'services/helpers/tempDataForCalendar';
 
-// import { setMonth, setYear } from "Store/monthStat/monthStatSlice";
-// import { selectMonth, selectMonthStat, selectYear } from "Store/monthStat/monthStatSelectors";
+import { setMonth, setYear } from "Store/monthStat/monthStatSlice";
+import { selectMonth, selectMonthStat, selectYear } from "Store/monthStat/monthStatSelectors";
+
 // import { getMonthStat } from "Store/monthStat/monthStatThunk";
 // import { setMonth, setYear } from "Store/monthStat/monthStatSlice";
 // import { selectMonth, selectMonthStat, selectYear } from "Store/monthStat/monthStatSelectors";
-// import { getMonthStat } from "Store/monthStat/monthStatThunk";
+import { getMonthStat } from "Store/monthStat/monthStatThunk";
 
 export const Calendar = () => {
 
   //* Calendar data */
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     // const month = useSelector(selectMonth);
     // const year = useSelector(selectYear);
-    // const monthStat = useSelector(selectMonthStat);
-    const monthStat = tempMonthStat;
+    const monthStat = useSelector(selectMonthStat);
+    // const monthStat = tempMonthStat;
+
+    console.log(monthStat);
 
 
   //check device screen width
@@ -103,9 +106,10 @@ export const Calendar = () => {
   const monthName = month.toLocaleString('en-US', { month: 'long' });
 
   //Fetch information when month changes
-  // useEffect(() => {
-  //   dispatch(getMonthStat({month, year}))
-  // }, [dispatch, month, year])
+
+  useEffect(() => {
+    dispatch(getMonthStat({month, year}))
+  }, [dispatch, month, year])
 
   // Pagination handlers
   const handlePreviousMonth = () => {
