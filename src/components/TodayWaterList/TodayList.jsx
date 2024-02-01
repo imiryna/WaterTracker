@@ -10,7 +10,7 @@ import { Modal } from 'components/Modal/Modal';
 import { AddWaterModal } from './modals/AddWaterModal';
 import { EditWaterModal } from './modals/EditWaterModal';
 import { PlusSvg } from './StyledTodayListIcons';
-import { parseUtcTime } from 'services/helpers/getUtcTime';
+// import { parseUtcTime } from 'services/helpers/getUtcTime';
 // import { Dialog } from '@mui/material';
 
 export const TodayList = () => {
@@ -23,13 +23,13 @@ export const TodayList = () => {
   });
 
   const [showAddModal, setShowAddModal] = useState(false);
-  const togleAddModal = () => {
+  const toggleAddModal = () => {
     setShowAddModal(!showAddModal);
   };
 
-  useEffect(()=>{
-    dispatch(getDailyWaterThunk())
-  }, [])
+  useEffect(() => {
+    dispatch(getDailyWaterThunk());
+  }, [dispatch]);
 
   const [showEditModal, setShowEditModal] = useState(false);
   const togleEditModal = () => setShowEditModal(!showEditModal);
@@ -64,12 +64,12 @@ export const TodayList = () => {
       <button
         className="add-btn"
         onClick={() => {
-          togleAddModal();
+          toggleAddModal();
         }}
       >
         {showAddModal && (
-          <Modal togleModal={togleAddModal}>
-            <AddWaterModal togleModal={togleAddModal} />
+          <Modal togleModal={toggleAddModal}>
+            <AddWaterModal togleModal={toggleAddModal} />
           </Modal>
         )}
         {showEditModal && (

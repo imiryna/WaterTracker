@@ -4,7 +4,7 @@ import {
   ContainerCss,
   TextCss,
   TableCss,
-} from './Discription.atyled';
+} from './Description.styled';
 
 export const Discription = () => {
   return (

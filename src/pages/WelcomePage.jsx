@@ -1,7 +1,7 @@
 import { Advicer } from 'components/Advicer/Advicer';
 import React from 'react';
 import { SectionCss, WelcomeWrapCss } from 'components/Advicer/Advicer.styled';
-import { Discription } from 'components/Discription/Discription';
+import { Discription } from 'components/Description/Description';
 
 const Welcome = () => {
   return (
