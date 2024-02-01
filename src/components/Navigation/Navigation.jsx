@@ -28,6 +28,7 @@ import {
   ArrowIcon,
   UserSettingCss,
   UserAvatarCss,
+  UserIcon,
 } from './Navigation.styled';
 
 // temp section ZooBeeN for modal
@@ -45,18 +46,17 @@ export const Navigation = () => {
   // selectors
   const dropdownShown = useSelector(selectDropdown);
   const userSettingsModalShown = useSelector(selectUserSettings);
-  const isAuth = useSelector(selectAuthenticated);
+  const isAuthed = useSelector(selectAuthenticated);
   const currentUser = useSelector(selectAuthUserData);
   const isConfirmLogoutShown = useSelector(selectLogout);
 
   // local variables
-  console.log(`cuser: ${currentUser}`);
-  const email = currentUser.email.split('@')[0];
-  console.log(`email: ${email}`);
-  const name = currentUser.name?.split(' ')[0];
-  console.log(`name: ${name}`);
-  const shownName = name ? name : email;
-  console.log(`sname: ${shownName}`);
+  let shownName = '';
+  if (isAuthed) {
+    const email = currentUser.email.split('@')[0];
+    const name = currentUser.name?.split(' ')[0];
+    shownName = name ? name : email;
+  }
 
   const getRandomHexColor = () =>
     `#${Math.floor(Math.random() * 16777215)
@@ -95,25 +95,32 @@ export const Navigation = () => {
       {/* // END OF Temp section */}
 
       <NavCss>
-        <NavLinkCss to={'/home'}>
+        <NavLinkCss to={'/'}>
           <LogoIcon />
           <LogoText>Tracker of water</LogoText>
         </NavLinkCss>
 
-        {/* <NavLinkCss to={'/signin'}>
-          <TextCss>Sign in</TextCss>
-          <UserIco />
-        </NavLinkCss> */}
-
-        <UserSettingCss onClick={toggleDropbox}>
-          {isAuth ? 'TRUE' : 'FALSE'}
-          <TextCss>{shownName}</TextCss>
-          <UserAvatarCss
-            style={{ backgroundColor: getRandomHexColor() }}
-          ></UserAvatarCss>
-          <ArrowIcon />
-          {dropdownShown ? <DropdownMenu /> : null}
-        </UserSettingCss>
+        {!isAuthed ? (
+          <NavLinkCss to={'/signin'}>
+            <TextCss>Sign in</TextCss>
+            <UserIcon />
+          </NavLinkCss>
+        ) : (
+          <UserSettingCss onClick={toggleDropbox}>
+            <TextCss>{shownName}</TextCss>
+            {!currentUser.avatarUrl ? (
+              <UserAvatarCss
+                style={{ backgroundColor: getRandomHexColor() }}
+              ></UserAvatarCss>
+            ) : (
+              <UserAvatarCss
+                style={{ backgroundImage: `url(${currentUser.avatarUrl})` }}
+              ></UserAvatarCss>
+            )}
+            <ArrowIcon />
+            {dropdownShown ? <DropdownMenu /> : null}
+          </UserSettingCss>
+        )}
       </NavCss>
       <Outlet />
     </>
