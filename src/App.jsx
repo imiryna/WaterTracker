@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { lazy, Suspense, useEffect } from 'react';
 import { Navigation } from 'components/Navigation/Navigation';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,6 +7,7 @@ import {
   selectAuthAuthenticated,
 } from 'Store/auth/authSelector';
 import { refreshUserThunk } from 'Store/auth/authOperations';
+import SigninPage from 'pages/SignInPage';
 
 const Home = lazy(() => import('pages/HomePage'));
 const Welcome = lazy(() => import('pages/WelcomePage'));
@@ -32,8 +33,8 @@ export const App = () => {
             <Route index element={<Welcome />} />
           )}
 
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/signin" element={<Signin />} />
+          <Route path="/signup" element={!isAuthed? <Signup/> : <Navigate to ={"/"} />}/>
+          <Route path="/signin" element={!isAuthed? <Signin />: <Navigate to ={"/"}/>} />
         </Route>
       </Routes>
     </Suspense>

@@ -34,8 +34,9 @@ export const registerThunk = createAsyncThunk(
 export const logOutThunk = createAsyncThunk(
   'user/logout',
   async (_, thunkAPI) => {
+    const token = thunkAPI.getState().auth.token;
     try {
-      await userLogOut();
+      await userLogOut(token);
       return;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
