@@ -53,7 +53,7 @@ export const refreshUserThunk = createAsyncThunk(
     }
 
     try {
-      const res = await getCurrentUser();
+      const res = await getCurrentUser(token);
       return res;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

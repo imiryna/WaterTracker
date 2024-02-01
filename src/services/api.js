@@ -10,8 +10,8 @@ export const clearToken = () => {
 };
 
 // User apis
-export const getCurrentUser = async () => {
-  // setToken(token);
+export const getCurrentUser = async token => {
+  setToken(token);
   const { data } = await waterTrackerInstance.get(`/user/current`);
   return data;
 };
