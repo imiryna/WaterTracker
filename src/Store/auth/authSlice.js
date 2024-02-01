@@ -11,7 +11,7 @@ const INITIAL_STATE = {
   user: {
     email: null,
     name: null,
-    avatarUrl: null, 
+    avatarUrl: null,
   },
   authenticated: false,
   error: null,
@@ -28,7 +28,11 @@ const authSlice = createSlice({
     builder
 
       .addCase(loginThunk.fulfilled, (state, action) => {
-        state.user = action.payload.user;
+        state.user = {
+          email: action.payload.email,
+          name: action.payload.name,
+          avatarUrl: action.payload.avatar,
+        };
         state.authenticated = true;
         state.token = action.payload.token;
         state.isLoading = false;
@@ -46,7 +50,11 @@ const authSlice = createSlice({
       })
 
       .addCase(refreshUserThunk.fulfilled, (state, action) => {
-        state.user = action.payload.user;
+        state.user = {
+          email: action.payload.email,
+          name: action.payload.name,
+          avatarUrl: action.payload.avatar,
+        };
         state.token = action.payload.token;
         state.authenticated = true;
         state.isLoading = false;

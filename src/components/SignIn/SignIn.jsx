@@ -13,7 +13,7 @@ import {
   StyledInput,
   FormButton,
   AuthDataError,
-  RedirectButton
+  RedirectButton,
 } from './SignIn.styled';
 import {
   selectAuthError,
@@ -45,13 +45,13 @@ export const AuthForm = () => {
     },
     validationSchema: validationSchema,
     onSubmit: async values => {
-        try {
-          await dispatch(loginThunk(values));
-          formik.resetForm();
-        } catch (error) {
-          setOpenSnackbar(true);
-        }
-      },
+      try {
+        await dispatch(loginThunk(values));
+        formik.resetForm();
+      } catch (error) {
+        setOpenSnackbar(true);
+      }
+    },
   });
 
   useEffect(() => {
@@ -65,7 +65,7 @@ export const AuthForm = () => {
   };
 
   if (isAuthenticated) {
-    return <Navigate to="/home" />;
+    return <Navigate to="/" />;
   }
 
   return (
