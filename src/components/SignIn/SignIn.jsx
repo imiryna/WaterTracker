@@ -14,6 +14,7 @@ import {
   FormButton,
   AuthDataError,
   RedirectButton,
+  NavDiv
 } from './SignIn.styled';
 import {
   selectAuthError,
@@ -109,7 +110,10 @@ export const AuthForm = () => {
           ) : null}
         </InputDiv>
         <FormButton type="submit">Sign In</FormButton>
-        <RedirectButton to="/signup">Sign Up</RedirectButton>
+        <NavDiv>
+          <RedirectButton to="/signup">Sign Up</RedirectButton>
+          <RedirectButton to="/forgotpassword">Forgot password?</RedirectButton>
+          </NavDiv>
       </AuthStyledForm>
 
       <Snackbar

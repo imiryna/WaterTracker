@@ -50,6 +50,25 @@ export const updateUser = async userData => {
   );
   return data;
 };
+
+
+export const forgotPassword = async userData => {
+  const { data } = await waterTrackerInstance.post(
+    '/users/forgotpassword',
+    userData
+  );
+  return data;
+};
+
+export const updatePassword = async userData => {
+  const { data } = await waterTrackerInstance.patch(
+    '/users/updatepassword',
+    userData
+  );
+  setToken(data.token);
+  return data;
+};
+
 // Today water portions apis
 
 export const getWaterServings = async token => {
