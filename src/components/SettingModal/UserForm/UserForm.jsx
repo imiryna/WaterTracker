@@ -1,5 +1,5 @@
 import { Formik } from 'formik';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { toggleSettingsVisibility } from 'Store/modals/modalSlice';
 import { object, string, ref } from 'yup';
 

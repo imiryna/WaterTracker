@@ -1,6 +1,6 @@
 import { UserForm } from './UserForm/UserForm';
 import { toggleSettingsVisibility } from '../../Store/modals/modalSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
   StyledHeader,
   StyledImg,
