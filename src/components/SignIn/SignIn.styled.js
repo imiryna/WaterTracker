@@ -131,5 +131,7 @@ font-style: normal;
 font-weight: 400;
 line-height: 20px; 
 `
-
-
+export const NavDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+`

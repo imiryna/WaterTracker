@@ -9,6 +9,7 @@ const LogoutConfirmationDialog = ({ visible, onHide }) => {
 
   const onConfirm = () => {
     dispatch(logOutThunk());
+    localStorage.clear();
     onHide();
   };
 

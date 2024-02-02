@@ -1,17 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { getMonthStat } from "./monthStatThunk";
+import { logOutThunk } from "Store/auth/authOperations";
+
+const INITIAL_STATE = {
+    owner: '',
+    month: new Date().getMonth(),
+    year: new Date().getFullYear(),
+    monthStat: [],
+    isLoading: false,
+    error: null,
+};
 
 const monthStatSlice = createSlice({
     name: 'monthStat',
-    initialState: {
-        owner: '',
-        month: new Date().getMonth(),
-        year: new Date().getFullYear(),
-        monthStat: [],
-        isLoading: false,
-        error: null,
-    },
-    reducers:{
+    initialState: INITIAL_STATE,
+    reducers: {
         setMonth: (state, action) => {
             state.month = action.payload;
         },
@@ -31,6 +34,8 @@ const monthStatSlice = createSlice({
         }).addCase(getMonthStat.rejected, (state, action) => {
             state.isLoading = false;
             state.error = action.payload;
+        }).addCase(logOutThunk.fulfilled, (state) => {
+            return INITIAL_STATE;
         })
     }
 })
