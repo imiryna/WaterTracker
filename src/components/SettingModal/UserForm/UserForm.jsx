@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { object, string, ref } from 'yup';
 
 import { toggleSettingsVisibility } from 'Store/modals/modalSlice';
-// temp - user from auth - it is wrong way
-// import { selectAuthUserData } from 'Store/auth/authSelector';
+
 import { selectUser } from 'Store/currentUser/currentUserSelectors';
 
 // Styles
@@ -24,10 +23,9 @@ import { FormError } from './FormError';
 export const UserForm = () => {
   const dispatch = useDispatch();
   const toggleModal = () => dispatch(toggleSettingsVisibility());
-  // temp - user from auth - it is wrong way
-  // const { name, email } = useSelector(selectAuthUserData);
-  const { name = '', email = '', gender = 'woman' } = useSelector(selectUser);
-  console.log({ name, email, gender });
+
+  const { name = '', email = '', gender } = useSelector(selectUser);
+
   //Submit function
   const handleSubmit = (values, { resetForm }) => {
     // todo - state
@@ -44,13 +42,10 @@ export const UserForm = () => {
   // } else {
   //   userName = '';
   // }
-  let userGender;
-  if (gender) {
-    if (gender === 'male') userGender = 'man';
-    if (gender === 'female') userGender = 'woman';
-  } else {
-    userGender = 'woman';
-  }
+  let userGender = 'woman';
+
+  if (gender === 'male') userGender = 'man';
+  if (gender === 'female') userGender = 'woman';
 
   const INITIAL_VALUES = {
     gender: userGender,
