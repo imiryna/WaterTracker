@@ -1,4 +1,4 @@
-import { Container } from 'components/SettingModal/SettingModal.styled';
+import { StyledContainer } from './WaterModal.styled';
 import { StyledWaterModal } from './WaterModal.styled';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -33,7 +33,7 @@ export const EditWaterModal = ({ togleModal, prevVal }) => {
     prevTime.dayPart = 'AM';
   }
   return (
-    <Container onClick={e => e.stopPropagation()}>
+    <StyledContainer onClick={e => e.stopPropagation()}>
       <StyledWaterModal>
         <p className="title">Edit the entered amount of water</p>
         <div className="previous-val-box">
@@ -103,6 +103,6 @@ export const EditWaterModal = ({ togleModal, prevVal }) => {
           </div>
         </form>
       </StyledWaterModal>
-    </Container>
+    </StyledContainer>
   );
 };
