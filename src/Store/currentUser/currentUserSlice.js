@@ -1,27 +1,32 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getCurrentUserThunk } from './currentUserThunk';
+import { refreshUserThunk } from './currentUserThunk';
+import { logOutThunk } from 'Store/auth/authOperations';
+
+const INITIAL_STATE = {
+  user: {
+    name: '',
+    email: '',
+    gender: '',
+    dailyNorm: '',
+    avatarUrl: '',
+  },
+  error: null,
+  token: null,
+  isLoading: true,
+  isRefreshing: false,
+}
 
 const currentUserSlice = createSlice({
   name: 'currentUser',
-  initialState: {
-    user: {
-      name: '',
-      email: '',
-      gender: '',
-      dailyNorm: '',
-      avatarUrl: '',
-    },
-    error: null,
-    token: null,
-    isLoading: true,
-  },
+  initialState: INITIAL_STATE,
   extraReducers: builder => {
     builder
-      .addCase(getCurrentUserThunk.pending, state => {
+      .addCase(refreshUserThunk.pending, state => {
         state.error = null;
         state.isLoading = true;
+        state.isRefreshing = true;
       })
-      .addCase(getCurrentUserThunk.fulfilled, (state, action) => {
+      .addCase(refreshUserThunk.fulfilled, (state, action) => {
         state.isLoading = false;
         state.user.email = action.payload.email;
         state.user.name = action.payload.name;
@@ -29,11 +34,15 @@ const currentUserSlice = createSlice({
         state.user.gender = action.payload.gender;
         state.error = null;
         state.token = action.payload.token;
+        state.isRefreshing = false;
       })
-      .addCase(getCurrentUserThunk.rejected, (state, action) => {
+      .addCase(refreshUserThunk.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
-      });
+        state.isRefreshing = false;
+      }).addCase(logOutThunk.fulfilled, () => {
+        return INITIAL_STATE;
+      })
   },
 });
 
