@@ -1,10 +1,10 @@
 {
   "files": {
     "main.css": "/WaterTracker/static/css/main.94357195.css",
-    "main.js": "/WaterTracker/static/js/main.7bc48991.js",
+    "main.js": "/WaterTracker/static/js/main.94f124fb.js",
     "static/js/343.9e1cdeb5.chunk.js": "/WaterTracker/static/js/343.9e1cdeb5.chunk.js",
     "static/js/546.629a236a.chunk.js": "/WaterTracker/static/js/546.629a236a.chunk.js",
-    "static/js/154.45c53df6.chunk.js": "/WaterTracker/static/js/154.45c53df6.chunk.js",
+    "static/js/154.9a36143b.chunk.js": "/WaterTracker/static/js/154.9a36143b.chunk.js",
     "static/js/535.38935bd0.chunk.js": "/WaterTracker/static/js/535.38935bd0.chunk.js",
     "static/js/198.57bb2b44.chunk.js": "/WaterTracker/static/js/198.57bb2b44.chunk.js",
     "static/js/99.df89536c.chunk.js": "/WaterTracker/static/js/99.df89536c.chunk.js",
@@ -37,10 +37,10 @@
     "static/media/plus.svg": "/WaterTracker/static/media/plus.e230c17eccfc72c82b63b96575ac344a.svg",
     "static/media/close.svg": "/WaterTracker/static/media/close.2d39ebec4a0b09e9a5de64dc02d5c5f2.svg",
     "main.94357195.css.map": "/WaterTracker/static/css/main.94357195.css.map",
-    "main.7bc48991.js.map": "/WaterTracker/static/js/main.7bc48991.js.map",
+    "main.94f124fb.js.map": "/WaterTracker/static/js/main.94f124fb.js.map",
     "343.9e1cdeb5.chunk.js.map": "/WaterTracker/static/js/343.9e1cdeb5.chunk.js.map",
     "546.629a236a.chunk.js.map": "/WaterTracker/static/js/546.629a236a.chunk.js.map",
-    "154.45c53df6.chunk.js.map": "/WaterTracker/static/js/154.45c53df6.chunk.js.map",
+    "154.9a36143b.chunk.js.map": "/WaterTracker/static/js/154.9a36143b.chunk.js.map",
     "535.38935bd0.chunk.js.map": "/WaterTracker/static/js/535.38935bd0.chunk.js.map",
     "198.57bb2b44.chunk.js.map": "/WaterTracker/static/js/198.57bb2b44.chunk.js.map",
     "99.df89536c.chunk.js.map": "/WaterTracker/static/js/99.df89536c.chunk.js.map",
@@ -50,6 +50,6 @@
   },
   "entrypoints": [
     "static/css/main.94357195.css",
-    "static/js/main.7bc48991.js"
+    "static/js/main.94f124fb.js"
   ]
 }
