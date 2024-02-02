@@ -4,8 +4,8 @@ import { object, string, ref } from 'yup';
 
 import { toggleSettingsVisibility } from 'Store/modals/modalSlice';
 // temp - user from auth - it is wrong way
-import { selectAuthUserData } from 'Store/auth/authSelector';
-// import { selectUser } from 'Store/currentUser/currentUserSelectors';
+// import { selectAuthUserData } from 'Store/auth/authSelector';
+import { selectUser } from 'Store/currentUser/currentUserSelectors';
 
 // Styles
 import {
@@ -25,9 +25,9 @@ export const UserForm = () => {
   const dispatch = useDispatch();
   const toggleModal = () => dispatch(toggleSettingsVisibility());
   // temp - user from auth - it is wrong way
-  const { name, email } = useSelector(selectAuthUserData);
-  // const {name, email, } = useSelector(selectUser);
-  const user = {};
+  // const { name, email } = useSelector(selectAuthUserData);
+  const { name = '', email = '', gender = 'woman' } = useSelector(selectUser);
+  console.log({ name, email, gender });
   //Submit function
   const handleSubmit = (values, { resetForm }) => {
     // todo - state
@@ -38,23 +38,24 @@ export const UserForm = () => {
     toggleModal();
     return;
   };
-  let userName;
-  if (name) {
-    userName = name;
+  // let userName;
+  // if (name) {
+  //   userName = name;
+  // } else {
+  //   userName = '';
+  // }
+  let userGender;
+  if (gender) {
+    if (gender === 'male') userGender = 'man';
+    if (gender === 'female') userGender = 'woman';
   } else {
-    userName = '';
-  }
-  let userEmail;
-  if (email) {
-    userEmail = email;
-  } else {
-    userEmail = '';
+    userGender = 'woman';
   }
 
   const INITIAL_VALUES = {
-    gender: 'woman',
-    name: userName,
-    email: userEmail,
+    gender: userGender,
+    name,
+    email,
     password: '',
     newpass: '',
     repitpass: '',
