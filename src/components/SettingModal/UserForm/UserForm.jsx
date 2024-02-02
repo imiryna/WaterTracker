@@ -1,11 +1,13 @@
 import { Formik } from 'formik';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleSettingsVisibility } from 'Store/modals/modalSlice';
 import { object, string, ref } from 'yup';
 
 import {
   FlexWrapper,
   FormStyled,
   Input,
-  RadioGrup,
+  Title,
   Radio,
   RadioLabel,
   Label,
@@ -13,17 +15,18 @@ import {
   Button,
 } from './UserForm.styled';
 import { FormError } from './FormError';
-// import { logIn } from 'redux/auth-operations';
 
 export const UserForm = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const toggleModal = () => dispatch(toggleSettingsVisibility());
   //Submit function
   const handleSubmit = (values, { resetForm }) => {
-    // const { email, password } = values;
     // todo - state
     console.log('Form was Submit: ', values);
-    // dispatch(logIn({ email, password }));
+
     resetForm();
+    // todo - доделать чтобы закрывалось после ответа сервера
+    toggleModal();
     return;
   };
 
@@ -37,7 +40,6 @@ export const UserForm = () => {
   };
   //Formik Validation schema
   const userSchema = object().shape({
-    // gender: string().required('Gender is required'),
     name: string().min(5).max(40).required('Name is required'),
     email: string().email().required('Email is required'),
     password: string().matches(
@@ -57,9 +59,19 @@ export const UserForm = () => {
       validationSchema={userSchema}
     >
       <FormStyled>
+        {/* <Label htmlFor="avatar">Your photo</Label>
+        <Input
+          type="file"
+          name="avatar"
+          id="avatar"
+          // title="Enter your name"
+          // placeholder="Your name"
+        />
+        <FormError name="avatar" /> */}
+
         <FlexWrapper>
           <Wrapper>
-            <RadioGrup id="my-radio-group">Your gender identity</RadioGrup>
+            <Title id="my-radio-group">Your gender identity</Title>
             <div role="group" aria-labelledby="my-radio-group">
               <RadioLabel>
                 <Radio type="radio" name="gender" value="woman" />
@@ -70,7 +82,6 @@ export const UserForm = () => {
                 Man
               </RadioLabel>
             </div>
-            {/* <FormError name="gender" /> */}
 
             <Label htmlFor="name">Your name</Label>
             <Input
@@ -82,53 +93,56 @@ export const UserForm = () => {
             />
             <FormError name="name" />
 
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email">E-mail</Label>
             <Input
               type="text"
               name="email"
               id="email"
               title="Enter your email"
-              placeholder="Email"
+              placeholder="E-mail"
             />
             <FormError name="email" />
           </Wrapper>
           <Wrapper>
-            <Label htmlFor="password">Password</Label>
+            <Title>Password</Title>
+            <Label className="small" htmlFor="password">
+              Outdated password:
+            </Label>
             <Input
               type="text"
               name="password"
               id="password"
               title="Enter your current password"
-              placeholder="Current password"
+              placeholder="Password"
             />
             <FormError name="password" />
 
-            <Label htmlFor="newpass">New password</Label>
+            <Label className="small" htmlFor="newpass">
+              New password:
+            </Label>
             <Input
               type="text"
               name="newpass"
               id="newpass"
-              // pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
               title="Enter new password"
-              placeholder="New password"
+              placeholder="Password"
             />
             <FormError name="newpass" />
 
-            <Label htmlFor="repit">Repit password</Label>
+            <Label className="small" htmlFor="repit">
+              Repit password:
+            </Label>
             <Input
               type="text"
               name="repitpass"
               id="repitpass"
-              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
               title="Repit new password"
-              placeholder="Repit password"
+              placeholder="Password"
             />
             <FormError name="repitpass" />
           </Wrapper>
         </FlexWrapper>
-        <Button type="submit" mt={3}>
-          Save
-        </Button>
+        <Button type="submit">Save</Button>
       </FormStyled>
     </Formik>
   );
