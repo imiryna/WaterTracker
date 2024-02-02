@@ -1,11 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import {
-    userLogin,
-    userRegister,
-    userLogOut,
-    getCurrentUser,
-    updatePassword,
-    forgotPassword,
+  userLogin,
+  userRegister,
+  userLogOut,
+  getCurrentUser,
+  updatePassword,
+  forgotPassword,
 } from 'services/api';
 
 export const loginThunk = createAsyncThunk(
@@ -37,6 +37,7 @@ export const logOutThunk = createAsyncThunk(
   'user/logout',
   async (_, thunkAPI) => {
     const token = thunkAPI.getState().auth.token;
+    console.log(token);
     try {
       await userLogOut(token);
       return;
@@ -65,26 +66,26 @@ export const refreshUserThunk = createAsyncThunk(
 );
 
 export const forgotPasswordThunk = createAsyncThunk(
-    'user/forgotpassword',
-    async (userData, thunkAPI) => {
-        try {
-            const res = await forgotPassword(userData);
-            return res;
-        } catch (error) {
-            return thunkAPI.rejectWithValue(error.message);
-        }
+  'user/forgotpassword',
+  async (userData, thunkAPI) => {
+    try {
+      const res = await forgotPassword(userData);
+      return res;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
     }
+  }
 );
 
 export const updatePasswordThunk = createAsyncThunk(
-    'user/updatepassword',
-    async (userData, thunkAPI) => {
-        try {
-            const res = await updatePassword(userData);
+  'user/updatepassword',
+  async (userData, thunkAPI) => {
+    try {
+      const res = await updatePassword(userData);
 
-            return res;
-        } catch (error) {
-            return thunkAPI.rejectWithValue(error.message);
-        }
+      return res;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
     }
+  }
 );
