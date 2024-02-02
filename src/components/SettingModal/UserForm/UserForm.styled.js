@@ -8,7 +8,7 @@ export const Title = styled.div`
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
-  line-height: 20px; /* 111.111% */
+  line-height: 1.1em; /* 111.111% */
 `;
 
 export const FormStyled = styled(Form)`
@@ -28,14 +28,11 @@ export const Label = styled.label`
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
-  /* line-height: 20px; 111.111% */
+  line-height: 1.1em; //111.111%
   &.small {
-    /* color: var(--Primery-Color-Black, #2f2f2f); */
-    /* font-family: Roboto; */
     font-size: 16px;
-    /* font-style: normal; */
     font-weight: 400;
-    /* line-height: 20px; 125% */
+    line-height: 1.25em;
   }
 `;
 export const RadioLabel = styled.label`
@@ -45,7 +42,7 @@ export const RadioLabel = styled.label`
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
-  line-height: 20px; /* 125% */
+  line-height: 1.25em; /* 125% */
 `;
 
 export const Radio = styled(Field)`
@@ -64,7 +61,7 @@ export const Input = styled(Field)`
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
-  line-height: 20px; /* 125% */
+  line-height: 1.25em; /* 125% */
 
   display: flex;
   padding: 12px 10px;
@@ -100,13 +97,16 @@ export const FlexWrapper = styled.div`
   display: flex;
   align-items: flex-start;
   gap: 20px;
-  @media screen and (min-width: 768px) {
-    /* display: block; */
+  @media screen and (max-width: 768px) {
+    flex-wrap: wrap;
   }
 `;
 export const Wrapper = styled.div`
   display: inline-block;
   width: 50%;
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
   /* margin-right: 20px; */
 `;
 export const ErrorText = styled.div`
