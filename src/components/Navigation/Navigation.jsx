@@ -29,16 +29,13 @@ import {
   UserIcon,
 } from './Navigation.styled';
 
-// temp section ZooBeeN for modal
 import { Modal } from 'components/Modal/Modal';
 import { DropdownMenu } from 'components/DropdownMenu/DropdownMenu';
 import { Setting } from 'components/SettingModal/SettingModal';
 import LogoutConfirmationDialog from 'components/LogOutModal/LogOutModal';
 // import { getCurrentUser } from 'services/api';
-// END OF Temp section
 
 export const Navigation = () => {
-  // temp section ZooBeeN for modal
   const dispatcher = useDispatch();
 
   // selectors

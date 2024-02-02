@@ -3,6 +3,7 @@ import { ReactComponent as CloseIcon } from 'Images/Icons/close.svg';
 import { ReactComponent as UploadIcon } from 'Images/Icons/upload.svg';
 
 export const StyledContainer = styled.div`
+  /* width: 600px; */
   color: var(--Primery-Color-Black, #2f2f2f);
   font-family: Roboto;
   display: inline-flex;
@@ -10,18 +11,28 @@ export const StyledContainer = styled.div`
   flex-direction: column;
   background: var(--Primery-Color-White, #fff);
   border-radius: 10px;
+  /* overflow-y: scroll; */
+
+  @media screen and (min-width: 320px) {
+    width: 280px;
+    /* overflow-y: scroll; */
+  }
+  @media screen and (min-width: 768px) {
+    width: 700px;
+  }
+  @media screen and (min-width: 1440px) {
+    width: 1000px;
+  }
 `;
 export const StyledHeader = styled.div`
   display: flex;
   margin-bottom: 10px;
 `;
 export const StyledTitle = styled.h2`
-  /* color: var(--Primery-Color-Black, #2f2f2f); */
-  /* font-family: Roboto; */
   font-size: 26px;
   font-style: normal;
   font-weight: 500;
-  line-height: 32px; /* 123.077% */
+  line-height: 1.23em; /* 123.077% */
 `;
 export const StyledCloseButton = styled.button`
   margin-left: auto;
@@ -51,7 +62,7 @@ export const StyledImgLabel = styled.p`
   font-weight: 600;
 `;
 export const StyledUploadButton = styled.button`
-  /* margin-left: auto; */
+  margin-left: 5px;
   display: flex;
   align-items: center;
   font-family: Roboto;

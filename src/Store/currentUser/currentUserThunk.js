@@ -1,10 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getCurrentUser, updateDailyNorma } from 'services/api';
+import {
+  getCurrentUser,
+  updateUser,
+  updateDailyNorma,
+  uploadUserAvatar,
+} from 'services/api';
 
 export const getCurrentUserThunk = createAsyncThunk(
   'user/getCurrent',
   async (_, thunkAPI) => {
-    console.log('GET CURRENT USER');
     const token = thunkAPI.getState().auth.token;
     if (token === null) {
       return thunkAPI.rejectWithValue('Please Login');
@@ -23,16 +27,55 @@ export const changeDailyNormaThunk = createAsyncThunk(
     try {
       const token = thunkAPI.getState().auth.token;
       newNorma = parseInt(newNorma);
-      console.log(`newNorma:`, newNorma)
+      console.log(`newNorma:`, newNorma);
       if (newNorma <= 0 || newNorma > 15000 || Number.isNaN(newNorma))
         throw new Error(
           'Water norma must be more then 0ml, less then 15000ml and be a number'
         );
-      const updatedDaliyNorma = await updateDailyNorma({dailyNorm: newNorma}, token);
-     
+      const updatedDaliyNorma = await updateDailyNorma(
+        { dailyNorm: newNorma },
+        token
+      );
+
       return updatedDaliyNorma;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
+export const updateCurrentUserThunk = createAsyncThunk(
+  'user/updateUser',
+  async (data, thunkAPI) => {
+    console.log('UPDATE CURRENT USER');
+    const token = thunkAPI.getState().auth.token;
+    if (token === null) {
+      return thunkAPI.rejectWithValue('Please Login');
+    }
+    try {
+      const res = await updateUser(data, token);
+      return res;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const uploadUserAvatarThunk = createAsyncThunk(
+  'user/avatars',
+  async (data, thunkAPI) => {
+    console.log('UPDATE USER AVATAR');
+    const token = thunkAPI.getState().auth.token;
+    if (token === null) {
+      return thunkAPI.rejectWithValue('Please Login');
+    }
+    try {
+      console.log(data);
+      const res = await uploadUserAvatar(data, token);
+      console.log(res);
+      return res;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
