@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const INITIAL_STATE = {
   addWaterShowing: false,
+  editWaterShowing: false,
   settingShowing: false,
   myDailyNormaShowing: false,
   dropdownShowing: false,
@@ -16,6 +17,9 @@ const modalSlice = createSlice({
   reducers: {
     toggleAddWateVisibility(state) {
       state.addWaterShowing = !state.addWaterShowing;
+    },
+    toggleEditWateVisibility(state) {
+      state.editWaterShowing = !state.editWaterShowing;
     },
     toggleSettingsVisibility(state) {
       state.settingShowing = !state.settingShowing;
@@ -34,6 +38,7 @@ const modalSlice = createSlice({
 
 export const {
   toggleAddWateVisibility,
+  toggleEditWateVisibility,
   toggleSettingsVisibility,
   toggleMyDailyNormaVisibility,
   toggleDropdownVisibility,

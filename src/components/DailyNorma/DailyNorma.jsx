@@ -8,6 +8,8 @@ import {
 } from 'Store/water/waterSelectors';
 import { Modal } from 'components/Modal/Modal';
 import { EditDailyNormaModal } from './EditNormaModal';
+import { selectEditNorma } from 'Store/modals/modalSelector';
+import { toggleMyDailyNormaVisibility } from 'Store/modals/modalSlice';
 
 export const DailyNorma = () => {
   const dispatch = useDispatch();
@@ -24,10 +26,9 @@ export const DailyNorma = () => {
   const [gender, setGender] = useState(GENDER.male);
   const [activeTime, setActiveTime] = useState(1);
 
-  const [showModal, setShowModal] = useState(false);
-  const togleModal = () => {
-    setShowModal(!showModal);
-  };
+  const editNormaModalVisibility = useSelector(selectEditNorma)
+
+  const toggleModal = () => dispatch(toggleMyDailyNormaVisibility())
 
   const changeDailyNorma = (newNorma) => {
     dispatch(changeDailyNormaThunk(newNorma));
@@ -41,15 +42,15 @@ export const DailyNorma = () => {
         <span className='norma-amount'>
           {totalTodayWater / 1000} L / {dailyNorma / 1000} L
         </span>
-        <button class="edit-btn" onClick={() => togleModal()}>Edit</button>
+        <button class="edit-btn" onClick={() => toggleModal()}>Edit</button>
       </div>
-      {showModal && (
-        <Modal togleModal={togleModal}>
+      {editNormaModalVisibility && (
+        <Modal toggleModal={toggleModal}>
           <EditDailyNormaModal
             values={{ weight, gender, activeTime }}
             setFns={{ setWeight, setActiveTime, setGender }}
             changeDailyNorma={changeDailyNorma}
-            togleModal={togleModal}
+            togleModal={toggleModal}
           />
         </Modal>
       )}
