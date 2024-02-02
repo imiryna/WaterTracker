@@ -43,6 +43,8 @@ export const Calendar = () => {
   const monthStat = useSelector(selectMonthStat);
   // const monthStat = tempMonthStat;
 
+  console.log(monthStat);
+
   //check device screen width
   const isDesktop = useMediaQuery('(min-width: 768px)');
 

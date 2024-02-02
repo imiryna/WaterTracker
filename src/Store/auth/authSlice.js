@@ -8,11 +8,6 @@ import {
 
 const INITIAL_STATE = {
   token: null,
-  user: {
-    email: null,
-    name: null,
-    avatarUrl: null,
-  },
   authenticated: false,
   error: null,
   isLoading: false,
@@ -27,11 +22,6 @@ const authSlice = createSlice({
     builder
 
       .addCase(loginThunk.fulfilled, (state, action) => {
-        state.user = {
-          email: action.payload.email,
-          name: action.payload.name,
-          avatarUrl: action.payload.avatar,
-        };
         state.authenticated = true;
         state.token = action.payload.token;
         state.isLoading = false;
@@ -49,8 +39,6 @@ const authSlice = createSlice({
       })
       .addCase(refreshUserThunk.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.user.email = action.payload.email;
-        state.user.avatarUrl = action.payload.avatar;
         state.error = null;
         state.token = action.payload.token;
         state.isRefreshing = false;
@@ -58,11 +46,7 @@ const authSlice = createSlice({
       })
 
       .addMatcher(
-        isAnyOf(
-          loginThunk.pending,
-          registerThunk.pending,
-          logOutThunk.pending,
-        ),
+        isAnyOf(loginThunk.pending, registerThunk.pending, logOutThunk.pending),
         state => {
           state.error = null;
           state.isLoading = true;
@@ -73,7 +57,7 @@ const authSlice = createSlice({
         isAnyOf(
           loginThunk.rejected,
           registerThunk.rejected,
-          logOutThunk.rejected,
+          logOutThunk.rejected
         ),
         (state, action) => {
           state.isLoading = false;
