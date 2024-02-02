@@ -1,8 +1,13 @@
 import { Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleSettingsVisibility } from 'Store/modals/modalSlice';
 import { object, string, ref } from 'yup';
 
+import { toggleSettingsVisibility } from 'Store/modals/modalSlice';
+// temp - user from auth - it is wrong way
+import { selectAuthUserData } from 'Store/auth/authSelector';
+// import { selectUser } from 'Store/currentUser/currentUserSelectors';
+
+// Styles
 import {
   FlexWrapper,
   FormStyled,
@@ -19,6 +24,10 @@ import { FormError } from './FormError';
 export const UserForm = () => {
   const dispatch = useDispatch();
   const toggleModal = () => dispatch(toggleSettingsVisibility());
+  // temp - user from auth - it is wrong way
+  const { name, email } = useSelector(selectAuthUserData);
+  // const {name, email, } = useSelector(selectUser);
+  const user = {};
   //Submit function
   const handleSubmit = (values, { resetForm }) => {
     // todo - state
@@ -29,11 +38,23 @@ export const UserForm = () => {
     toggleModal();
     return;
   };
+  let userName;
+  if (name) {
+    userName = name;
+  } else {
+    userName = '';
+  }
+  let userEmail;
+  if (email) {
+    userEmail = email;
+  } else {
+    userEmail = '';
+  }
 
   const INITIAL_VALUES = {
     gender: 'woman',
-    name: '',
-    email: '',
+    name: userName,
+    email: userEmail,
     password: '',
     newpass: '',
     repitpass: '',

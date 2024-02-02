@@ -3,6 +3,7 @@ import { ReactComponent as CloseIcon } from 'Images/Icons/close.svg';
 import { ReactComponent as UploadIcon } from 'Images/Icons/upload.svg';
 
 export const StyledContainer = styled.div`
+  /* width: 600px; */
   color: var(--Primery-Color-Black, #2f2f2f);
   font-family: Roboto;
   display: inline-flex;
@@ -10,6 +11,16 @@ export const StyledContainer = styled.div`
   flex-direction: column;
   background: var(--Primery-Color-White, #fff);
   border-radius: 10px;
+
+  @media screen and (min-width: 320px) {
+    width: 280px;
+  }
+  @media screen and (min-width: 768px) {
+    width: 700px;
+  }
+  @media screen and (min-width: 1440px) {
+    width: 1000px;
+  }
 `;
 export const StyledHeader = styled.div`
   display: flex;

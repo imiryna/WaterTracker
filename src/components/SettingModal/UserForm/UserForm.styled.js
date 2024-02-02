@@ -12,7 +12,8 @@ export const Title = styled.div`
 `;
 
 export const FormStyled = styled(Form)`
-  width: 900px;
+  /* display: flex; */
+  width: 100%;
   margin-top: 30px;
   margin-right: auto;
   margin-left: auto;
@@ -99,6 +100,9 @@ export const FlexWrapper = styled.div`
   display: flex;
   align-items: flex-start;
   gap: 20px;
+  @media screen and (min-width: 768px) {
+    /* display: block; */
+  }
 `;
 export const Wrapper = styled.div`
   display: inline-block;
