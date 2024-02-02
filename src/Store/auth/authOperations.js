@@ -37,6 +37,7 @@ export const logOutThunk = createAsyncThunk(
   'user/logout',
   async (_, thunkAPI) => {
     const token = thunkAPI.getState().auth.token;
+    console.log(token)
     try {
       await userLogOut(token);
       return;

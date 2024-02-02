@@ -11,3 +11,4 @@ export const selectAuthIsLoading = createSelector(
   selectAuth,
   auth => auth.isLoading
 );
+export const selectIsRefreshing = state => state.currentUser.isRefreshing;

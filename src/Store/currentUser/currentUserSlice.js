@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { refreshUserThunk } from './currentUserThunk';
+import { getCurrentUserThunk } from './currentUserThunk';
 import { logOutThunk } from 'Store/auth/authOperations';
 
 const INITIAL_STATE = {
@@ -11,9 +11,7 @@ const INITIAL_STATE = {
     avatarUrl: '',
   },
   error: null,
-  token: null,
-  isLoading: true,
-  isRefreshing: false,
+  isLoading: true
 }
 
 const currentUserSlice = createSlice({
@@ -21,25 +19,23 @@ const currentUserSlice = createSlice({
   initialState: INITIAL_STATE,
   extraReducers: builder => {
     builder
-      .addCase(refreshUserThunk.pending, state => {
+      .addCase(getCurrentUserThunk.pending, state => {
         state.error = null;
         state.isLoading = true;
-        state.isRefreshing = true;
-      })
-      .addCase(refreshUserThunk.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.user.email = action.payload.email;
-        state.user.name = action.payload.name;
-        state.user.avatarUrl = action.payload.avatar;
-        state.user.gender = action.payload.gender;
+      }).addCase(getCurrentUserThunk.fulfilled, (state, action) => {
+        state.user = {
+          name: action.payload.user.name,
+          email: action.payload.user.email,
+          gender: action.payload.user.gender,
+          dailyNorm: action.payload.user.dailyNorm,
+          avatarUrl: action.payload.user.avatarUrl,
+        };
         state.error = null;
-        state.token = action.payload.token;
-        state.isRefreshing = false;
+        state.isLoading = false;
       })
-      .addCase(refreshUserThunk.rejected, (state, action) => {
+      .addCase(getCurrentUserThunk.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
-        state.isRefreshing = false;
       }).addCase(logOutThunk.fulfilled, () => {
         return INITIAL_STATE;
       })

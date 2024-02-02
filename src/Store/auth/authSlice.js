@@ -3,6 +3,7 @@ import {
   loginThunk,
   registerThunk,
   logOutThunk,
+  refreshUserThunk,
 } from './authOperations';
 
 const INITIAL_STATE = {
@@ -34,15 +35,26 @@ const authSlice = createSlice({
         state.authenticated = true;
         state.token = action.payload.token;
         state.isLoading = false;
+        state.isRefreshing = false;
       })
 
       .addCase(registerThunk.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
+        state.isRefreshing = false;
       })
 
       .addCase(logOutThunk.fulfilled, () => {
         return INITIAL_STATE;
+      })
+      .addCase(refreshUserThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.user.email = action.payload.email;
+        state.user.avatarUrl = action.payload.avatar;
+        state.error = null;
+        state.token = action.payload.token;
+        state.isRefreshing = false;
+        state.authenticated = true;
       })
 
       .addMatcher(
@@ -54,6 +66,7 @@ const authSlice = createSlice({
         state => {
           state.error = null;
           state.isLoading = true;
+          state.isRefreshing = true;
         }
       )
       .addMatcher(
@@ -65,6 +78,7 @@ const authSlice = createSlice({
         (state, action) => {
           state.isLoading = false;
           state.error = action.payload;
+          state.isRefreshing = false;
         }
       ),
 });
