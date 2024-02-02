@@ -58,6 +58,11 @@ input {
   display: block;
   outline: none;
 }
+
+body.modal-open {
+  overflow: hidden;
+}
+
 /* Root styles */
 
 :root {
