@@ -5,11 +5,15 @@ import { useDispatch } from 'react-redux';
 import { changeWaterThunk } from 'Store/water/waterThunks';
 import { CupSvg, MinusSvg, PlusSvg } from '../StyledTodayListIcons';
 import { parseUtcTime } from 'services/helpers/getUtcTime';
+import { toggleEditWateVisibility } from 'Store/modals/modalSlice';
 
-export const EditWaterModal = ({ togleModal, prevVal }) => {
+export const EditWaterModal = ({ prevVal }) => {
   const [amount, setAmount] = useState(prevVal.quantity);
   const [time, setTime] = useState(new Date());
   const dispatch = useDispatch();
+
+  const toggleModal = () => dispatch(toggleEditWateVisibility())
+  
 
   const editWater = () => {
     dispatch(
@@ -21,7 +25,7 @@ export const EditWaterModal = ({ togleModal, prevVal }) => {
     );
     setAmount(50);
     setTime(new Date());
-    togleModal(true);
+    toggleModal();
   };
 
   const prevTime = parseUtcTime(prevVal.time);

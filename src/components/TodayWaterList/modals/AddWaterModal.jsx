@@ -5,11 +5,14 @@ import { Container } from 'components/SettingModal/SettingModal.styled';
 import { StyledWaterModal } from './WaterModal.styled';
 import { addWaterThunk } from 'Store/water/waterThunks';
 import { MinusSvg, PlusSvg } from '../StyledTodayListIcons';
+import { toggleAddWateVisibility } from 'Store/modals/modalSlice';
 
-export const AddWaterModal = ({ togleModal }) => {
+export const AddWaterModal = () => {
   const [amount, setAmount] = useState(50);
   const [time, setTime] = useState(new Date());
   const dispatch = useDispatch();
+  
+  const toggleModal = () => dispatch(toggleAddWateVisibility())
 
   const addWater = () => {
     dispatch(addWaterThunk({ quantity: amount, time: time }));
@@ -17,7 +20,7 @@ export const AddWaterModal = ({ togleModal }) => {
     setAmount(50);
     setTime(new Date());
 
-    togleModal(true);
+    toggleModal();
   };
   return (
     <Container onClick={e => e.stopPropagation()}>

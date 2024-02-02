@@ -19,7 +19,7 @@ export const CreateWaterCardMarcup = ({
 
   const dispatch = useDispatch()
 
-  const toggleModal = () => dispatch(toggleEditWateVisibility)
+  const toggleModal = () => dispatch(toggleEditWateVisibility())
 
   if (time.hours >= 12) {
     time.hours = time.hours - 12;
