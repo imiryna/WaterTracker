@@ -1,17 +1,20 @@
-import { delWaterThunk, getDailyWaterThunk } from 'Store/water/waterThunks';
+import { delWaterThunk } from 'Store/water/waterThunks';
 import { useDispatch, useSelector } from 'react-redux';
 import { StyledWaterList } from './TodayList.styled';
 import { CreateWaterCardMarkup } from './WaterCard';
 import { waterArrSelector } from 'Store/water/waterSelectors';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { DeleteConfirmDialog } from './DeleteDialog';
 import { StyledBackdrop } from './DeleteDialog.styled';
 import { EditWaterModal } from './modals/EditWaterModal';
 import { PlusSvg } from './StyledTodayListIcons';
-import { parseUtcTime } from 'services/helpers/getUtcTime';
+// import { parseUtcTime } from 'services/helpers/getUtcTime';
 import { Modal } from 'components/Modal/Modal';
 import { AddWaterModal } from './modals/AddWaterModal';
-import { toggleAddWateVisibility, toggleEditWateVisibility } from 'Store/modals/modalSlice';
+import {
+  toggleAddWateVisibility,
+  toggleEditWateVisibility,
+} from 'Store/modals/modalSlice';
 import { selectAddWater, selectEditWater } from 'Store/modals/modalSelector';
 
 // import { Dialog } from '@mui/material';
@@ -25,6 +28,7 @@ export const TodayList = () => {
     idToDelete: null,
   });
 
+
   const showAddModal = useSelector(selectAddWater)
   const showEditModal = useSelector(selectEditWater)
 
@@ -32,6 +36,7 @@ export const TodayList = () => {
     dispatch(getDailyWaterThunk())
   },[dispatch])
   
+
 
 
   const [currentEditObj, setCurrentEditObj] = useState(null);
