@@ -46,7 +46,7 @@ export const TodayList = () => {
 
   const [currentEditObj, setCurrentEditObj] = useState(null);
   //Creating marcup arr
-  const marcup = waterArr.map(item => {
+  const markup = waterArr.map(item => {
     const waterCardId = item._id;
 
     // Calculating adding time
@@ -70,7 +70,7 @@ export const TodayList = () => {
 
   return (
     <StyledWaterList>
-      {marcup}
+      {markup}
       <button
         className="add-btn"
         onClick={() => dispatch(toggleAddWateVisibility())}
