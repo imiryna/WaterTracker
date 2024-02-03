@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { StyledDalyNorma } from './DailyNorma.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeDailyNormaThunk } from 'Store/water/waterThunks';
 import {
-  todayNormaSelector,
   totalWaterAmmountSelector,
 } from 'Store/water/waterSelectors';
 import { Modal } from 'components/Modal/Modal';
 import { EditDailyNormaModal } from './EditNormaModal';
 import { selectEditNorma } from 'Store/modals/modalSelector';
 import { toggleMyDailyNormaVisibility } from 'Store/modals/modalSlice';
+import { changeDailyNormaThunk } from 'Store/currentUser/currentUserThunk';
+import { selectDailyNorm } from 'Store/currentUser/currentUserSelectors';
 
 export const DailyNorma = () => {
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ export const DailyNorma = () => {
     female: 'female',
   };
 
-  const dailyNorma = useSelector(todayNormaSelector);
+  const dailyNorma = useSelector(selectDailyNorm);
   const totalTodayWater = useSelector(totalWaterAmmountSelector);
 
   const [weight, setWeight] = useState(1);

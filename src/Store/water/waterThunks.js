@@ -87,24 +87,3 @@ export const addWaterThunk = createAsyncThunk(
   }
 );
 
-//CHANGE DALY NORMA
-export const changeDailyNormaThunk = createAsyncThunk(
-  'waterNorma/change',
-  async (newNorma, thunkAPI) => {
-    try {
-      // const token = thunkAPI.getState().auth.token;
-      newNorma = parseInt(newNorma);
-      if (newNorma <= 0 || newNorma > 15000 || Number.isNaN(newNorma))
-        throw new Error(
-          'Water norma must be more then 0ml, less then 15000ml and be a number'
-        );
-      // ~ Наразі не доступно
-      // const updatedDaliyNorma = await updateDailyNorma(newNorma, token);
-      // ! Тимчасове рішення, поки не з'явиться можливість використати бекенд
-      const updatedDaliyNorma = newNorma;
-      return updatedDaliyNorma;
-    } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
-    }
-  }
-);

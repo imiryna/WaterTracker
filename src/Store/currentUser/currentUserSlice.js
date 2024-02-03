@@ -1,5 +1,5 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { getCurrentUserThunk } from './currentUserThunk';
+import { changeDailyNormaThunk, getCurrentUserThunk } from './currentUserThunk';
 import {
   logOutThunk,
   loginThunk,
@@ -59,6 +59,19 @@ const currentUserSlice = createSlice({
       //   state.error = null;
       //   state.isLoading = false;
       // })
+      //?CHANGE DALY NORMA
+      .addCase(changeDailyNormaThunk.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(changeDailyNormaThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.user.dailyNorm = action.payload.dailyNorm;
+      })
+      .addCase(changeDailyNormaThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
       .addMatcher(
         isAnyOf(
           loginThunk.pending,
