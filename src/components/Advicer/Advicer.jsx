@@ -13,6 +13,7 @@ import {
   CalendarArrowCss,
   ChatBarArrowCss,
   PersonalSettingsArr,
+  TableTextCss,
 } from './Advicer.styled';
 
 export const Advicer = () => {
@@ -23,7 +24,7 @@ export const Advicer = () => {
           <TitleCss>Water consumption tracker</TitleCss>
           <TextCss>Record daily water intake and track</TextCss>
         </WrapCss>
-        <p>Tracker Benefits</p>
+        <TableTextCss>Tracker Benefits</TableTextCss>
         <GridBoxcss>
           <IconBoxCss>
             <CalendarArrowCss />
@@ -39,7 +40,7 @@ export const Advicer = () => {
           </IconBoxCss>
         </GridBoxcss>
 
-        <NavLinkBtn to={'/signin'}>
+        <NavLinkBtn to={'/signup'}>
           <BtnText>Try tracker</BtnText>
         </NavLinkBtn>
       </AdvicerCss>
