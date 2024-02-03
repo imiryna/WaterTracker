@@ -69,6 +69,7 @@ export const Navigation = () => {
   const closeLogoutDialog = () => {
     dispatcher(toggleLogoutVisibility());
   };
+
   // END OF Temp section
 
   // const openUserSetting = e => {

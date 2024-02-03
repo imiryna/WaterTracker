@@ -1,9 +1,9 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalConfirmDialogStyles = createGlobalStyle`
-   body {
+   /* body {
     overflow: ${({ overlayVisible }) => (overlayVisible ? 'hidden' : 'auto')};
-   }
+   } */
 
   .custom-confirm-overlay {
     position: fixed;
@@ -13,7 +13,7 @@ export const GlobalConfirmDialogStyles = createGlobalStyle`
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
     z-index: 40;
-    display: ${({ overlayVisible }) => (overlayVisible ? 'block' : 'none')};
+    display: ${props => (props.overlayVisible ? 'block' : 'none')}; 
   }
 
   .custom-confirm-dialog {
@@ -34,7 +34,6 @@ export const GlobalConfirmDialogStyles = createGlobalStyle`
     letter-spacing: 0%;
     text-align: left;
     overflow: hidden;
-
   }
 
   .p-confirm-dialog-header {
@@ -89,9 +88,3 @@ export const GlobalConfirmDialogStyles = createGlobalStyle`
     
   }
 `;
-
-
- 
-
-
-

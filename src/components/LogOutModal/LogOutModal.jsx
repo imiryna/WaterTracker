@@ -13,21 +13,19 @@ const LogoutConfirmationDialog = ({ visible, onHide }) => {
 
   const onConfirm = () => {
     dispatch(logOutThunk());
-    localStorage.clear();
-    onHide();
+    // localStorage.clear();
+    // onHide();
   };
 
   const onClose = () => {
     onHide();
   };
 
-  const onKeyDown = (e) => {
+  const onKeyDown = e => {
     if (e.key === 'Enter') {
       onClose();
     }
   };
-
-
 
   if (!isAuthenticated) {
     return <Navigate to="/" />;
@@ -35,10 +33,8 @@ const LogoutConfirmationDialog = ({ visible, onHide }) => {
   return (
     <>
       <GlobalConfirmDialogStyles overlayVisible={visible} />
-      <div
-        className="custom-confirm-overlay"
-        onClick={onClose}
-      />
+      <div className="custom-confirm-overlay" onClick={onClose} />
+      {/* <div className="custom-confirm-overlay" /> */}
       <ConfirmDialog
         visible={visible}
         onHide={onClose}
@@ -48,7 +44,7 @@ const LogoutConfirmationDialog = ({ visible, onHide }) => {
         acceptLabel="Log out"
         rejectLabel="Cancel"
         accept={onConfirm}
-        reject={() => {}} 
+        reject={() => {}}
         onKeyDown={onKeyDown}
         className="custom-confirm-dialog"
         contentClassName="custom-confirm-dialog-content"
