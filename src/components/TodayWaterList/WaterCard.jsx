@@ -21,7 +21,7 @@ export const CreateWaterCardMarkup = ({
 
   const toggleModal = () => dispatch(toggleEditWateVisibility())
 
-  if (time.hours >= 12) {
+  if (time.hours > 12) {
     time.hours = time.hours - 12;
     time.dayPart = 'PM';
   } else {

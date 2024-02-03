@@ -28,20 +28,10 @@ export const TodayList = () => {
   const showAddModal = useSelector(selectAddWater)
   const showEditModal = useSelector(selectEditWater)
 
-
+  useEffect(()=>{
+    dispatch(getDailyWaterThunk())
+  },[dispatch])
   
-
-  // const [showAddModal, setShowAddModal] = useState(false);
-  // const togleAddModal = () => {
-  //   setShowAddModal(!showAddModal);
-  // };
-  // useEffect(()=>{
-  //   dispatch(getDailyWaterThunk())
-  // }, [])
-
-  // const [showEditModal, setShowEditModal] = useState(false);
-  // const togleEditModal = () => setShowEditModal(!showEditModal);
-
 
 
   const [currentEditObj, setCurrentEditObj] = useState(null);

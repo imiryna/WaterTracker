@@ -34,6 +34,7 @@ export const waterSlice = createSlice({
     })
     .addCase(getDailyWaterThunk.fulfilled, (state, action) => {
       state.waterArr = action.payload.dailyList
+      state.totalWaterAmmount = recalculateTodayDrinkedWater(state.waterArr)
       state.isLoading = false
     })
     .addCase(getDailyWaterThunk.rejected, (state, action) => {
