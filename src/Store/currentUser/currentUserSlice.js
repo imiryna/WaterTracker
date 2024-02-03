@@ -1,5 +1,8 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { getCurrentUserThunk } from './currentUserThunk';
+import {
+  getCurrentUserThunk,
+  updateCurrentUserThunk,
+} from './currentUserThunk';
 import {
   logOutThunk,
   loginThunk,
@@ -17,6 +20,13 @@ const INITIAL_STATE = {
   error: null,
   isLoading: true,
 };
+
+// Added ZooBeeN
+const handleRejected = (state, { payload }) => {
+  state.isLoading = false;
+  state.error = payload;
+};
+// ! ************************
 
 const currentUserSlice = createSlice({
   name: 'currentUser',
@@ -59,11 +69,29 @@ const currentUserSlice = createSlice({
       //   state.error = null;
       //   state.isLoading = false;
       // })
+
+      // ! Added ZooBeeN ********************
+      .addCase(updateCurrentUserThunk.pending, state => {
+        // handlePending(state);
+        console.log('UpdateUser-Pending');
+      })
+      .addCase(updateCurrentUserThunk.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = null;
+        console.log('UpdateUser-Fulfield - Payload-slice: ', payload);
+        // state.user = newUser;
+      })
+      .addCase(updateCurrentUserThunk.rejected, (state, { payload }) => {
+        console.log('UpdateUser-Rejected!!!');
+        handleRejected(state, payload);
+      })
+      // ! **************************
       .addMatcher(
         isAnyOf(
           loginThunk.pending,
           getCurrentUserThunk.pending,
-          logOutThunk.pending
+          logOutThunk.pending,
+          updateCurrentUserThunk.pending
         ),
         state => {
           state.error = null;

@@ -1,6 +1,6 @@
 import { UserForm } from './UserForm/UserForm';
 import { toggleSettingsVisibility } from 'Store/modals/modalSlice';
-import { selectUser } from 'Store/currentUser/currentUserSelectors';
+import { selectUserData } from 'Store/currentUser/currentUserSelectors';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   StyledHeader,
@@ -15,11 +15,11 @@ import {
   StyledAvatarSection,
 } from './SettingModal.styled';
 
-export const Setting = imgData => {
+export const Setting = () => {
   const dispatch = useDispatch();
   const toggleModal = () => dispatch(toggleSettingsVisibility());
 
-  const { avatarUrl, name } = useSelector(selectUser);
+  const { avatarUrl, name } = useSelector(selectUserData);
 
   const { imgUrl = 'Images/avatar-neutral.jpg', imgName = 'Avatar' } = {
     imgUrl: avatarUrl,

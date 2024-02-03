@@ -37,24 +37,24 @@ export const userLogOut = async userData => {
 
 export const uploadUserAvatar = async userData => {
   const { data } = await waterTrackerInstance.patch(
-    '/users/udateAvatar',
+    '/user/udateAvatar',
     userData
   );
   return data;
 };
 
-export const updateUser = async userData => {
+export const updateUser = async (userData, token) => {
+  setToken(token);
   const { data } = await waterTrackerInstance.patch(
-    '/users/updateUser',
+    '/user/updateUser',
     userData
   );
   return data;
 };
-
 
 export const forgotPassword = async userData => {
   const { data } = await waterTrackerInstance.post(
-    '/users/forgotpassword',
+    '/user/forgotpassword',
     userData
   );
   return data;
@@ -62,7 +62,7 @@ export const forgotPassword = async userData => {
 
 export const updatePassword = async userData => {
   const { data } = await waterTrackerInstance.patch(
-    '/users/updatepassword',
+    '/user/updatepassword',
     userData
   );
   setToken(data.token);
@@ -96,7 +96,7 @@ export const removeWaterServing = async (servingId, token) => {
 };
 
 export const editWaterServing = async (servingId, servingData, token) => {
-  console.log(`Id:`, servingId)
+  console.log(`Id:`, servingId);
   setToken(token);
   // const water = await getWaterServingById(servingId);
   // const updatedWater = { ...water, ...servingData };

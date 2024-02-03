@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { object, string, ref } from 'yup';
 
 import { toggleSettingsVisibility } from 'Store/modals/modalSlice';
-import { selectUser } from 'Store/currentUser/currentUserSelectors';
+import { selectUserData } from 'Store/currentUser/currentUserSelectors';
+import { updateCurrentUserThunk } from 'Store/currentUser/currentUserThunk';
 
 // Styles
 import {
@@ -22,18 +23,28 @@ import { FormError } from './FormError';
 export const UserForm = () => {
   const dispatch = useDispatch();
   const toggleModal = () => dispatch(toggleSettingsVisibility());
-  const { name = '', email = '', gender = 'woman' } = useSelector(selectUser);
-  console.log({ name, email, gender });
-  //Submit function
-  const handleSubmit = (values, { resetForm }) => {
-    // todo - state
-    console.log('Form was Submit: ', values);
+  const {
+    name = '',
+    email = '',
+    gender = 'woman',
+  } = useSelector(selectUserData);
 
+  //Submit function
+  function handleSubmit(values, { resetForm }) {
+    // todo - проверку совпадения паролей - отправку данных без проверочного пароля
+    console.log('Form was Submit: ', values);
+    const { email, gender, name, password, newpass, repitpass } = values;
+    const userData = { email, gender, name, password, newPassword: newpass };
+    if (newpass !== repitpass) {
+      console.log('Пароли не совпадают');
+      return;
+    }
+    dispatch(updateCurrentUserThunk(userData));
     resetForm();
     // todo - доделать чтобы закрывалось после ответа сервера
     toggleModal();
     return;
-  };
+  }
   // let userName;
   // if (name) {
   //   userName = name;
