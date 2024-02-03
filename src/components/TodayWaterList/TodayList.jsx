@@ -1,16 +1,19 @@
 import { delWaterThunk, getDailyWaterThunk } from 'Store/water/waterThunks';
 import { useDispatch, useSelector } from 'react-redux';
 import { StyledWaterList } from './TodayList.styled';
-import { createWaterCardMarcup } from './WaterCard';
+import { CreateWaterCardMarkup } from './WaterCard';
 import { waterArrSelector } from 'Store/water/waterSelectors';
 import { useEffect, useState } from 'react';
 import { DeleteConfirmDialog } from './DeleteDialog';
 import { StyledBackdrop } from './DeleteDialog.styled';
-import { Modal } from 'components/Modal/Modal';
-import { AddWaterModal } from './modals/AddWaterModal';
 import { EditWaterModal } from './modals/EditWaterModal';
 import { PlusSvg } from './StyledTodayListIcons';
-// import { parseUtcTime } from 'services/helpers/getUtcTime';
+import { parseUtcTime } from 'services/helpers/getUtcTime';
+import { Modal } from 'components/Modal/Modal';
+import { AddWaterModal } from './modals/AddWaterModal';
+import { toggleAddWateVisibility, toggleEditWateVisibility } from 'Store/modals/modalSlice';
+import { selectAddWater, selectEditWater } from 'Store/modals/modalSelector';
+
 // import { Dialog } from '@mui/material';
 
 export const TodayList = () => {
@@ -22,20 +25,28 @@ export const TodayList = () => {
     idToDelete: null,
   });
 
-  const [showAddModal, setShowAddModal] = useState(false);
-  const toggleAddModal = () => {
-    setShowAddModal(!showAddModal);
-  };
+  const showAddModal = useSelector(selectAddWater)
+  const showEditModal = useSelector(selectEditWater)
 
-  useEffect(() => {
-    dispatch(getDailyWaterThunk());
-  }, [dispatch]);
 
-  const [showEditModal, setShowEditModal] = useState(false);
-  const togleEditModal = () => setShowEditModal(!showEditModal);
+  
+
+  // const [showAddModal, setShowAddModal] = useState(false);
+  // const togleAddModal = () => {
+  //   setShowAddModal(!showAddModal);
+  // };
+  // useEffect(()=>{
+  //   dispatch(getDailyWaterThunk())
+  // }, [])
+
+  // const [showEditModal, setShowEditModal] = useState(false);
+  // const togleEditModal = () => setShowEditModal(!showEditModal);
+
+
+
   const [currentEditObj, setCurrentEditObj] = useState(null);
   //Creating marcup arr
-  const marcup = waterArr.map(item => {
+  const markup = waterArr.map(item => {
     const waterCardId = item._id;
 
     // Calculating adding time
@@ -43,13 +54,12 @@ export const TodayList = () => {
 
     const waterQuantity = item.amount;
 
-    return createWaterCardMarcup({
+    return CreateWaterCardMarkup({
       waterAddTime,
       waterCardId,
       waterQuantity,
       dialogStatus,
       setDialogStatus,
-      togleEditModal,
       setCurrentEditObj,
     });
   });
@@ -60,23 +70,21 @@ export const TodayList = () => {
 
   return (
     <StyledWaterList>
-      {marcup}
+      {markup}
       <button
         className="add-btn"
-        onClick={() => {
-          toggleAddModal();
-        }}
+        onClick={() => dispatch(toggleAddWateVisibility())}
       >
         {showAddModal && (
-          <Modal togleModal={toggleAddModal}>
-            <AddWaterModal togleModal={toggleAddModal} />
+          <Modal toggleModal={toggleAddWateVisibility}>
+            <AddWaterModal togleModal={toggleAddWateVisibility} />
           </Modal>
         )}
         {showEditModal && (
-          <Modal togleModal={togleEditModal}>
+          <Modal toggleModal={toggleEditWateVisibility}>
             <EditWaterModal
               prevVal={currentEditObj}
-              togleModal={togleEditModal}
+              togleModal={toggleEditWateVisibility}
             />
           </Modal>
         )}

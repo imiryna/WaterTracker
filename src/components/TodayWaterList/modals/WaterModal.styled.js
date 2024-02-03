@@ -18,6 +18,8 @@ export const StyledWaterModal = styled.div`
   @media only screen and (min-width: 1440px) {
     width: 544px;
   }
+
+  position: relative;
   .title {
     font-size: 26px;
     line-height: 1.3;
@@ -127,5 +129,12 @@ export const StyledWaterModal = styled.div`
         width: 82px;
       }
     }
+  }
+  .close-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: transparent;
+    border: none;
   }
 `;

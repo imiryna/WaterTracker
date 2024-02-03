@@ -3,8 +3,8 @@ import styled from 'styled-components';
 export const StyledEditNormaModal = styled.div`
   background-color: var(--primery-white);
   padding: 32px 24px;
+  position: relative;
   width: 100%;
-  overflow: scroll;
   @media only screen and (min-width: 768px) {
      max-width: 704px;
   }
@@ -113,5 +113,12 @@ export const StyledEditNormaModal = styled.div`
         padding: 8px 30px;
       }
     }
+  }
+  .close-btn {
+    position: absolute;
+    top: 36px;
+    right: 24px;
+    background: transparent;
+    border: none;
   }
 `;
