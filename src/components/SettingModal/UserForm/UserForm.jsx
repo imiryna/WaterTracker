@@ -4,7 +4,10 @@ import { object, string, ref } from 'yup';
 
 import { toggleSettingsVisibility } from 'Store/modals/modalSlice';
 import { selectUserData } from 'Store/currentUser/currentUserSelectors';
-import { updateCurrentUserThunk } from 'Store/currentUser/currentUserThunk';
+import {
+  updateCurrentUserThunk,
+  getCurrentUserThunk,
+} from 'Store/currentUser/currentUserThunk';
 
 // Styles
 import {
@@ -26,23 +29,43 @@ export const UserForm = () => {
   const {
     name = '',
     email = '',
-    gender = 'woman',
+    gender = 'female',
   } = useSelector(selectUserData);
 
   //Submit function
   function handleSubmit(values, { resetForm }) {
     // todo - проверку совпадения паролей - отправку данных без проверочного пароля
     console.log('Form was Submit: ', values);
-    const { email, gender, name, password, newpass, repitpass } = values;
-    const userData = { email, gender, name, password, newPassword: newpass };
-    if (newpass !== repitpass) {
+    const { email, gender, name, currentPassword, newPassword, repitpass } =
+      values;
+    // Ubiraem iz objecta pustye svojstva
+
+    let userData = {
+      email,
+      gender,
+      name,
+      currentPassword,
+      newPassword,
+    };
+
+    Object.entries(userData).map(a =>
+      Object.entries(a[1]).filter(b => b[1].length).length
+        ? a
+        : delete userData[a[0]]
+    );
+    console.log('Check: ', userData);
+
+    if (newPassword !== repitpass) {
       console.log('Пароли не совпадают');
       return;
     }
     dispatch(updateCurrentUserThunk(userData));
-    resetForm();
+
     // todo - доделать чтобы закрывалось после ответа сервера
+    resetForm();
     toggleModal();
+    // todo - доделать чтобы после закрытия обновлялись данные текущего пользователя
+    dispatch(getCurrentUserThunk());
     return;
   }
   // let userName;
@@ -51,31 +74,25 @@ export const UserForm = () => {
   // } else {
   //   userName = '';
   // }
-  let userGender;
-  if (gender) {
-    if (gender === 'male') userGender = 'man';
-    if (gender === 'female') userGender = 'woman';
-  } else {
-    userGender = 'woman';
-  }
 
   const INITIAL_VALUES = {
-    gender: userGender,
+    gender,
     name,
     email,
-    password: '',
-    newpass: '',
+    currentPassword: '',
+    newPassword: '',
     repitpass: '',
   };
   //Formik Validation schema
   const userSchema = object().shape({
     name: string().min(5).max(40).required('Name is required'),
     email: string().email().required('Email is required'),
-    password: string().matches(
-      /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,}$/gu,
-      'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character'
-    ),
-    newpass: string().matches(
+    currentPassword: string().min(8).required('Password is required'),
+    //   string().matches(
+    //   /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,}$/gu,
+    //   'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character'
+    // ),
+    newPassword: string().matches(
       /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,}$/gu,
       'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character'
     ),
@@ -103,11 +120,11 @@ export const UserForm = () => {
             <Title id="my-radio-group">Your gender identity</Title>
             <div role="group" aria-labelledby="my-radio-group">
               <RadioLabel>
-                <Radio type="radio" name="gender" value="woman" />
+                <Radio type="radio" name="gender" value="female" />
                 Woman
               </RadioLabel>
               <RadioLabel>
-                <Radio type="radio" name="gender" value="man" />
+                <Radio type="radio" name="gender" value="male" />
                 Man
               </RadioLabel>
             </div>
@@ -134,29 +151,29 @@ export const UserForm = () => {
           </Wrapper>
           <Wrapper>
             <Title>Password</Title>
-            <Label className="small" htmlFor="password">
+            <Label className="small" htmlFor="currentPassword">
               Outdated password:
             </Label>
             <Input
               type="text"
-              name="password"
-              id="password"
+              name="currentPassword"
+              id="currentPassword"
               title="Enter your current password"
               placeholder="Password"
             />
-            <FormError name="password" />
+            <FormError name="currentPassword" />
 
-            <Label className="small" htmlFor="newpass">
+            <Label className="small" htmlFor="newPassword">
               New password:
             </Label>
             <Input
               type="text"
-              name="newpass"
-              id="newpass"
+              name="newPassword"
+              id="newPassword"
               title="Enter new password"
               placeholder="Password"
             />
-            <FormError name="newpass" />
+            <FormError name="newPassword" />
 
             <Label className="small" htmlFor="repit">
               Repit password:

@@ -6,7 +6,7 @@ import {
   getCurrentUser,
   updatePassword,
   forgotPassword,
-} from 'services/api';
+} from 'services/api.js';
 
 export const loginThunk = createAsyncThunk(
   'user/login',

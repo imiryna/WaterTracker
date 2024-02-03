@@ -19,12 +19,20 @@ import {
 } from 'redux-persist';
 import { currentUserReducer } from './currentUser/currentUserSlice';
 
-const persistConfig = {
+const persistAuthConfig = {
   key: 'auth',
   storage,
-  whitelist: ['token'],
+  whitelist: 'token',
 };
-const persistedAuthReducer = persistReducer(persistConfig, authReducer);
+// const persistUserConfig = {
+//   key: 'user',
+//   storage,
+// };
+const persistedAuthReducer = persistReducer(persistAuthConfig, authReducer);
+// const persistedUserReducer = persistReducer(
+//   persistUserConfig,
+//   currentUserReducer
+// );
 //! ****************************
 
 export const store = configureStore({
@@ -34,7 +42,6 @@ export const store = configureStore({
     monthStat: monthStatReducer,
     currentUser: currentUserReducer,
     modal: modalReducer,
-    // user: userReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

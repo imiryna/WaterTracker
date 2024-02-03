@@ -79,7 +79,7 @@ const currentUserSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         console.log('UpdateUser-Fulfield - Payload-slice: ', payload);
-        // state.user = newUser;
+        state.user = payload.user;
       })
       .addCase(updateCurrentUserThunk.rejected, (state, { payload }) => {
         console.log('UpdateUser-Rejected!!!');
