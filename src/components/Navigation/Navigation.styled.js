@@ -92,4 +92,6 @@ export const UserAvatarCss = styled.div`
   margin-right: 8px;
   width: 28px;
   height: 28px;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
 `;

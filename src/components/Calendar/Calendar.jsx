@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useMediaQuery } from '@mui/material';
 
 import {
@@ -25,39 +25,41 @@ import {
   StyledCloseButton,
 } from './Calendar.styled';
 
+// import { tempMonthStat } from 'services/helpers/tempDataForCalendar';
+
 // import { setMonth, setYear } from "Store/monthStat/monthStatSlice";
-// import { selectMonth, selectMonthStat, selectYear } from "Store/monthStat/monthStatSelectors";
+import { selectMonthStat } from 'Store/monthStat/monthStatSelectors';
+
 // import { getMonthStat } from "Store/monthStat/monthStatThunk";
 // import { setMonth, setYear } from "Store/monthStat/monthStatSlice";
 // import { selectMonth, selectMonthStat, selectYear } from "Store/monthStat/monthStatSelectors";
-// import { getMonthStat } from "Store/monthStat/monthStatThunk";
+import { getMonthStat } from 'Store/monthStat/monthStatThunk';
 
 export const Calendar = () => {
-  /** PopOver Logic */
-
-  // const dispatch = useDispatch();
-
   //* Calendar data */
+  const dispatch = useDispatch();
   // const month = useSelector(selectMonth);
   // const year = useSelector(selectYear);
+  const monthStat = useSelector(selectMonthStat);
+  // const monthStat = tempMonthStat;
 
-  const [month, setMonth] = useState(1); //temp data
-  const [year, setYear] = useState(2024); //temp data
-
-  // const monthStat = useSelector(selectMonthStat);
-  const monthStat = [{ id: 1, day: 1, norma: 2, percentage: 100, servings: 3 }];
+  console.log(monthStat);
 
   //check device screen width
   const isDesktop = useMediaQuery('(min-width: 768px)');
 
-  // open popOver handlers
+  /** PopOver Logic */
+  const [month, setMonth] = useState(1); //temp data
+  const [year, setYear] = useState(2024); //temp data
+
+  // open popOver hooks
   const [anchor, setAnchor] = useState(null);
   const [popOverData, setPopOverData] = useState(null);
 
   //PopOver open checker
   const isOpen = Boolean(anchor);
 
-  // open popOver handlers
+  // open/close popOver funcs
   const openPopOver = (event, day) => {
     setAnchor(event.currentTarget);
     setPopOverData(day);
@@ -80,13 +82,9 @@ export const Calendar = () => {
         closePopOver();
       }
     };
-    document.body.addEventListener('click', handleClickOutside);
+
     document.body.addEventListener('click', handleClickOutside);
     window.addEventListener('keydown', handleEscPress);
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // console.log(anchor)
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     return () => {
       document.body.removeEventListener('click', handleClickOutside);
@@ -94,21 +92,10 @@ export const Calendar = () => {
     };
   }, [anchor]);
 
-  // close popover via button handlers
-  const handleCloseButtonClick = event => {
-    closePopOver();
-  };
-
-  // handle clicks on popove
-  const handlePopoverClick = event => {
-    console.log('click inside');
-    // console.log(event.currentTarget.id);
-    console.log(event.target.closest('calendar-popover-parent'));
-    if (!event.currentTarget) {
-      closePopOver();
-    }
-    // closePopOver();
-  };
+  // // close popover via button handlers
+  // const handleCloseButtonClick = event => {
+  //   closePopOver();
+  // };
 
   //* Pagination logic */
 
@@ -116,9 +103,10 @@ export const Calendar = () => {
   const monthName = month.toLocaleString('en-US', { month: 'long' });
 
   //Fetch information when month changes
-  // useEffect(() => {
-  //   dispatch(getMonthStat({month, year}))
-  // }, [dispatch, month, year])
+
+  useEffect(() => {
+    dispatch(getMonthStat({ month, year }));
+  }, [dispatch, month, year]);
 
   // Pagination handlers
   const handlePreviousMonth = () => {
@@ -166,7 +154,7 @@ export const Calendar = () => {
                 openPopOver(event, day);
               }}
             >
-              <StyledDay percentage={day.percentage}>{day.day}</StyledDay>
+              <StyledDay $percentage={day.percentage}>{day.date}</StyledDay>
               <StyledPercentage>{day.percentage}</StyledPercentage>
             </StyledItem>
           );
@@ -185,18 +173,15 @@ export const Calendar = () => {
           vertical: 'bottom',
           horizontal: isDesktop ? 'right' : 'center',
         }}
-        disableRestoreFocus={true}
+        disableRestoreFocus
       >
         {popOverData && (
-          <StyledPopOverContainer
-            id="calendar-popover-parent"
-            onClick={handlePopoverClick}
-          >
-            <StyledCloseButton onClick={handleCloseButtonClick}>
+          <StyledPopOverContainer>
+            <StyledCloseButton>
               <StyledCloseIcon />
             </StyledCloseButton>
             <StyledPopOverDate>
-              {popOverData.day}, {monthName}
+              {popOverData.date}, {monthName}
             </StyledPopOverDate>
             <StyledPopOverText>
               Daily norma :{' '}

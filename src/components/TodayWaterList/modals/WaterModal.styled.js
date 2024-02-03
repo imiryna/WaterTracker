@@ -1,4 +1,14 @@
 import styled from 'styled-components';
+// ZooBeeN added - fix problem
+export const StyledContainer = styled.div`
+  color: var(--Primery-Color-Black, #2f2f2f);
+  font-family: Roboto;
+  display: inline-flex;
+  padding: 32px 24px;
+  flex-direction: column;
+  background: var(--Primery-Color-White, #fff);
+  border-radius: 10px;
+`;
 
 export const StyledWaterModal = styled.div`
   width: 256px;

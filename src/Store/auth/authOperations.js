@@ -4,6 +4,8 @@ import {
   userRegister,
   userLogOut,
   getCurrentUser,
+  updatePassword,
+  forgotPassword,
 } from 'services/api';
 
 export const loginThunk = createAsyncThunk(
@@ -11,7 +13,6 @@ export const loginThunk = createAsyncThunk(
   async (userData, thunkAPI) => {
     try {
       const response = await userLogin(userData);
-
       return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -35,8 +36,10 @@ export const registerThunk = createAsyncThunk(
 export const logOutThunk = createAsyncThunk(
   'user/logout',
   async (_, thunkAPI) => {
+    const token = thunkAPI.getState().auth.token;
+    console.log(token);
     try {
-      await userLogOut();
+      await userLogOut(token);
       return;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -47,14 +50,40 @@ export const logOutThunk = createAsyncThunk(
 export const refreshUserThunk = createAsyncThunk(
   '/auth/refresh',
   async (_, thunkAPI) => {
-    const token = thunkAPI.getState().auth.token;
+    const state = thunkAPI.getState();
+    const token = state.auth.token;
     if (!token) {
-      return;
+      return thunkAPI.rejectWithValue('Please Login');
     }
 
     try {
       const res = await getCurrentUser(token);
-      return res.data;
+      return res;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const forgotPasswordThunk = createAsyncThunk(
+  'user/forgotpassword',
+  async (userData, thunkAPI) => {
+    try {
+      const res = await forgotPassword(userData);
+      return res;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const updatePasswordThunk = createAsyncThunk(
+  'user/updatepassword',
+  async (userData, thunkAPI) => {
+    try {
+      const res = await updatePassword(userData);
+
+      return res;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

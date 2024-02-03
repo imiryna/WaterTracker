@@ -14,7 +14,6 @@ import { AddWaterModal } from './modals/AddWaterModal';
 import { toggleAddWateVisibility, toggleEditWateVisibility } from 'Store/modals/modalSlice';
 import { selectAddWater, selectEditWater } from 'Store/modals/modalSelector';
 
-
 // import { Dialog } from '@mui/material';
 
 export const TodayList = () => {
@@ -42,6 +41,7 @@ export const TodayList = () => {
 
   // const [showEditModal, setShowEditModal] = useState(false);
   // const togleEditModal = () => setShowEditModal(!showEditModal);
+
 
 
   const [currentEditObj, setCurrentEditObj] = useState(null);

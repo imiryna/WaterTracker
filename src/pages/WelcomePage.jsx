@@ -1,11 +1,15 @@
 import { Advicer } from 'components/Advicer/Advicer';
 import React from 'react';
-import { SectionCss } from 'components/Advicer/Advicer.styled';
+import { SectionCss, WelcomeWrapCss } from 'components/Advicer/Advicer.styled';
+import { Discription } from 'components/Description/Description';
 
 const Welcome = () => {
   return (
     <SectionCss>
-      <Advicer />
+      <WelcomeWrapCss>
+        <Advicer />
+        <Discription />
+      </WelcomeWrapCss>
     </SectionCss>
   );
 };

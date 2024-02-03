@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { Container } from 'components/SettingModal/SettingModal.styled';
+import { StyledContainer } from './WaterModal.styled';
 import { StyledWaterModal } from './WaterModal.styled';
 import { addWaterThunk } from 'Store/water/waterThunks';
 import { CloseSvg, MinusSvg, PlusSvg } from '../StyledTodayListIcons';
@@ -23,7 +23,7 @@ export const AddWaterModal = () => {
     toggleModal();
   };
   return (
-    <Container onClick={e => e.stopPropagation()}>
+    <StyledContainer onClick={e => e.stopPropagation()}>
       <StyledWaterModal>
         <p className="title">Add water</p>
         <form
@@ -89,6 +89,6 @@ export const AddWaterModal = () => {
           <CloseSvg />
         </button>
       </StyledWaterModal>
-    </Container>
+    </StyledContainer>
   );
 };
