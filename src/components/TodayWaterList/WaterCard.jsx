@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 const WaterBtn = ({ children, onClick }) => {
   return <button onClick={onClick}>{children}</button>;
 };
-export const CreateWaterCardMarcup = ({
+export const CreateWaterCardMarkup = ({
   waterCardId,
   waterQuantity,
   waterAddTime,

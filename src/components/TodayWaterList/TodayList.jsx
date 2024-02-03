@@ -1,7 +1,7 @@
 import { delWaterThunk, getDailyWaterThunk } from 'Store/water/waterThunks';
 import { useDispatch, useSelector } from 'react-redux';
 import { StyledWaterList } from './TodayList.styled';
-import { CreateWaterCardMarcup } from './WaterCard';
+import { CreateWaterCardMarkup } from './WaterCard';
 import { waterArrSelector } from 'Store/water/waterSelectors';
 import { useEffect, useState } from 'react';
 import { DeleteConfirmDialog } from './DeleteDialog';
@@ -54,7 +54,7 @@ export const TodayList = () => {
 
     const waterQuantity = item.amount;
 
-    return CreateWaterCardMarcup({
+    return CreateWaterCardMarkup({
       waterAddTime,
       waterCardId,
       waterQuantity,
