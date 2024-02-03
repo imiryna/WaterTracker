@@ -22,6 +22,10 @@ export const CalendarArrowCss = styled(CalendarArrow)`
   height: 32px;
 `;
 export const SectionCss = styled.div`
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
   padding: 72px 20px 40px;
   background-color: var(--primery-White);
   background-image: url(${BottleImg});
@@ -38,11 +42,27 @@ export const SectionCss = styled.div`
   }
 `;
 
+export const WelcomeWrapCss = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding-top: 31px;
+  padding-bottom: 195px;
+  @media (min-width: 768px) {
+    gap: 60px;
+  }
+  @media (min-width: 1440px) {
+    flex-direction: row;
+    gap: 81px;
+  }
+`;
+
 /* advicer styled */
 export const AdvicerCss = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
+  width: 280px;
 `;
 
 export const WrapCss = styled.div`
@@ -109,6 +129,10 @@ export const BtnText = styled.p`
   font-style: normal;
   font-weight: 500;
   line-height: 1.33;
+  width: 280px;
+  @media (min-width: 768px) {
+    width: 336px;
+  }
 `;
 export const ContentTextCss = styled.div`
   color: var(--primery-black);

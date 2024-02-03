@@ -4,7 +4,6 @@ import {
   editWaterServing,
   getWaterServings,
   removeWaterServing,
-  updateDailyNorma,
 } from 'services/api';
 import { getUtcTime } from 'services/helpers/getUtcTime';
 
@@ -93,7 +92,7 @@ export const changeDailyNormaThunk = createAsyncThunk(
   'waterNorma/change',
   async (newNorma, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.token;
+      // const token = thunkAPI.getState().auth.token;
       newNorma = parseInt(newNorma);
       if (newNorma <= 0 || newNorma > 15000 || Number.isNaN(newNorma))
         throw new Error(

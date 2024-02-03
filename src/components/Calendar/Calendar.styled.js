@@ -7,7 +7,7 @@ import {ReactComponent as CloseIcon} from "Images/Icons/close.svg"
 
 export const StyledDiv = styled.div`
 @media (min-width: 768px){
-    width: 646px;
+    max-width: 646px;
 }
 `
 
@@ -45,9 +45,11 @@ flex-direction: column;
 justify-content: center;
 font-size: 14px;
 font-family: var(--primery-font);
+max-width: 32px;
 
 @media (min-width: 768px){
     font-size: 16px;
+    max-width: 34px;
 }
 `
 
@@ -74,16 +76,10 @@ border: 1px solid black;
 width: 34px;
 height: 34px;
 background-color: var(--primery-white);
-
-border-color: ${(props) => {
-    if(props.percentage < 100 ){
-        return 'orange';
-
-    }else{
-        return 'transparent';
-    }
-}}
+border-color:  ${props => props.$percentage < 100 ? 'orange' : 'transparent'}
 `
+
+
 
 export const StyledPopOver = styled(Popover)`
 box-shadow: 0px 4px 4px 0px rgba(64, 123, 255, 0.30);

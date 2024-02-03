@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
-import { NavLink } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
@@ -14,6 +13,13 @@ import {
   StyledInput,
   FormButton,
   AuthDataError,
+  RedirectButton,
+  NavDiv,
+  ShowPassIcon,
+  HidePassIcon,
+  IconContainer, 
+  ButtonIcon,
+
 } from './SignIn.styled';
 import {
   selectAuthError,
@@ -37,6 +43,7 @@ export const AuthForm = () => {
   const isAuthenticated = useSelector(selectAuthAuthenticated);
 
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -45,13 +52,13 @@ export const AuthForm = () => {
     },
     validationSchema: validationSchema,
     onSubmit: async values => {
-        try {
-          await dispatch(loginThunk(values));
-          formik.resetForm();
-        } catch (error) {
-          setOpenSnackbar(true);
-        }
-      },
+      try {
+        await dispatch(loginThunk(values));
+        formik.resetForm();
+      } catch (error) {
+        setOpenSnackbar(true);
+      }
+    },
   });
 
   useEffect(() => {
@@ -65,7 +72,7 @@ export const AuthForm = () => {
   };
 
   if (isAuthenticated) {
-    return <Navigate to="/home" />;
+    return <Navigate to="/" />;
   }
 
   return (
@@ -92,30 +99,41 @@ export const AuthForm = () => {
 
         <InputDiv>
           <label htmlFor="password">Enter your password</label>
-          <StyledInput
+          <IconContainer>
+             <StyledInput
             id="password"
             name="password"
-            type="password"
+            type={showPassword ? 'text' : 'password'}
             onChange={formik.handleChange}
             value={formik.values.password}
             placeholder="Password"
-            className={
-              formik.errors.password && formik.touched.password ? 'error' : ''
-            }
+            className={formik.errors.password && formik.touched.password ? 'error' : ''}
           />
-
+          
+            <ButtonIcon
+              type="button" 
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <ShowPassIcon /> : <HidePassIcon />}
+            </ButtonIcon>
+          </IconContainer>
           {formik.errors.password && formik.touched.password ? (
             <AuthDataError>{formik.errors.password}</AuthDataError>
           ) : null}
         </InputDiv>
+
         <FormButton type="submit">Sign In</FormButton>
-        <NavLink to="/signup">Sign Up</NavLink>
+        <NavDiv>
+          <RedirectButton to="/signup">Sign Up</RedirectButton>
+          <RedirectButton to="/forgotpassword">Forgot password?</RedirectButton>
+          </NavDiv>
       </AuthStyledForm>
 
       <Snackbar
         open={openSnackbar}
         autoHideDuration={6000}
         onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
       >
         <Alert onClose={handleCloseSnackbar} severity="error">
           {authError}
