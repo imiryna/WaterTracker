@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Container } from 'components/SettingModal/SettingModal.styled';
 import { StyledWaterModal } from './WaterModal.styled';
 import { addWaterThunk } from 'Store/water/waterThunks';
-import { MinusSvg, PlusSvg } from '../StyledTodayListIcons';
+import { CloseSvg, MinusSvg, PlusSvg } from '../StyledTodayListIcons';
 import { toggleAddWateVisibility } from 'Store/modals/modalSlice';
 
 export const AddWaterModal = () => {
@@ -85,6 +85,9 @@ export const AddWaterModal = () => {
             </button>
           </div>
         </form>
+        <button className="close-btn" onClick={toggleModal}>
+          <CloseSvg />
+        </button>
       </StyledWaterModal>
     </Container>
   );

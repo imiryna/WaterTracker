@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { StyledEditNormaModal } from './EditNormaModal.styled';
+import { CloseSvg } from 'components/TodayWaterList/StyledTodayListIcons';
 
 export const EditDailyNormaModal = ({
   togleModal,
@@ -38,7 +39,7 @@ export const EditDailyNormaModal = ({
           e.preventDefault();
           changeDailyNorma(newNorma * 1000);
 
-          togleModal(true);
+          togleModal();
         }}
       >
         <label className="gender">
@@ -120,6 +121,9 @@ export const EditDailyNormaModal = ({
           <button>Save</button>
         </div>
       </form>
+      <button className="close-btn" onClick={togleModal}>
+          <CloseSvg />
+        </button>
     </StyledEditNormaModal>
   );
 };

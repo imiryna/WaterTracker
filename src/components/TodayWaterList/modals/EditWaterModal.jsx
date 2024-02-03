@@ -3,7 +3,7 @@ import { StyledWaterModal } from './WaterModal.styled';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { changeWaterThunk } from 'Store/water/waterThunks';
-import { CupSvg, MinusSvg, PlusSvg } from '../StyledTodayListIcons';
+import { CloseSvg, CupSvg, MinusSvg, PlusSvg } from '../StyledTodayListIcons';
 import { parseUtcTime } from 'services/helpers/getUtcTime';
 import { toggleEditWateVisibility } from 'Store/modals/modalSlice';
 
@@ -106,6 +106,9 @@ export const EditWaterModal = ({ prevVal }) => {
             </button>
           </div>
         </form>
+        <button className="close-btn" onClick={toggleModal}>
+          <CloseSvg />
+        </button>
       </StyledWaterModal>
     </Container>
   );
