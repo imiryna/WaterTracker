@@ -27,29 +27,26 @@ import {
 
 // import { tempMonthStat } from 'services/helpers/tempDataForCalendar';
 
-import { setMonth, setYear } from "Store/monthStat/monthStatSlice";
-import { selectMonth, selectMonthStat, selectYear } from "Store/monthStat/monthStatSelectors";
+// import { setMonth, setYear } from "Store/monthStat/monthStatSlice";
+import { selectMonthStat } from 'Store/monthStat/monthStatSelectors';
 
 // import { getMonthStat } from "Store/monthStat/monthStatThunk";
 // import { setMonth, setYear } from "Store/monthStat/monthStatSlice";
 // import { selectMonth, selectMonthStat, selectYear } from "Store/monthStat/monthStatSelectors";
-import { getMonthStat } from "Store/monthStat/monthStatThunk";
+import { getMonthStat } from 'Store/monthStat/monthStatThunk';
 
 export const Calendar = () => {
-
   //* Calendar data */
-    const dispatch = useDispatch();
-    // const month = useSelector(selectMonth);
-    // const year = useSelector(selectYear);
-    const monthStat = useSelector(selectMonthStat);
-    // const monthStat = tempMonthStat;
+  const dispatch = useDispatch();
+  // const month = useSelector(selectMonth);
+  // const year = useSelector(selectYear);
+  const monthStat = useSelector(selectMonthStat);
+  // const monthStat = tempMonthStat;
 
-    console.log(monthStat);
-
+  console.log(monthStat);
 
   //check device screen width
   const isDesktop = useMediaQuery('(min-width: 768px)');
-
 
   /** PopOver Logic */
   const [month, setMonth] = useState(1); //temp data
@@ -88,7 +85,7 @@ export const Calendar = () => {
 
     document.body.addEventListener('click', handleClickOutside);
     window.addEventListener('keydown', handleEscPress);
- 
+
     return () => {
       document.body.removeEventListener('click', handleClickOutside);
       window.removeEventListener('keydown', handleEscPress);
@@ -108,8 +105,8 @@ export const Calendar = () => {
   //Fetch information when month changes
 
   useEffect(() => {
-    dispatch(getMonthStat({month, year}))
-  }, [dispatch, month, year])
+    dispatch(getMonthStat({ month, year }));
+  }, [dispatch, month, year]);
 
   // Pagination handlers
   const handlePreviousMonth = () => {
@@ -128,7 +125,7 @@ export const Calendar = () => {
     // dispatch(setYear(newYear));
     setMonth(nextMonth);
     setYear(newYear);
-  }
+  };
 
   return (
     <StyledDiv>
@@ -203,4 +200,4 @@ export const Calendar = () => {
       </StyledPopOver>
     </StyledDiv>
   );
-}
+};
