@@ -37,16 +37,15 @@ export const userLogOut = async userData => {
 
 export const uploadUserAvatar = async userData => {
   const { data } = await waterTrackerInstance.patch(
-    '/user/udateAvatar',
+    '/users/udateAvatar',
     userData
   );
   return data;
 };
 
-export const updateUser = async (userData, token) => {
-  setToken(token);
+export const updateUser = async userData => {
   const { data } = await waterTrackerInstance.patch(
-    '/user/updateUser',
+    '/users/updateUser',
     userData
   );
   return data;
@@ -68,7 +67,6 @@ export const updatePassword = async userData => {
   setToken(data.token);
   return data;
 };
-
 // Today water portions apis
 
 export const getWaterServings = async token => {
