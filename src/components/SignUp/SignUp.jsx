@@ -17,7 +17,8 @@ import {
   ShowPassIcon,
   HidePassIcon,
   IconContainer, 
-  RedirectButton
+  RedirectButton,
+  ButtonIcon,
 } from '../SignIn/SignIn.styled';
 import {
   selectAuthError,
@@ -102,7 +103,8 @@ export const AuthRegForm = () => {
 
         <InputDiv>
           <label htmlFor="password">Enter your password</label>
-          <StyledInput
+          <IconContainer>
+             <StyledInput
             id="password"
             name="password"
             type={showPassword ? 'text' : 'password'}
@@ -111,13 +113,13 @@ export const AuthRegForm = () => {
             placeholder="Password"
             className={formik.errors.password && formik.touched.password ? 'error' : ''}
           />
-          <IconContainer>
-            <button
-              type="button" // Make sure it's not submitting the form
+          
+            <ButtonIcon
+              type="button" 
               onClick={() => setShowPassword(!showPassword)}
             >
-              {showPassword ? <HidePassIcon /> : <ShowPassIcon />}
-            </button>
+              {showPassword ? <ShowPassIcon /> : <HidePassIcon />}
+            </ButtonIcon>
           </IconContainer>
           {formik.errors.password && formik.touched.password ? (
             <AuthDataError>{formik.errors.password}</AuthDataError>
@@ -125,7 +127,9 @@ export const AuthRegForm = () => {
         </InputDiv>
 
         <InputDiv>
+
           <label htmlFor="repeatPassword">Repeat your password</label>
+          <IconContainer>
           <StyledInput
             id="repeatPassword"
             name="repeatPassword"
@@ -135,6 +139,13 @@ export const AuthRegForm = () => {
             placeholder="Repeat password"
             className={formik.errors.repeatPassword && formik.touched.repeatPassword ? 'error' : ''}
           />
+          <ButtonIcon
+              type="button" 
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <ShowPassIcon /> : <HidePassIcon />}
+            </ButtonIcon>
+            </IconContainer>
           {formik.errors.repeatPassword && formik.touched.repeatPassword ? (
             <AuthDataError>{formik.errors.repeatPassword}</AuthDataError>
           ) : null}
