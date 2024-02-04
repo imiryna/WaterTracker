@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { Field, Form } from 'formik';
 import { ReactComponent as ShowPass } from 'Images/Icons/show-pass.svg';
 import { ReactComponent as HidePass } from 'Images/Icons/hide-pass.svg';
-import { ReactComponent as UploadIcon } from 'Images/Icons/upload.svg';
 
 export const Title = styled.div`
   /* margin-bottom: 15px; */
@@ -112,12 +111,7 @@ export const Wrapper = styled.div`
   }
   /* margin-right: 20px; */
 `;
-export const ErrorText = styled.div`
-  color: red;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  font-size: 12px;
-`;
+
 export const Button = styled.button`
   margin-top: 24px;
   border-radius: 10px;
@@ -165,38 +159,4 @@ export const HidePassIcon = styled(HidePass)`
   width: 16px;
   height: 16px;
   stroke: #407bff;
-`;
-export const StyledAvatarSection = styled.div`
-  display: flex;
-`;
-export const StyledImg = styled.img`
-  height: 80px;
-  width: 80px;
-  border-radius: 50%;
-`;
-export const StyledImgLabel = styled.p`
-  margin-top: 10px;
-  margin-bottom: 10px;
-  font-size: 16px;
-  font-weight: 600;
-`;
-export const StyledUploadButton = styled.button`
-  margin-left: 5px;
-  display: flex;
-  align-items: center;
-  font-family: Roboto;
-  font-weight: 500;
-  font-size: 15px;
-  color: var(--primery-blue);
-  outline: none;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-`;
-export const StyledUploadIcon = styled(UploadIcon)`
-  margin-right: 5px;
-  width: 20px;
-  height: 20px;
-  stroke: var(--primery-blue);
-  stroke-width: 80px;
 `;

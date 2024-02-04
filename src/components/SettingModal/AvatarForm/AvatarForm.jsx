@@ -1,115 +1,97 @@
-import React, { useState } from 'react';
-import { Formik } from 'formik';
+import React from 'react';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
-import { object, mixed } from 'yup';
 
 import { selectUserData } from 'Store/currentUser/currentUserSelectors';
-import {
-  uploadUserAvatarThunk,
-  // getCurrentUserThunk,
-} from 'Store/currentUser/currentUserThunk';
-
+import { uploadUserAvatarThunk } from 'Store/currentUser/currentUserThunk';
 // Styles
 import {
   FormStyled,
   Input,
   Label,
-  Button,
+  ErrorText,
   InputContainer,
   StyledImg,
   StyledImgLabel,
+  StyledUploadButtonText,
   StyledUploadButton,
   StyledUploadIcon,
   StyledAvatarSection,
 } from './AvatarForm.styled';
-import { FormError } from './FormError';
 
 export const AvatarForm = () => {
   const dispatch = useDispatch();
-  const [fieldValue, setFieldValue] = useState(null);
-  const { name = '' } = useSelector(selectUserData);
-
-  // const uploadAvatar = dispatch(uploadUserAvatar());
-
-  //Submit function
-  function handleSubmit(values, { resetForm }) {
-    const myData = new FormData();
-
-    myData.append('avatar', fieldValue.file);
-    // todo
-    console.log('Form was Submit: ', values, fieldValue.file, myData);
-    dispatch(uploadUserAvatarThunk(myData));
-    return;
-  }
-
-  const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/png'];
-
-  const INITIAL_VALUES = { avatar: null };
-  //Formik Validation schema
-  const userSchema = object().shape({
-    avatar: mixed()
-      .nullable()
-      .required('A file is required')
-      .test(
-        'Fichier taille',
-        'upload file',
-        value => !value || (value && value.size <= 1024 * 1024)
-      )
-      .test(
-        'format',
-        'upload file',
-        value => !value || (value && SUPPORTED_FORMATS.includes(value.type))
-      ),
-  });
   // Avatarka
-  const { avatarUrl } = useSelector(selectUserData);
+  const { avatarUrl, name } = useSelector(selectUserData);
   console.log('Avatar: ', avatarUrl);
   const { imgUrl = 'WaterTracker/avatar-neutral.jpg', imgName = 'Avatar' } = {
     imgUrl: avatarUrl,
     imgName: `Avatar for ${name}`,
   };
+  //Submit function
+  // function handleSubmit(values, { resetForm }) {
+  function handleSubmit(values) {
+    const myData = new FormData();
+    myData.append('avatar', values);
+    // todo
+    console.log('Form was Submit: ', values, myData);
+    dispatch(uploadUserAvatarThunk(myData));
+    return;
+  }
+
+  const validationRules = Yup.object().shape({
+    avatar: Yup.mixed()
+      .required('required')
+      .test('fileFormat', 'Only JPG or PNG files are allowed', value => {
+        if (value) {
+          const supportedFormats = ['jpg', 'jpeg', 'png'];
+          return supportedFormats.includes(value.name.split('.').pop());
+        }
+        return true;
+      })
+      .test('fileSize', 'File size must not be more than 1MB', value => {
+        if (value) {
+          return value.size <= 1 * 1024 * 1024;
+        }
+        return true;
+      }),
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      avatar: '',
+    },
+    onSubmit: handleSubmit,
+    validationSchema: validationRules,
+  });
+
+  const handleChange = e => {
+    console.log('Input chenged');
+    formik.setFieldValue('avatar', e.target.files[0]);
+    handleSubmit(e.target.files[0]);
+  };
 
   return (
-    <Formik
-      initialValues={INITIAL_VALUES}
-      onSubmit={handleSubmit}
-      // validationSchema={userSchema}
-    >
-      <FormStyled>
-        <Label htmlFor="avatar">Your photo</Label>
+    <FormStyled onSubmit={formik.handleSubmit}>
+      <Label htmlFor="avatar">
+        Your photo
         <InputContainer>
-          {/* <StyledImgLabel>Your photo</StyledImgLabel> */}
           <StyledAvatarSection>
             <StyledImg src={imgUrl} alt={imgName} />
-            <StyledUploadButton type="submit">
+            <StyledUploadButton>
               <StyledUploadIcon />
-              Upload a photo
+              <StyledUploadButtonText>Upload a photo</StyledUploadButtonText>
+              <Input type="file" name="avatar" onChange={handleChange} />
             </StyledUploadButton>
           </StyledAvatarSection>
-          <Input
-            type="file"
-            name="avatar"
-            id="avatar"
-            onChange={event => {
-              setFieldValue({ file: event.currentTarget.files[0] });
-            }}
-            // title="Enter your name"
-            // placeholder="Your name"
-          />
         </InputContainer>
-        <FormError name="avatar" />
-
-        {/* <Button type="submit">Upload a photo</Button> */}
-      </FormStyled>
-    </Formik>
+      </Label>
+      <ErrorText>
+        {formik.errors.avatar ? (
+          <p style={{ color: 'red' }}>{formik.errors.avatar}</p>
+        ) : null}
+      </ErrorText>
+    </FormStyled>
   );
 };
-
-/* <StyledImgLabel>Your photo</StyledImgLabel>
-      <StyledAvatarSection>
-        <StyledImg src={imgUrl} alt={imgName} />
-        <StyledUploadButton>
-          <StyledUploadIcon />
-          Upload a photo
-        </StyledUploadButton>
-      </StyledAvatarSection> */

@@ -2,6 +2,7 @@ import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 import {
   getCurrentUserThunk,
   updateCurrentUserThunk,
+  uploadUserAvatarThunk,
   changeDailyNormaThunk,
 } from './currentUserThunk';
 
@@ -85,6 +86,21 @@ const currentUserSlice = createSlice({
         state.user = payload.user;
       })
       .addCase(updateCurrentUserThunk.rejected, (state, { payload }) => {
+        console.log('UpdateUser-Rejected!!!');
+        handleRejected(state, payload);
+      })
+
+      .addCase(uploadUserAvatarThunk.pending, state => {
+        // handlePending(state);
+        console.log('UpdateUserAvatar-Pending');
+      })
+      .addCase(uploadUserAvatarThunk.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = null;
+        console.log('UpdateUserAvatar-Fulfield - Payload-slice: ', payload);
+        // state.user.avatarUrl = payload.user;
+      })
+      .addCase(uploadUserAvatarThunk.rejected, (state, { payload }) => {
         console.log('UpdateUser-Rejected!!!');
         handleRejected(state, payload);
       })
