@@ -14,9 +14,9 @@ export const loginThunk = createAsyncThunk(
   async (userData, thunkAPI) => {
     try {
       const response = await userLogin(userData);
-      await thunkAPI.dispatch(getCurrentUserThunk());
       return response;
     } catch (error) {
+      console.log(error)
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -39,23 +39,28 @@ export const logOutThunk = createAsyncThunk(
   'user/logout',
   async (_, thunkAPI) => {
     const token = thunkAPI.getState().auth.token;
-    try {
-      await userLogOut(token);
-      return;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+    if(token){
+      try {
+        await userLogOut();
+        return;
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error.message);
+      }
     }
+    return;
+    
   }
 );
 
 export const refreshUserThunk = createAsyncThunk(
-  '/auth/refresh',
+  '/user/refresh',
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
     const token = state.auth.token;
     if(token){
       try {
-        const res = await getCurrentUser();
+        const res = await getCurrentUser(token);
+        await thunkAPI.dispatch(getCurrentUserThunk())
         return res;
       } catch (error) {
         return thunkAPI.rejectWithValue(error.message);
@@ -67,7 +72,7 @@ export const refreshUserThunk = createAsyncThunk(
   }
 );
 
-export default createAsyncThunk(
+export const forgotPasswordThunk = createAsyncThunk(
   'user/forgotpassword',
   async (userData, thunkAPI) => {
     try {

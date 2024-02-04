@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 
@@ -32,10 +32,12 @@ import { Modal } from 'components/Modal/Modal';
 import { DropdownMenu } from 'components/DropdownMenu/DropdownMenu';
 import { Setting } from 'components/SettingModal/SettingModal';
 import LogoutConfirmationDialog from 'components/LogOutModal/LogOutModal';
+import { getCurrentUserThunk } from 'Store/currentUser/currentUserThunk';
 // END OF Temp section
 
 export const Navigation = () => {
   // temp section ZooBeeN for modal
+  const isLogged = useSelector(selectAuthenticated)
   const dispatcher = useDispatch();
 
   // selectors
@@ -43,14 +45,12 @@ export const Navigation = () => {
   const userSettingsModalShown = useSelector(selectUserSettings);
   const isAuthed = useSelector(selectAuthenticated);
   const currentUser = useSelector(selectUserData);
-  const isConfirmLogoutShown = useSelector(selectLogout);
-
-  console.log(currentUser)
+  const isConfirmLogoutShown = useSelector(selectLogout); 
 
 
   // local variables
   let shownName = '';
-  if (isAuthed) {
+  if (currentUser.email !== null && currentUser.name !== null) {
     const email = currentUser.email.split('@')[0];
     const name = currentUser.name?.split(' ')[0];
     shownName = name ? name : email;
