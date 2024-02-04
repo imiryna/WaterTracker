@@ -1,4 +1,4 @@
-import { createSlice, isAnyOf } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { changeDailyNormaThunk, getCurrentUserThunk } from './currentUserThunk';
 import {
   logOutThunk} from 'Store/auth/authOperations';
@@ -20,9 +20,7 @@ const currentUserSlice = createSlice({
   initialState: INITIAL_STATE,
   extraReducers: builder => {
     builder
-      .addCase(logOutThunk.fulfilled, () => {
-        return INITIAL_STATE;
-      })
+      
       .addCase(getCurrentUserThunk.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
@@ -40,6 +38,11 @@ const currentUserSlice = createSlice({
         };
         state.error = null;
         state.isLoading = false;
+      })
+
+      // Clear state when logout
+      .addCase(logOutThunk.fulfilled, () => {
+        return INITIAL_STATE;
       })
       // .addCase(getCurrentUserThunk.fulfilled, (state, action) => {
       //   state.user = {

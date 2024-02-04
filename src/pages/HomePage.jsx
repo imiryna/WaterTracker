@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { TodayList } from 'components/TodayWaterList/TodayList';
 import { DailyNorma } from 'components/DailyNorma/DailyNorma';
@@ -10,8 +10,16 @@ import {
   StyledRightContainer,
   SectionCss,
 } from './HomePage.styled';
+import { useDispatch } from 'react-redux';
+import { getCurrentUserThunk } from 'Store/currentUser/currentUserThunk';
 
 const HomePage = () => {
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCurrentUserThunk())
+  })
   return (
     <SectionCss>
       <StyledHomePageWrapper>

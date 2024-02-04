@@ -8,9 +8,9 @@ import {
   selectAuthToken,
   selectIsRefreshing,
 } from 'Store/auth/authSelector';
+import { loginThunk, refreshUserThunk } from 'Store/auth/authOperations';
 import { getCurrentUserThunk } from 'Store/currentUser/currentUserThunk';
-import { selectIsLoading } from 'Store/currentUser/currentUserSelectors';
-import { refreshUserThunk } from 'Store/auth/authOperations';
+import { persistor } from 'Store/store';
 
 const Home = lazy(() => import('pages/HomePage'));
 const Welcome = lazy(() => import('pages/WelcomePage'));
@@ -23,19 +23,17 @@ export const App = () => {
   const dispatch = useDispatch();
   const isRefreshing = useSelector(selectIsRefreshing);
   const isAuthed = useSelector(selectAuthAuthenticated);
-  const token = useSelector(selectAuthToken);
-  const isLoading = useSelector(selectIsLoading);
 
-  // useEffect(() => {
-  //   dispatch(refreshUserThunk())
-  // }, [dispatch])
+  useEffect(() => {
+   dispatch(refreshUserThunk())
+  }, [dispatch]);
 
-  return isRefreshing && isLoading? (
+  return isRefreshing ? (
     <CircularProgress />
   ) : (
     <Suspense>
       <Routes>
-        <Route path="/" element={<Navigation />}>
+        <Route path="/" element={<Navigation/>}>
           {isAuthed ? (
             <Route index element={<Home />} />
           ) : (
