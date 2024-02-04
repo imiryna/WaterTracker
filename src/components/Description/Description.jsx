@@ -6,7 +6,7 @@ import {
   TableCss,
 } from './Description.styled';
 
-export const Discription = () => {
+export const Description = () => {
   return (
     <>
       <ContainerCss>

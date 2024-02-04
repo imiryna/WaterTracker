@@ -9,18 +9,21 @@ import BubblesImgDesktop from 'Images/Backgrounds/background-bubbles-main-page.p
 import BubblesImgMob from 'Images/Backgrounds/background-bubbles-home-screen-mobile.png';
 
 export const WelcomeWrapCss = styled.div`
-  display: flex;
+  display: grid;
   flex-direction: column;
   gap: 40px;
   margin-bottom: 37px;
+  /* background-color: yellow; */
+
   @media (min-width: 768px) {
     gap: 60px;
     margin-bottom: 50px;
   }
   @media (min-width: 1440px) {
-    flex-direction: row;
-    gap: 81px;
-    margin-bottom: 109px;
+    display: grid;
+    grid-template-columns: 439px 430px;
+    gap: 80px;
+    margin-bottom: 185px;
   }
 `;
 
@@ -28,7 +31,7 @@ export const SectionCss = styled.div`
   display: flex;
   gap: 40px;
   align-items: center;
-  justify-content: center;
+
   padding: 72px 20px 40px;
   background-color: var(--primery-White);
   background-image: url(${BottleImgMob});
@@ -38,15 +41,16 @@ export const SectionCss = styled.div`
   background-color: var(--primery-white);
 
   @media (min-width: 768px) {
-    padding: 104px 32px 50px;
+    padding: 104px 32px 104px;
     background-image: url(${BottleImgTab});
     gap: 60px;
   }
 
   @media (min-width: 1440px) {
-    padding: 109px 18px 40px;
+    padding: 109px 18px 0px;
+    align-items: center;
+    justify-content: center;
     background-image: url(${BottleImgDesktop}), url(${BubblesImgDesktop});
-    gap: 81px;
   }
 `;
 export const StyledHomePageWrapper = styled.section`

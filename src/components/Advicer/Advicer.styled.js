@@ -7,7 +7,7 @@ import { ReactComponent as PersonalSettingsArrow } from 'Images/Icons/personal-s
 export const PersonalSettingsArr = styled(PersonalSettingsArrow)`
   width: 24px;
   height: 24px;
-  @media (width: 768px) {
+  @media (min-width: 768px) {
     width: 32px;
     height: 32px;
   }
@@ -16,7 +16,7 @@ export const PersonalSettingsArr = styled(PersonalSettingsArrow)`
 export const ChatBarArrowCss = styled(ChatBarArrow)`
   width: 24px;
   height: 24px;
-  @media (width: 768px) {
+  @media (min-width: 768px) {
     width: 32px;
     height: 32px;
   }
@@ -25,7 +25,7 @@ export const ChatBarArrowCss = styled(ChatBarArrow)`
 export const CalendarArrowCss = styled(CalendarArrow)`
   width: 24px;
   height: 24px;
-  @media (width: 768px) {
+  @media (min-width: 768px) {
     width: 32px;
     height: 32px;
   }
@@ -37,7 +37,15 @@ export const AdvicerCss = styled.div`
   flex-direction: column;
   gap: 24px;
   width: 280px;
+  margin-top: 30px;
+  /* background-color: green; */
+
+  @media (min-width: 1440px) {
+    width: 100%;
+    margin-top: -36px;
+  }
 `;
+
 export const TableTextCss = styled.p`
   color: var(--primery-black);
   font-family: var(--primery-font);
@@ -47,9 +55,13 @@ export const TableTextCss = styled.p`
 
   text-align: left;
 `;
+
 export const WrapCss = styled.div`
+  margin-top: 24px;
   width: 246px;
+
   @media (min-width: 768px) {
+    margin-top: 40px;
     width: 436px;
   }
 `;
@@ -86,11 +98,16 @@ export const IconBoxCss = styled.div`
   align-items: center;
 `;
 export const GridBoxcss = styled.div`
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 16px;
+
   @media (min-width: 768px) {
-    flex-direction: row;
+    grid-template-columns: repeat(3, 224px);
+  }
+
+  @media (min-width: 1440px) {
+    grid-template-columns: 1fr;
   }
 `;
 export const NavLinkBtn = styled(NavLink)`
@@ -101,8 +118,10 @@ export const NavLinkBtn = styled(NavLink)`
   border-radius: 10px;
   background: var(--primery-blue);
   box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.34);
+
   width: 280px;
-  @media (width: 768px) {
+
+  @media (min-width: 768px) {
     width: 336px;
   }
 `;
@@ -114,10 +133,6 @@ export const BtnText = styled.p`
   font-style: normal;
   font-weight: 500;
   line-height: 1.33;
-  width: 280px;
-  @media (min-width: 768px) {
-    width: 336px;
-  }
 `;
 export const ContentTextCss = styled.div`
   color: var(--primery-black);
