@@ -4,26 +4,28 @@ import { TodayList } from 'components/TodayWaterList/TodayList';
 import { DailyNorma } from 'components/DailyNorma/DailyNorma';
 import { Calendar } from 'components/Calendar/Calendar';
 import { ProgressBar } from 'components/ProgressBar/ProgressBar';
-import { StyledHomePageWrapper, StyledLeftContainer, StyledRightContainer } from './HomePage.styled';
+import {
+  StyledHomePageWrapper,
+  StyledLeftContainer,
+  StyledRightContainer,
+  SectionCss,
+} from './HomePage.styled';
 
 const HomePage = () => {
   return (
-    <main>
+    <SectionCss>
       <StyledHomePageWrapper>
-
         <StyledLeftContainer>
           <DailyNorma />
           <ProgressBar />
         </StyledLeftContainer>
-       
+
         <StyledRightContainer>
           <TodayList />
           <Calendar />
         </StyledRightContainer>
-
       </StyledHomePageWrapper>
-      
-    </main>
+    </SectionCss>
   );
 };
 export default HomePage;

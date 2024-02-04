@@ -34,7 +34,7 @@ const authSlice = createSlice({
         state.isRefreshing = false;
       })
 
-      .addCase(logOutThunk.fulfilled, () => {
+      .addCase(logOutThunk.fulfilled, state => {
         return INITIAL_STATE;
       })
       .addCase(refreshUserThunk.fulfilled, (state, action) => {

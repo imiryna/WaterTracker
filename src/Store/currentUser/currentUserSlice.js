@@ -2,7 +2,9 @@ import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 import {
   getCurrentUserThunk,
   updateCurrentUserThunk,
+  changeDailyNormaThunk,
 } from './currentUserThunk';
+
 import {
   logOutThunk,
   loginThunk,
@@ -71,6 +73,7 @@ const currentUserSlice = createSlice({
       // })
 
       // ! Added ZooBeeN ********************
+
       .addCase(updateCurrentUserThunk.pending, state => {
         // handlePending(state);
         console.log('UpdateUser-Pending');
@@ -86,6 +89,19 @@ const currentUserSlice = createSlice({
         handleRejected(state, payload);
       })
       // ! **************************
+      //?CHANGE DALY NORMA
+      .addCase(changeDailyNormaThunk.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(changeDailyNormaThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.user.dailyNorm = action.payload.dailyNorm;
+      })
+      .addCase(changeDailyNormaThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
       .addMatcher(
         isAnyOf(
           loginThunk.pending,

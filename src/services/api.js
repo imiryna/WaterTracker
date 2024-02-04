@@ -29,8 +29,9 @@ export const userRegister = async userData => {
   return data;
 };
 
-export const userLogOut = async userData => {
-  const { data } = await waterTrackerInstance.post('/user/logout', userData);
+export const userLogOut = async token => {
+  setToken(token);
+  const { data } = await waterTrackerInstance.post('/user/logout');
   clearToken();
   return data;
 };
@@ -116,7 +117,7 @@ export const getDailyNorma = async token => {
 export const updateDailyNorma = async (dailyNorma, token) => {
   setToken(token);
   const { data } = await waterTrackerInstance.patch(
-    '/user/upDateWaterRate',
+    '/user/updateWaterRate',
     dailyNorma
   );
   return data;

@@ -18,6 +18,8 @@ export const StyledWaterModal = styled.div`
   @media only screen and (min-width: 1440px) {
     width: 544px;
   }
+
+  position: relative;
   .title {
     font-size: 26px;
     line-height: 1.3;
@@ -46,6 +48,19 @@ export const StyledWaterModal = styled.div`
       background-color: var(--primery-white);
       border-radius: 6px;
       border: 1px solid var(--secondary-color-4);
+    }
+  }
+
+  .MuiTextField-root {
+    width: 100%;
+    .MuiInputBase-root{
+      padding: 0;
+      input{
+        border: 1px solid var(--secondary-color-4);
+      }
+      .MuiOutlinedInput-notchedOutline{
+        border: none;
+      }
     }
   }
 
@@ -127,5 +142,12 @@ export const StyledWaterModal = styled.div`
         width: 82px;
       }
     }
+  }
+  .close-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: transparent;
+    border: none;
   }
 `;
