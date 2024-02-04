@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/WaterTracker/static/css/main.94357195.css",
-    "main.js": "/WaterTracker/static/js/main.1b7b53d1.js",
-    "static/js/146.cfc56405.chunk.js": "/WaterTracker/static/js/146.cfc56405.chunk.js",
+    "main.js": "/WaterTracker/static/js/main.fed0b8bb.js",
+    "static/js/146.8f857bb4.chunk.js": "/WaterTracker/static/js/146.8f857bb4.chunk.js",
     "static/js/69.972ef8f1.chunk.js": "/WaterTracker/static/js/69.972ef8f1.chunk.js",
-    "static/js/866.b130a149.chunk.js": "/WaterTracker/static/js/866.b130a149.chunk.js",
-    "static/js/21.2ff3451e.chunk.js": "/WaterTracker/static/js/21.2ff3451e.chunk.js",
-    "static/js/462.fb7466e0.chunk.js": "/WaterTracker/static/js/462.fb7466e0.chunk.js",
-    "static/js/371.87ac4b1b.chunk.js": "/WaterTracker/static/js/371.87ac4b1b.chunk.js",
-    "static/js/342.7a9587b0.chunk.js": "/WaterTracker/static/js/342.7a9587b0.chunk.js",
-    "static/js/703.a41ff549.chunk.js": "/WaterTracker/static/js/703.a41ff549.chunk.js",
-    "static/js/265.de727318.chunk.js": "/WaterTracker/static/js/265.de727318.chunk.js",
+    "static/js/866.b9796802.chunk.js": "/WaterTracker/static/js/866.b9796802.chunk.js",
+    "static/js/21.ac5e00d2.chunk.js": "/WaterTracker/static/js/21.ac5e00d2.chunk.js",
+    "static/js/462.e092d3cd.chunk.js": "/WaterTracker/static/js/462.e092d3cd.chunk.js",
+    "static/js/371.9c4c0ea0.chunk.js": "/WaterTracker/static/js/371.9c4c0ea0.chunk.js",
+    "static/js/497.2f659c68.chunk.js": "/WaterTracker/static/js/497.2f659c68.chunk.js",
+    "static/js/436.d431a4d8.chunk.js": "/WaterTracker/static/js/436.d431a4d8.chunk.js",
+    "static/js/545.893f6ac2.chunk.js": "/WaterTracker/static/js/545.893f6ac2.chunk.js",
     "static/media/bottle-sign-in.png": "/WaterTracker/static/media/bottle-sign-in.abfbe239550c8bdcad14.png",
     "static/media/bottle-sign-in-tablet.png": "/WaterTracker/static/media/bottle-sign-in-tablet.85f4f45f374a65be51e7.png",
     "static/media/background-main-page-tablet.png": "/WaterTracker/static/media/background-main-page-tablet.0c4824a52fdfb0d79a06.png",
@@ -39,19 +39,19 @@
     "static/media/plus.svg": "/WaterTracker/static/media/plus.e230c17eccfc72c82b63b96575ac344a.svg",
     "static/media/close.svg": "/WaterTracker/static/media/close.2d39ebec4a0b09e9a5de64dc02d5c5f2.svg",
     "main.94357195.css.map": "/WaterTracker/static/css/main.94357195.css.map",
-    "main.1b7b53d1.js.map": "/WaterTracker/static/js/main.1b7b53d1.js.map",
-    "146.cfc56405.chunk.js.map": "/WaterTracker/static/js/146.cfc56405.chunk.js.map",
+    "main.fed0b8bb.js.map": "/WaterTracker/static/js/main.fed0b8bb.js.map",
+    "146.8f857bb4.chunk.js.map": "/WaterTracker/static/js/146.8f857bb4.chunk.js.map",
     "69.972ef8f1.chunk.js.map": "/WaterTracker/static/js/69.972ef8f1.chunk.js.map",
-    "866.b130a149.chunk.js.map": "/WaterTracker/static/js/866.b130a149.chunk.js.map",
-    "21.2ff3451e.chunk.js.map": "/WaterTracker/static/js/21.2ff3451e.chunk.js.map",
-    "462.fb7466e0.chunk.js.map": "/WaterTracker/static/js/462.fb7466e0.chunk.js.map",
-    "371.87ac4b1b.chunk.js.map": "/WaterTracker/static/js/371.87ac4b1b.chunk.js.map",
-    "342.7a9587b0.chunk.js.map": "/WaterTracker/static/js/342.7a9587b0.chunk.js.map",
-    "703.a41ff549.chunk.js.map": "/WaterTracker/static/js/703.a41ff549.chunk.js.map",
-    "265.de727318.chunk.js.map": "/WaterTracker/static/js/265.de727318.chunk.js.map"
+    "866.b9796802.chunk.js.map": "/WaterTracker/static/js/866.b9796802.chunk.js.map",
+    "21.ac5e00d2.chunk.js.map": "/WaterTracker/static/js/21.ac5e00d2.chunk.js.map",
+    "462.e092d3cd.chunk.js.map": "/WaterTracker/static/js/462.e092d3cd.chunk.js.map",
+    "371.9c4c0ea0.chunk.js.map": "/WaterTracker/static/js/371.9c4c0ea0.chunk.js.map",
+    "497.2f659c68.chunk.js.map": "/WaterTracker/static/js/497.2f659c68.chunk.js.map",
+    "436.d431a4d8.chunk.js.map": "/WaterTracker/static/js/436.d431a4d8.chunk.js.map",
+    "545.893f6ac2.chunk.js.map": "/WaterTracker/static/js/545.893f6ac2.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.94357195.css",
-    "static/js/main.1b7b53d1.js"
+    "static/js/main.fed0b8bb.js"
   ]
 }
