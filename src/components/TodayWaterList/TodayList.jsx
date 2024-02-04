@@ -1,9 +1,9 @@
-import { delWaterThunk } from 'Store/water/waterThunks';
+import { delWaterThunk, getDailyWaterThunk } from 'Store/water/waterThunks';
 import { useDispatch, useSelector } from 'react-redux';
 import { StyledWaterList } from './TodayList.styled';
 import { CreateWaterCardMarkup } from './WaterCard';
 import { waterArrSelector } from 'Store/water/waterSelectors';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { DeleteConfirmDialog } from './DeleteDialog';
 import { StyledBackdrop } from './DeleteDialog.styled';
 import { EditWaterModal } from './modals/EditWaterModal';
@@ -28,16 +28,12 @@ export const TodayList = () => {
     idToDelete: null,
   });
 
+  const showAddModal = useSelector(selectAddWater);
+  const showEditModal = useSelector(selectEditWater);
 
-  const showAddModal = useSelector(selectAddWater)
-  const showEditModal = useSelector(selectEditWater)
-
-  useEffect(()=>{
-    dispatch(getDailyWaterThunk())
-  },[dispatch])
-  
-
-
+  useEffect(() => {
+    dispatch(getDailyWaterThunk());
+  }, [dispatch]);
 
   const [currentEditObj, setCurrentEditObj] = useState(null);
   //Creating marcup arr
