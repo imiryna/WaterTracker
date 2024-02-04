@@ -8,7 +8,7 @@ import { CloseSvg, MinusSvg, PlusSvg } from '../StyledTodayListIcons';
 import { toggleAddWateVisibility } from 'Store/modals/modalSlice';
 import { LocalizationProvider, TimeField } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { getUtcTime, parseUtcTime } from 'services/helpers/getUtcTime';
+// import { getUtcTime, parseUtcTime } from 'services/helpers/getUtcTime';
 import dayjs from 'dayjs';
 
 export const AddWaterModal = () => {
@@ -27,8 +27,7 @@ export const AddWaterModal = () => {
     toggleModal();
   };
 
-  const defaultTimeValue = dayjs(new Date()) 
-
+  const defaultTimeValue = dayjs(new Date());
 
   return (
     <StyledContainer onClick={e => e.stopPropagation()}>
@@ -68,7 +67,7 @@ export const AddWaterModal = () => {
               <p className="label-title">Recording time:</p>
               <TimeField
                 value={time}
-                onChange={(newTime) => setTime(newTime)}
+                onChange={newTime => setTime(newTime)}
                 defaultValue={defaultTimeValue}
                 format="hh:mm a"
               />
