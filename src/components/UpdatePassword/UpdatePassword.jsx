@@ -100,9 +100,9 @@ import { updatePasswordThunk } from 'Store/auth/authOperations';
        <FormButton type="submit">Reset password</FormButton>
        <RedirectButton to="/signin">Sign In</RedirectButton>
      </AuthStyledForm>
-     <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
-          <Alert onClose={handleCloseSnackbar} severity="error">
-            {authError}
+     <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+          <Alert onClose={handleCloseSnackbar} severity="success">
+            Your password has been reset
           </Alert>
         </Snackbar>
      </AuthDiv>
