@@ -28,19 +28,16 @@ export const TodayList = () => {
     idToDelete: null,
   });
 
-  const showAddModal = useSelector(selectAddWater);
-  const showEditModal = useSelector(selectEditWater);
 
-  // const [showAddModal, setShowAddModal] = useState(false);
-  // const togleAddModal = () => {
-  //   setShowAddModal(!showAddModal);
-  // };
-  // useEffect(()=>{
-  //   dispatch(getDailyWaterThunk())
-  // }, [])
+  const showAddModal = useSelector(selectAddWater)
+  const showEditModal = useSelector(selectEditWater)
 
-  // const [showEditModal, setShowEditModal] = useState(false);
-  // const togleEditModal = () => setShowEditModal(!showEditModal);
+  useEffect(()=>{
+    dispatch(getDailyWaterThunk())
+  },[dispatch])
+  
+
+
 
   const [currentEditObj, setCurrentEditObj] = useState(null);
   //Creating marcup arr

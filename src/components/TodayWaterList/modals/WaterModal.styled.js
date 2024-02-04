@@ -51,6 +51,19 @@ export const StyledWaterModal = styled.div`
     }
   }
 
+  .MuiTextField-root {
+    width: 100%;
+    .MuiInputBase-root{
+      padding: 0;
+      input{
+        border: 1px solid var(--secondary-color-4);
+      }
+      .MuiOutlinedInput-notchedOutline{
+        border: none;
+      }
+    }
+  }
+
   button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
