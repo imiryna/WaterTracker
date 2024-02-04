@@ -44,7 +44,7 @@ export const DailyNorma = () => {
         <span className='norma-amount'>
           {totalTodayWater / 1000} L / {dailyNorma / 1000} L
         </span>
-        <button class="edit-btn" onClick={() => toggleModal()}>Edit</button>
+        <button className="edit-btn" onClick={() => toggleModal()}>Edit</button>
       </div>
       {editNormaModalVisibility && (
         <Modal toggleModal={toggleModal}>

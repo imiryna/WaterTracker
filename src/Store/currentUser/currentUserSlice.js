@@ -44,17 +44,7 @@ const currentUserSlice = createSlice({
       .addCase(logOutThunk.fulfilled, () => {
         return INITIAL_STATE;
       })
-      // .addCase(getCurrentUserThunk.fulfilled, (state, action) => {
-      //   state.user = {
-      //     name: action.payload.name,
-      //     email: action.payload.email,
-      //     gender: action.payload.gender,
-      //     dailyNorm: action.payload.dailyNorm,
-      //     avatarUrl: action.payload.avatar,
-      //   };
-      //   state.error = null;
-      //   state.isLoading = false;
-      // })
+  
       //?CHANGE DALY NORMA
       .addCase(changeDailyNormaThunk.pending, state => {
         state.isLoading = true;
@@ -68,18 +58,7 @@ const currentUserSlice = createSlice({
         state.isLoading = false;
         state.error = action.payload;
       })
-      .addMatcher(
-        isAnyOf(
-          loginThunk.pending,
-          getCurrentUserThunk.pending,
-          logOutThunk.pending
-        ),
-        state => {
-          state.error = null;
-          state.isLoading = true;
-        }
-      );
-  },
+},
 });
 
 export const currentUserReducer = currentUserSlice.reducer;
