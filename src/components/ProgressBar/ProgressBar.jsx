@@ -1,28 +1,31 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ProgressBarStyled } from './ProgressBar.styled';
 import { ReactComponent as Icon } from './progressBar-icon.svg';
-import { useSelector } from 'react-redux';
-import {
-  todayNormaSelector,
-  totalWaterAmmountSelector,
-} from 'Store/water/waterSelectors';
+import { useDispatch, useSelector } from 'react-redux';
+import { totalWaterAmmountSelector } from 'Store/water/waterSelectors';
 import { Slider } from '@mui/material';
 import { Modal } from 'components/Modal/Modal';
 import { AddWaterModal } from 'components/TodayWaterList/modals/AddWaterModal';
 import { EditWaterModal } from 'components/TodayWaterList/modals/EditWaterModal';
+import { selectDailyNorm } from 'Store/currentUser/currentUserSelectors';
+import {
+  toggleAddWateVisibility,
+  toggleEditWateVisibility,
+} from 'Store/modals/modalSlice';
+import { selectAddWater, selectEditWater } from 'Store/modals/modalSelector';
+import { getDailyWaterThunk } from 'Store/water/waterThunks';
 
 export const ProgressBar = () => {
   const waterAmount = useSelector(totalWaterAmmountSelector);
-  const waterNorma = useSelector(todayNormaSelector);
+  const waterNorma = useSelector(selectDailyNorm);
   const progress = (waterAmount / waterNorma) * 100;
+  console.log(`waterNorma`, waterNorma);
+console.log(`waterAmount`, waterAmount);
+  const dispatch = useDispatch();
 
- const [showAddModal, setShowAddModal] = useState(false);
- const toggleAddModal = () => {
-   setShowAddModal(!showAddModal);
-  };
-  
-  const [showEditModal, setShowEditModal] = useState(false);
-  const togleEditModal = () => setShowEditModal(!showEditModal);
+  const showAddModal = useSelector(selectAddWater);
+  const showEditModal = useSelector(selectEditWater);
+
   const [currentEditObj] = useState(null);
 
   const CustomSliderStyles = {
@@ -67,20 +70,18 @@ export const ProgressBar = () => {
       <div className="button-block">
         <button
           className="progress-bar-button"
-          onClick={() => {
-            toggleAddModal();
-          }}
+          onClick={() => dispatch(toggleAddWateVisibility())}
         >
           {showAddModal && (
-            <Modal togleModal={toggleAddModal}>
-              <AddWaterModal togleModal={toggleAddModal} />
+            <Modal toggleModal={toggleAddWateVisibility}>
+              <AddWaterModal togleModal={toggleAddWateVisibility} />
             </Modal>
           )}
           {showEditModal && (
-            <Modal togleModal={togleEditModal}>
+            <Modal toggleModal={toggleEditWateVisibility}>
               <EditWaterModal
                 prevVal={currentEditObj}
-                togleModal={togleEditModal}
+                togleModal={toggleEditWateVisibility}
               />
             </Modal>
           )}

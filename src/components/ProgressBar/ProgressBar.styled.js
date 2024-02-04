@@ -56,6 +56,7 @@ export const ProgressBarStyled = styled.div`
     display: flex;
     margin-right: auto;
     margin-left: auto;
+    margin-bottom:7px;
      }
 
   @media (min-width: 768px) {
