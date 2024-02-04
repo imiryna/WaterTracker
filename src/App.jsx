@@ -5,10 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import CircularProgress from '@mui/material/CircularProgress';
 import {
   selectAuthAuthenticated,
+  selectAuthToken,
   selectIsRefreshing,
 } from 'Store/auth/authSelector';
+import { getCurrentUserThunk } from 'Store/currentUser/currentUserThunk';
+import { selectIsLoading } from 'Store/currentUser/currentUserSelectors';
 import { refreshUserThunk } from 'Store/auth/authOperations';
-// import { getCurrentUserThunk } from 'Store/currentUser/currentUserThunk';
 
 const Home = lazy(() => import('pages/HomePage'));
 const Welcome = lazy(() => import('pages/WelcomePage'));
@@ -21,16 +23,14 @@ export const App = () => {
   const dispatch = useDispatch();
   const isRefreshing = useSelector(selectIsRefreshing);
   const isAuthed = useSelector(selectAuthAuthenticated);
-
-  useEffect(() => {
-    dispatch(refreshUserThunk());
-  }, [dispatch]);
+  const token = useSelector(selectAuthToken);
+  const isLoading = useSelector(selectIsLoading);
 
   // useEffect(() => {
-  //   dispatch(getCurrentUserThunk())
-  // }, [isAuthed])
+  //   dispatch(refreshUserThunk())
+  // }, [dispatch])
 
-  return isRefreshing ? (
+  return isRefreshing && isLoading? (
     <CircularProgress />
   ) : (
     <Suspense>
