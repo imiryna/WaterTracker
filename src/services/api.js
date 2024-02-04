@@ -50,12 +50,11 @@ export const userLogOut = async userData => {
 
 export const uploadUserAvatar = async userData => {
   console.log('Avatar');
-  const { data } = await axios.patch('/user/udateAvatar', userData);
+  const { data } = await axios.patch('/user/avatars', userData);
   return data;
 };
 
-export const updateUser = async (userData, token) => {
-  // setToken(token);
+export const updateUser = async userData => {
   console.log('User update');
   const { data } = await axios.patch('/user/updateUser', userData);
   return data;
@@ -76,37 +75,32 @@ export const updatePassword = async userData => {
 
 // Today water portions apis
 
-export const getWaterServings = async token => {
+export const getWaterServings = async () => {
   console.log('Get WaterServ');
-  // setToken(token);
   const { data } = await axios.get('/water/today');
   return data;
 };
 
-export const getWaterServingById = async (servingId, token) => {
+export const getWaterServingById = async servingId => {
   console.log('Get WaterServ-byID');
-  // setToken(token);
   const { data } = await axios.get(`/water/today/${servingId}`);
   return data;
 };
 
-export const addWaterServing = async (servingData, token) => {
+export const addWaterServing = async servingData => {
   console.log('Add Water');
-  // setToken(token);
   const { data } = await axios.post('/water', servingData);
   return data;
 };
 
-export const removeWaterServing = async (servingId, token) => {
+export const removeWaterServing = async servingId => {
   console.log('RemoveWater');
-  // setToken(token);
   const { data } = await axios.delete(`/water/${servingId}`);
   return data;
 };
 
-export const editWaterServing = async (servingId, servingData, token) => {
+export const editWaterServing = async (servingId, servingData) => {
   console.log(`Id:`, servingId);
-  // setToken(token);
   // const water = await getWaterServingById(servingId);
   // const updatedWater = { ...water, ...servingData };
   const { data } = await axios.put(`/water/${servingId}`, servingData);
@@ -115,25 +109,22 @@ export const editWaterServing = async (servingId, servingData, token) => {
 
 // // Daily norma apis
 
-export const getDailyNorma = async token => {
+export const getDailyNorma = async () => {
   console.log('Daily Norma');
-  // setToken(token);
   const { data } = await axios.get('/water');
   return data;
 };
 
-export const updateDailyNorma = async (dailyNorma, token) => {
+export const updateDailyNorma = async dailyNorma => {
   console.log('Update Daily norma');
-  // setToken(token);
   const { data } = await axios.patch('/user/upDateWaterRate', dailyNorma);
   return data;
 };
 
 // // Month info
 
-export const fetchMonthStat = async (month, year, token) => {
+export const fetchMonthStat = async (month, year) => {
   console.log('Fetch Month');
-  // setToken(token);
   const { data } = await axios.get(`/monthStat/${year}/${month}`);
   return data;
 };

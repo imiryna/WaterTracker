@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { Field, Form } from 'formik';
-import { ReactComponent as ShowPass } from 'Images/Icons/show-pass.svg';
-import { ReactComponent as HidePass } from 'Images/Icons/hide-pass.svg';
+
 import { ReactComponent as UploadIcon } from 'Images/Icons/upload.svg';
 
 export const Title = styled.div`
@@ -155,17 +154,7 @@ export const ButtonIcon = styled.button`
   cursor: pointer;
   background: transparent;
 `;
-export const ShowPassIcon = styled(ShowPass)`
-  width: 16px;
-  height: 16px;
-  stroke: #407bff;
-`;
 
-export const HidePassIcon = styled(HidePass)`
-  width: 16px;
-  height: 16px;
-  stroke: #407bff;
-`;
 export const StyledAvatarSection = styled.div`
   display: flex;
 `;

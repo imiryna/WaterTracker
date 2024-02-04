@@ -36,6 +36,8 @@ export const UserForm = () => {
     email = '',
     gender = 'female',
   } = useSelector(selectUserData);
+
+  // Hide-Show passwords
   const [showPassword, setShowPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showRepPassword, setShowRepPassword] = useState(false);
@@ -44,30 +46,30 @@ export const UserForm = () => {
   function handleSubmit(values, { resetForm }) {
     // todo - проверку совпадения паролей - отправку данных без проверочного пароля
     console.log('Form was Submit: ', values);
-    const { email, gender, name, currentPassword, newPassword, repitpass } =
-      values;
+    // const { email, gender, name, currentPassword, newPassword, repitpass } =
+    //   values;
+
     // Ubiraem iz objecta pustye svojstva
-
-    let userData = {
-      email,
-      gender,
-      name,
-      currentPassword,
-      newPassword,
-    };
-
-    Object.entries(userData).map(a =>
+    // let userData = {
+    //   email,
+    //   gender,
+    //   name,
+    //   currentPassword,
+    //   newPassword,
+    // };
+    // Remove empty properties
+    Object.entries(values).map(a =>
       Object.entries(a[1]).filter(b => b[1].length).length
         ? a
-        : delete userData[a[0]]
+        : delete values[a[0]]
     );
-    console.log('Check: ', userData);
+    console.log('Check: ', values);
 
-    if (newPassword !== repitpass) {
+    if (values.newPassword !== values.repitpass) {
       console.log('Пароли не совпадают');
       return;
     }
-    dispatch(updateCurrentUserThunk(userData));
+    dispatch(updateCurrentUserThunk(values));
 
     // todo - доделать чтобы закрывалось после ответа сервера
     resetForm();
@@ -76,12 +78,6 @@ export const UserForm = () => {
     dispatch(getCurrentUserThunk());
     return;
   }
-  // let userName;
-  // if (name) {
-  //   userName = name;
-  // } else {
-  //   userName = '';
-  // }
 
   const INITIAL_VALUES = {
     gender,
@@ -96,10 +92,7 @@ export const UserForm = () => {
     name: string().min(5).max(40).required('Name is required'),
     email: string().email().required('Email is required'),
     currentPassword: string().min(8).required('Password is required'),
-    //   string().matches(
-    //   /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,}$/gu,
-    //   'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character'
-    // ),
+
     newPassword: string().matches(
       /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,}$/gu,
       'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character'
@@ -109,6 +102,7 @@ export const UserForm = () => {
       'Passwords must match'
     ),
   });
+
   return (
     <Formik
       initialValues={INITIAL_VALUES}
@@ -116,16 +110,6 @@ export const UserForm = () => {
       validationSchema={userSchema}
     >
       <FormStyled>
-        {/* <Label htmlFor="avatar">Your photo</Label>
-        <Input
-          type="file"
-          name="avatar"
-          id="avatar"
-          // title="Enter your name"
-          // placeholder="Your name"
-        />
-        <FormError name="avatar" /> */}
-
         <FlexWrapper>
           <Wrapper>
             <Title id="my-radio-group">Your gender identity</Title>
