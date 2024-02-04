@@ -24,15 +24,17 @@ export const DailyNorma = () => {
 
   const {gender: userGender} = useSelector(selectUserData)
 
-  const [weight, setWeight] = useState(1);
+  const [weight, setWeight] = useState(0);
   const [gender, setGender] = useState(userGender);
-  const [activeTime, setActiveTime] = useState(1);
+  const [activeTime, setActiveTime] = useState(0);
 
   const editNormaModalVisibility = useSelector(selectEditNorma)
 
   const toggleModal = () => dispatch(toggleMyDailyNormaVisibility())
 
   const changeDailyNorma = (newNorma) => {
+    setWeight(0)
+    setActiveTime(0)
     dispatch(changeDailyNormaThunk(newNorma));
   };
 
