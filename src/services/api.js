@@ -29,8 +29,9 @@ export const userRegister = async userData => {
   return data;
 };
 
-export const userLogOut = async userData => {
-  const { data } = await waterTrackerInstance.post('/user/logout', userData);
+export const userLogOut = async token => {
+  setToken(token);
+  const { data } = await waterTrackerInstance.post('/user/logout');
   clearToken();
   return data;
 };
@@ -50,7 +51,6 @@ export const updateUser = async userData => {
   );
   return data;
 };
-
 
 export const forgotPassword = async userData => {
   const { data } = await waterTrackerInstance.post(
@@ -96,7 +96,7 @@ export const removeWaterServing = async (servingId, token) => {
 };
 
 export const editWaterServing = async (servingId, servingData, token) => {
-  console.log(`Id:`, servingId)
+  console.log(`Id:`, servingId);
   setToken(token);
   // const water = await getWaterServingById(servingId);
   // const updatedWater = { ...water, ...servingData };
