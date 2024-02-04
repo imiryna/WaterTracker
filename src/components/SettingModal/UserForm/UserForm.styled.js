@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { Field, Form } from 'formik';
+import { ReactComponent as ShowPass } from 'Images/Icons/show-pass.svg';
+import { ReactComponent as HidePass } from 'Images/Icons/hide-pass.svg';
 
 export const Title = styled.div`
   /* margin-bottom: 15px; */
@@ -130,4 +132,36 @@ export const Button = styled.button`
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
+`;
+
+export const InputContainer = styled.div`
+  position: relative;
+  width: 280px;
+
+  @media (min-width: 768px) {
+    width: 336px;
+  }
+
+  @media (min-width: 1440px) {
+    width: 384px;
+  }
+`;
+export const ButtonIcon = styled.button`
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  background: transparent;
+`;
+export const ShowPassIcon = styled(ShowPass)`
+  width: 16px;
+  height: 16px;
+  stroke: #407bff;
+`;
+
+export const HidePassIcon = styled(HidePass)`
+  width: 16px;
+  height: 16px;
+  stroke: #407bff;
 `;

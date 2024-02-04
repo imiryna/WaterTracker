@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { object, string, ref } from 'yup';
@@ -20,6 +21,10 @@ import {
   Label,
   Wrapper,
   Button,
+  InputContainer,
+  ButtonIcon,
+  ShowPassIcon,
+  HidePassIcon,
 } from './UserForm.styled';
 import { FormError } from './FormError';
 
@@ -31,6 +36,9 @@ export const UserForm = () => {
     email = '',
     gender = 'female',
   } = useSelector(selectUserData);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showRepPassword, setShowRepPassword] = useState(false);
 
   //Submit function
   function handleSubmit(values, { resetForm }) {
@@ -96,7 +104,10 @@ export const UserForm = () => {
       /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,}$/gu,
       'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character'
     ),
-    repitpass: string().oneOf([ref('newpass'), null], 'Passwords must match'),
+    repitpass: string().oneOf(
+      [ref('newPassword'), null],
+      'Passwords must match'
+    ),
   });
   return (
     <Formik
@@ -154,37 +165,61 @@ export const UserForm = () => {
             <Label className="small" htmlFor="currentPassword">
               Outdated password:
             </Label>
-            <Input
-              type="text"
-              name="currentPassword"
-              id="currentPassword"
-              title="Enter your current password"
-              placeholder="Password"
-            />
+            <InputContainer>
+              <Input
+                type={showPassword ? 'text' : 'password'}
+                name="currentPassword"
+                id="currentPassword"
+                title="Enter your current password"
+                placeholder="Password"
+              />
+              <ButtonIcon
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <ShowPassIcon /> : <HidePassIcon />}
+              </ButtonIcon>
+            </InputContainer>
             <FormError name="currentPassword" />
 
             <Label className="small" htmlFor="newPassword">
               New password:
             </Label>
-            <Input
-              type="text"
-              name="newPassword"
-              id="newPassword"
-              title="Enter new password"
-              placeholder="Password"
-            />
+            <InputContainer>
+              <Input
+                type={showNewPassword ? 'text' : 'password'}
+                name="newPassword"
+                id="newPassword"
+                title="Enter new password"
+                placeholder="Password"
+              />
+              <ButtonIcon
+                type="button"
+                onClick={() => setShowNewPassword(!showNewPassword)}
+              >
+                {showNewPassword ? <ShowPassIcon /> : <HidePassIcon />}
+              </ButtonIcon>
+            </InputContainer>
             <FormError name="newPassword" />
 
             <Label className="small" htmlFor="repit">
               Repit password:
             </Label>
-            <Input
-              type="text"
-              name="repitpass"
-              id="repitpass"
-              title="Repit new password"
-              placeholder="Password"
-            />
+            <InputContainer>
+              <Input
+                type={showRepPassword ? 'text' : 'password'}
+                name="repitpass"
+                id="repitpass"
+                title="Repit new password"
+                placeholder="Password"
+              />
+              <ButtonIcon
+                type="button"
+                onClick={() => setShowRepPassword(!showRepPassword)}
+              >
+                {showRepPassword ? <ShowPassIcon /> : <HidePassIcon />}
+              </ButtonIcon>
+            </InputContainer>
             <FormError name="repitpass" />
           </Wrapper>
         </FlexWrapper>

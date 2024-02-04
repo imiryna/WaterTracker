@@ -20,8 +20,8 @@ export const Setting = () => {
   const toggleModal = () => dispatch(toggleSettingsVisibility());
 
   const { avatarUrl, name } = useSelector(selectUserData);
-
-  const { imgUrl = 'Images/avatar-neutral.jpg', imgName = 'Avatar' } = {
+  console.log('Avatar: ', avatarUrl);
+  const { imgUrl = 'WaterTracker/avatar-neutral.jpg', imgName = 'Avatar' } = {
     imgUrl: avatarUrl,
     imgName: `Avatar for ${name}`,
   };
