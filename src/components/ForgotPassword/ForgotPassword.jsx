@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from "yup";
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
-import { forgotPasswordThunk } from 'Store/auth/authOperations';
+import forgotPasswordThunk from 'Store/auth/authOperations';
 
 
  const validationSchema = Yup.object({

@@ -11,6 +11,7 @@ const INITIAL_STATE = {
   authenticated: false,
   error: null,
   isLoading: false,
+  isRefreshing: false,
 };
 
 const authSlice = createSlice({
@@ -25,34 +26,38 @@ const authSlice = createSlice({
         state.authenticated = true;
         state.token = action.payload.token;
         state.isLoading = false;
-        state.isRefreshing = false;
       })
 
       .addCase(registerThunk.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.isRefreshing = false;
       })
 
       .addCase(logOutThunk.fulfilled, state => {
         return INITIAL_STATE;
       })
-      .addCase(refreshUserThunk.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.error = null;
-        state.token = action.payload.token;
-        state.isRefreshing = false;
-        state.authenticated = true;
-      })
+      // .addCase(refreshUserThunk.pending, (state, action) => {
+      //   state.isRefreshing = true;
+      //   state.error = null;
+      // })
+      // .addCase(refreshUserThunk.fulfilled, (state, action) => {
+      //   state.isLoading = false;
+      //   state.error = null;
+      //   state.token = action.payload.token;
+      //   state.isRefreshing = false;
+      //   state.authenticated = true;
+      // })
+      // .addCase(refreshUserThunk.rejected, (state, action) => {
+      //     state.isRefreshing = false;
+      //     state.error = action.payload;
+      // })
 
       .addMatcher(
         isAnyOf(loginThunk.pending, registerThunk.pending, logOutThunk.pending),
         state => {
           state.error = null;
           state.isLoading = true;
-          state.isRefreshing = true;
-        }
-      )
+        })
       .addMatcher(
         isAnyOf(
           loginThunk.rejected,
@@ -62,7 +67,6 @@ const authSlice = createSlice({
         (state, action) => {
           state.isLoading = false;
           state.error = action.payload;
-          state.isRefreshing = false;
         }
       ),
 });

@@ -4,13 +4,12 @@ import { getCurrentUser, updateDailyNorma } from 'services/api';
 export const getCurrentUserThunk = createAsyncThunk(
   'user/getCurrent',
   async (_, thunkAPI) => {
-    console.log('GET CURRENT USER');
     const token = thunkAPI.getState().auth.token;
     if (token === null) {
       return thunkAPI.rejectWithValue('Please Login');
     }
     try {
-      const res = await getCurrentUser(token);
+      const res = await getCurrentUser();
       return res;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

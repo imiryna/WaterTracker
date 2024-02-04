@@ -1,10 +1,7 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 import { changeDailyNormaThunk, getCurrentUserThunk } from './currentUserThunk';
 import {
-  logOutThunk,
-  loginThunk,
-  refreshUserThunk,
-} from 'Store/auth/authOperations';
+  logOutThunk} from 'Store/auth/authOperations';
 
 const INITIAL_STATE = {
   user: {
@@ -15,7 +12,7 @@ const INITIAL_STATE = {
     avatarUrl: null,
   },
   error: null,
-  isLoading: true,
+  isLoading: false,
 };
 
 const currentUserSlice = createSlice({
@@ -23,30 +20,26 @@ const currentUserSlice = createSlice({
   initialState: INITIAL_STATE,
   extraReducers: builder => {
     builder
-      .addCase(loginThunk.fulfilled, (state, action) => {
-        state.user = {
-          avatarUrl: action.payload.avatar,
-          dailyNorm: action.payload.dailyNorm,
-          email: action.payload.email,
-          gender: action.payload.gender,
-          name: action.payload.name,
-        };
-      })
       .addCase(logOutThunk.fulfilled, () => {
         return INITIAL_STATE;
-      })
-      .addCase(refreshUserThunk.fulfilled, (state, action) => {
-        state.user = {
-          avatarUrl: action.payload.avatar,
-          dailyNorm: action.payload.dailyNorm,
-          email: action.payload.email,
-          gender: action.payload.gender,
-          name: action.payload.name,
-        };
       })
       .addCase(getCurrentUserThunk.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
+      })
+      .addCase(getCurrentUserThunk.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getCurrentUserThunk.fulfilled, (state, action) => {
+        state.user = {
+          name: action.payload.name,
+          email: action.payload.email,
+          gender: action.payload.gender,
+          dailyNorm: action.payload.dailyNorm,
+          avatarUrl: action.payload.avatar,
+        };
+        state.error = null;
+        state.isLoading = false;
       })
       // .addCase(getCurrentUserThunk.fulfilled, (state, action) => {
       //   state.user = {
