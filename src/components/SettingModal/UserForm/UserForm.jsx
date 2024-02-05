@@ -58,7 +58,6 @@ export const UserForm = () => {
     if (passState === '') {
       console.log('UPS');
       setShowPassword(!showPassword);
-      // const inp = document.querySelector('#currentPassword');
       setPassState('Password is necessary');
       return console.log('Current is necessary');
     }
@@ -97,13 +96,13 @@ export const UserForm = () => {
     email,
     currentPassword: '',
     newPassword: '',
-    repitpass: '',
+    repeatPassword: '',
   };
   //Formik Validation schema
   const userSchema = object().shape({
     name: string().min(5).max(40).required('Name is required'),
     email: string().email().required('Email is required'),
-    currentPassword: string().min(8),
+    currentPassword: string().min(8).required('Old password is required'),
 
     newPassword: string().matches(
       /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,}$/gu,
@@ -165,10 +164,6 @@ export const UserForm = () => {
                 id="currentPassword"
                 title="Enter your current password"
                 placeholder="Password"
-                value={passState}
-                onChange={e => {
-                  setPassState(e.target.value);
-                }}
               />
               <ButtonIcon
                 type="button"
@@ -203,15 +198,15 @@ export const UserForm = () => {
             </InputContainer>
             <FormError name="newPassword" />
 
-            <Label className="small" htmlFor="repit">
-              Repit password:
+            <Label className="small" htmlFor="repeat">
+              Repeat password:
             </Label>
             <InputContainer>
               <Input
                 type={showRepPassword ? 'text' : 'password'}
-                name="repitpass"
-                id="repitpass"
-                title="Repit new password"
+                name="repeatPassword"
+                id="repeatPassword"
+                title="repeat new password"
                 placeholder="Password"
               />
               <ButtonIcon
@@ -221,7 +216,7 @@ export const UserForm = () => {
                 {showRepPassword ? <ShowPassIcon /> : <HidePassIcon />}
               </ButtonIcon>
             </InputContainer>
-            <FormError name="repitpass" />
+            <FormError name="repeatPassword" />
           </Wrapper>
         </FlexWrapper>
         <Button type="submit">Save</Button>
