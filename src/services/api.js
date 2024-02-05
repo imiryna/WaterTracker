@@ -2,6 +2,7 @@ import { waterTrackerInstance } from './baseURL';
 
 // Set and clear token
 export const setToken = token => {
+  console.log('Set token: ', token);
   waterTrackerInstance.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
@@ -36,17 +37,16 @@ export const userLogOut = async token => {
   return data;
 };
 
-export const uploadUserAvatar = async userData => {
-  const { data } = await waterTrackerInstance.patch(
-    '/users/udateAvatar',
-    userData
-  );
+export const uploadUserAvatar = async (userData, token) => {
+  setToken(token);
+  const { data } = await waterTrackerInstance.patch('/user/avatars', userData);
   return data;
 };
 
-export const updateUser = async userData => {
+export const updateUser = async (userData, token) => {
+  setToken(token);
   const { data } = await waterTrackerInstance.patch(
-    '/users/updateUser',
+    '/user/updateUser',
     userData
   );
   return data;
@@ -70,7 +70,6 @@ export const updatePassword = async userData => {
 };
 
 // Today water portions apis
-
 export const getWaterServings = async token => {
   setToken(token);
   const { data } = await waterTrackerInstance.get('/water/today');

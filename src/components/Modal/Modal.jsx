@@ -8,7 +8,6 @@ export function Modal({ children, toggleModal }) {
   //Functions
 
   const handleBakcdropClick = e => {
-    console.log('Clicked', e.currentTarget, ' ', e.target);
     e.currentTarget === e.target && toggleModal();
   };
 

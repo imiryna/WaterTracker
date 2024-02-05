@@ -26,7 +26,7 @@ export const AvatarForm = () => {
   console.log('Avatar: ', avatarUrl);
 
   //Submit function
-  // function handleSubmit(values, { resetForm }) {
+
   function handleSubmit(values) {
     const myData = new FormData();
     myData.append('avatar', values);

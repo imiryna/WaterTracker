@@ -38,7 +38,7 @@ const currentUserSlice = createSlice({
     builder
       .addCase(loginThunk.fulfilled, (state, action) => {
         state.user = {
-          avatarUrl: action.payload.avatar,
+          avatarUrl: action.payload.avatarUrl,
           dailyNorm: action.payload.dailyNorm,
           email: action.payload.email,
           gender: action.payload.gender,
@@ -50,7 +50,7 @@ const currentUserSlice = createSlice({
       })
       .addCase(refreshUserThunk.fulfilled, (state, action) => {
         state.user = {
-          avatarUrl: action.payload.avatar,
+          avatarUrl: action.payload.avatarUrl,
           dailyNorm: action.payload.dailyNorm,
           email: action.payload.email,
           gender: action.payload.gender,
@@ -64,11 +64,17 @@ const currentUserSlice = createSlice({
         // handlePending(state);
         console.log('GetUser-Pending');
       })
-      .addCase(getCurrentUserThunk.fulfilled, (state, { payload }) => {
+      .addCase(getCurrentUserThunk.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
         console.log('GetUser-Fulfield');
-        state.user = payload.user;
+        state.user = {
+          avatarUrl: action.payload.avatarUrl,
+          dailyNorm: action.payload.dailyNorm,
+          email: action.payload.email,
+          gender: action.payload.gender,
+          name: action.payload.name,
+        };
       })
       .addCase(getCurrentUserThunk.rejected, (state, { payload }) => {
         console.log('GetUser-Rejected!!!');
@@ -76,14 +82,19 @@ const currentUserSlice = createSlice({
       })
 
       .addCase(updateCurrentUserThunk.pending, state => {
-        // handlePending(state);
         console.log('UpdateUser-Pending');
       })
       .addCase(updateCurrentUserThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
         console.log('UpdateUser-Fulfield');
-        state.user = payload.user;
+        state.user = {
+          avatarUrl: payload.user.avatarUrl,
+          dailyNorm: payload.user.dailyNorm,
+          email: payload.user.email,
+          gender: payload.user.gender,
+          name: payload.user.name,
+        };
       })
       .addCase(updateCurrentUserThunk.rejected, (state, { payload }) => {
         console.log('UpdateUser-Rejected!!!');
@@ -91,13 +102,12 @@ const currentUserSlice = createSlice({
       })
 
       .addCase(uploadUserAvatarThunk.pending, state => {
-        // handlePending(state);
         console.log('UpdateUserAvatar-Pending');
       })
       .addCase(uploadUserAvatarThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
-        console.log('UpdateUserAvatar-Fulfield');
+        console.log('UpdateUserAvatar-Fulfield', payload);
         state.user.avatarUrl = payload.avatarURL;
       })
       .addCase(uploadUserAvatarThunk.rejected, (state, { payload }) => {

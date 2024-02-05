@@ -15,8 +15,25 @@ export const getCurrentUserThunk = createAsyncThunk(
       return thunkAPI.rejectWithValue('Please Login');
     }
     try {
-      const res = await getCurrentUser();
+      const res = await getCurrentUser(token);
       console.log('Get User Thunk: ', res);
+      return res;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const uploadUserAvatarThunk = createAsyncThunk(
+  'user/avatars',
+  async (data, thunkAPI) => {
+    console.log('UPDATE USER AVATAR');
+    const token = thunkAPI.getState().auth.token;
+    if (token === null) {
+      return thunkAPI.rejectWithValue('Please Login');
+    }
+    try {
+      const res = await uploadUserAvatar(data, token);
       return res;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -34,24 +51,7 @@ export const updateCurrentUserThunk = createAsyncThunk(
     }
     try {
       console.log(data);
-      const res = await updateUser(data);
-      return res;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
-
-export const uploadUserAvatarThunk = createAsyncThunk(
-  'user/avatars',
-  async (data, thunkAPI) => {
-    console.log('UPDATE USER AVATAR');
-    const token = thunkAPI.getState().auth.token;
-    if (token === null) {
-      return thunkAPI.rejectWithValue('Please Login');
-    }
-    try {
-      const res = await uploadUserAvatar(data);
+      const res = await updateUser(data, token);
       return res;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
