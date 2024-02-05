@@ -12,23 +12,27 @@ export const WelcomeWrapCss = styled.div`
   display: flex;
   flex-direction: column;
   gap: 40px;
+  justify-content: center;
   margin-bottom: 37px;
+  margin-left: 0;
+  margin-right: 0;
+
   @media (min-width: 768px) {
+    justify-content: start;
     gap: 60px;
     margin-bottom: 50px;
   }
   @media (min-width: 1440px) {
+    margin-bottom: 200px;
+    justify-content: space-around;
     flex-direction: row;
-    gap: 81px;
-    margin-bottom: 109px;
+    gap: 90px;
+    margin-left: 140px;
+    margin-right: auto;
   }
 `;
 
 export const SectionCss = styled.div`
-  display: flex;
-  gap: 40px;
-  align-items: center;
-  justify-content: center;
   padding: 72px 20px 40px;
   background-color: var(--primery-White);
   background-image: url(${BottleImgMob});
@@ -40,13 +44,11 @@ export const SectionCss = styled.div`
   @media (min-width: 768px) {
     padding: 104px 32px 50px;
     background-image: url(${BottleImgTab});
-    gap: 60px;
   }
 
   @media (min-width: 1440px) {
     padding: 109px 18px 40px;
     background-image: url(${BottleImgDesktop}), url(${BubblesImgDesktop});
-    gap: 81px;
   }
 `;
 export const StyledHomePageWrapper = styled.section`
