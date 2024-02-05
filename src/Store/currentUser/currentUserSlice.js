@@ -26,7 +26,7 @@ const currentUserSlice = createSlice({
     builder
       .addCase(loginThunk.fulfilled, (state, action) => {
         state.user = {
-          avatarUrl: action.payload.avatar,
+          avatarUrl: action.payload.avatarUrl,
           dailyNorm: action.payload.dailyNorm,
           email: action.payload.email,
           gender: action.payload.gender,
@@ -39,7 +39,7 @@ const currentUserSlice = createSlice({
       })
       .addCase(refreshUserThunk.fulfilled, (state, action) => {
         state.user = {
-          avatarUrl: action.payload.avatar,
+          avatarUrl: action.payload.avatarUrl,
           dailyNorm: action.payload.dailyNorm,
           email: action.payload.email,
           gender: action.payload.gender,
