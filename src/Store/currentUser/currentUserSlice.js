@@ -82,7 +82,7 @@ const currentUserSlice = createSlice({
       .addCase(updateCurrentUserThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
-        console.log('UpdateUser-Fulfield - Payload-slice: ', payload);
+        console.log('UpdateUser-Fulfield');
         state.user = payload.user;
       })
       .addCase(updateCurrentUserThunk.rejected, (state, { payload }) => {
@@ -97,11 +97,11 @@ const currentUserSlice = createSlice({
       .addCase(uploadUserAvatarThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
-        console.log('UpdateUserAvatar-Fulfield - Payload-slice: ', payload);
+        console.log('UpdateUserAvatar-Fulfield');
         state.user.avatarUrl = payload.avatarURL;
       })
       .addCase(uploadUserAvatarThunk.rejected, (state, { payload }) => {
-        console.log('UpdateUser-Rejected!!!');
+        console.log('UpdateUserAvatar-Rejected!!!');
         handleRejected(state, payload);
       })
       // ! **************************
@@ -123,7 +123,8 @@ const currentUserSlice = createSlice({
           loginThunk.pending,
           getCurrentUserThunk.pending,
           logOutThunk.pending,
-          updateCurrentUserThunk.pending
+          updateCurrentUserThunk.pending,
+          uploadUserAvatarThunk.pending
         ),
         state => {
           state.error = null;

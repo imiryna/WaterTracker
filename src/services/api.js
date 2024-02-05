@@ -4,7 +4,6 @@ axios.defaults.baseURL = 'https://water-tracker-backend-314i.onrender.com/api/';
 
 // Set and clear token
 export const setToken = token => {
-  // waterTrackerInstance.defaults.headers.common.Authorization = `Bearer ${token}`;
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
   console.log(
     'Set token: ',
