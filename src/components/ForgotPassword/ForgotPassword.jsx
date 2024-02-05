@@ -79,8 +79,8 @@ import { forgotPasswordThunk } from 'Store/auth/authOperations';
        <RedirectButton to="/signin">Sign In</RedirectButton>
      </AuthStyledForm>
      <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar } anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
-          <Alert onClose={handleCloseSnackbar} severity="success">
-            Email succesfully sent
+          <Alert onClose={handleCloseSnackbar} severity="error">
+            Please, enter your email
           </Alert>
         </Snackbar>
      </AuthDiv>
