@@ -8,24 +8,21 @@ import {
   StyledHomePageWrapper,
   StyledLeftContainer,
   StyledRightContainer,
-  SectionCss,
 } from './HomePage.styled';
 
 const HomePage = () => {
   return (
-    <SectionCss>
-      <StyledHomePageWrapper>
-        <StyledLeftContainer>
-          <DailyNorma />
-          <ProgressBar />
-        </StyledLeftContainer>
+    <StyledHomePageWrapper>
+      <StyledLeftContainer>
+        <DailyNorma />
+        <ProgressBar />
+      </StyledLeftContainer>
 
-        <StyledRightContainer>
-          <TodayList />
-          <Calendar />
-        </StyledRightContainer>
-      </StyledHomePageWrapper>
-    </SectionCss>
+      <StyledRightContainer>
+        <TodayList />
+        <Calendar />
+      </StyledRightContainer>
+    </StyledHomePageWrapper>
   );
 };
 export default HomePage;
