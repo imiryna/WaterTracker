@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addWaterThunk, changeDailyNormaThunk, changeWaterThunk, delWaterThunk, getDailyWaterThunk } from './waterThunks';
+import { addWaterThunk,  changeWaterThunk, delWaterThunk, getDailyWaterThunk } from './waterThunks';
 
 /*
   water card exemple:
@@ -14,7 +14,6 @@ const INITIAL_STATE = {
   isLoading: false,
   error: null,
   totalWaterAmmount: 0,
-  todayNorma: 1500,
 };
 
 
@@ -35,6 +34,7 @@ export const waterSlice = createSlice({
     })
     .addCase(getDailyWaterThunk.fulfilled, (state, action) => {
       state.waterArr = action.payload.dailyList
+      state.totalWaterAmmount = recalculateTodayDrinkedWater(state.waterArr)
       state.isLoading = false
     })
     .addCase(getDailyWaterThunk.rejected, (state, action) => {
@@ -106,18 +106,7 @@ export const waterSlice = createSlice({
         state.isLoading = false;
         state.error = action.payload;
       })
-      //?CHANGE DALY NORMA
-      .addCase(changeDailyNormaThunk.pending, state => {
-        state.isLoading = true;
-        state.error = null;
-      })
-      .addCase(changeDailyNormaThunk.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.todayNorma = action.payload;
-      }).addCase(changeDailyNormaThunk.rejected, (state, action) =>{
-        state.isLoading = false
-        state.error = action.payload
-      }),
+     
 });
 
 const recalculateTodayDrinkedWater = waterArr => {

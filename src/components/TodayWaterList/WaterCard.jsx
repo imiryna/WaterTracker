@@ -1,22 +1,27 @@
 import { Button } from 'primereact/button';
 import { CupSvg, DeleteSvg, EditSvg } from './StyledTodayListIcons';
 import { parseUtcTime } from 'services/helpers/getUtcTime';
+import { toggleEditWateVisibility } from 'Store/modals/modalSlice';
+import { useDispatch } from 'react-redux';
 
 const WaterBtn = ({ children, onClick }) => {
   return <button onClick={onClick}>{children}</button>;
 };
-export const createWaterCardMarcup = ({
+export const CreateWaterCardMarkup = ({
   waterCardId,
   waterQuantity,
   waterAddTime,
   setDialogStatus,
   setCurrentEditObj,
-  togleEditModal,
 }) => {
-
+  
   const time = parseUtcTime(waterAddTime);
 
-  if (time.hours >= 12) {
+  const dispatch = useDispatch()
+
+  const toggleModal = () => dispatch(toggleEditWateVisibility())
+
+  if (time.hours > 12) {
     time.hours = time.hours - 12;
     time.dayPart = 'PM';
   } else {
@@ -40,7 +45,7 @@ export const createWaterCardMarcup = ({
               quantity: waterQuantity,
               time: waterAddTime,
             });
-            togleEditModal();
+            toggleModal()
           }}
           children={<EditSvg />}
         />

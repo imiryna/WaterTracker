@@ -1,76 +1,133 @@
+import React, { useState } from 'react';
 import { Formik } from 'formik';
+import { useDispatch, useSelector } from 'react-redux';
 import { object, string, ref } from 'yup';
 
+import { toggleSettingsVisibility } from 'Store/modals/modalSlice';
+import { selectUserData } from 'Store/currentUser/currentUserSelectors';
+import {
+  updateCurrentUserThunk,
+  // getCurrentUserThunk,
+} from 'Store/currentUser/currentUserThunk';
+
+// Styles
 import {
   FlexWrapper,
   FormStyled,
   Input,
-  RadioGrup,
+  Title,
   Radio,
   RadioLabel,
   Label,
   Wrapper,
   Button,
+  InputContainer,
+  ButtonIcon,
+  ShowPassIcon,
+  HidePassIcon,
 } from './UserForm.styled';
 import { FormError } from './FormError';
-// import { logIn } from 'redux/auth-operations';
 
 export const UserForm = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const toggleModal = () => dispatch(toggleSettingsVisibility());
+
+  const {
+    name = '',
+    email = '',
+    gender = 'female',
+  } = useSelector(selectUserData);
+  // for checking chenging fields
+  const startUserData = { name, email, gender };
+  // Hide-Show passwords
+  const [showPassword, setShowPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showRepPassword, setShowRepPassword] = useState(false);
+  // const [passState, setPassState] = useState('');
+
   //Submit function
-  const handleSubmit = (values, { resetForm }) => {
-    // const { email, password } = values;
-    // todo - state
-    console.log('Form was Submit: ', values);
-    // dispatch(logIn({ email, password }));
-    resetForm();
+  function handleSubmit(values, { resetForm }) {
+    if (
+      startUserData.name === values.name &&
+      startUserData.email === values.email &&
+      startUserData.gender === values.gender
+    ) {
+      if (!values.newPassword) {
+        toggleModal();
+        return console.log('Noting to change');
+      }
+    }
+
+    if (values.newPassword) {
+      if (!values.currentPassword) {
+        // console.log(newFormData);
+        setShowPassword(!showPassword);
+        // const inp = document.querySelector('#currentPassword');
+        // setPassState('Password is necessary');
+        return console.log('Current is necessary');
+      }
+    }
+    // Remove empty properties
+    Object.entries(values).map(a =>
+      Object.entries(a[1]).filter(b => b[1].length).length
+        ? a
+        : delete values[a[0]]
+    );
+
+    dispatch(updateCurrentUserThunk(values));
+
+    // todo - доделать чтобы закрывалось после ответа сервера
+    // resetForm();
+    // toggleModal();
+    // todo - доделать чтобы после закрытия обновлялись данные текущего пользователя
+    // dispatch(getCurrentUserThunk());
     return;
-  };
+  }
 
   const INITIAL_VALUES = {
-    gender: 'woman',
-    name: '',
-    email: '',
-    password: '',
-    newpass: '',
-    repitpass: '',
+    gender,
+    name,
+    email,
+    currentPassword: '',
+    newPassword: '',
+    repeatPassword: '',
   };
   //Formik Validation schema
   const userSchema = object().shape({
-    // gender: string().required('Gender is required'),
     name: string().min(5).max(40).required('Name is required'),
     email: string().email().required('Email is required'),
-    password: string().matches(
+    currentPassword: string().min(8).required('Old password is required'),
+
+    newPassword: string().matches(
       /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,}$/gu,
       'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character'
     ),
-    newpass: string().matches(
-      /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,}$/gu,
-      'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character'
+    repeatPassword: string().oneOf(
+      [ref('newPassword'), null],
+      'Passwords must match'
     ),
-    repitpass: string().oneOf([ref('newpass'), null], 'Passwords must match'),
   });
+
   return (
     <Formik
       initialValues={INITIAL_VALUES}
       onSubmit={handleSubmit}
       validationSchema={userSchema}
     >
-      <FormStyled>
+      <FormStyled id="form">
         <FlexWrapper>
           <Wrapper>
-            <RadioGrup id="my-radio-group">Your gender identity</RadioGrup>
+            <Title id="my-radio-group">Your gender identity</Title>
             <div role="group" aria-labelledby="my-radio-group">
               <RadioLabel>
-                <Radio type="radio" name="gender" value="woman" />
+                <Radio type="radio" name="gender" value="female" />
                 Woman
               </RadioLabel>
               <RadioLabel>
-                <Radio type="radio" name="gender" value="man" />
+                <Radio type="radio" name="gender" value="male" />
                 Man
               </RadioLabel>
             </div>
-            {/* <FormError name="gender" /> */}
 
             <Label htmlFor="name">Your name</Label>
             <Input
@@ -82,53 +139,80 @@ export const UserForm = () => {
             />
             <FormError name="name" />
 
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email">E-mail</Label>
             <Input
               type="text"
               name="email"
               id="email"
               title="Enter your email"
-              placeholder="Email"
+              placeholder="E-mail"
             />
             <FormError name="email" />
           </Wrapper>
           <Wrapper>
-            <Label htmlFor="password">Password</Label>
-            <Input
-              type="text"
-              name="password"
-              id="password"
-              title="Enter your current password"
-              placeholder="Current password"
-            />
-            <FormError name="password" />
+            <Title>Password</Title>
+            <Label className="small" htmlFor="currentPassword">
+              Outdated password:
+            </Label>
+            <InputContainer>
+              <Input
+                type={showPassword ? 'text' : 'password'}
+                name="currentPassword"
+                id="currentPassword"
+                title="Enter your current password"
+                placeholder="Password"
+              />
+              <ButtonIcon
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <ShowPassIcon /> : <HidePassIcon />}
+              </ButtonIcon>
+            </InputContainer>
+            <FormError name="currentPassword" />
 
-            <Label htmlFor="newpass">New password</Label>
-            <Input
-              type="text"
-              name="newpass"
-              id="newpass"
-              // pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-              title="Enter new password"
-              placeholder="New password"
-            />
-            <FormError name="newpass" />
+            <Label className="small" htmlFor="newPassword">
+              New password:
+            </Label>
+            <InputContainer>
+              <Input
+                type={showNewPassword ? 'text' : 'password'}
+                name="newPassword"
+                id="newPassword"
+                title="Enter new password"
+                placeholder="Password"
+              />
+              <ButtonIcon
+                type="button"
+                onClick={() => setShowNewPassword(!showNewPassword)}
+              >
+                {showNewPassword ? <ShowPassIcon /> : <HidePassIcon />}
+              </ButtonIcon>
+            </InputContainer>
+            <FormError name="newPassword" />
 
-            <Label htmlFor="repit">Repit password</Label>
-            <Input
-              type="text"
-              name="repitpass"
-              id="repitpass"
-              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-              title="Repit new password"
-              placeholder="Repit password"
-            />
-            <FormError name="repitpass" />
+            <Label className="small" htmlFor="repeat">
+              Repeat password:
+            </Label>
+            <InputContainer>
+              <Input
+                type={showRepPassword ? 'text' : 'password'}
+                name="repeatPassword"
+                id="repeatPassword"
+                title="repeat new password"
+                placeholder="Password"
+              />
+              <ButtonIcon
+                type="button"
+                onClick={() => setShowRepPassword(!showRepPassword)}
+              >
+                {showRepPassword ? <ShowPassIcon /> : <HidePassIcon />}
+              </ButtonIcon>
+            </InputContainer>
+            <FormError name="repeatPassword" />
           </Wrapper>
         </FlexWrapper>
-        <Button type="submit" mt={3}>
-          Save
-        </Button>
+        <Button type="submit">Save</Button>
       </FormStyled>
     </Formik>
   );

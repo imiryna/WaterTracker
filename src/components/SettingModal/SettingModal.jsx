@@ -1,21 +1,36 @@
 import { UserForm } from './UserForm/UserForm';
-import { Img, ImgLabel, Container } from './SettingModal.styled';
+import { AvatarForm } from './AvatarForm/AvatarForm';
+import { toggleSettingsVisibility } from 'Store/modals/modalSlice';
+// import { selectUserData } from 'Store/currentUser/currentUserSelectors';
+import { useDispatch } from 'react-redux';
+import {
+  StyledHeader,
+  StyledContainer,
+  StyledTitle,
+  StyledCloseButton,
+  StyledCloseIcon,
+} from './SettingModal.styled';
 
-export const Setting = imgData => {
-  // tmp image data
-  const { imgUrl, imgName } = {
-    imgUrl:
-      'https://img.freepik.com/premium-vector/bearded-man-avatar-man-vector-portrait_9385-36.jpg?w=740',
-    imgName: 'Morda lica',
-  };
+export const Setting = () => {
+  const dispatch = useDispatch();
+  const toggleModal = () => dispatch(toggleSettingsVisibility());
+  // const { avatarUrl, name } = useSelector(selectUserData);
+  // const { imgUrl = 'WaterTracker/avatar-neutral.jpg', imgName = 'Avatar' } = {
+  //   imgUrl: avatarUrl,
+  //   imgName: `Avatar for ${name}`,
+  // };
 
-  // const { imgUrl, imgName } = imgData;
   return (
-    <Container>
-      <h2>Setting</h2>
-      <ImgLabel>Your photo</ImgLabel>
-      <Img src={imgUrl} alt={imgName} />
+    <StyledContainer>
+      <StyledHeader>
+        <StyledTitle>Setting</StyledTitle>
+        <StyledCloseButton onClick={toggleModal}>
+          <StyledCloseIcon />
+        </StyledCloseButton>
+      </StyledHeader>
+
+      <AvatarForm />
       <UserForm />
-    </Container>
+    </StyledContainer>
   );
 };

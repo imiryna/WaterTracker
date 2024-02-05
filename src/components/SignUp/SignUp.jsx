@@ -17,7 +17,8 @@ import {
   ShowPassIcon,
   HidePassIcon,
   IconContainer, 
-  RedirectButton
+  RedirectButton,
+  ButtonIcon,
 } from '../SignIn/SignIn.styled';
 import {
   selectAuthError,
@@ -45,6 +46,7 @@ export const AuthRegForm = () => {
 
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [showRepeatPassword, setShowRepeatPassword] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -102,7 +104,8 @@ export const AuthRegForm = () => {
 
         <InputDiv>
           <label htmlFor="password">Enter your password</label>
-          <StyledInput
+          <IconContainer>
+             <StyledInput
             id="password"
             name="password"
             type={showPassword ? 'text' : 'password'}
@@ -111,13 +114,13 @@ export const AuthRegForm = () => {
             placeholder="Password"
             className={formik.errors.password && formik.touched.password ? 'error' : ''}
           />
-          <IconContainer>
-            <button
-              type="button" // Make sure it's not submitting the form
+          
+            <ButtonIcon
+              type="button" 
               onClick={() => setShowPassword(!showPassword)}
             >
-              {showPassword ? <HidePassIcon /> : <ShowPassIcon />}
-            </button>
+              {showPassword ? <ShowPassIcon /> : <HidePassIcon />}
+            </ButtonIcon>
           </IconContainer>
           {formik.errors.password && formik.touched.password ? (
             <AuthDataError>{formik.errors.password}</AuthDataError>
@@ -126,19 +129,30 @@ export const AuthRegForm = () => {
 
         <InputDiv>
           <label htmlFor="repeatPassword">Repeat your password</label>
-          <StyledInput
+          <IconContainer>
+             <StyledInput
             id="repeatPassword"
             name="repeatPassword"
-            type="password"
+            type={showRepeatPassword ? 'text' : 'password'}
             onChange={formik.handleChange}
             value={formik.values.repeatPassword}
             placeholder="Repeat password"
-            className={formik.errors.repeatPassword && formik.touched.repeatPassword ? 'error' : ''}
+            className={formik.errors.password && formik.touched.password ? 'error' : ''}
           />
+          
+          <ButtonIcon
+              type="button" 
+              onClick={() => setShowRepeatPassword(!showRepeatPassword)}
+            >
+              {showRepeatPassword ? <ShowPassIcon /> : <HidePassIcon />}
+            </ButtonIcon>
+
+          </IconContainer>
           {formik.errors.repeatPassword && formik.touched.repeatPassword ? (
-            <AuthDataError>{formik.errors.repeatPassword}</AuthDataError>
+            <AuthDataError>{formik.errors.password}</AuthDataError>
           ) : null}
         </InputDiv>
+
 
         <FormButton type="submit">Sign Up</FormButton>
         <RedirectButton to="/signin">Sign In</RedirectButton>

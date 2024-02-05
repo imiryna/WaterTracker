@@ -2,11 +2,13 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { lazy, Suspense, useEffect } from 'react';
 import { Navigation } from 'components/Navigation/Navigation';
 import { useDispatch, useSelector } from 'react-redux';
+import CircularProgress from '@mui/material/CircularProgress';
 import {
-  // selectAuthIsRefreshing,
   selectAuthAuthenticated,
+  selectIsRefreshing,
 } from 'Store/auth/authSelector';
 import { refreshUserThunk } from 'Store/auth/authOperations';
+// import { getCurrentUserThunk } from 'Store/currentUser/currentUserThunk';
 
 const Home = lazy(() => import('pages/HomePage'));
 const Welcome = lazy(() => import('pages/WelcomePage'));
@@ -17,14 +19,20 @@ const UpdatePassword = lazy(() => import('pages/UpdatePasswordPage'));
 
 export const App = () => {
   const dispatch = useDispatch();
-  // const isRefreshing = useSelector(selectAuthIsRefreshing);
+  const isRefreshing = useSelector(selectIsRefreshing);
   const isAuthed = useSelector(selectAuthAuthenticated);
 
   useEffect(() => {
     dispatch(refreshUserThunk());
   }, [dispatch]);
 
-  return (
+  // useEffect(() => {
+  //   dispatch(getCurrentUserThunk())
+  // }, [isAuthed])
+
+  return isRefreshing ? (
+    <CircularProgress />
+  ) : (
     <Suspense>
       <Routes>
         <Route path="/" element={<Navigation />}>
@@ -43,7 +51,7 @@ export const App = () => {
             element={!isAuthed ? <Signin /> : <Navigate to={'/'} />}
           />
           <Route path="/forgotpassword" element={<ForgotPassword />} />
-          <Route path="/updatepassword" element={<UpdatePassword/>} />
+          <Route path="/updatepassword" element={<UpdatePassword />} />
         </Route>
       </Routes>
     </Suspense>

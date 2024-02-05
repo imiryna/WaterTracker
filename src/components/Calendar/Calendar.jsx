@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useMediaQuery } from '@mui/material';
 
 import {
@@ -17,56 +17,58 @@ import {
   StyledContainer,
   StyledPaginationContainer,
   StyledDate,
-  StyledArrowButton,
   StyledLeftArrow,
   StyledRightArrow,
   StyledTitle,
   StyledCloseIcon,
   StyledCloseButton,
+  StyledArrowButtonRight,
+  StyledArrowButtonLeft,
 } from './Calendar.styled';
 
-// import { setMonth, setYear } from "Store/monthStat/monthStatSlice";
-// import { selectMonth, selectMonthStat, selectYear } from "Store/monthStat/monthStatSelectors";
-// import { getMonthStat } from "Store/monthStat/monthStatThunk";
-// import { setMonth, setYear } from "Store/monthStat/monthStatSlice";
-// import { selectMonth, selectMonthStat, selectYear } from "Store/monthStat/monthStatSelectors";
-// import { getMonthStat } from "Store/monthStat/monthStatThunk";
+
+import { selectIsLoading, selectMonthStat } from "Store/monthStat/monthStatSelectors";
+import { getMonthStat } from 'Store/monthStat/monthStatThunk';
+import { selectRegisterDate } from 'Store/currentUser/currentUserSelectors';
+import { Loading } from 'components/Loader/Loader.styled';
 
 export const Calendar = () => {
-  /** PopOver Logic */
-
-  // const dispatch = useDispatch();
-
-  //* Calendar data */
-  // const month = useSelector(selectMonth);
-  // const year = useSelector(selectYear);
-
-  const [month, setMonth] = useState(1); //temp data
-  const [year, setYear] = useState(2024); //temp data
-
-  // const monthStat = useSelector(selectMonthStat);
-  const monthStat = [{ id: 1, day: 1, norma: 2, percentage: 100, servings: 3 }];
 
   //check device screen width
   const isDesktop = useMediaQuery('(min-width: 768px)');
 
-  // open popOver handlers
+  //* Date picker hooks */
+  
+  const [month, setMonth] = useState(new Date().getMonth()+1);
+  const [year, setYear] = useState(new Date().getFullYear());
+
+  // Fetch month statistic
+  const isLoading = useSelector(selectIsLoading);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getMonthStat({ month, year }));
+  }, [dispatch, month, year]);
+
+  //* User data */
+  const registerDate = useSelector(selectRegisterDate);
+  const registerYear = Number(registerDate.split('-')[0]);
+  const registerMonth = Number(registerDate.split('-')[1]);
+  
+  // Get month statistic
+  const stats = useSelector(selectMonthStat);
+  // const monthStat = tempMonthStat;
+
+
+  /** PopOver Logic */
+
+  // set anchor and popOver content hooks
   const [anchor, setAnchor] = useState(null);
   const [popOverData, setPopOverData] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
 
-  //PopOver open checker
-  const isOpen = Boolean(anchor);
 
-  // open popOver handlers
-  const openPopOver = (event, day) => {
-    setAnchor(event.currentTarget);
-    setPopOverData(day);
-  };
-
-  const closePopOver = () => {
-    setAnchor(null);
-    setPopOverData(null);
-  };
+  const id = isOpen ? 'simple-popover' : undefined;
 
   // close popover handlers and eventlisteners clear
   useEffect(() => {
@@ -80,13 +82,9 @@ export const Calendar = () => {
         closePopOver();
       }
     };
-    document.body.addEventListener('click', handleClickOutside);
+
     document.body.addEventListener('click', handleClickOutside);
     window.addEventListener('keydown', handleEscPress);
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // console.log(anchor)
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     return () => {
       document.body.removeEventListener('click', handleClickOutside);
@@ -94,38 +92,29 @@ export const Calendar = () => {
     };
   }, [anchor]);
 
-  // close popover via button handlers
-  const handleCloseButtonClick = event => {
-    closePopOver();
+
+  // Open and close popover logic
+  const openPopOver = (event, item) => {
+    if (item.quantity === null) return;
+    
+      setIsOpen(true);
+      setAnchor(event.currentTarget);
+      setPopOverData(item);
   };
 
-  // handle clicks on popove
-  const handlePopoverClick = event => {
-    console.log('click inside');
-    // console.log(event.currentTarget.id);
-    console.log(event.target.closest('calendar-popover-parent'));
-    if (!event.currentTarget) {
-      closePopOver();
-    }
-    // closePopOver();
+  const closePopOver = (event, reason) => {
+      setIsOpen(false);
+      setAnchor(null);
+      setPopOverData(null);
+    
   };
 
   //* Pagination logic */
-
-  // Get month name
-  const monthName = month.toLocaleString('en-US', { month: 'long' });
-
-  //Fetch information when month changes
-  // useEffect(() => {
-  //   dispatch(getMonthStat({month, year}))
-  // }, [dispatch, month, year])
 
   // Pagination handlers
   const handlePreviousMonth = () => {
     const previousMonth = month - 1 <= 0 ? 12 : month - 1;
     const newYear = previousMonth === 12 ? year - 1 : year;
-    // dispatch(setMonth(previousMonth));
-    // dispatch(setYear(newYear));
     setMonth(previousMonth);
     setYear(newYear);
   };
@@ -133,86 +122,108 @@ export const Calendar = () => {
   const handleNextMonth = () => {
     const nextMonth = month + 1 > 12 ? 1 : month + 1;
     const newYear = nextMonth === 1 ? year + 1 : year;
-    // dispatch(setMonth(nextMonth));
-    // dispatch(setYear(newYear));
     setMonth(nextMonth);
     setYear(newYear);
   };
+    
+  // Current month and year
+  const currentMonth = new Date().getMonth() + 1;
+  const currentYear = new Date().getFullYear();
 
-  return (
+  //Need to hide pagination controllers checker
+  const hideRightArrow = () => {
+      if(month === currentMonth && year === currentYear){
+        return true
+      } else{
+        return false
+      }
+  }
+
+  const hideLeftArrow = () => {
+    if(month === registerMonth && year === registerYear){
+      return true;
+    } else{
+      return false;
+    }
+  }
+
+  
+
+  // Get month name
+
+  const date = new Date(); 
+  date.setMonth(month - 1);
+  const monthName = date.toLocaleString('en-US', { month: 'long' });
+
+
+
+  // Render
+
+  return isLoading ? 
+  <Loading/> :
+
     <StyledDiv>
       <StyledContainer>
         <StyledTitle>Month</StyledTitle>
         <StyledPaginationContainer>
-          <StyledArrowButton onClick={handlePreviousMonth}>
+          <StyledArrowButtonLeft $hideButton = {hideLeftArrow()} onClick={handlePreviousMonth}>
             <StyledLeftArrow />
-          </StyledArrowButton>
+          </StyledArrowButtonLeft>
           <StyledDate>
             {monthName}, {year}
           </StyledDate>
-          <StyledArrowButton onClick={handleNextMonth}>
+          <StyledArrowButtonRight $hideButton = {hideRightArrow()} onClick={handleNextMonth}>
             <StyledRightArrow />
-          </StyledArrowButton>
+          </StyledArrowButtonRight>
         </StyledPaginationContainer>
       </StyledContainer>
       <StyledList>
-        {monthStat.map(day => {
+        {stats.map(item => {
           return (
             <StyledItem
-              key={day.id}
+              key={item.date.day}
               aria-owns={isOpen ? 'calendar-popover' : undefined}
               aria-haspopup="true"
               onClick={event => {
-                openPopOver(event, day);
+                openPopOver(event, item);
               }}
             >
-              <StyledDay percentage={day.percentage}>{day.day}</StyledDay>
-              <StyledPercentage>{day.percentage}</StyledPercentage>
+              <StyledDay $percentage={item.percent}>{item.date.day}</StyledDay>
+              <StyledPercentage>{item.percent}</StyledPercentage>
             </StyledItem>
           );
         })}
       </StyledList>
       <StyledPopOver
-        id="calendar-popover"
+        id={id}
         open={isOpen}
-        onClose={closePopOver}
+        onClose={(event, reason) => {closePopOver(event, reason)}}
         anchorEl={anchor}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: isDesktop ? 'left' : 'center',
-        }}
-        transformOrigin={{
-          vertical: 'bottom',
-          horizontal: isDesktop ? 'right' : 'center',
-        }}
-        disableRestoreFocus={true}
+        placement={isDesktop ? "top-start" : "top"}
       >
         {popOverData && (
-          <StyledPopOverContainer
-            id="calendar-popover-parent"
-            onClick={handlePopoverClick}
-          >
-            <StyledCloseButton onClick={handleCloseButtonClick}>
+          <StyledPopOverContainer>
+            <StyledCloseButton onClick={closePopOver}>
               <StyledCloseIcon />
             </StyledCloseButton>
             <StyledPopOverDate>
-              {popOverData.day}, {monthName}
+              {popOverData.date.day}, {monthName}
             </StyledPopOverDate>
             <StyledPopOverText>
               Daily norma :{' '}
-              <StyledPopOverSpan>{popOverData.norma}L</StyledPopOverSpan>
+              <StyledPopOverSpan>{popOverData.dailyNorm / 1000}L</StyledPopOverSpan>
             </StyledPopOverText>
             <StyledPopOverText>
               Fulfillment of the daily norm:{' '}
-              <StyledPopOverSpan>{popOverData.percentage}%</StyledPopOverSpan>
+              <StyledPopOverSpan>{popOverData.percent}%</StyledPopOverSpan>
             </StyledPopOverText>
             <StyledPopOverText>
               How many servings of water:{' '}
-              <StyledPopOverSpan>{popOverData.servings}</StyledPopOverSpan>
+              <StyledPopOverSpan>{popOverData.quantity}</StyledPopOverSpan>
             </StyledPopOverText>
           </StyledPopOverContainer>
         )}
-      </StyledPopOver>
+      </StyledPopOver>      
     </StyledDiv>
-  );
+  
 };

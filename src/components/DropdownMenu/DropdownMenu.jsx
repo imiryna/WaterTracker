@@ -7,6 +7,7 @@ import {
   OutlineCss,
   BoxCss,
   ArrowCss,
+  WrapCss,
 } from './DropdownMenu.styled';
 
 import {
@@ -26,10 +27,10 @@ export const DropdownMenu = () => {
   return (
     <DropdownCss>
       <MenuCss>
-        <BoxCss>
+        <WrapCss>
           <OutlineCss />
           <div onClick={toggleModal}>Setting</div>
-        </BoxCss>
+        </WrapCss>
 
         <BoxCss>
           <ArrowCss />

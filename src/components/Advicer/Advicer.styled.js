@@ -1,59 +1,33 @@
 import styled from 'styled-components';
-import BottleImg from 'Images/Backgrounds/bottle-home-screen-mobile.png';
-import BottleImgTab from 'Images/Backgrounds/background-bubbles-main-page-tablet.png';
-import BottleImgDes from 'Images/Backgrounds/background-main-page.png';
 import { NavLink } from 'react-router-dom';
 import { ReactComponent as CalendarArrow } from 'Images/Icons/calendar.svg';
 import { ReactComponent as ChatBarArrow } from 'Images/Icons/statistic.svg';
 import { ReactComponent as PersonalSettingsArrow } from 'Images/Icons/personal-settings.svg';
 
 export const PersonalSettingsArr = styled(PersonalSettingsArrow)`
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
+  @media (width: 768px) {
+    width: 32px;
+    height: 32px;
+  }
 `;
 
 export const ChatBarArrowCss = styled(ChatBarArrow)`
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
+  @media (width: 768px) {
+    width: 32px;
+    height: 32px;
+  }
 `;
 
 export const CalendarArrowCss = styled(CalendarArrow)`
-  width: 32px;
-  height: 32px;
-`;
-export const SectionCss = styled.div`
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-  padding: 72px 20px 40px;
-  background-color: var(--primery-White);
-  background-image: url(${BottleImg});
-  background-size: cover;
-
-  @media (min-width: 768px) {
-    padding: 104px 32px 50px;
-    background-image: url(${BottleImgTab});
-  }
-
-  @media (min-width: 1440px) {
-    padding: 109px 18px 40px;
-    background-image: url(${BottleImgDes});
-  }
-`;
-
-export const WelcomeWrapCss = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  padding-top: 31px;
-  padding-bottom: 195px;
-  @media (min-width: 768px) {
-    gap: 60px;
-  }
-  @media (min-width: 1440px) {
-    flex-direction: row;
-    gap: 81px;
+  width: 24px;
+  height: 24px;
+  @media (width: 768px) {
+    width: 32px;
+    height: 32px;
   }
 `;
 
@@ -64,7 +38,15 @@ export const AdvicerCss = styled.div`
   gap: 24px;
   width: 280px;
 `;
+export const TableTextCss = styled.p`
+  color: var(--primery-black);
+  font-family: var(--primery-font);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.1;
 
+  text-align: left;
+`;
 export const WrapCss = styled.div`
   width: 246px;
   @media (min-width: 768px) {
@@ -104,11 +86,17 @@ export const IconBoxCss = styled.div`
   align-items: center;
 `;
 export const GridBoxcss = styled.div`
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 216px;
   gap: 16px;
   @media (min-width: 768px) {
-    flex-direction: row;
+    gap: 20px;
+    grid-template-columns: 224px 224px 224px;
+  }
+
+  @media (min-width: 1440px) {
+    gap: 27px;
+    grid-template-columns: 248px;
   }
 `;
 export const NavLinkBtn = styled(NavLink)`
@@ -119,7 +107,10 @@ export const NavLinkBtn = styled(NavLink)`
   border-radius: 10px;
   background: var(--primery-blue);
   box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.34);
-  width: 336px;
+  width: 280px;
+  @media (min-width: 768px) {
+    width: 336px;
+  }
 `;
 export const BtnText = styled.p`
   color: var(--primery-white);
@@ -141,4 +132,5 @@ export const ContentTextCss = styled.div`
   font-style: normal;
   font-weight: 400;
   line-height: 1.25;
+  white-space: nowrap;
 `;

@@ -3,10 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 
 // selectors
-import {
-  selectAuthenticated,
-  selectAuthUserData,
-} from 'Store/auth/authSelector';
+import { selectAuthenticated } from 'Store/auth/authSelector';
+import { selectUserData } from 'Store/currentUser/currentUserSelectors';
 import { selectUserSettings, selectDropdown } from 'Store/modals/modalSelector';
 // import { selectUser } from 'Store/currentUser/currentUserSelectors';
 // import { getCurrentUserThunk } from 'Store/currentUser/currentUserThunk';
@@ -31,23 +29,20 @@ import {
   UserIcon,
 } from './Navigation.styled';
 
-// temp section ZooBeeN for modal
 import { Modal } from 'components/Modal/Modal';
 import { DropdownMenu } from 'components/DropdownMenu/DropdownMenu';
 import { Setting } from 'components/SettingModal/SettingModal';
 import LogoutConfirmationDialog from 'components/LogOutModal/LogOutModal';
 // import { getCurrentUser } from 'services/api';
-// END OF Temp section
 
 export const Navigation = () => {
-  // temp section ZooBeeN for modal
   const dispatcher = useDispatch();
 
   // selectors
   const dropdownShown = useSelector(selectDropdown);
   const userSettingsModalShown = useSelector(selectUserSettings);
   const isAuthed = useSelector(selectAuthenticated);
-  const currentUser = useSelector(selectAuthUserData);
+  const currentUser = useSelector(selectUserData);
   const isConfirmLogoutShown = useSelector(selectLogout);
 
   // local variables
@@ -71,12 +66,6 @@ export const Navigation = () => {
   const closeLogoutDialog = () => {
     dispatcher(toggleLogoutVisibility());
   };
-  // END OF Temp section
-
-  // const openUserSetting = e => {
-  //   // here should be called function of modal component to <open> modal
-  //   alert('User settings modal');
-  // };
   return (
     <>
       {/* Confirmation window to confirm Logout */}
