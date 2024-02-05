@@ -131,7 +131,6 @@ export const Button = styled.button`
 
 export const InputContainer = styled.div`
   position: relative;
-  width: 280px;
 
   @media (min-width: 768px) {
     width: 336px;
