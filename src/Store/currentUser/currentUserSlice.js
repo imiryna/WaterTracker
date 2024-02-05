@@ -115,7 +115,6 @@ const currentUserSlice = createSlice({
         state.user.avatarUrl = payload.avatarURL;
       })
       .addCase(uploadUserAvatarThunk.rejected, (state, { payload }) => {
-        console.log('UpdateUserAvatar-Rejected!!!');
         handleRejected(state, payload);
       })
       // ! **************************

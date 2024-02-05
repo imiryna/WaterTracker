@@ -37,16 +37,13 @@ export const userLogOut = async token => {
 };
 
 export const uploadUserAvatar = async userData => {
-  const { data } = await waterTrackerInstance.patch(
-    '/users/udateAvatar',
-    userData
-  );
+  const { data } = await waterTrackerInstance.patch('/user/avatars', userData);
   return data;
 };
 
 export const updateUser = async userData => {
   const { data } = await waterTrackerInstance.patch(
-    '/users/updateUser',
+    '/user/updateUser',
     userData
   );
   return data;

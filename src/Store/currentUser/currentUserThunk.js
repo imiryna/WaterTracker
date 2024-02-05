@@ -64,7 +64,6 @@ export const updateCurrentUserThunk = createAsyncThunk(
 export const uploadUserAvatarThunk = createAsyncThunk(
   'user/avatars',
   async (data, thunkAPI) => {
-    console.log('UPDATE USER AVATAR');
     const token = thunkAPI.getState().auth.token;
     if (token === null) {
       return thunkAPI.rejectWithValue('Please Login');
