@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { ProgressBarStyled } from './ProgressBar.styled';
 import { ReactComponent as Icon } from './progressBar-icon.svg';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,21 +6,14 @@ import { totalWaterAmmountSelector } from 'Store/water/waterSelectors';
 import { Slider } from '@mui/material';
 import { Modal } from 'components/Modal/Modal';
 import { AddWaterModal } from 'components/TodayWaterList/modals/AddWaterModal';
-import { EditWaterModal } from 'components/TodayWaterList/modals/EditWaterModal';
 import { selectDailyNorm } from 'Store/currentUser/currentUserSelectors';
-import {
-  toggleAddWateVisibility,
-  toggleEditWateVisibility,
-} from 'Store/modals/modalSlice';
-import { selectAddWater, selectEditWater } from 'Store/modals/modalSelector';
-import { getDailyWaterThunk } from 'Store/water/waterThunks';
+import { toggleAddWateVisibility } from 'Store/modals/modalSlice';
+import { selectAddWater } from 'Store/modals/modalSelector';
 
 export const ProgressBar = () => {
   const waterAmount = useSelector(totalWaterAmmountSelector);
   const waterNorma = useSelector(selectDailyNorm);
   const progress = (waterAmount / waterNorma) * 100;
-  console.log(`waterNorma`, waterNorma);
-  console.log(`waterAmount`, waterAmount);
   const dispatch = useDispatch();
 
   const showAddModal = useSelector(selectAddWater);
