@@ -86,11 +86,17 @@ export const IconBoxCss = styled.div`
   align-items: center;
 `;
 export const GridBoxcss = styled.div`
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 216px;
   gap: 16px;
   @media (min-width: 768px) {
-    flex-direction: row;
+    gap: 20px;
+    grid-template-columns: 224px 224px 224px;
+  }
+
+  @media (min-width: 1440px) {
+    gap: 27px;
+    grid-template-columns: 248px;
   }
 `;
 export const NavLinkBtn = styled(NavLink)`
@@ -102,7 +108,7 @@ export const NavLinkBtn = styled(NavLink)`
   background: var(--primery-blue);
   box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.34);
   width: 280px;
-  @media (width: 768px) {
+  @media (min-width: 768px) {
     width: 336px;
   }
 `;

@@ -8,8 +8,17 @@ export const ContainerCss = styled.div`
   border-radius: 10px;
   background: var(--secondary-color-2);
   box-shadow: 0px 4px 14px 0px rgba(64, 123, 255, 0.3);
-  @media (width: 768px;) {
+  margin-right: 0;
+  margin-top: 0;
+
+  @media (min-width: 768px) {
     padding: 30px;
+    margin-right: 210px;
+  }
+
+  @media (min-width: 1440px) {
+    margin-top: 30px;
+    padding: 24px;
   }
 `;
 
