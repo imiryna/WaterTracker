@@ -66,13 +66,6 @@ export const Navigation = () => {
   const closeLogoutDialog = () => {
     dispatcher(toggleLogoutVisibility());
   };
-
-  // END OF Temp section
-
-  // const openUserSetting = e => {
-  //   // here should be called function of modal component to <open> modal
-  //   alert('User settings modal');
-  // };
   return (
     <>
       {/* Confirmation window to confirm Logout */}

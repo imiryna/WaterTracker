@@ -1,5 +1,10 @@
 import styled from 'styled-components';
 
+
+// export const CustomSliderStyles = styled.div`
+
+
+// `
 export const ProgressBarStyled = styled.div`
   width: 280px;
   height: 82px;
@@ -51,13 +56,8 @@ export const ProgressBarStyled = styled.div`
     display: flex;
     margin-right: auto;
     margin-left: auto;
-    position: relative;
-    width: 256px;
-    height: 8px;
-    border-radius: 10px;
-    background-color: var(--secondaru-color);
-    margin-bottom: 7px;
-  }
+    margin-bottom:7px;
+     }
 
   @media (min-width: 768px) {
     .progress-bar {
@@ -72,12 +72,6 @@ export const ProgressBarStyled = styled.div`
     }
   }
 
-  .progress-bar-fill {
-    max-width: 256px;
-    height: 100%;
-    border-radius: 10px;
-    background-color: var(--secondary-color-4);
-  }
 
   @media (min-width: 768px) {
     .progress-bar-fill {
@@ -187,17 +181,6 @@ export const ProgressBarStyled = styled.div`
     }
   }
 
-  .moving-dot {
-    position: absolute;
-    top: -3.5px;
-    width: 14px;
-    height: 14px;
-    background-color: var(--primery-white);
-    border: solid 1px var(--primery-blue);
-    border-radius: 50%;
-    transform: translateX(-45%);
-    transition: width 0.5s ease-out;
-  }
 
   .progress-bar-button {
     display: flex;
@@ -205,7 +188,6 @@ export const ProgressBarStyled = styled.div`
     justify-content: center;
     width: 280px;
     height: 36px;
-
     border-radius: 10px;
     gap: 10px;
     color: var(--primery-white);

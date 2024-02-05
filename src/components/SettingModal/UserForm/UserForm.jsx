@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { object, string } from 'yup';
-
 import { toggleSettingsVisibility } from 'Store/modals/modalSlice';
 import { selectUserData } from 'Store/currentUser/currentUserSelectors';
 import { updateCurrentUserThunk } from 'Store/currentUser/currentUserThunk';

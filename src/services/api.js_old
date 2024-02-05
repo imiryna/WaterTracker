@@ -2,7 +2,6 @@ import { waterTrackerInstance } from './baseURL';
 
 // Set and clear token
 export const setToken = token => {
-  console.log('Set token: ', token);
   waterTrackerInstance.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
@@ -37,16 +36,15 @@ export const userLogOut = async token => {
   return data;
 };
 
-export const uploadUserAvatar = async (userData, token) => {
-  setToken(token);
-  const { data } = await waterTrackerInstance.patch('/user/avatars', userData);
+export const uploadUserAvatar = async userData => {
+  console.log('API ', userData);
+  const { data } = await waterTrackerInstance.patch('/users/avatars', userData);
   return data;
 };
 
-export const updateUser = async (userData, token) => {
-  setToken(token);
+export const updateUser = async userData => {
   const { data } = await waterTrackerInstance.patch(
-    '/user/updateUser',
+    '/users/updateUser',
     userData
   );
   return data;
@@ -54,7 +52,7 @@ export const updateUser = async (userData, token) => {
 
 export const forgotPassword = async userData => {
   const { data } = await waterTrackerInstance.post(
-    '/users/forgot-password',
+    '/user/forgotpassword',
     userData
   );
   return data;
@@ -62,14 +60,14 @@ export const forgotPassword = async userData => {
 
 export const updatePassword = async userData => {
   const { data } = await waterTrackerInstance.patch(
-    '/users/update-password',
+    '/user/updatepassword',
     userData
   );
   setToken(data.token);
   return data;
 };
-
 // Today water portions apis
+
 export const getWaterServings = async token => {
   setToken(token);
   const { data } = await waterTrackerInstance.get('/water/today');
@@ -125,9 +123,10 @@ export const updateDailyNorma = async (dailyNorma, token) => {
 
 // // Month info
 
-export const fetchMonthStat = async (month, year) => {
+export const fetchMonthStat = async (month, year, token) => {
+  setToken(token);
   const { data } = await waterTrackerInstance.get(
-    `/water/month?date=${year}-${month}`
+    `/monthStat/${year}/${month}`
   );
   return data;
 };

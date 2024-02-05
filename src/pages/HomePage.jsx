@@ -6,18 +6,21 @@ import { Calendar } from 'components/Calendar/Calendar';
 import { ProgressBar } from 'components/ProgressBar/ProgressBar';
 import {
   StyledHomePageWrapper,
-  StyledLeftContainer,
   StyledRightContainer,
+  ButtleImgCss,
+  Wraper,
 } from './HomePage.styled';
 
 const HomePage = () => {
   return (
     <StyledHomePageWrapper>
-      <StyledLeftContainer>
+      <Wraper>
         <DailyNorma />
-        <ProgressBar />
-      </StyledLeftContainer>
-
+        <div>
+          <ButtleImgCss />
+          <ProgressBar />
+        </div>
+      </Wraper>
       <StyledRightContainer>
         <TodayList />
         <Calendar />

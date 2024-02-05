@@ -9,21 +9,17 @@ export const DropdownCss = styled.div`
 
 export const MenuCss = styled.div`
   position: absolute;
-  top: 85%;
+  top: 20px;
   right: 10%;
   width: 118px;
   display: flex;
   flex-direction: column;
-
   gap: 16px;
-
   align-items: center;
   justify-content: center;
-
   border-radius: 10px;
   background: var(--primery-white, #fff);
   box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.2);
-
   list-style-type: none;
 `;
 
@@ -46,6 +42,7 @@ export const BoxCss = styled.div`
 
   padding-bottom: 16px;
   gap: 8px;
+  padding-bottom: 16px;
   color: var(--primery-blue);
   font-family: var(--primery-font);
   font-size: 16px;

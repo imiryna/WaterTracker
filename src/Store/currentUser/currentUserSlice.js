@@ -5,7 +5,6 @@ import {
   uploadUserAvatarThunk,
   changeDailyNormaThunk,
 } from './currentUserThunk';
-
 import {
   logOutThunk,
   loginThunk,
@@ -19,6 +18,7 @@ const INITIAL_STATE = {
     gender: null,
     dailyNorm: null,
     avatarUrl: null,
+    registerDate: ' ',
   },
   error: null,
   isLoading: true,
@@ -43,6 +43,7 @@ const currentUserSlice = createSlice({
           email: action.payload.email,
           gender: action.payload.gender,
           name: action.payload.name,
+          registerDate: action.payload.created,
         };
       })
       .addCase(logOutThunk.fulfilled, () => {
@@ -55,6 +56,7 @@ const currentUserSlice = createSlice({
           email: action.payload.email,
           gender: action.payload.gender,
           name: action.payload.name,
+          registerDate: action.payload.created,
         };
       })
 
@@ -128,6 +130,7 @@ const currentUserSlice = createSlice({
         state.isLoading = false;
         state.error = action.payload;
       })
+
       .addMatcher(
         isAnyOf(
           getCurrentUserThunk.pending,

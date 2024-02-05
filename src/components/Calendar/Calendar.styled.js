@@ -1,5 +1,5 @@
 import {styled} from "styled-components";
-import { Popover } from "@mui/material";
+import { Popper } from "@mui/material";
 
 import {ReactComponent as Arrow} from "Images/Icons/arrow-down.svg"
 import {ReactComponent as CloseIcon} from "Images/Icons/close.svg"
@@ -81,7 +81,8 @@ border-color:  ${props => props.$percentage < 100 ? 'orange' : 'transparent'}
 
 
 
-export const StyledPopOver = styled(Popover)`
+export const StyledPopOver = styled(Popper)`
+background-color: #fff;
 box-shadow: 0px 4px 4px 0px rgba(64, 123, 255, 0.30);
 border-radius: 10px;
 font-family: var(--primery-font);
@@ -130,12 +131,22 @@ width: 14px;
 height: 14px;
 `
 
-export const StyledArrowButton = styled.button`
+export const StyledArrowButtonLeft = styled.button`
 background-color: transparent;
 border: none;
 outline: none;
 width: 14px;
 height: 14px;
+visibility: ${props => props.$hideButton ? 'hidden' : 'visible'}
+`
+
+export const StyledArrowButtonRight = styled.button`
+background-color: transparent;
+border: none;
+outline: none;
+width: 14px;
+height: 14px;
+visibility: ${props => props.$hideButton ? 'hidden' : 'visible'}
 `
 
 export const StyledDate = styled.span`
@@ -171,4 +182,6 @@ export const StyledCloseIcon = styled(CloseIcon)`
 width: 16px;
 height: 16px;
 stroke: var(--primery-blue);
+
+
 `

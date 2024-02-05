@@ -6,7 +6,7 @@ export const getMonthStat = createAsyncThunk(
   async ({ month, year }, thunkApi) => {
     try {
       const monthStat = await fetchMonthStat(month, year);
-      return monthStat.data;
+      return monthStat;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
     }
