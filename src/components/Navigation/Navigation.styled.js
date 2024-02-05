@@ -11,7 +11,6 @@ export const LogoIcon = styled(Logo)`
 export const UserIcon = styled(User)`
   width: 28px;
   height: 28px;
-  /* fill: var(--primery-black); */
   stroke: var(--primery-black);
 `;
 export const ArrowIcon = styled(Arrow)`
@@ -23,7 +22,7 @@ export const ArrowIcon = styled(Arrow)`
 export const NavCss = styled.nav`
   display: flex;
   flex-direction: row;
-  gap: 94px;
+  gap: 54px;
   align-items: center;
   margin-bottom: 24px;
   position: fixed;
@@ -37,13 +36,13 @@ export const NavCss = styled.nav`
   @media (min-width: 768px) {
     top: 16px;
     width: 704px;
-    gap: 512px;
+    gap: 480px;
     margin-bottom: 40px;
   }
 
   @media (min-width: 1440px) {
     width: 1216px;
-    gap: 1024px;
+    gap: 992px;
     margin-bottom: 49px;
   }
 `;
