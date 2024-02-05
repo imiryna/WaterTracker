@@ -57,23 +57,23 @@ const currentUserSlice = createSlice({
           name: action.payload.name,
         };
       })
-      .addCase(getCurrentUserThunk.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
-      })
-      // .addCase(getCurrentUserThunk.fulfilled, (state, action) => {
-      //   state.user = {
-      //     name: action.payload.name,
-      //     email: action.payload.email,
-      //     gender: action.payload.gender,
-      //     dailyNorm: action.payload.dailyNorm,
-      //     avatarUrl: action.payload.avatar,
-      //   };
-      //   state.error = null;
-      //   state.isLoading = false;
-      // })
 
       // ! Added ZooBeeN ********************
+
+      .addCase(getCurrentUserThunk.pending, state => {
+        // handlePending(state);
+        console.log('GetUser-Pending');
+      })
+      .addCase(getCurrentUserThunk.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = null;
+        console.log('GetUser-Fulfield');
+        state.user = payload.user;
+      })
+      .addCase(getCurrentUserThunk.rejected, (state, { payload }) => {
+        console.log('GetUser-Rejected!!!');
+        handleRejected(state, payload);
+      })
 
       .addCase(updateCurrentUserThunk.pending, state => {
         // handlePending(state);
@@ -120,11 +120,11 @@ const currentUserSlice = createSlice({
       })
       .addMatcher(
         isAnyOf(
-          loginThunk.pending,
           getCurrentUserThunk.pending,
-          logOutThunk.pending,
           updateCurrentUserThunk.pending,
-          uploadUserAvatarThunk.pending
+          uploadUserAvatarThunk.pending,
+          loginThunk.pending,
+          logOutThunk.pending
         ),
         state => {
           state.error = null;

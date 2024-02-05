@@ -5,12 +5,12 @@ axios.defaults.baseURL = 'https://water-tracker-backend-314i.onrender.com/api/';
 // Set and clear token
 export const setToken = token => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-  console.log(
-    'Set token: ',
-    token,
-    'Axios: ',
-    axios.defaults.headers.common.Authorization
-  );
+  // console.log(
+  //   'Set token: ',
+  //   token,
+  //   'Axios: ',
+  //   axios.defaults.headers.common.Authorization
+  // );
 };
 
 export const clearToken = () => {
@@ -19,10 +19,10 @@ export const clearToken = () => {
 };
 
 // User apis
-export const getCurrentUser = async token => {
-  console.log('Get user');
-  setToken(token);
-  const { data } = await axios.get(`/user/current`);
+export const userRegister = async userData => {
+  const { data } = await axios.post('/user/register', userData);
+  setToken(data.token);
+  localStorage.clear();
   return data;
 };
 
@@ -33,17 +33,17 @@ export const userLogin = async userData => {
   return data;
 };
 
-export const userRegister = async userData => {
-  const { data } = await axios.post('/user/register', userData);
-  setToken(data.token);
-  localStorage.clear();
-  return data;
-};
-
 export const userLogOut = async userData => {
   console.log('Log out');
   const { data } = await axios.post('/user/logout', userData);
   clearToken();
+  return data;
+};
+
+export const getCurrentUser = async () => {
+  console.log('Get user');
+  // setToken(token);
+  const { data } = await axios.get(`/user/current`);
   return data;
 };
 
@@ -56,6 +56,7 @@ export const uploadUserAvatar = async userData => {
 export const updateUser = async userData => {
   console.log('User update');
   const { data } = await axios.patch('/user/updateUser', userData);
+  console.log(data);
   return data;
 };
 

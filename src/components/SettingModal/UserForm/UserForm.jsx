@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
 import { Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-import { object, string, ref } from 'yup';
+import { object, string } from 'yup';
 
 import { toggleSettingsVisibility } from 'Store/modals/modalSlice';
 import { selectUserData } from 'Store/currentUser/currentUserSelectors';
-import {
-  updateCurrentUserThunk,
-  getCurrentUserThunk,
-} from 'Store/currentUser/currentUserThunk';
+import { updateCurrentUserThunk } from 'Store/currentUser/currentUserThunk';
 
 // Styles
 import {
@@ -42,7 +39,9 @@ export const UserForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showRepPassword, setShowRepPassword] = useState(false);
+  // controlled elements
   const [passState, setPassState] = useState('');
+  const [newPassState, setNewPassState] = useState('');
 
   //Submit function
   function handleSubmit(values, { resetForm }) {
@@ -51,34 +50,46 @@ export const UserForm = () => {
       startUserData.email === values.email &&
       startUserData.gender === values.gender
     ) {
-      if (!values.newPassword) {
+      if (newPassState === '') {
         toggleModal();
         return console.log('Noting to change');
       }
     }
 
-    if (values.newPassword) {
-      if (!values.currentPassword) {
-        // console.log(newFormData);
-        setShowPassword(!showPassword);
-        // const inp = document.querySelector('#currentPassword');
-        setPassState('Password is necessary');
-        return console.log('Current is necessary');
-      }
+    if (passState === '') {
+      console.log('UPS');
+      setShowPassword(!showPassword);
+      // const inp = document.querySelector('#currentPassword');
+      setPassState('Password is necessary');
+      return console.log('Current is necessary');
     }
+    const uploadData = {
+      name: values.name,
+      email: values.email,
+      gender: values.gender,
+      currentPassword: passState,
+      newPassword: newPassState,
+    };
     // Remove empty properties
-    Object.entries(values).map(a =>
+    Object.entries(uploadData).map(a =>
       Object.entries(a[1]).filter(b => b[1].length).length
         ? a
-        : delete values[a[0]]
+        : delete uploadData[a[0]]
     );
 
-    dispatch(updateCurrentUserThunk(values));
-
+    const res = dispatch(updateCurrentUserThunk(uploadData));
+    const f = async arg => {
+      try {
+        await console.log(arg);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    // res.then(console.log('1', res)).then(console.log('2'), res);
     // todo - доделать чтобы закрывалось после ответа сервера
     // resetForm();
     // toggleModal();
-    // todo - доделать чтобы после закрытия обновлялись данные текущего пользователя
+
     // dispatch(getCurrentUserThunk());
     return;
   }
@@ -101,10 +112,7 @@ export const UserForm = () => {
       /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,}$/gu,
       'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character'
     ),
-    repitpass: string().oneOf(
-      [ref('newPassword'), null],
-      'Passwords must match'
-    ),
+    repitpass: string().oneOf([newPassState], 'Passwords must match'),
   });
 
   return (
@@ -184,6 +192,10 @@ export const UserForm = () => {
                 id="newPassword"
                 title="Enter new password"
                 placeholder="Password"
+                value={newPassState}
+                onChange={e => {
+                  setNewPassState(e.target.value);
+                }}
               />
               <ButtonIcon
                 type="button"

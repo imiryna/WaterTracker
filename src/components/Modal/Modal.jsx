@@ -7,8 +7,10 @@ const modalRoot = document.querySelector('#modal-root');
 export function Modal({ children, toggleModal }) {
   //Functions
 
-  const handleBakcdropClick = e =>
+  const handleBakcdropClick = e => {
+    console.log('Clicked', e.currentTarget, ' ', e.target);
     e.currentTarget === e.target && toggleModal();
+  };
 
   useEffect(() => {
     const handleKeyDown = e => e.code === 'Escape' && toggleModal();

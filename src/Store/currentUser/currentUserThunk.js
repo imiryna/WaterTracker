@@ -15,7 +15,8 @@ export const getCurrentUserThunk = createAsyncThunk(
       return thunkAPI.rejectWithValue('Please Login');
     }
     try {
-      const res = await getCurrentUser(token);
+      const res = await getCurrentUser();
+      console.log('Get User Thunk: ', res);
       return res;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -33,7 +34,7 @@ export const updateCurrentUserThunk = createAsyncThunk(
     }
     try {
       console.log(data);
-      const res = await updateUser(data, token);
+      const res = await updateUser(data);
       return res;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -50,9 +51,7 @@ export const uploadUserAvatarThunk = createAsyncThunk(
       return thunkAPI.rejectWithValue('Please Login');
     }
     try {
-      console.log(data);
-      const res = await uploadUserAvatar(data, token);
-      console.log(res);
+      const res = await uploadUserAvatar(data);
       return res;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

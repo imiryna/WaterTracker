@@ -21,12 +21,10 @@ import {
 export const AvatarForm = () => {
   const dispatch = useDispatch();
   // Avatarka
-  const { avatarUrl, name } = useSelector(selectUserData);
+  const { avatarUrl = 'WaterTracker/avatar-neutral.jpg', name = 'Avatar' } =
+    useSelector(selectUserData);
   console.log('Avatar: ', avatarUrl);
-  const { imgUrl = 'WaterTracker/avatar-neutral.jpg', imgName = 'Avatar' } = {
-    imgUrl: avatarUrl,
-    imgName: `Avatar for ${name}`,
-  };
+
   //Submit function
   // function handleSubmit(values, { resetForm }) {
   function handleSubmit(values) {
@@ -75,7 +73,7 @@ export const AvatarForm = () => {
       <Label htmlFor="avatar">Your photo</Label>
       <InputContainer>
         <StyledAvatarSection>
-          <StyledImg src={imgUrl} alt={imgName} />
+          <StyledImg src={avatarUrl} alt={name} />
           <StyledUploadButton>
             <StyledUploadIcon />
             <p>Upload a photo</p>
