@@ -7,7 +7,7 @@ import { toggleSettingsVisibility } from 'Store/modals/modalSlice';
 import { selectUserData } from 'Store/currentUser/currentUserSelectors';
 import {
   updateCurrentUserThunk,
-  getCurrentUserThunk,
+  // getCurrentUserThunk,
 } from 'Store/currentUser/currentUserThunk';
 
 // Styles
