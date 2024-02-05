@@ -4,7 +4,7 @@ import {
   editWaterServing,
   getWaterServings,
   removeWaterServing,
-} from 'services/api';
+} from 'services/api.js';
 import { getUtcTime } from 'services/helpers/getUtcTime';
 
 // GET WATER ARR

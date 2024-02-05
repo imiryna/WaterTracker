@@ -37,13 +37,14 @@ export const userLogOut = async token => {
 };
 
 export const uploadUserAvatar = async userData => {
-  const { data } = await waterTrackerInstance.patch('/user/avatars', userData);
+  console.log('API ', userData);
+  const { data } = await waterTrackerInstance.patch('/users/avatars', userData);
   return data;
 };
 
 export const updateUser = async userData => {
   const { data } = await waterTrackerInstance.patch(
-    '/user/updateUser',
+    '/users/updateUser',
     userData
   );
   return data;
@@ -51,7 +52,7 @@ export const updateUser = async userData => {
 
 export const forgotPassword = async userData => {
   const { data } = await waterTrackerInstance.post(
-    '/users/forgot-password',
+    '/user/forgotpassword',
     userData
   );
   return data;
@@ -59,13 +60,12 @@ export const forgotPassword = async userData => {
 
 export const updatePassword = async userData => {
   const { data } = await waterTrackerInstance.patch(
-    '/users/update-password',
+    '/user/updatepassword',
     userData
   );
   setToken(data.token);
   return data;
 };
-
 // Today water portions apis
 
 export const getWaterServings = async token => {
@@ -123,9 +123,10 @@ export const updateDailyNorma = async (dailyNorma, token) => {
 
 // // Month info
 
-export const fetchMonthStat = async (month, year) => {
+export const fetchMonthStat = async (month, year, token) => {
+  setToken(token);
   const { data } = await waterTrackerInstance.get(
-    `/water/month?date=${year}-${month}`
+    `/monthStat/${year}/${month}`
   );
   return data;
 };

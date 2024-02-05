@@ -1,5 +1,10 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { changeDailyNormaThunk, getCurrentUserThunk } from './currentUserThunk';
+import {
+  getCurrentUserThunk,
+  updateCurrentUserThunk,
+  uploadUserAvatarThunk,
+  changeDailyNormaThunk,
+} from './currentUserThunk';
 import {
   logOutThunk,
   loginThunk,
@@ -18,6 +23,13 @@ const INITIAL_STATE = {
   error: null,
   isLoading: true,
 };
+
+// Added ZooBeeN
+const handleRejected = (state, { payload }) => {
+  state.isLoading = false;
+  state.error = payload;
+};
+// ! ************************
 
 const currentUserSlice = createSlice({
   name: 'currentUser',
@@ -75,11 +87,44 @@ const currentUserSlice = createSlice({
         state.isLoading = false;
         state.error = action.payload;
       })
+
+      // ! Added ZooBeeN ********************
+      .addCase(updateCurrentUserThunk.pending, state => {
+        // handlePending(state);
+        console.log('UpdateUser-Pending');
+      })
+      .addCase(updateCurrentUserThunk.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = null;
+        console.log('UpdateUser-Fulfield');
+        state.user = payload.user;
+      })
+      .addCase(updateCurrentUserThunk.rejected, (state, { payload }) => {
+        console.log('UpdateUser-Rejected!!!');
+        handleRejected(state, payload);
+      })
+
+      .addCase(uploadUserAvatarThunk.pending, state => {
+        // handlePending(state);
+        console.log('UpdateUserAvatar-Pending');
+      })
+      .addCase(uploadUserAvatarThunk.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = null;
+        console.log('UpdateUserAvatar-Fulfield');
+        state.user.avatarUrl = payload.avatarURL;
+      })
+      .addCase(uploadUserAvatarThunk.rejected, (state, { payload }) => {
+        handleRejected(state, payload);
+      })
+      // ! **************************
       .addMatcher(
         isAnyOf(
           loginThunk.pending,
           getCurrentUserThunk.pending,
-          logOutThunk.pending
+          logOutThunk.pending,
+          updateCurrentUserThunk.pending,
+          uploadUserAvatarThunk.pending
         ),
         state => {
           state.error = null;

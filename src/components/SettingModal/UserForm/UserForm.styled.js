@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { Field, Form } from 'formik';
+import { ReactComponent as ShowPass } from 'Images/Icons/show-pass.svg';
+import { ReactComponent as HidePass } from 'Images/Icons/hide-pass.svg';
 
 export const Title = styled.div`
   /* margin-bottom: 15px; */
@@ -8,11 +10,12 @@ export const Title = styled.div`
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
-  line-height: 20px; /* 111.111% */
+  line-height: 1.1em; /* 111.111% */
 `;
 
 export const FormStyled = styled(Form)`
-  width: 900px;
+  /* display: flex; */
+  width: 100%;
   margin-top: 30px;
   margin-right: auto;
   margin-left: auto;
@@ -27,14 +30,11 @@ export const Label = styled.label`
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
-  /* line-height: 20px; 111.111% */
+  line-height: 1.1em; //111.111%
   &.small {
-    /* color: var(--Primery-Color-Black, #2f2f2f); */
-    /* font-family: Roboto; */
     font-size: 16px;
-    /* font-style: normal; */
     font-weight: 400;
-    /* line-height: 20px; 125% */
+    line-height: 1.25em;
   }
 `;
 export const RadioLabel = styled.label`
@@ -44,7 +44,7 @@ export const RadioLabel = styled.label`
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
-  line-height: 20px; /* 125% */
+  line-height: 1.25em; /* 125% */
 `;
 
 export const Radio = styled(Field)`
@@ -63,7 +63,7 @@ export const Input = styled(Field)`
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
-  line-height: 20px; /* 125% */
+  line-height: 1.25em; /* 125% */
 
   display: flex;
   padding: 12px 10px;
@@ -99,18 +99,19 @@ export const FlexWrapper = styled.div`
   display: flex;
   align-items: flex-start;
   gap: 20px;
+  @media screen and (max-width: 768px) {
+    flex-wrap: wrap;
+  }
 `;
 export const Wrapper = styled.div`
   display: inline-block;
   width: 50%;
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
   /* margin-right: 20px; */
 `;
-export const ErrorText = styled.div`
-  color: red;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  font-size: 12px;
-`;
+
 export const Button = styled.button`
   margin-top: 24px;
   border-radius: 10px;
@@ -126,4 +127,36 @@ export const Button = styled.button`
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
+`;
+
+export const InputContainer = styled.div`
+  position: relative;
+  width: 280px;
+
+  @media (min-width: 768px) {
+    width: 336px;
+  }
+
+  @media (min-width: 1440px) {
+    width: 384px;
+  }
+`;
+export const ButtonIcon = styled.button`
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  background: transparent;
+`;
+export const ShowPassIcon = styled(ShowPass)`
+  width: 16px;
+  height: 16px;
+  stroke: #407bff;
+`;
+
+export const HidePassIcon = styled(HidePass)`
+  width: 16px;
+  height: 16px;
+  stroke: #407bff;
 `;
