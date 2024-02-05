@@ -22,7 +22,7 @@ import { currentUserReducer } from './currentUser/currentUserSlice';
 const persistAuthConfig = {
   key: 'auth',
   storage,
-  whitelist: 'token',
+  whitelist: ['token'],
 };
 // const persistUserConfig = {
 //   key: 'user',
