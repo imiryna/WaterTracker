@@ -88,8 +88,6 @@ export const UserForm = () => {
     // todo - доделать чтобы закрывалось после ответа сервера
     // resetForm();
     // toggleModal();
-
-    // dispatch(getCurrentUserThunk());
     return;
   }
 
