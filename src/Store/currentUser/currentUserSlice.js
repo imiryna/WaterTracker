@@ -24,7 +24,7 @@ const INITIAL_STATE = {
   isLoading: true,
 };
 
-// Added ZooBeeN
+// !Added ZooBeeN
 const handleRejected = (state, { payload }) => {
   state.isLoading = false;
   state.error = payload;
@@ -76,6 +76,7 @@ const currentUserSlice = createSlice({
           email: action.payload.email,
           gender: action.payload.gender,
           name: action.payload.name,
+          registerDate: action.payload.created,
         };
       })
       .addCase(getCurrentUserThunk.rejected, (state, { payload }) => {
@@ -89,13 +90,14 @@ const currentUserSlice = createSlice({
       .addCase(updateCurrentUserThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
-        console.log('UpdateUser-Fulfield');
+        console.log('UpdateUser-Fulfield', payload);
         state.user = {
           avatarUrl: payload.user.avatarUrl,
           dailyNorm: payload.user.dailyNorm,
           email: payload.user.email,
           gender: payload.user.gender,
           name: payload.user.name,
+          registerDate: payload.user.created,
         };
       })
       .addCase(updateCurrentUserThunk.rejected, (state, { payload }) => {

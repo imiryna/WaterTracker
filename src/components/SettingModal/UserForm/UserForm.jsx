@@ -43,22 +43,21 @@ export const UserForm = () => {
   const [newPassState, setNewPassState] = useState('');
 
   //Submit function
-  function handleSubmit(values, { resetForm }) {
+  async function handleSubmit(values, { resetForm }) {
     if (
       startUserData.name === values.name &&
       startUserData.email === values.email &&
       startUserData.gender === values.gender
     ) {
       if (newPassState === '') {
-        toggleModal();
+        // toggleModal();
         return console.log('Noting to change');
       }
     }
 
     if (passState === '') {
-      console.log('UPS');
-      setShowPassword(!showPassword);
-      setPassState('Password is necessary');
+      // setShowPassword(!showPassword);
+      // setPassState('Password is necessary');
       return console.log('Current is necessary');
     }
     const uploadData = {
@@ -75,18 +74,14 @@ export const UserForm = () => {
         : delete uploadData[a[0]]
     );
 
-    const res = dispatch(updateCurrentUserThunk(uploadData));
-    const f = async arg => {
-      try {
-        await console.log(arg);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    // res.then(console.log('1', res)).then(console.log('2'), res);
+    const e = await dispatch(updateCurrentUserThunk(uploadData));
+    console.log('Async dispatch ', e);
     // todo - доделать чтобы закрывалось после ответа сервера
-    // resetForm();
-    // toggleModal();
+    if (e.payload.message === 'User updated successfully') {
+      resetForm();
+      toggleModal();
+    }
+
     return;
   }
 
@@ -102,7 +97,7 @@ export const UserForm = () => {
   const userSchema = object().shape({
     name: string().min(5).max(40).required('Name is required'),
     email: string().email().required('Email is required'),
-    currentPassword: string().min(8).required('Old password is required'),
+    currentPassword: string().min(8),
 
     newPassword: string().matches(
       /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,}$/gu,
@@ -164,6 +159,10 @@ export const UserForm = () => {
                 id="currentPassword"
                 title="Enter your current password"
                 placeholder="Password"
+                value={passState}
+                onChange={e => {
+                  setPassState(e.target.value);
+                }}
               />
               <ButtonIcon
                 type="button"
