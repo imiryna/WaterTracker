@@ -126,10 +126,9 @@ export const updateDailyNorma = async (dailyNorma, token) => {
 
 // // Month info
 
-export const fetchMonthStat = async (month, year, token) => {
-  setToken(token);
+export const fetchMonthStat = async (month, year) => {
   const { data } = await waterTrackerInstance.get(
-    `/monthStat/${year}/${month}`
+    `/water/month?date=${year}-${month}`
   );
   return data;
 };

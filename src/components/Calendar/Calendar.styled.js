@@ -130,12 +130,22 @@ width: 14px;
 height: 14px;
 `
 
-export const StyledArrowButton = styled.button`
+export const StyledArrowButtonLeft = styled.button`
 background-color: transparent;
 border: none;
 outline: none;
 width: 14px;
 height: 14px;
+visibility: ${props => props.$hideButton ? 'hidden' : 'visible'}
+`
+
+export const StyledArrowButtonRight = styled.button`
+background-color: transparent;
+border: none;
+outline: none;
+width: 14px;
+height: 14px;
+visibility: ${props => props.$hideButton ? 'hidden' : 'visible'}
 `
 
 export const StyledDate = styled.span`
@@ -171,4 +181,6 @@ export const StyledCloseIcon = styled(CloseIcon)`
 width: 16px;
 height: 16px;
 stroke: var(--primery-blue);
+
+
 `

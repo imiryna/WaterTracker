@@ -13,6 +13,7 @@ const INITIAL_STATE = {
     gender: null,
     dailyNorm: null,
     avatarUrl: null,
+    registerDate: ' ',
   },
   error: null,
   isLoading: true,
@@ -30,6 +31,7 @@ const currentUserSlice = createSlice({
           email: action.payload.email,
           gender: action.payload.gender,
           name: action.payload.name,
+          registerDate: action.payload.created,
         };
       })
       .addCase(logOutThunk.fulfilled, () => {
@@ -42,6 +44,7 @@ const currentUserSlice = createSlice({
           email: action.payload.email,
           gender: action.payload.gender,
           name: action.payload.name,
+          registerDate: action.payload.created,
         };
       })
       .addCase(getCurrentUserThunk.rejected, (state, action) => {
