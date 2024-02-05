@@ -46,7 +46,9 @@ export const RadioLabel = styled.label`
   font-weight: 400;
   line-height: 1.25em; /* 125% */
 `;
-
+export const RadioGroup = styled.div`
+  margin-bottom: auto;
+`;
 export const Radio = styled(Field)`
   display: inline;
   margin-top: 15px;
@@ -97,19 +99,22 @@ export const Input = styled(Field)`
 
 export const FlexWrapper = styled.div`
   display: flex;
-  align-items: flex-start;
   gap: 20px;
   @media screen and (max-width: 768px) {
     flex-wrap: wrap;
   }
+  @media screen and (min-width: 768px) {
+    max-width: 850px;
+  }
 `;
 export const Wrapper = styled.div`
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 50%;
   @media screen and (max-width: 768px) {
     width: 100%;
   }
-  /* margin-right: 20px; */
 `;
 
 export const Button = styled.button`
@@ -131,14 +136,6 @@ export const Button = styled.button`
 
 export const InputContainer = styled.div`
   position: relative;
-
-  @media (min-width: 768px) {
-    width: 336px;
-  }
-
-  @media (min-width: 1440px) {
-    width: 384px;
-  }
 `;
 export const ButtonIcon = styled.button`
   position: absolute;

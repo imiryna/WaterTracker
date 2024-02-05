@@ -13,6 +13,7 @@ import {
   FormStyled,
   Input,
   Title,
+  RadioGroup,
   Radio,
   RadioLabel,
   Label,
@@ -114,8 +115,9 @@ export const UserForm = () => {
       <FormStyled id="form">
         <FlexWrapper>
           <Wrapper>
+            {/* <div> */}
             <Title id="my-radio-group">Your gender identity</Title>
-            <div role="group" aria-labelledby="my-radio-group">
+            <RadioGroup role="group" aria-labelledby="my-radio-group">
               <RadioLabel>
                 <Radio type="radio" name="gender" value="female" />
                 Woman
@@ -124,8 +126,9 @@ export const UserForm = () => {
                 <Radio type="radio" name="gender" value="male" />
                 Man
               </RadioLabel>
-            </div>
-
+            </RadioGroup>
+            {/* </div> */}
+            {/* <div> */}
             <Label htmlFor="name">Your name</Label>
             <Input
               type="text"
@@ -135,7 +138,8 @@ export const UserForm = () => {
               placeholder="Your name"
             />
             <FormError name="name" />
-
+            {/* </div> */}
+            {/* <div> */}
             <Label htmlFor="email">E-mail</Label>
             <Input
               type="text"
@@ -145,6 +149,7 @@ export const UserForm = () => {
               placeholder="E-mail"
             />
             <FormError name="email" />
+            {/* </div> */}
           </Wrapper>
           <Wrapper>
             <Title>Password</Title>
