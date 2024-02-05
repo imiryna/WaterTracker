@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Formik } from 'formik';
+import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { object, string } from 'yup';
 import { toggleSettingsVisibility } from 'Store/modals/modalSlice';
@@ -51,13 +52,13 @@ export const UserForm = () => {
     ) {
       if (newPassState === '') {
         // toggleModal();
+        toast.info('Noting to change');
         return console.log('Noting to change');
       }
     }
 
     if (passState === '') {
-      // setShowPassword(!showPassword);
-      // setPassState('Password is necessary');
+      toast.error('Current Password is necessary!!!');
       return console.log('Current is necessary');
     }
     const uploadData = {
