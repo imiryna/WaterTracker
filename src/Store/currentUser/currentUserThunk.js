@@ -15,7 +15,6 @@ export const getCurrentUserThunk = createAsyncThunk(
     }
     try {
       const res = await getCurrentUser(token);
-      console.log('Get User Thunk: ', res);
       return res;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -26,7 +25,6 @@ export const getCurrentUserThunk = createAsyncThunk(
 export const uploadUserAvatarThunk = createAsyncThunk(
   'user/avatars',
   async (data, thunkAPI) => {
-    console.log('UPDATE USER AVATAR');
     const token = thunkAPI.getState().auth.token;
     if (token === null) {
       return thunkAPI.rejectWithValue('Please Login');
@@ -43,13 +41,11 @@ export const uploadUserAvatarThunk = createAsyncThunk(
 export const updateCurrentUserThunk = createAsyncThunk(
   'user/updateUser',
   async (data, thunkAPI) => {
-    console.log('UPDATE CURRENT USER');
     const token = thunkAPI.getState().auth.token;
     if (token === null) {
       return thunkAPI.rejectWithValue('Please Login');
     }
     try {
-      console.log(data);
       const res = await updateUser(data, token);
       return res;
     } catch (error) {

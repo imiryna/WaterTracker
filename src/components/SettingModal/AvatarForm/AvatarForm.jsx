@@ -23,15 +23,11 @@ export const AvatarForm = () => {
   // Avatarka
   const { avatarUrl = 'WaterTracker/avatar-neutral.jpg', name = 'Avatar' } =
     useSelector(selectUserData);
-  console.log('Avatar: ', avatarUrl);
-
   //Submit function
 
   function handleSubmit(values) {
     const myData = new FormData();
     myData.append('avatar', values);
-    // todo
-    console.log('Form was Submit: ', values, myData);
     dispatch(uploadUserAvatarThunk(myData));
     return;
   }
@@ -58,12 +54,10 @@ export const AvatarForm = () => {
     initialValues: {
       avatar: '',
     },
-    // onSubmit: handleSubmit,
     validationSchema: validationRules,
   });
 
   const handleChange = e => {
-    console.log('Input chenged');
     formik.setFieldValue('avatar', e.target.files[0]);
     handleSubmit(e.target.files[0]);
   };

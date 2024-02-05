@@ -2,7 +2,6 @@ import { waterTrackerInstance } from './baseURL';
 
 // Set and clear token
 export const setToken = token => {
-  console.log('Set token: ', token);
   waterTrackerInstance.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 

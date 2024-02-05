@@ -61,9 +61,7 @@ const currentUserSlice = createSlice({
       })
 
       // ! Added ZooBeeN ********************
-
       .addCase(getCurrentUserThunk.pending, state => {
-        // handlePending(state);
         console.log('GetUser-Pending');
       })
       .addCase(getCurrentUserThunk.fulfilled, (state, action) => {
@@ -90,7 +88,7 @@ const currentUserSlice = createSlice({
       .addCase(updateCurrentUserThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
-        console.log('UpdateUser-Fulfield', payload);
+        console.log('UpdateUser-Fulfield');
         state.user = {
           avatarUrl: payload.user.avatarUrl,
           dailyNorm: payload.user.dailyNorm,

@@ -33,7 +33,7 @@ export const UserForm = () => {
     email = '',
     gender = 'female',
   } = useSelector(selectUserData);
-  // for checking chenging fields
+  // for checking changing fields
   const startUserData = { name, email, gender };
   // Hide-Show passwords
   const [showPassword, setShowPassword] = useState(false);
@@ -51,15 +51,13 @@ export const UserForm = () => {
       startUserData.gender === values.gender
     ) {
       if (newPassState === '') {
-        // toggleModal();
         toast.info('Noting to change');
-        return console.log('Noting to change');
+        return;
       }
     }
-
     if (passState === '') {
       toast.error('Current Password is necessary!!!');
-      return console.log('Current is necessary');
+      return;
     }
     const uploadData = {
       name: values.name,
