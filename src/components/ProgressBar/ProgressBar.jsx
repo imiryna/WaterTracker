@@ -20,13 +20,10 @@ export const ProgressBar = () => {
   const waterNorma = useSelector(selectDailyNorm);
   const progress = (waterAmount / waterNorma) * 100;
   console.log(`waterNorma`, waterNorma);
-console.log(`waterAmount`, waterAmount);
+  console.log(`waterAmount`, waterAmount);
   const dispatch = useDispatch();
 
   const showAddModal = useSelector(selectAddWater);
-  const showEditModal = useSelector(selectEditWater);
-
-  const [currentEditObj] = useState(null);
 
   const CustomSliderStyles = {
     width: '256px',
@@ -77,14 +74,7 @@ console.log(`waterAmount`, waterAmount);
               <AddWaterModal togleModal={toggleAddWateVisibility} />
             </Modal>
           )}
-          {showEditModal && (
-            <Modal toggleModal={toggleEditWateVisibility}>
-              <EditWaterModal
-                prevVal={currentEditObj}
-                togleModal={toggleEditWateVisibility}
-              />
-            </Modal>
-          )}
+
           <span className="svg-icon">
             <Icon />
           </span>
