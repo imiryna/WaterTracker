@@ -36,46 +36,50 @@ export const UserForm = () => {
     email = '',
     gender = 'female',
   } = useSelector(selectUserData);
-
+  // for checking chenging fields
+  const startUserData = { name, email, gender };
   // Hide-Show passwords
   const [showPassword, setShowPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showRepPassword, setShowRepPassword] = useState(false);
+  const [passState, setPassState] = useState('');
 
   //Submit function
   function handleSubmit(values, { resetForm }) {
-    // todo - проверку совпадения паролей - отправку данных без проверочного пароля
-    console.log('Form was Submit: ', values);
-    // const { email, gender, name, currentPassword, newPassword, repitpass } =
-    //   values;
+    if (
+      startUserData.name === values.name &&
+      startUserData.email === values.email &&
+      startUserData.gender === values.gender
+    ) {
+      if (!values.newPassword) {
+        toggleModal();
+        return console.log('Noting to change');
+      }
+    }
 
-    // Ubiraem iz objecta pustye svojstva
-    // let userData = {
-    //   email,
-    //   gender,
-    //   name,
-    //   currentPassword,
-    //   newPassword,
-    // };
+    if (values.newPassword) {
+      if (!values.currentPassword) {
+        // console.log(newFormData);
+        setShowPassword(!showPassword);
+        // const inp = document.querySelector('#currentPassword');
+        setPassState('Password is necessary');
+        return console.log('Current is necessary');
+      }
+    }
     // Remove empty properties
     Object.entries(values).map(a =>
       Object.entries(a[1]).filter(b => b[1].length).length
         ? a
         : delete values[a[0]]
     );
-    console.log('Check: ', values);
 
-    if (values.newPassword !== values.repitpass) {
-      console.log('Пароли не совпадают');
-      return;
-    }
     dispatch(updateCurrentUserThunk(values));
 
     // todo - доделать чтобы закрывалось после ответа сервера
-    resetForm();
-    toggleModal();
+    // resetForm();
+    // toggleModal();
     // todo - доделать чтобы после закрытия обновлялись данные текущего пользователя
-    dispatch(getCurrentUserThunk());
+    // dispatch(getCurrentUserThunk());
     return;
   }
 
@@ -91,7 +95,7 @@ export const UserForm = () => {
   const userSchema = object().shape({
     name: string().min(5).max(40).required('Name is required'),
     email: string().email().required('Email is required'),
-    currentPassword: string().min(8).required('Password is required'),
+    currentPassword: string().min(8),
 
     newPassword: string().matches(
       /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,}$/gu,
@@ -109,7 +113,7 @@ export const UserForm = () => {
       onSubmit={handleSubmit}
       validationSchema={userSchema}
     >
-      <FormStyled>
+      <FormStyled id="form">
         <FlexWrapper>
           <Wrapper>
             <Title id="my-radio-group">Your gender identity</Title>
@@ -156,6 +160,10 @@ export const UserForm = () => {
                 id="currentPassword"
                 title="Enter your current password"
                 placeholder="Password"
+                value={passState}
+                onChange={e => {
+                  setPassState(e.target.value);
+                }}
               />
               <ButtonIcon
                 type="button"

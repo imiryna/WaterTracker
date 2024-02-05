@@ -7,6 +7,15 @@ export const FormStyled = styled.form`
 
 export const Label = styled.label`
   //todo
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: var(--Primery-Color-Black, #2f2f2f);
+  font-family: Roboto;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.1em; //111.111%
 `;
 export const StyledUploadIcon = styled(UploadIcon)`
   margin-right: 5px;
@@ -39,18 +48,7 @@ export const Input = styled.input`
   opacity: 0;
   cursor: pointer;
 `;
-export const StyledUploadButtonText = styled.p`
-  /* position: relative; */
-  /* left: 0; */
-  /* top: 0; */
-  /* width: 100%; */
-  /* height: 100%; */
-  /* transform: scale(2); */
-  /* letter-spacing: 10em; //IE 9 fix */
-  /* -ms-transform: scale(20); //IE 9 fix */
-  /* opacity: 50; */
-  /* cursor: pointer; */
-`;
+
 export const InputContainer = styled.div`
   // position: relative;
 `;

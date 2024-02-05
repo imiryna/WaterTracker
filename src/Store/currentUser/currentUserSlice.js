@@ -98,7 +98,7 @@ const currentUserSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         console.log('UpdateUserAvatar-Fulfield - Payload-slice: ', payload);
-        // state.user.avatarUrl = payload.user;
+        state.user.avatarUrl = payload.avatarURL;
       })
       .addCase(uploadUserAvatarThunk.rejected, (state, { payload }) => {
         console.log('UpdateUser-Rejected!!!');

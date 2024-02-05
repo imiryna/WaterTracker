@@ -13,8 +13,6 @@ import {
   ErrorText,
   InputContainer,
   StyledImg,
-  StyledImgLabel,
-  StyledUploadButtonText,
   StyledUploadButton,
   StyledUploadIcon,
   StyledAvatarSection,
@@ -62,7 +60,7 @@ export const AvatarForm = () => {
     initialValues: {
       avatar: '',
     },
-    onSubmit: handleSubmit,
+    // onSubmit: handleSubmit,
     validationSchema: validationRules,
   });
 
@@ -73,20 +71,19 @@ export const AvatarForm = () => {
   };
 
   return (
-    <FormStyled onSubmit={formik.handleSubmit}>
-      <Label htmlFor="avatar">
-        Your photo
-        <InputContainer>
-          <StyledAvatarSection>
-            <StyledImg src={imgUrl} alt={imgName} />
-            <StyledUploadButton>
-              <StyledUploadIcon />
-              <StyledUploadButtonText>Upload a photo</StyledUploadButtonText>
-              <Input type="file" name="avatar" onChange={handleChange} />
-            </StyledUploadButton>
-          </StyledAvatarSection>
-        </InputContainer>
-      </Label>
+    <FormStyled>
+      <Label htmlFor="avatar">Your photo</Label>
+      <InputContainer>
+        <StyledAvatarSection>
+          <StyledImg src={imgUrl} alt={imgName} />
+          <StyledUploadButton>
+            <StyledUploadIcon />
+            <p>Upload a photo</p>
+            <Input type="file" name="avatar" onChange={handleChange} />
+          </StyledUploadButton>
+        </StyledAvatarSection>
+      </InputContainer>
+
       <ErrorText>
         {formik.errors.avatar ? (
           <p style={{ color: 'red' }}>{formik.errors.avatar}</p>
