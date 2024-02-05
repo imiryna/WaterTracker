@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { CircularProgress, useMediaQuery } from '@mui/material';
+import { useMediaQuery } from '@mui/material';
 
 import {
   StyledDay,
@@ -30,10 +30,7 @@ import {
 import { selectIsLoading, selectMonthStat } from "Store/monthStat/monthStatSelectors";
 import { getMonthStat } from 'Store/monthStat/monthStatThunk';
 import { selectRegisterDate } from 'Store/currentUser/currentUserSelectors';
-
-// ////////////////////
-// TODO: close popover logic && Month name
-
+import { Loading } from 'components/Loader/Loader.styled';
 
 export const Calendar = () => {
 
@@ -73,51 +70,30 @@ export const Calendar = () => {
 
   const id = isOpen ? 'simple-popover' : undefined;
 
-
-  // open/close popOver funcs
-  // const openPopOver = (event, item) => {
-  //   if(item.quantity === null){
-  //     return
-  //   }
-  //   setAnchor(event.currentTarget);
-  //     setPopOverData(item);
-  //     setIsOpen(true);
-  // };
-
-  // const closePopOver = () => {
-  //   setAnchor(null);
-  //   setPopOverData(null);
-  //   setIsOpen(false);
-    
-  // };
-
   // close popover handlers and eventlisteners clear
-  // useEffect(() => {
-  //   const handleClickOutside = event => {
-  //     if (anchor && !anchor.contains(event.target)) {
-  //       closePopOver();
-  //     }
-  //   };
-  //   const handleEscPress = event => {
-  //     if (event.code === 'Escape') {
-  //       closePopOver();
-  //     }
-  //   };
+  useEffect(() => {
+    const handleClickOutside = event => {
+      if (anchor && !anchor.contains(event.target)) {
+        closePopOver();
+      }
+    };
+    const handleEscPress = event => {
+      if (event.code === 'Escape') {
+        closePopOver();
+      }
+    };
 
-  //   document.body.addEventListener('click', handleClickOutside);
-  //   window.addEventListener('keydown', handleEscPress);
+    document.body.addEventListener('click', handleClickOutside);
+    window.addEventListener('keydown', handleEscPress);
 
-  //   return () => {
-  //     document.body.removeEventListener('click', handleClickOutside);
-  //     window.removeEventListener('keydown', handleEscPress);
-  //   };
-  // }, [anchor]);
+    return () => {
+      document.body.removeEventListener('click', handleClickOutside);
+      window.removeEventListener('keydown', handleEscPress);
+    };
+  }, [anchor]);
 
-  // // close popover via button handlers
-  // const handleCloseButtonClick = event => {
-  //   closePopOver();
-  // };
 
+  // Open and close popover logic
   const openPopOver = (event, item) => {
     if (item.quantity === null) return;
     
@@ -133,23 +109,12 @@ export const Calendar = () => {
     
   };
 
-  const handleClickOutside = event => {
-    if (anchor && !anchor.contains(event.target)) {
-      closePopOver();
-    }
-  };
-
   //* Pagination logic */
-
-  // Get month name
-  // const monthName = month.toLocaleString('en-US', { month: 'long' });
 
   // Pagination handlers
   const handlePreviousMonth = () => {
     const previousMonth = month - 1 <= 0 ? 12 : month - 1;
     const newYear = previousMonth === 12 ? year - 1 : year;
-    // dispatch(setMonth(previousMonth));
-    // dispatch(setYear(newYear));
     setMonth(previousMonth);
     setYear(newYear);
   };
@@ -182,11 +147,12 @@ export const Calendar = () => {
     }
   }
 
-  // get month name
+  
 
-  const date = new Date(); // Получаем текущую дату и время
-  date.setMonth(month - 1); // Устанавливаем месяц (вычитаем 1, так как месяцы нумеруются с 0)
+  // Get month name
 
+  const date = new Date(); 
+  date.setMonth(month - 1);
   const monthName = date.toLocaleString('en-US', { month: 'long' });
 
 
@@ -194,7 +160,7 @@ export const Calendar = () => {
   // Render
 
   return isLoading ? 
-  <CircularProgress/> :
+  <Loading/> :
 
     <StyledDiv>
       <StyledContainer>
@@ -233,15 +199,7 @@ export const Calendar = () => {
         open={isOpen}
         onClose={(event, reason) => {closePopOver(event, reason)}}
         anchorEl={anchor}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: isDesktop ? 'left' : 'center',
-        }}
-        transformOrigin={{
-          vertical: 'bottom',
-          horizontal: isDesktop ? 'right' : 'center',
-        }}
-        disableRestoreFocus={true}
+        placement={isDesktop ? "top-start" : "top"}
       >
         {popOverData && (
           <StyledPopOverContainer>
@@ -265,7 +223,7 @@ export const Calendar = () => {
             </StyledPopOverText>
           </StyledPopOverContainer>
         )}
-      </StyledPopOver>
+      </StyledPopOver>      
     </StyledDiv>
   
 };
