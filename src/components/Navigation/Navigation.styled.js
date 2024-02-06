@@ -30,7 +30,6 @@ export const NavCss = styled.nav`
   z-index: 100;
 
   width: 100%;
-  /* border: 1px transparent; */
   background-color: var(--primery-white);
 
   @media (min-width: 1440px) {
@@ -43,8 +42,7 @@ export const WraperCss = styled.div`
   flex-direction: row;
   gap: 54px;
   align-items: center;
-
-  /* border: 1px transparent; */
+  justify-content: center;
   background-color: var(--primery-white);
 
   @media (min-width: 768px) {
