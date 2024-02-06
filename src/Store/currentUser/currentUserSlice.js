@@ -61,9 +61,7 @@ const currentUserSlice = createSlice({
       })
 
       // ! Added ZooBeeN ********************
-      .addCase(getCurrentUserThunk.pending, state => {
-        console.log('GetUser-Pending');
-      })
+      .addCase(getCurrentUserThunk.pending, state => {})
       .addCase(getCurrentUserThunk.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
@@ -78,13 +76,10 @@ const currentUserSlice = createSlice({
         };
       })
       .addCase(getCurrentUserThunk.rejected, (state, { payload }) => {
-        console.log('GetUser-Rejected!!!');
         handleRejected(state, payload);
       })
 
-      .addCase(updateCurrentUserThunk.pending, state => {
-        console.log('UpdateUser-Pending');
-      })
+      .addCase(updateCurrentUserThunk.pending, state => {})
       .addCase(updateCurrentUserThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
@@ -99,21 +94,16 @@ const currentUserSlice = createSlice({
         };
       })
       .addCase(updateCurrentUserThunk.rejected, (state, { payload }) => {
-        console.log('UpdateUser-Rejected!!!');
         handleRejected(state, payload);
       })
 
-      .addCase(uploadUserAvatarThunk.pending, state => {
-        console.log('UpdateUserAvatar-Pending');
-      })
+      .addCase(uploadUserAvatarThunk.pending, state => {})
       .addCase(uploadUserAvatarThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
-        console.log('UpdateUserAvatar-Fulfield', payload);
         state.user.avatarUrl = payload.avatarURL;
       })
       .addCase(uploadUserAvatarThunk.rejected, (state, { payload }) => {
-        console.log('UpdateUserAvatar-Rejected!!!');
         handleRejected(state, payload);
       })
       // ! **************************
