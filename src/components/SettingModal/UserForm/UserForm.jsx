@@ -46,6 +46,7 @@ export const UserForm = () => {
 
   //Submit function
   async function handleSubmit(values, { resetForm }) {
+    // Nothing to change
     if (
       startUserData.name === values.name &&
       startUserData.email === values.email &&
@@ -56,7 +57,7 @@ export const UserForm = () => {
         return;
       }
     }
-    if (passState === '') {
+    if (newPassState && passState === '') {
       toast.error('Current Password is necessary!!!');
       return;
     }
