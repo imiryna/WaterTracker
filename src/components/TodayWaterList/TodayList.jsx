@@ -32,15 +32,12 @@ export const TodayList = () => {
   const showAddModal = useSelector(selectAddWater);
   const showEditModal = useSelector(selectEditWater);
 
-  useEffect(() => {
-    dispatch(getDailyWaterThunk());
-  }, [dispatch]);
-
+  
   const [currentEditObj, setCurrentEditObj] = useState(null);
   //Creating marcup arr
   const markup = waterArr.map(item => {
     const waterCardId = item._id;
-
+    
     // Calculating adding time
     const waterAddTime = item.time;
 
@@ -55,13 +52,22 @@ export const TodayList = () => {
       setCurrentEditObj,
     });
   });
-
+  
   const delWaterById = idToDel => {
     dispatch(delWaterThunk(idToDel));
   };
+  
+  
+  useEffect(() => {
+    const fetchWater = () => {
+      dispatch(getDailyWaterThunk());
+    }
+    fetchWater()
+  }, [dispatch]);
 
   return (
     <StyledWaterList>
+      <p className='main-title'>Today</p>
       {markup}
       <button
         className="add-btn"

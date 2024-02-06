@@ -15,6 +15,15 @@ export const StyledWaterList = styled.div`
     background-color: var(--secondary-color-4);
     border-radius: 20px;
   }
+  .main-title{
+    font-size: 24px;
+    font-family: var(--primery-font);
+    font-weight: 500;
+    @media only screen and (min-width: 768px) {
+      font-size: 26px;
+    }
+
+  }
   .water-card {
     display: flex;
     justify-content: space-between;
