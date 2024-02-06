@@ -76,7 +76,7 @@ export const EditDailyNormaModal = ({
           <input
             type="number"
             name="weight"
-            min={1}
+            min={0}
             value={weight}
             onChange={e => setWeight(e.target.value < 0 ? 0 : e.target.value)}
           />
@@ -89,6 +89,7 @@ export const EditDailyNormaModal = ({
           <input
             type="number"
             name="activeTime"
+            min={0}
             value={activeTime}
             onChange={e =>
               setActiveTime(

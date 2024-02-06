@@ -15,6 +15,15 @@ export const StyledWaterList = styled.div`
     background-color: var(--secondary-color-4);
     border-radius: 20px;
   }
+  .main-title {
+    font-size: 24px;
+    font-family: var(--primery-font);
+    font-weight: 500;
+    margin-bottom: 16px;
+    @media only screen and (min-width: 768px) {
+      font-size: 26px;
+    }
+  }
   .water-card {
     display: flex;
     justify-content: space-between;
@@ -46,11 +55,49 @@ export const StyledWaterList = styled.div`
       gap: 18px;
       button {
         background-color: transparent;
-        .edit-icon {
+        &.edit-btn {
           stroke: var(--secondary-color-4);
+          position: relative;
+          &:before {
+            content: '';
+            display: block;
+            width: 16px;
+            opacity: 0;
+            position: absolute;
+            height: 1px;
+            border-radius: 1px;
+            bottom: 25%;
+            left: 0;
+            transition: opacity 100ms linear;
+          }
+          &:hover {
+            &:before {
+              opacity: 1;
+              background-color: var(--secondary-color-4);
+            }
+          }
         }
-        .delete-icon {
+        &.delete-btn {
           stroke: var(--secondary-color-3);
+          position: relative;
+          &:before {
+            content: '';
+            display: block;
+            width: 16px;
+            opacity: 0;
+            position: absolute;
+            height: 1px;
+            border-radius: 1px;
+            bottom: 25%;
+            left: 0;
+            transition: opacity 100ms linear;
+          }
+          &:hover {
+            &:before {
+              opacity: 1;
+              background-color: var(--secondary-color-3);
+            }
+          }
         }
       }
     }
@@ -65,8 +112,8 @@ export const StyledWaterList = styled.div`
     width: fit-content;
     gap: 8px;
     background: none;
-    .plus-icon {
-      stroke: var(--primery-blue);
+    &:hover{
+      color: var(--secondary-color-5);
     }
   }
 `;

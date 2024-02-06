@@ -54,14 +54,15 @@ export const updateUser = async (userData, token) => {
 export const forgotPassword = async userData => {
   const { data } = await waterTrackerInstance.post(
     '/user/forgot-password',
+    '/user/forgot-password',
     userData
   );
   return data;
 };
 
-export const updatePassword = async (userData, token) => {
-  const { data } = await waterTrackerInstance.post(
-    `/user/restore-password/${token}`,
+export const updatePassword = async (restoreToken, userData) => {
+  const { data } = await waterTrackerInstance.patch(
+    `/user/restore-password/${restoreToken}`,
     userData
   );
   return data;

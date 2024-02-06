@@ -27,12 +27,16 @@ import {
 } from './Calendar.styled';
 
 
-import { selectIsLoading, selectMonthStat } from "Store/monthStat/monthStatSelectors";
+import { selectMonthStat } from "Store/monthStat/monthStatSelectors";
 import { getMonthStat } from 'Store/monthStat/monthStatThunk';
-import { selectRegisterDate } from 'Store/currentUser/currentUserSelectors';
-import { Loading } from 'components/Loader/Loader.styled';
+import { selectUserData } from 'Store/currentUser/currentUserSelectors';
+import { waterArrSelector } from 'Store/water/waterSelectors';
 
 export const Calendar = () => {
+  const dispatch = useDispatch();
+
+
+  const userData = useSelector(selectUserData);
 
   //check device screen width
   const isDesktop = useMediaQuery('(min-width: 768px)');
@@ -43,17 +47,15 @@ export const Calendar = () => {
   const [year, setYear] = useState(new Date().getFullYear());
 
   // Fetch month statistic
-  const isLoading = useSelector(selectIsLoading);
+  const waterServings = useSelector(waterArrSelector);
 
-  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getMonthStat({ month, year }));
-  }, [dispatch, month, year]);
+  }, [dispatch, month, year, waterServings, userData]);
 
   //* User data */
-  const registerDate = useSelector(selectRegisterDate);
-  const registerYear = Number(registerDate.split('-')[0]);
-  const registerMonth = Number(registerDate.split('-')[1]);
+  const registerYear = Number(userData.created.split('-')[0]);
+  const registerMonth = Number(userData.created.split('-')[1]);
   
   // Get month statistic
   const stats = useSelector(selectMonthStat);
@@ -159,8 +161,7 @@ export const Calendar = () => {
 
   // Render
 
-  return isLoading ? 
-  <Loading/> :
+  return (
 
     <StyledDiv>
       <StyledContainer>
@@ -225,5 +226,5 @@ export const Calendar = () => {
         )}
       </StyledPopOver>      
     </StyledDiv>
-  
+  )
 };
