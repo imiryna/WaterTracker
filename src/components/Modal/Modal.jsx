@@ -1,14 +1,13 @@
 import { useEffect } from 'react';
 import { StyledModal, StyledOverlay } from './Modal.styled';
 import { createPortal } from 'react-dom';
-// const modalRoot = document.getElementById('modal-root');
 const modalRoot = document.querySelector('#modal-root');
 
 export function Modal({ children, toggleModal }) {
   //Functions
-
-  const handleBakcdropClick = e =>
+  const handleBakcdropClick = e => {
     e.currentTarget === e.target && toggleModal();
+  };
 
   useEffect(() => {
     const handleKeyDown = e => e.code === 'Escape' && toggleModal();

@@ -24,7 +24,7 @@ const INITIAL_STATE = {
   isLoading: true,
 };
 
-// Added ZooBeeN
+// !Added ZooBeeN
 const handleRejected = (state, { payload }) => {
   state.isLoading = false;
   state.error = payload;
@@ -59,21 +59,54 @@ const currentUserSlice = createSlice({
           created: action.payload.created,
         };
       })
-      .addCase(getCurrentUserThunk.rejected, (state, action) => {
+
+      // ! Added ZooBeeN ********************
+      .addCase(getCurrentUserThunk.pending, state => {})
+      .addCase(getCurrentUserThunk.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.error = action.payload;
+        state.error = null;
+        console.log('GetUser-Fulfield');
+        state.user = {
+          avatarUrl: action.payload.avatarUrl,
+          dailyNorm: action.payload.dailyNorm,
+          email: action.payload.email,
+          gender: action.payload.gender,
+          name: action.payload.name,
+          registerDate: action.payload.created,
+        };
       })
-      // .addCase(getCurrentUserThunk.fulfilled, (state, action) => {
-      //   state.user = {
-      //     name: action.payload.name,
-      //     email: action.payload.email,
-      //     gender: action.payload.gender,
-      //     dailyNorm: action.payload.dailyNorm,
-      //     avatarUrl: action.payload.avatar,
-      //   };
-      //   state.error = null;
-      //   state.isLoading = false;
-      // })
+      .addCase(getCurrentUserThunk.rejected, (state, { payload }) => {
+        handleRejected(state, payload);
+      })
+
+      .addCase(updateCurrentUserThunk.pending, state => {})
+      .addCase(updateCurrentUserThunk.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = null;
+        console.log('UpdateUser-Fulfield');
+        state.user = {
+          avatarUrl: payload.user.avatarUrl,
+          dailyNorm: payload.user.dailyNorm,
+          email: payload.user.email,
+          gender: payload.user.gender,
+          name: payload.user.name,
+          registerDate: payload.user.created,
+        };
+      })
+      .addCase(updateCurrentUserThunk.rejected, (state, { payload }) => {
+        handleRejected(state, payload);
+      })
+
+      .addCase(uploadUserAvatarThunk.pending, state => {})
+      .addCase(uploadUserAvatarThunk.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = null;
+        state.user.avatarUrl = payload.avatarURL;
+      })
+      .addCase(uploadUserAvatarThunk.rejected, (state, { payload }) => {
+        handleRejected(state, payload);
+      })
+      // ! **************************
       //?CHANGE DALY NORMA
       .addCase(changeDailyNormaThunk.pending, state => {
         state.isLoading = true;
@@ -88,43 +121,13 @@ const currentUserSlice = createSlice({
         state.error = action.payload;
       })
 
-      // ! Added ZooBeeN ********************
-      .addCase(updateCurrentUserThunk.pending, state => {
-        // handlePending(state);
-        console.log('UpdateUser-Pending');
-      })
-      .addCase(updateCurrentUserThunk.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
-        state.error = null;
-        console.log('UpdateUser-Fulfield');
-        state.user = payload.user;
-      })
-      .addCase(updateCurrentUserThunk.rejected, (state, { payload }) => {
-        console.log('UpdateUser-Rejected!!!');
-        handleRejected(state, payload);
-      })
-
-      .addCase(uploadUserAvatarThunk.pending, state => {
-        // handlePending(state);
-        console.log('UpdateUserAvatar-Pending');
-      })
-      .addCase(uploadUserAvatarThunk.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
-        state.error = null;
-        console.log('UpdateUserAvatar-Fulfield');
-        state.user.avatarUrl = payload.avatarURL;
-      })
-      .addCase(uploadUserAvatarThunk.rejected, (state, { payload }) => {
-        handleRejected(state, payload);
-      })
-      // ! **************************
       .addMatcher(
         isAnyOf(
-          loginThunk.pending,
           getCurrentUserThunk.pending,
-          logOutThunk.pending,
           updateCurrentUserThunk.pending,
-          uploadUserAvatarThunk.pending
+          uploadUserAvatarThunk.pending,
+          loginThunk.pending,
+          logOutThunk.pending
         ),
         state => {
           state.error = null;

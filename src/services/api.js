@@ -36,12 +36,14 @@ export const userLogOut = async token => {
   return data;
 };
 
-export const uploadUserAvatar = async userData => {
+export const uploadUserAvatar = async (userData, token) => {
+  setToken(token);
   const { data } = await waterTrackerInstance.patch('/user/avatars', userData);
   return data;
 };
 
-export const updateUser = async userData => {
+export const updateUser = async (userData, token) => {
+  setToken(token);
   const { data } = await waterTrackerInstance.patch(
     '/user/updateUser',
     userData
@@ -66,7 +68,6 @@ export const updatePassword = async (restoreToken, userData) => {
 };
 
 // Today water portions apis
-
 export const getWaterServings = async token => {
   setToken(token);
   const { data } = await waterTrackerInstance.get('/water/today');

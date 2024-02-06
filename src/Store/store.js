@@ -4,7 +4,7 @@ import { authReducer } from './auth/authSlice';
 import { monthStatReducer } from './monthStat/monthStatSlice';
 import { modalReducer } from './modals/modalSlice';
 import { waterReducer } from './water/waterReducer';
-// import { usersReducer } from './users/usersSlice';
+
 //!Persist block *********************
 import storage from 'redux-persist/lib/storage';
 import {
@@ -22,17 +22,11 @@ import { currentUserReducer } from './currentUser/currentUserSlice';
 const persistAuthConfig = {
   key: 'auth',
   storage,
-  whitelist: 'token',
+  whitelist: ['token'],
 };
-// const persistUserConfig = {
-//   key: 'user',
-//   storage,
-// };
+
 const persistedAuthReducer = persistReducer(persistAuthConfig, authReducer);
-// const persistedUserReducer = persistReducer(
-//   persistUserConfig,
-//   currentUserReducer
-// );
+
 //! ****************************
 
 export const store = configureStore({

@@ -21,19 +21,13 @@ import {
 export const AvatarForm = () => {
   const dispatch = useDispatch();
   // Avatarka
-  const { avatarUrl, name } = useSelector(selectUserData);
-  console.log('Avatar: ', avatarUrl);
-  const { imgUrl = 'WaterTracker/avatar-neutral.jpg', imgName = 'Avatar' } = {
-    imgUrl: avatarUrl,
-    imgName: `Avatar for ${name}`,
-  };
+  const { avatarUrl = 'WaterTracker/avatar-neutral.jpg', name = 'Avatar' } =
+    useSelector(selectUserData);
   //Submit function
-  // function handleSubmit(values, { resetForm }) {
+
   function handleSubmit(values) {
     const myData = new FormData();
     myData.append('avatar', values);
-    // todo
-    console.log('Form was Submit: ', values, myData);
     dispatch(uploadUserAvatarThunk(myData));
     return;
   }
@@ -60,12 +54,10 @@ export const AvatarForm = () => {
     initialValues: {
       avatar: '',
     },
-    // onSubmit: handleSubmit,
     validationSchema: validationRules,
   });
 
   const handleChange = e => {
-    console.log('Input chenged');
     formik.setFieldValue('avatar', e.target.files[0]);
     handleSubmit(e.target.files[0]);
   };
@@ -75,7 +67,7 @@ export const AvatarForm = () => {
       <Label htmlFor="avatar">Your photo</Label>
       <InputContainer>
         <StyledAvatarSection>
-          <StyledImg src={imgUrl} alt={imgName} />
+          <StyledImg src={avatarUrl} alt={name} />
           <StyledUploadButton>
             <StyledUploadIcon />
             <p>Upload a photo</p>

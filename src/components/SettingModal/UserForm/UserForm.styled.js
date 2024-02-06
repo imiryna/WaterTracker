@@ -5,7 +5,7 @@ import { ReactComponent as HidePass } from 'Images/Icons/hide-pass.svg';
 
 export const Title = styled.div`
   /* margin-bottom: 15px; */
-  color: var(--Primery-Color-Black, #2f2f2f);
+  color: var(--primery-black);
   font-family: Roboto;
   font-size: 18px;
   font-style: normal;
@@ -25,7 +25,7 @@ export const Label = styled.label`
   display: block;
   margin-top: 15px;
   margin-bottom: 5px;
-  color: var(--Primery-Color-Black, #2f2f2f);
+  color: var(--primery-black);
   font-family: Roboto;
   font-size: 18px;
   font-style: normal;
@@ -39,26 +39,28 @@ export const Label = styled.label`
 `;
 export const RadioLabel = styled.label`
   margin-right: 15px;
-  color: var(--Primery-Color-Black, #2f2f2f);
+  color: var(--primery-black);
   font-family: Roboto;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: 1.25em; /* 125% */
 `;
-
+export const RadioGroup = styled.div`
+  margin-bottom: auto;
+`;
 export const Radio = styled(Field)`
   display: inline;
   margin-top: 15px;
   margin-bottom: 53px;
   margin-right: 5px;
 
-  fill: var(--Primery-Color-White, #fff);
+  fill: var(--primery-white, #fff);
   stroke-width: 1px;
-  stroke: var(--Primery-Color-Blue, #407bff);
+  stroke: var(--primery-blue);
 `;
 export const Input = styled(Field)`
-  color: var(--Primery-Color-Blue, #407bff);
+  color: var(--primery-blue);
   font-family: Roboto;
   font-size: 16px;
   font-style: normal;
@@ -74,48 +76,56 @@ export const Input = styled(Field)`
   margin-top: 5px;
   margin-bottom: 5px;
   border-radius: 6px;
-  border: 1px solid var(--Secondary-color-4, #d7e3ff);
+  border: 1px solid var(--secondary-color-4);
   width: 100%;
 
+  &.error {
+    color: var(--secondary-color-3);
+    border: 1px solid var(--secondary-color-3);
+  }
+
   &::-webkit-autofill {
-    color: var(--Secondary-color-3, #9ebbff);
+    color: var(--secondary-color-4);
   }
 
   &::-webkit-input-placeholder {
-    color: var(--Secondary-color-3, #9ebbff);
+    color: var(--secondary-color-4);
   }
   &::-moz-placeholder {
-    color: var(--Secondary-color-3, #9ebbff);
+    color: var(--secondary-color-4);
   } /* Firefox 19+ */
   &:-moz-placeholder {
-    color: var(--Secondary-color-3, #9ebbff);
+    color: var(--secondary-color-4);
   } /* Firefox 18- */
   &:-ms-input-placeholder {
-    color: var(--Secondary-color-3, #9ebbff);
+    color: var(--secondary-color-4);
   }
 `;
 
 export const FlexWrapper = styled.div`
   display: flex;
-  align-items: flex-start;
   gap: 20px;
   @media screen and (max-width: 768px) {
     flex-wrap: wrap;
   }
+  @media screen and (min-width: 768px) {
+    max-width: 850px;
+  }
 `;
 export const Wrapper = styled.div`
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 50%;
   @media screen and (max-width: 768px) {
     width: 100%;
   }
-  /* margin-right: 20px; */
 `;
 
 export const Button = styled.button`
   margin-top: 24px;
   border-radius: 10px;
-  background: var(--primery-blue, #407bff);
+  background: var(--primery-blue);
   box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.34);
 
   padding: 10px 50px;
@@ -127,19 +137,17 @@ export const Button = styled.button`
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
+
+  &:hover {
+    box-shadow: 0px 4px 14px 0px rgba(64, 123, 255, 0.54);
+  }
+  &:active {
+    box-shadow: none;
+  }
 `;
 
 export const InputContainer = styled.div`
   position: relative;
-  width: 280px;
-
-  @media (min-width: 768px) {
-    width: 336px;
-  }
-
-  @media (min-width: 1440px) {
-    width: 384px;
-  }
 `;
 export const ButtonIcon = styled.button`
   position: absolute;
@@ -152,11 +160,11 @@ export const ButtonIcon = styled.button`
 export const ShowPassIcon = styled(ShowPass)`
   width: 16px;
   height: 16px;
-  stroke: #407bff;
+  stroke: var(--primery-blue);
 `;
 
 export const HidePassIcon = styled(HidePass)`
   width: 16px;
   height: 16px;
-  stroke: #407bff;
+  stroke: var(--primery-blue);
 `;

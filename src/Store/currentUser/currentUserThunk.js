@@ -2,8 +2,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import {
   getCurrentUser,
   updateUser,
-  updateDailyNorma,
   uploadUserAvatar,
+  updateDailyNorma,
 } from 'services/api';
 
 export const getCurrentUserThunk = createAsyncThunk(
@@ -21,6 +21,39 @@ export const getCurrentUserThunk = createAsyncThunk(
     }
   }
 );
+
+export const uploadUserAvatarThunk = createAsyncThunk(
+  'user/avatars',
+  async (data, thunkAPI) => {
+    const token = thunkAPI.getState().auth.token;
+    if (token === null) {
+      return thunkAPI.rejectWithValue('Please Login');
+    }
+    try {
+      const res = await uploadUserAvatar(data, token);
+      return res;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const updateCurrentUserThunk = createAsyncThunk(
+  'user/updateUser',
+  async (data, thunkAPI) => {
+    const token = thunkAPI.getState().auth.token;
+    if (token === null) {
+      return thunkAPI.rejectWithValue('Please Login');
+    }
+    try {
+      const res = await updateUser(data, token);
+      return res;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
 export const changeDailyNormaThunk = createAsyncThunk(
   'waterNorma/change',
   async (newNorma, thunkAPI) => {
@@ -40,41 +73,6 @@ export const changeDailyNormaThunk = createAsyncThunk(
       return updatedDaliyNorma;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
-    }
-  }
-);
-
-export const updateCurrentUserThunk = createAsyncThunk(
-  'user/updateUser',
-  async (data, thunkAPI) => {
-    console.log('UPDATE CURRENT USER');
-    const token = thunkAPI.getState().auth.token;
-    if (token === null) {
-      return thunkAPI.rejectWithValue('Please Login');
-    }
-    try {
-      const res = await updateUser(data, token);
-      return res;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
-
-export const uploadUserAvatarThunk = createAsyncThunk(
-  'user/avatars',
-  async (data, thunkAPI) => {
-    const token = thunkAPI.getState().auth.token;
-    if (token === null) {
-      return thunkAPI.rejectWithValue('Please Login');
-    }
-    try {
-      console.log(data);
-      const res = await uploadUserAvatar(data, token);
-      console.log(res);
-      return res;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );

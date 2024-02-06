@@ -1,7 +1,6 @@
 import { UserForm } from './UserForm/UserForm';
 import { AvatarForm } from './AvatarForm/AvatarForm';
 import { toggleSettingsVisibility } from 'Store/modals/modalSlice';
-// import { selectUserData } from 'Store/currentUser/currentUserSelectors';
 import { useDispatch } from 'react-redux';
 import {
   StyledHeader,
@@ -14,11 +13,6 @@ import {
 export const Setting = () => {
   const dispatch = useDispatch();
   const toggleModal = () => dispatch(toggleSettingsVisibility());
-  // const { avatarUrl, name } = useSelector(selectUserData);
-  // const { imgUrl = 'WaterTracker/avatar-neutral.jpg', imgName = 'Avatar' } = {
-  //   imgUrl: avatarUrl,
-  //   imgName: `Avatar for ${name}`,
-  // };
 
   return (
     <StyledContainer>

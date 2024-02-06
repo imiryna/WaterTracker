@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
 import { Formik } from 'formik';
+import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { object, string, ref } from 'yup';
-
 import { toggleSettingsVisibility } from 'Store/modals/modalSlice';
 import { selectUserData } from 'Store/currentUser/currentUserSelectors';
-import {
-  updateCurrentUserThunk,
-  // getCurrentUserThunk,
-} from 'Store/currentUser/currentUserThunk';
+import { updateCurrentUserThunk } from 'Store/currentUser/currentUserThunk';
 
 // Styles
 import {
@@ -16,6 +13,7 @@ import {
   FormStyled,
   Input,
   Title,
+  RadioGroup,
   Radio,
   RadioLabel,
   Label,
@@ -31,56 +29,56 @@ import { FormError } from './FormError';
 export const UserForm = () => {
   const dispatch = useDispatch();
   const toggleModal = () => dispatch(toggleSettingsVisibility());
-
   const {
     name = '',
     email = '',
     gender = 'female',
   } = useSelector(selectUserData);
-  // for checking chenging fields
+  // for checking changing fields
   const startUserData = { name, email, gender };
   // Hide-Show passwords
   const [showPassword, setShowPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showRepPassword, setShowRepPassword] = useState(false);
-  // const [passState, setPassState] = useState('');
 
   //Submit function
-  function handleSubmit(values, { resetForm }) {
+  async function handleSubmit(values, { resetForm }) {
+    // Nothing to change
     if (
       startUserData.name === values.name &&
       startUserData.email === values.email &&
       startUserData.gender === values.gender
     ) {
-      if (!values.newPassword) {
-        toggleModal();
-        return console.log('Noting to change');
+      if (values.newPassword === '') {
+        toast.info('Noting to change');
+        return;
       }
     }
-
-    if (values.newPassword) {
-      if (!values.currentPassword) {
-        // console.log(newFormData);
-        setShowPassword(!showPassword);
-        // const inp = document.querySelector('#currentPassword');
-        // setPassState('Password is necessary');
-        return console.log('Current is necessary');
-      }
+    if (values.newPassword && values.currentPassword === '') {
+      toast.error('Current Password is necessary!!!');
+      return;
     }
+    const uploadData = {
+      name: values.name,
+      email: values.email,
+      gender: values.gender,
+      currentPassword: values.currentPassword,
+      newPassword: values.newPassword,
+    };
     // Remove empty properties
-    Object.entries(values).map(a =>
+    Object.entries(uploadData).map(a =>
       Object.entries(a[1]).filter(b => b[1].length).length
         ? a
-        : delete values[a[0]]
+        : delete uploadData[a[0]]
     );
 
-    dispatch(updateCurrentUserThunk(values));
+    const e = await dispatch(updateCurrentUserThunk(uploadData));
 
-    // todo - доделать чтобы закрывалось после ответа сервера
-    // resetForm();
-    // toggleModal();
-    // todo - доделать чтобы после закрытия обновлялись данные текущего пользователя
-    // dispatch(getCurrentUserThunk());
+    if (e.payload.message === 'User updated successfully') {
+      resetForm();
+      toggleModal();
+    }
+
     return;
   }
 
@@ -94,13 +92,12 @@ export const UserForm = () => {
   };
   //Formik Validation schema
   const userSchema = object().shape({
-    name: string().min(5).max(40).required('Name is required'),
+    name: string().min(3).max(40).required('Name is required'),
     email: string().email().required('Email is required'),
-    currentPassword: string().min(8).required('Old password is required'),
-
+    currentPassword: string().min(8),
     newPassword: string().matches(
-      /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,}$/gu,
-      'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character'
+      /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/gu,
+      'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number'
     ),
     repeatPassword: string().oneOf(
       [ref('newPassword'), null],
@@ -114,106 +111,113 @@ export const UserForm = () => {
       onSubmit={handleSubmit}
       validationSchema={userSchema}
     >
-      <FormStyled id="form">
-        <FlexWrapper>
-          <Wrapper>
-            <Title id="my-radio-group">Your gender identity</Title>
-            <div role="group" aria-labelledby="my-radio-group">
-              <RadioLabel>
-                <Radio type="radio" name="gender" value="female" />
-                Woman
-              </RadioLabel>
-              <RadioLabel>
-                <Radio type="radio" name="gender" value="male" />
-                Man
-              </RadioLabel>
-            </div>
+      {({ errors, touched }) => (
+        <FormStyled name="form">
+          <FlexWrapper>
+            <Wrapper>
+              <Title id="my-radio-group">Your gender identity</Title>
+              <RadioGroup role="group" aria-labelledby="my-radio-group">
+                <RadioLabel>
+                  <Radio type="radio" name="gender" value="female" />
+                  Woman
+                </RadioLabel>
+                <RadioLabel>
+                  <Radio type="radio" name="gender" value="male" />
+                  Man
+                </RadioLabel>
+              </RadioGroup>
 
-            <Label htmlFor="name">Your name</Label>
-            <Input
-              type="text"
-              name="name"
-              id="name"
-              title="Enter your name"
-              placeholder="Your name"
-            />
-            <FormError name="name" />
-
-            <Label htmlFor="email">E-mail</Label>
-            <Input
-              type="text"
-              name="email"
-              id="email"
-              title="Enter your email"
-              placeholder="E-mail"
-            />
-            <FormError name="email" />
-          </Wrapper>
-          <Wrapper>
-            <Title>Password</Title>
-            <Label className="small" htmlFor="currentPassword">
-              Outdated password:
-            </Label>
-            <InputContainer>
+              <Label htmlFor="name">Your name</Label>
               <Input
-                type={showPassword ? 'text' : 'password'}
-                name="currentPassword"
-                id="currentPassword"
-                title="Enter your current password"
-                placeholder="Password"
+                type="text"
+                name="name"
+                id="name"
+                title="Enter your name"
+                placeholder="Your name"
+                className={errors.name ? 'error' : ''}
               />
-              <ButtonIcon
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? <ShowPassIcon /> : <HidePassIcon />}
-              </ButtonIcon>
-            </InputContainer>
-            <FormError name="currentPassword" />
+              <FormError name="name" />
 
-            <Label className="small" htmlFor="newPassword">
-              New password:
-            </Label>
-            <InputContainer>
+              <Label htmlFor="email">E-mail</Label>
               <Input
-                type={showNewPassword ? 'text' : 'password'}
-                name="newPassword"
-                id="newPassword"
-                title="Enter new password"
-                placeholder="Password"
+                type="text"
+                name="email"
+                id="email"
+                title="Enter your email"
+                placeholder="E-mail"
+                className={errors.email ? 'error' : ''}
               />
-              <ButtonIcon
-                type="button"
-                onClick={() => setShowNewPassword(!showNewPassword)}
-              >
-                {showNewPassword ? <ShowPassIcon /> : <HidePassIcon />}
-              </ButtonIcon>
-            </InputContainer>
-            <FormError name="newPassword" />
+              <FormError name="email" />
+            </Wrapper>
+            <Wrapper>
+              <Title>Password</Title>
+              <Label className="small" htmlFor="currentPassword">
+                Outdated password:
+              </Label>
+              <InputContainer>
+                <Input
+                  type={showPassword ? 'text' : 'password'}
+                  name="currentPassword"
+                  id="currentPassword"
+                  title="Enter your current password"
+                  placeholder="Password"
+                  className={errors.currentPassword ? 'error' : ''}
+                />
+                <ButtonIcon
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? <ShowPassIcon /> : <HidePassIcon />}
+                </ButtonIcon>
+              </InputContainer>
+              <FormError name="currentPassword" />
 
-            <Label className="small" htmlFor="repeat">
-              Repeat password:
-            </Label>
-            <InputContainer>
-              <Input
-                type={showRepPassword ? 'text' : 'password'}
-                name="repeatPassword"
-                id="repeatPassword"
-                title="repeat new password"
-                placeholder="Password"
-              />
-              <ButtonIcon
-                type="button"
-                onClick={() => setShowRepPassword(!showRepPassword)}
-              >
-                {showRepPassword ? <ShowPassIcon /> : <HidePassIcon />}
-              </ButtonIcon>
-            </InputContainer>
-            <FormError name="repeatPassword" />
-          </Wrapper>
-        </FlexWrapper>
-        <Button type="submit">Save</Button>
-      </FormStyled>
+              <Label className="small" htmlFor="newPassword">
+                New password:
+              </Label>
+              <InputContainer>
+                <Input
+                  type={showNewPassword ? 'text' : 'password'}
+                  name="newPassword"
+                  id="newPassword"
+                  title="Enter new password"
+                  placeholder="Password"
+                  className={errors.newPassword ? 'error' : ''}
+                />
+                <ButtonIcon
+                  type="button"
+                  onClick={() => setShowNewPassword(!showNewPassword)}
+                >
+                  {showNewPassword ? <ShowPassIcon /> : <HidePassIcon />}
+                </ButtonIcon>
+              </InputContainer>
+              <FormError name="newPassword" />
+
+              <Label className="small" htmlFor="repeat">
+                Repeat password:
+              </Label>
+              <InputContainer>
+                <Input
+                  type={showRepPassword ? 'text' : 'password'}
+                  name="repeatPassword"
+                  id="repeatPassword"
+                  title="repeat new password"
+                  placeholder="Password"
+                  className={errors.repeatPassword ? 'error' : ''}
+                />
+                <ButtonIcon
+                  type="button"
+                  onClick={() => setShowRepPassword(!showRepPassword)}
+                >
+                  {showRepPassword ? <ShowPassIcon /> : <HidePassIcon />}
+                </ButtonIcon>
+              </InputContainer>
+              <FormError name="repeatPassword" />
+            </Wrapper>
+          </FlexWrapper>
+          <Button type="submit">Save</Button>
+        </FormStyled>
+      )}
     </Formik>
   );
 };
