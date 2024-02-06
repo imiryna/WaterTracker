@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { PlusSvg } from './StyledTodayListIcons';
 
 export const StyledWaterList = styled.div`
   display: flex;
@@ -116,9 +115,9 @@ export const StyledWaterList = styled.div`
     &:hover{
       color: var(--secondary-color-5);
     }
-    
+
     &:hover{
-      color: var(--secondary-color-5)
-    };
+      color: var(--secondary-color-5);
+    }
   }
 `;

@@ -30,12 +30,18 @@ export const PlusSvg = styled(PlusIcon)`
   fill: currentColor;
   width: 24px;
   height: 24px;
+  &:hover{
+    stroke: var(--secondary-color-5);
+  }
 `;
 
 export const MinusSvg = styled(MinusIcon)`
   stroke: var(--primery-blue);
   width: 24px;
   height: 24px;
+  &:hover{
+    fill: var(--secondary-color-5);
+  }
 `;
 
 export const CloseSvg = styled(CloseIcon)`

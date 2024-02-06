@@ -83,9 +83,6 @@ export const StyledWaterModal = styled.div`
       padding: 10px;
       border: 1px solid var(--secondary-color-4);
       box-shadow: 0px 2px 4px 0px rgba(64, 123, 255, 0.2);
-      &:hover{
-        box-shadow: 0 4px 14px 0 rgba(64, 123, 255, 0.54);
-      }
     }
     .current-water {
       font-size: 18px;
@@ -115,6 +112,10 @@ export const StyledWaterModal = styled.div`
       padding: 10px 30px;
       background-color: var(--primery-blue);
       border-radius: 10px;
+
+      &:hover{
+        box-shadow: 0 4px 14px 0 rgba(64, 123, 255, 0.54);
+      }
     }
   }
   .previous-val-box {

@@ -52,6 +52,7 @@ export const ProgressBarStyled = styled.div`
     display: flex;
     gap: 126px;
     justify-content: space-between;
+    margin-top: 5px;
     margin-bottom: 4px;
     width: 100%;
   }
@@ -158,6 +159,7 @@ export const ProgressBarStyled = styled.div`
     line-height: 20px;
     text-align: center;
     background-color: var(--primery-blue);
+    margin-top: 16px;
 
     &:hover{
       box-shadow: 0 4px 14px 0 rgba(64, 123, 255, 0.54);
@@ -184,14 +186,6 @@ export const ProgressBarStyled = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-
-  .button-text {
-  }
-
-  @media (min-width: 1440px) {
-    .button-text {
-    }
   }
 
   @media (min-width: 768px) {
