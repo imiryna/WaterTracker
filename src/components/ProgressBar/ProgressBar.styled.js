@@ -188,14 +188,6 @@ export const ProgressBarStyled = styled.div`
     justify-content: center;
   }
 
-  .button-text {
-  }
-
-  @media (min-width: 1440px) {
-    .button-text {
-    }
-  }
-
   @media (min-width: 768px) {
     .button-block {
       padding-top: 25px;
