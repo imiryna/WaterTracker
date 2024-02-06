@@ -81,8 +81,7 @@ export const updatePasswordThunk = createAsyncThunk(
   '/user/restore-password',
   async (userData, thunkAPI) => {
     try {
-      const res = await updatePassword(userData);
-
+      const res = await updatePassword(userData.restoreToken, userData.password);
       return res;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

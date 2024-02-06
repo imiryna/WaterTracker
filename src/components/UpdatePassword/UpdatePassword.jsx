@@ -40,7 +40,7 @@ import { updatePasswordThunk } from 'Store/auth/authOperations';
       validationSchema: validationSchema,
       onSubmit: async (values) => {
         try {
-            await dispatch(updatePasswordThunk(values));
+            await dispatch(updatePasswordThunk({restoreToken, password: {password: values.password}}));
              formik.resetForm();
         } catch (error) {
           setOpenSnackbar(true);
@@ -48,6 +48,12 @@ import { updatePasswordThunk } from 'Store/auth/authOperations';
       }
    });
 
+  //  get token
+  const url = window.location.href;
+  const urlObject = new URL(url);
+  const pathname = urlObject.search;
+  const segment = (pathname.split('='));
+  const restoreToken = segment[1];
 
    useEffect(() => {
     if (authError) {
