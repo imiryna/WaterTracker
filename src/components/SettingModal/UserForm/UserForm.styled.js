@@ -79,7 +79,7 @@ export const Input = styled(Field)`
   border: 1px solid var(--secondary-color-4);
   width: 100%;
 
-  &_error {
+  &.error {
     color: var(--secondary-color-3);
     border: 1px solid var(--secondary-color-3);
   }

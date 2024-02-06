@@ -74,7 +74,6 @@ export const UserForm = () => {
 
     const e = await dispatch(updateCurrentUserThunk(uploadData));
 
-    // todo - доделать чтобы закрывалось после ответа сервера
     if (e.payload.message === 'User updated successfully') {
       resetForm();
       toggleModal();
@@ -112,106 +111,113 @@ export const UserForm = () => {
       onSubmit={handleSubmit}
       validationSchema={userSchema}
     >
-      <FormStyled name="form">
-        <FlexWrapper>
-          <Wrapper>
-            <Title id="my-radio-group">Your gender identity</Title>
-            <RadioGroup role="group" aria-labelledby="my-radio-group">
-              <RadioLabel>
-                <Radio type="radio" name="gender" value="female" />
-                Woman
-              </RadioLabel>
-              <RadioLabel>
-                <Radio type="radio" name="gender" value="male" />
-                Man
-              </RadioLabel>
-            </RadioGroup>
+      {({ errors, touched }) => (
+        <FormStyled name="form">
+          <FlexWrapper>
+            <Wrapper>
+              <Title id="my-radio-group">Your gender identity</Title>
+              <RadioGroup role="group" aria-labelledby="my-radio-group">
+                <RadioLabel>
+                  <Radio type="radio" name="gender" value="female" />
+                  Woman
+                </RadioLabel>
+                <RadioLabel>
+                  <Radio type="radio" name="gender" value="male" />
+                  Man
+                </RadioLabel>
+              </RadioGroup>
 
-            <Label htmlFor="name">Your name</Label>
-            <Input
-              type="text"
-              name="name"
-              id="name"
-              title="Enter your name"
-              placeholder="Your name"
-            />
-            <FormError name="name" />
-
-            <Label htmlFor="email">E-mail</Label>
-            <Input
-              type="text"
-              name="email"
-              id="email"
-              title="Enter your email"
-              placeholder="E-mail"
-            />
-            <FormError name="email" />
-          </Wrapper>
-          <Wrapper>
-            <Title>Password</Title>
-            <Label className="small" htmlFor="currentPassword">
-              Outdated password:
-            </Label>
-            <InputContainer>
+              <Label htmlFor="name">Your name</Label>
               <Input
-                type={showPassword ? 'text' : 'password'}
-                name="currentPassword"
-                id="currentPassword"
-                title="Enter your current password"
-                placeholder="Password"
+                type="text"
+                name="name"
+                id="name"
+                title="Enter your name"
+                placeholder="Your name"
+                className={errors.name ? 'error' : ''}
               />
-              <ButtonIcon
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? <ShowPassIcon /> : <HidePassIcon />}
-              </ButtonIcon>
-            </InputContainer>
-            <FormError name="currentPassword" />
+              <FormError name="name" />
 
-            <Label className="small" htmlFor="newPassword">
-              New password:
-            </Label>
-            <InputContainer>
+              <Label htmlFor="email">E-mail</Label>
               <Input
-                type={showNewPassword ? 'text' : 'password'}
-                name="newPassword"
-                id="newPassword"
-                title="Enter new password"
-                placeholder="Password"
+                type="text"
+                name="email"
+                id="email"
+                title="Enter your email"
+                placeholder="E-mail"
+                className={errors.email ? 'error' : ''}
               />
-              <ButtonIcon
-                type="button"
-                onClick={() => setShowNewPassword(!showNewPassword)}
-              >
-                {showNewPassword ? <ShowPassIcon /> : <HidePassIcon />}
-              </ButtonIcon>
-            </InputContainer>
-            <FormError name="newPassword" />
+              <FormError name="email" />
+            </Wrapper>
+            <Wrapper>
+              <Title>Password</Title>
+              <Label className="small" htmlFor="currentPassword">
+                Outdated password:
+              </Label>
+              <InputContainer>
+                <Input
+                  type={showPassword ? 'text' : 'password'}
+                  name="currentPassword"
+                  id="currentPassword"
+                  title="Enter your current password"
+                  placeholder="Password"
+                  className={errors.currentPassword ? 'error' : ''}
+                />
+                <ButtonIcon
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? <ShowPassIcon /> : <HidePassIcon />}
+                </ButtonIcon>
+              </InputContainer>
+              <FormError name="currentPassword" />
 
-            <Label className="small" htmlFor="repeat">
-              Repeat password:
-            </Label>
-            <InputContainer>
-              <Input
-                type={showRepPassword ? 'text' : 'password'}
-                name="repeatPassword"
-                id="repeatPassword"
-                title="repeat new password"
-                placeholder="Password"
-              />
-              <ButtonIcon
-                type="button"
-                onClick={() => setShowRepPassword(!showRepPassword)}
-              >
-                {showRepPassword ? <ShowPassIcon /> : <HidePassIcon />}
-              </ButtonIcon>
-            </InputContainer>
-            <FormError name="repeatPassword" />
-          </Wrapper>
-        </FlexWrapper>
-        <Button type="submit">Save</Button>
-      </FormStyled>
+              <Label className="small" htmlFor="newPassword">
+                New password:
+              </Label>
+              <InputContainer>
+                <Input
+                  type={showNewPassword ? 'text' : 'password'}
+                  name="newPassword"
+                  id="newPassword"
+                  title="Enter new password"
+                  placeholder="Password"
+                  className={errors.newPassword ? 'error' : ''}
+                />
+                <ButtonIcon
+                  type="button"
+                  onClick={() => setShowNewPassword(!showNewPassword)}
+                >
+                  {showNewPassword ? <ShowPassIcon /> : <HidePassIcon />}
+                </ButtonIcon>
+              </InputContainer>
+              <FormError name="newPassword" />
+
+              <Label className="small" htmlFor="repeat">
+                Repeat password:
+              </Label>
+              <InputContainer>
+                <Input
+                  type={showRepPassword ? 'text' : 'password'}
+                  name="repeatPassword"
+                  id="repeatPassword"
+                  title="repeat new password"
+                  placeholder="Password"
+                  className={errors.repeatPassword ? 'error' : ''}
+                />
+                <ButtonIcon
+                  type="button"
+                  onClick={() => setShowRepPassword(!showRepPassword)}
+                >
+                  {showRepPassword ? <ShowPassIcon /> : <HidePassIcon />}
+                </ButtonIcon>
+              </InputContainer>
+              <FormError name="repeatPassword" />
+            </Wrapper>
+          </FlexWrapper>
+          <Button type="submit">Save</Button>
+        </FormStyled>
+      )}
     </Formik>
   );
 };
