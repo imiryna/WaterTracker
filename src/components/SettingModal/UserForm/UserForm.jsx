@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Formik } from 'formik';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
-import { object, string } from 'yup';
+import { object, string, ref } from 'yup';
 import { toggleSettingsVisibility } from 'Store/modals/modalSlice';
 import { selectUserData } from 'Store/currentUser/currentUserSelectors';
 import { updateCurrentUserThunk } from 'Store/currentUser/currentUserThunk';
@@ -40,9 +40,6 @@ export const UserForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showRepPassword, setShowRepPassword] = useState(false);
-  // controlled elements
-  const [passState, setPassState] = useState('');
-  const [newPassState, setNewPassState] = useState('');
 
   //Submit function
   async function handleSubmit(values, { resetForm }) {
@@ -52,12 +49,12 @@ export const UserForm = () => {
       startUserData.email === values.email &&
       startUserData.gender === values.gender
     ) {
-      if (newPassState === '') {
+      if (values.newPassword === '') {
         toast.info('Noting to change');
         return;
       }
     }
-    if (newPassState && passState === '') {
+    if (values.newPassword && values.currentPassword === '') {
       toast.error('Current Password is necessary!!!');
       return;
     }
@@ -65,8 +62,8 @@ export const UserForm = () => {
       name: values.name,
       email: values.email,
       gender: values.gender,
-      currentPassword: passState,
-      newPassword: newPassState,
+      currentPassword: values.currentPassword,
+      newPassword: values.newPassword,
     };
     // Remove empty properties
     Object.entries(uploadData).map(a =>
@@ -76,7 +73,7 @@ export const UserForm = () => {
     );
 
     const e = await dispatch(updateCurrentUserThunk(uploadData));
-    console.log('Async dispatch ', e);
+
     // todo - доделать чтобы закрывалось после ответа сервера
     if (e.payload.message === 'User updated successfully') {
       resetForm();
@@ -96,15 +93,17 @@ export const UserForm = () => {
   };
   //Formik Validation schema
   const userSchema = object().shape({
-    name: string().min(5).max(40).required('Name is required'),
+    name: string().min(3).max(40).required('Name is required'),
     email: string().email().required('Email is required'),
     currentPassword: string().min(8),
-
     newPassword: string().matches(
-      /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,}$/gu,
-      'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character'
+      /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/gu,
+      'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number'
     ),
-    repitpass: string().oneOf([newPassState], 'Passwords must match'),
+    repeatPassword: string().oneOf(
+      [ref('newPassword'), null],
+      'Passwords must match'
+    ),
   });
 
   return (
@@ -113,10 +112,9 @@ export const UserForm = () => {
       onSubmit={handleSubmit}
       validationSchema={userSchema}
     >
-      <FormStyled id="form">
+      <FormStyled name="form">
         <FlexWrapper>
           <Wrapper>
-            {/* <div> */}
             <Title id="my-radio-group">Your gender identity</Title>
             <RadioGroup role="group" aria-labelledby="my-radio-group">
               <RadioLabel>
@@ -128,8 +126,7 @@ export const UserForm = () => {
                 Man
               </RadioLabel>
             </RadioGroup>
-            {/* </div> */}
-            {/* <div> */}
+
             <Label htmlFor="name">Your name</Label>
             <Input
               type="text"
@@ -139,8 +136,7 @@ export const UserForm = () => {
               placeholder="Your name"
             />
             <FormError name="name" />
-            {/* </div> */}
-            {/* <div> */}
+
             <Label htmlFor="email">E-mail</Label>
             <Input
               type="text"
@@ -150,7 +146,6 @@ export const UserForm = () => {
               placeholder="E-mail"
             />
             <FormError name="email" />
-            {/* </div> */}
           </Wrapper>
           <Wrapper>
             <Title>Password</Title>
@@ -164,10 +159,6 @@ export const UserForm = () => {
                 id="currentPassword"
                 title="Enter your current password"
                 placeholder="Password"
-                value={passState}
-                onChange={e => {
-                  setPassState(e.target.value);
-                }}
               />
               <ButtonIcon
                 type="button"
@@ -188,10 +179,6 @@ export const UserForm = () => {
                 id="newPassword"
                 title="Enter new password"
                 placeholder="Password"
-                value={newPassState}
-                onChange={e => {
-                  setNewPassState(e.target.value);
-                }}
               />
               <ButtonIcon
                 type="button"

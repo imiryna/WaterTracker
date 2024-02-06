@@ -21,7 +21,7 @@ export const StyledUploadIcon = styled(UploadIcon)`
   margin-right: 5px;
   width: 20px;
   height: 20px;
-  stroke: var(--primery-blue);
+  stroke: inherit;
   stroke-width: 80px;
 `;
 export const StyledUploadButton = styled.div`
@@ -33,10 +33,15 @@ export const StyledUploadButton = styled.div`
   font-weight: 500;
   font-size: 15px;
   color: var(--primery-blue);
+  stroke: var(--primery-blue);
   outline: none;
   border: none;
   background: transparent;
   cursor: pointer;
+  &:hover {
+    color: var(--secondary-color-5);
+    stroke: var(--secondary-color-5);
+  }
 `;
 
 export const Input = styled.input`
