@@ -3,23 +3,17 @@ import { CupSvg, DeleteSvg, EditSvg } from './StyledTodayListIcons';
 import { parseUtcTime } from 'services/helpers/getUtcTime';
 import { toggleEditWateVisibility } from 'Store/modals/modalSlice';
 
-const WaterBtn = ({ children, onClick }) => {
-  return <button onClick={onClick}>{children}</button>;
-};
 export const createWaterCardMarkup = ({
   waterCardId,
   waterQuantity,
   waterAddTime,
   setDialogStatus,
   setCurrentEditObj,
-  dispatch
+  dispatch,
 }) => {
-  
-  
   const time = parseUtcTime(waterAddTime);
 
-
-  const toggleModal = () => dispatch(toggleEditWateVisibility())
+  const toggleModal = () => dispatch(toggleEditWateVisibility());
 
   if (time.hours > 12) {
     time.hours = time.hours - 12;
@@ -38,19 +32,21 @@ export const createWaterCardMarkup = ({
         </div>
       </div>
       <div className="btns">
-        <WaterBtn
+        <button
+          className="edit-btn"
           onClick={() => {
             setCurrentEditObj({
               _id: waterCardId,
               quantity: waterQuantity,
               time: waterAddTime,
             });
-            toggleModal()
+            toggleModal();
           }}
           children={<EditSvg />}
         />
         {/* remove btn */}
         <Button
+          className="delete-btn"
           label={<DeleteSvg data-place="card" />}
           icon="pi pi-info-circle"
           onClick={() =>
