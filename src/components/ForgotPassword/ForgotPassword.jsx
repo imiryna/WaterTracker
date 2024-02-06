@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate} from 'react-router-dom';
 import { AuthStyledForm, AuthDiv, FormName, InputDiv, StyledInput, FormButton, AuthDataError, RedirectButton } from '../SignIn/SignIn.styled';
 import { selectAuthError, selectAuthAuthenticated } from 'Store/auth/authSelector';
 import { useFormik } from 'formik';
@@ -18,7 +18,6 @@ import { forgotPasswordThunk } from 'Store/auth/authOperations';
 });
 
  export const ForgotPasswordForm = () => {
-
  const dispatch = useDispatch();
  const authError = useSelector(selectAuthError);
  const isAuthenticated = useSelector(selectAuthAuthenticated);
@@ -30,10 +29,12 @@ import { forgotPasswordThunk } from 'Store/auth/authOperations';
        email: ''
       },
 
+      
       validationSchema: validationSchema,
+
       onSubmit: async (values) => {
         try {
-          await dispatch(forgotPasswordThunk(values));
+          await dispatch(forgotPasswordThunk({email: values.email}));
           formik.resetForm();
         } catch (error) {
           setOpenSnackbar(true);

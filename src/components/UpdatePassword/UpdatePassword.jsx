@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate, redirect, useLocation } from 'react-router-dom';
 import { AuthStyledForm, AuthDiv, FormName, InputDiv, StyledInput, FormButton, AuthDataError, RedirectButton } from '../SignIn/SignIn.styled';
 import { selectAuthError, selectAuthAuthenticated } from 'Store/auth/authSelector';
 import { useFormik } from 'formik';
@@ -41,7 +41,8 @@ import { updatePasswordThunk } from 'Store/auth/authOperations';
       onSubmit: async (values) => {
         try {
             await dispatch(updatePasswordThunk({restoreToken, password: {password: values.password}}));
-             formik.resetForm();
+            formik.resetForm();
+            return redirect('/signin');
         } catch (error) {
           setOpenSnackbar(true);
         }
@@ -60,12 +61,6 @@ import { updatePasswordThunk } from 'Store/auth/authOperations';
       setOpenSnackbar(true);
     }
   }, [authError]);
-
-   useEffect(() => {
-     const searchParams = new URLSearchParams(location.search);
-     const token = searchParams.get('token');
-     console.log(token);
-   }, [location]);
 
   const handleCloseSnackbar = () => {
     setOpenSnackbar(false);
