@@ -22,7 +22,6 @@ export const waterSlice = createSlice({
   initialState: INITIAL_STATE,
   reducers: {
     setWater: (state, action) => {
-      console.log("adsada")
       state.waterArr = action.payload;
     },
   },

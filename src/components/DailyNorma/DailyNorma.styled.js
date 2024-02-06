@@ -16,6 +16,7 @@ export const StyledDalyNorma = styled.div`
     gap: 12px;
     .norma-amount {
       font-size: 24px;
+      font-weight: 700;
       color: var(--primery-blue);
       @media only screen and (max-width: 767px) {
         font-size: 22px;
