@@ -66,28 +66,26 @@ export const refreshUserThunk = createAsyncThunk(
 );
 
 export const forgotPasswordThunk = createAsyncThunk(
-    '/user/forgot-password',
-    async (userData, thunkAPI) => {
-        try {
-            const res = await forgotPassword(userData);
-            return res;
-        } catch (error) {
-            return thunkAPI.rejectWithValue(error.message);
-        }
+  '/user/forgot-password',
+  async (userData, thunkAPI) => {
+    try {
+      const res = await forgotPassword(userData);
+      return res;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
 
 export const updatePasswordThunk = createAsyncThunk(
-    '/user/restore-password',
+  '/user/restore-password',
   async (userData, thunkAPI) => {
-        try {
-          const res = await updatePassword(userData);
-          
-            return res;
-        } catch (error) {
-            return thunkAPI.rejectWithValue(error.message);
-        }
+    try {
+      const res = await updatePassword(userData);
+
+      return res;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
