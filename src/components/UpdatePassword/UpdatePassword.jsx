@@ -31,12 +31,14 @@ const validationSchema = Yup.object({
     .required('Password is required'),
 });
 
-export const UpdatePasswordForm = () => {
-  const dispatch = useDispatch();
-  const authError = useSelector(selectAuthError);
-  const isAuthenticated = useSelector(selectAuthAuthenticated);
+ export const UpdatePasswordForm = () => {
 
-  const [openSnackbar, setOpenSnackbar] = useState(false);
+ const dispatch = useDispatch();
+ const authError = useSelector(selectAuthError);
+ const isAuthenticated = useSelector(selectAuthAuthenticated);
+ const [openSnackbar, setOpenSnackbar] = useState(false);
+ const [openConfirmation, setOpenOpenConfirmation] = useState(false);
+
 
   const formik = useFormik({
     initialValues: {
