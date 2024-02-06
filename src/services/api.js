@@ -52,7 +52,6 @@ export const updateUser = async userData => {
 export const forgotPassword = async userData => {
   const { data } = await waterTrackerInstance.post(
     '/user/forgot-password',
-    '/user/forgot-password',
     userData
   );
   return data;
