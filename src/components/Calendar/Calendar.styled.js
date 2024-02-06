@@ -121,6 +121,10 @@ background-color: transparent;
 transform: rotate(90deg);
 width: 14px;
 height: 14px;
+
+&:hover{
+    color: var(--secondary-color-5)
+}
 `
 
 export const StyledRightArrow = styled(Arrow)`
@@ -129,6 +133,10 @@ background-color: transparent;
 transform: rotate(-90deg);
 width: 14px;
 height: 14px;
+
+&:hover{
+    color: var(--secondary-color-5)
+}
 `
 
 export const StyledArrowButtonLeft = styled.button`
@@ -137,7 +145,8 @@ border: none;
 outline: none;
 width: 14px;
 height: 14px;
-visibility: ${props => props.$hideButton ? 'hidden' : 'visible'}
+visibility: ${props => props.$hideButton ? 'hidden' : 'visible'};
+cursor: pointer;
 `
 
 export const StyledArrowButtonRight = styled.button`
@@ -146,7 +155,8 @@ border: none;
 outline: none;
 width: 14px;
 height: 14px;
-visibility: ${props => props.$hideButton ? 'hidden' : 'visible'}
+visibility: ${props => props.$hideButton ? 'hidden' : 'visible'};
+cursor: pointer;
 `
 
 export const StyledDate = styled.span`

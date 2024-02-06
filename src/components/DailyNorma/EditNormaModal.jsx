@@ -48,6 +48,7 @@ export const EditDailyNormaModal = ({
             <label className="gender-label">
               <input
                 type="radio"
+                className='radio-input'
                 name="gender"
                 value="female"
                 onChange={e => {
@@ -60,6 +61,7 @@ export const EditDailyNormaModal = ({
             <label className="gender-label">
               <input
                 type="radio"
+                className='radio-input'
                 name="gender"
                 value="male"
                 onChange={e => {

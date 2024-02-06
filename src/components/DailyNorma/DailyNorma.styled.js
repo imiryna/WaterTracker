@@ -6,6 +6,15 @@ export const StyledDalyNorma = styled.div`
   border: 1px solid var(--secondary-color-2);
   width: fit-content;
   background-color: var(--primery-white);
+  margin-bottom: 232px;
+
+  @media (min-width: 768px){
+    margin-bottom: 326px;
+  }
+
+  @media (min-width: 1440px){
+    margin-bottom: 466px;
+  }
 
   .title {
     font-size: 18px;
@@ -26,6 +35,12 @@ export const StyledDalyNorma = styled.div`
       font-size: 16px;
       color: var(--secondary-color-4);
       background: none;
+      cursor: pointer;
+
+      &:hover{
+      color: var(--secondary-color-5)
+      }
     }
+    
   }
 `;

@@ -83,18 +83,11 @@ export const TextCss = styled.p`
   font-weight: 400;
   line-height: 1.3;
   text-align: right;
-
+  
   @media (min-width: 768px) {
     font-size: 18px;
     line-height: 1.25;
   }
-`;
-
-export const UserSettingCss = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  cursor: pointer;
 `;
 
 export const UserAvatarCss = styled.div`
@@ -107,3 +100,17 @@ export const UserAvatarCss = styled.div`
   background-position: 50% 50%;
   background-repeat: no-repeat;
 `;
+
+export const UserSettingCss = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+  &:hover ${TextCss}{
+    color: var(--secondary-color-5);
+  };
+  
+  &:hover ${ArrowIcon}{
+    fill: var(--secondary-color-5)
+  }
+`

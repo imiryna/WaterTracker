@@ -42,4 +42,8 @@ export const CloseSvg = styled(CloseIcon)`
   stroke: var(--primery-blue);
   width: 24px;
   height: 24px;
+
+  &:hover{
+      stroke: var(--secondary-color-5);
+    }
 `;

@@ -17,6 +17,10 @@ export const StyledEditNormaModal = styled.div`
   label {
     display: block;
   }
+
+  .radio-input{
+    cursor: pointer;
+  }
   .main-title {
     font-size: 26px;
     line-height: 1.3;
@@ -107,10 +111,14 @@ export const StyledEditNormaModal = styled.div`
       padding: 10px 30px;
       width: 160px;
       border-radius: 10px;
+      &:hover{
+          box-shadow: 0 4px 14px 0 rgba(64, 123, 255, 0.54);
+        }
       @media only screen and (max-width: 767px) {
         width: 100%;
         font-size: 16px;
         padding: 8px 30px;
+       
       }
     }
   }
