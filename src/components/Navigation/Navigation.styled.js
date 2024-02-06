@@ -50,6 +50,7 @@ export const NavLinkCss = styled(NavLink)`
   display: flex;
   flex-direction: row;
   align-items: center;
+  cursor: pointer;
 `;
 
 export const LogoText = styled.div`
@@ -84,6 +85,7 @@ export const UserSettingCss = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  cursor: pointer;
 `;
 
 export const UserAvatarCss = styled.div`

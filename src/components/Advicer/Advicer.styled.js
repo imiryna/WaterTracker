@@ -108,6 +108,8 @@ export const NavLinkBtn = styled(NavLink)`
   background: var(--primery-blue);
   box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.34);
   width: 280px;
+  cursor: pointer;
+
   @media (min-width: 768px) {
     width: 336px;
   }
