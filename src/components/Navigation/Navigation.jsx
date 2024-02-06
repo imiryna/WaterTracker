@@ -27,6 +27,7 @@ import {
   UserSettingCss,
   UserAvatarCss,
   UserIcon,
+  WraperCss,
 } from './Navigation.styled';
 
 import { Modal } from 'components/Modal/Modal';
@@ -84,32 +85,34 @@ export const Navigation = () => {
       {/* // END OF Temp section */}
 
       <NavCss>
-        <NavLinkCss to={'/'}>
-          <LogoIcon />
-          <LogoText>Tracker of water</LogoText>
-        </NavLinkCss>
-
-        {!isAuthed ? (
-          <NavLinkCss to={'/signin'}>
-            <TextCss>Sign in</TextCss>
-            <UserIcon />
+        <WraperCss>
+          <NavLinkCss to={'/'}>
+            <LogoIcon />
+            <LogoText>Tracker of water</LogoText>
           </NavLinkCss>
-        ) : (
-          <UserSettingCss onClick={toggleDropbox}>
-            <TextCss>{shownName}</TextCss>
-            {!currentUser.avatarUrl ? (
-              <UserAvatarCss
-                style={{ backgroundColor: getRandomHexColor() }}
-              ></UserAvatarCss>
-            ) : (
-              <UserAvatarCss
-                style={{ backgroundImage: `url(${currentUser.avatarUrl})` }}
-              ></UserAvatarCss>
-            )}
-            <ArrowIcon />
-            {dropdownShown ? <DropdownMenu /> : null}
-          </UserSettingCss>
-        )}
+
+          {!isAuthed ? (
+            <NavLinkCss to={'/signin'}>
+              <TextCss>Sign in</TextCss>
+              <UserIcon />
+            </NavLinkCss>
+          ) : (
+            <UserSettingCss onClick={toggleDropbox}>
+              <TextCss>{shownName}</TextCss>
+              {!currentUser.avatarUrl ? (
+                <UserAvatarCss
+                  style={{ backgroundColor: getRandomHexColor() }}
+                ></UserAvatarCss>
+              ) : (
+                <UserAvatarCss
+                  style={{ backgroundImage: `url(${currentUser.avatarUrl})` }}
+                ></UserAvatarCss>
+              )}
+              <ArrowIcon />
+              {dropdownShown ? <DropdownMenu /> : null}
+            </UserSettingCss>
+          )}
+        </WraperCss>
       </NavCss>
       <Outlet />
     </>
