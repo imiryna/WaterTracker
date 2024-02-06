@@ -154,6 +154,10 @@ export const FormButton = styled.button`
   letter-spacing: 0%;
   text-align: center;
 
+  &:hover {
+    box-shadow: 0px 4px 14px 0px rgba(64, 123, 255, 0.54);
+  }
+
 
 
   @media (min-width: 768px) {
@@ -184,6 +188,10 @@ font-size: 16px;
 font-style: normal;
 font-weight: 400;
 line-height: 20px; 
+
+&:hover {
+  color: rgb(255, 157, 67);
+}
 `
 export const NavDiv = styled.div`
   display: flex;

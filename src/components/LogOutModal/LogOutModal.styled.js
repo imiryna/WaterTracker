@@ -78,7 +78,7 @@ export const GlobalConfirmDialogStyles = createGlobalStyle`
   }
 
   .p-confirm-dialog-accept {
-    /* Styles for Log out button */
+    
     background-color: #EF5050;
     color: white;
     font-family: Roboto;
@@ -107,7 +107,7 @@ export const GlobalConfirmDialogStyles = createGlobalStyle`
   }
 
   .p-confirm-dialog-reject {
-    /* Styles for Cancel button */
+   
     background-color: #D7E3FF;
     color: #407BFF;
     font-family: Roboto;

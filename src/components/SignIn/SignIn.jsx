@@ -54,7 +54,7 @@ export const AuthForm = () => {
     onSubmit: async values => {
       try {
         await dispatch(loginThunk(values));
-        formik.resetForm();
+        
       } catch (error) {
         setOpenSnackbar(true);
       }
