@@ -26,9 +26,8 @@ export const DeleteSvg = styled(DeleteIcon)`
 `;
 
 export const PlusSvg = styled(PlusIcon)`
-  stroke: var(--primery-blue);
-  fill: var(--primery-blue);
-  color: var(--primery-blue);
+  stroke: currentColor;
+  fill: currentColor;
   width: 24px;
   height: 24px;
 `;
