@@ -47,6 +47,7 @@ export const AuthRegForm = () => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
+  const [verificationSent, setVerificationSent] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -61,7 +62,7 @@ export const AuthRegForm = () => {
         const { repeatPassword, ...registrationData } = values;
     
         await dispatch(registerThunk(registrationData));
-        formik.resetForm();
+        setVerificationSent(true);
       } catch (error) {
         setOpenSnackbar(true);
       }
@@ -80,7 +81,7 @@ export const AuthRegForm = () => {
 
   if (isAuthenticated) {
     return <Navigate to="/signin" />;
-  }
+   }
 
   return (
     <AuthDiv>
@@ -167,6 +168,18 @@ export const AuthRegForm = () => {
           {authError}
         </Alert>
       </Snackbar>
+      {verificationSent && (
+      <Snackbar
+        open={true} 
+        autoHideDuration={6000}
+        onClose={() => setVerificationSent(false)}
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+          >
+        <Alert severity="info">
+          Verification instructions were sent to your email. Please check.
+        </Alert>
+    </Snackbar>
+)}
     </AuthDiv>
   );
 };
