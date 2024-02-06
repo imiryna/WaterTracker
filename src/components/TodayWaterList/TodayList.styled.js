@@ -19,6 +19,7 @@ export const StyledWaterList = styled.div`
     font-size: 24px;
     font-family: var(--primery-font);
     font-weight: 500;
+    margin-bottom: 16px;
     @media only screen and (min-width: 768px) {
       font-size: 26px;
     }

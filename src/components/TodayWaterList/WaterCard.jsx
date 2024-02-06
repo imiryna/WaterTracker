@@ -2,22 +2,22 @@ import { Button } from 'primereact/button';
 import { CupSvg, DeleteSvg, EditSvg } from './StyledTodayListIcons';
 import { parseUtcTime } from 'services/helpers/getUtcTime';
 import { toggleEditWateVisibility } from 'Store/modals/modalSlice';
-import { useDispatch } from 'react-redux';
 
 const WaterBtn = ({ children, onClick }) => {
   return <button onClick={onClick}>{children}</button>;
 };
-export const CreateWaterCardMarkup = ({
+export const createWaterCardMarkup = ({
   waterCardId,
   waterQuantity,
   waterAddTime,
   setDialogStatus,
   setCurrentEditObj,
+  dispatch
 }) => {
+  
   
   const time = parseUtcTime(waterAddTime);
 
-  const dispatch = useDispatch()
 
   const toggleModal = () => dispatch(toggleEditWateVisibility())
 

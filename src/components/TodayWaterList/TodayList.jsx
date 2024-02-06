@@ -2,7 +2,7 @@ import { delWaterThunk, getDailyWaterThunk } from 'Store/water/waterThunks';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { StyledWaterList } from './TodayList.styled';
-import { CreateWaterCardMarkup } from './WaterCard';
+import { createWaterCardMarkup } from './WaterCard';
 import { waterArrSelector } from 'Store/water/waterSelectors';
 import { useState, useEffect } from 'react';
 import { DeleteConfirmDialog } from './DeleteDialog';
@@ -18,56 +18,55 @@ import {
 } from 'Store/modals/modalSlice';
 import { selectAddWater, selectEditWater } from 'Store/modals/modalSelector';
 
-// import { Dialog } from '@mui/material';
 
 export const TodayList = () => {
   const dispatch = useDispatch();
 
-  const waterArr = useSelector(waterArrSelector);
   const [dialogStatus, setDialogStatus] = useState({
     visible: false,
     idToDelete: null,
   });
 
-  const showAddModal = useSelector(selectAddWater);
-  const showEditModal = useSelector(selectEditWater);
-
-  
   const [currentEditObj, setCurrentEditObj] = useState(null);
   //Creating marcup arr
+
+  const delWaterById = idToDel => {
+    dispatch(delWaterThunk(idToDel));
+  };
+
+  useEffect(() => {
+    const fetchWater = () => {
+      dispatch(getDailyWaterThunk());
+    };
+    fetchWater();
+  }, [dispatch]);
+
+  const showAddModal = useSelector(selectAddWater);
+  const showEditModal = useSelector(selectEditWater);
+  const waterArr = useSelector(waterArrSelector);
+
   const markup = waterArr.map(item => {
     const waterCardId = item._id;
-    
+
     // Calculating adding time
     const waterAddTime = item.time;
 
     const waterQuantity = item.amount;
 
-    return CreateWaterCardMarkup({
+    return createWaterCardMarkup({
       waterAddTime,
       waterCardId,
       waterQuantity,
       dialogStatus,
       setDialogStatus,
       setCurrentEditObj,
+      dispatch
     });
   });
-  
-  const delWaterById = idToDel => {
-    dispatch(delWaterThunk(idToDel));
-  };
-  
-  
-  useEffect(() => {
-    const fetchWater = () => {
-      dispatch(getDailyWaterThunk());
-    }
-    fetchWater()
-  }, [dispatch]);
 
   return (
     <StyledWaterList>
-      <p className='main-title'>Today</p>
+      <p className="main-title">Today</p>
       {markup}
       <button
         className="add-btn"
