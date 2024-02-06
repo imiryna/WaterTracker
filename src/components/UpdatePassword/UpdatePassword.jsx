@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import { AuthStyledForm, AuthDiv, FormName, InputDiv, StyledInput, FormButton, AuthDataError, RedirectButton } from '../SignIn/SignIn.styled';
 import { selectAuthError, selectAuthAuthenticated } from 'Store/auth/authSelector';
 import { useFormik } from 'formik';
@@ -27,6 +27,7 @@ import { updatePasswordThunk } from 'Store/auth/authOperations';
  const dispatch = useDispatch();
  const authError = useSelector(selectAuthError);
  const isAuthenticated = useSelector(selectAuthAuthenticated);
+ const location = useLocation();
 
  const [openSnackbar, setOpenSnackbar] = useState(false);
 
@@ -53,6 +54,12 @@ import { updatePasswordThunk } from 'Store/auth/authOperations';
       setOpenSnackbar(true);
     }
   }, [authError]);
+
+   useEffect(() => {
+     const searchParams = new URLSearchParams(location.search);
+     const token = searchParams.get('token');
+     console.log(token);
+   }, [location]);
 
   const handleCloseSnackbar = () => {
     setOpenSnackbar(false);
@@ -100,9 +107,9 @@ import { updatePasswordThunk } from 'Store/auth/authOperations';
        <FormButton type="submit">Reset password</FormButton>
        <RedirectButton to="/signin">Sign In</RedirectButton>
      </AuthStyledForm>
-     <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
+     <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
           <Alert onClose={handleCloseSnackbar} severity="error">
-            {authError}
+            Fill the fields to reset your password
           </Alert>
         </Snackbar>
      </AuthDiv>

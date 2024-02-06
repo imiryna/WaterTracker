@@ -66,7 +66,7 @@ export const refreshUserThunk = createAsyncThunk(
 );
 
 export const forgotPasswordThunk = createAsyncThunk(
-  'user/forgotpassword',
+  '/user/forgot-password',
   async (userData, thunkAPI) => {
     try {
       const res = await forgotPassword(userData);
@@ -78,7 +78,7 @@ export const forgotPasswordThunk = createAsyncThunk(
 );
 
 export const updatePasswordThunk = createAsyncThunk(
-  'user/updatepassword',
+  '/user/restore-password',
   async (userData, thunkAPI) => {
     try {
       const res = await updatePassword(userData);
