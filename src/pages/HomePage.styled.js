@@ -17,6 +17,7 @@ export const WelcomeWrapCss = styled.div`
   gap: 40px;
   justify-content: center;
   margin-bottom: 37px;
+  margin-top: 24px;
   margin-left: 0;
   margin-right: 0;
 
@@ -36,7 +37,7 @@ export const WelcomeWrapCss = styled.div`
 `;
 
 export const SectionCss = styled.div`
-  padding: 72px 20px 40px;
+  padding: 72px 20px 64px;
   background-color: var(--primery-White);
   background-image: url(${BottleImgMob}), url(${BubblesImgMob});
   background-size: contain;
@@ -45,12 +46,12 @@ export const SectionCss = styled.div`
   background-color: var(--primery-white);
 
   @media (min-width: 768px) {
-    padding: 104px 32px 50px;
+    padding: 104px 32px 74px;
     background-image: url(${BottleImgTab}), url(${BubblesImgTab});
   }
 
   @media (min-width: 1440px) {
-    padding: 109px 18px 40px;
+    padding: 109px 18px 74px;
     background-image: url(${BottleImgDesktop}), url(${BubblesImgDesktop});
   }
 `;
@@ -60,7 +61,7 @@ export const StyledHomePageWrapper = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 72px 20px 40px;
+  padding: 72px 20px 64px;
   background-image: url(${BubblesImgMob});
   background-size: contain;
   background-position: top bottom;
