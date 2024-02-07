@@ -4,7 +4,6 @@ import { ReactComponent as Arrow } from 'Images/Icons/logout.svg';
 
 export const DropdownCss = styled.div`
   position: relative;
-  /* padding: 16px; */
 `;
 
 export const MenuCss = styled.div`
@@ -21,7 +20,18 @@ export const MenuCss = styled.div`
   background-color: var(--primery-white);
   box-shadow: 0px 4px 8px 0px rgba(64, 123, 255, 0.2);
   list-style-type: none;
-  cursor: pointer;
+`;
+
+export const OutlineCss = styled(Outline)`
+  width: 16px;
+  height: 16px;
+  stroke: var(--primery-blue);
+`;
+
+export const ArrowCss = styled(Arrow)`
+  width: 16px;
+  height: 16px;
+  stroke: var(--primery-blue);
 `;
 
 export const WrapCss = styled.div`
@@ -36,7 +46,17 @@ export const WrapCss = styled.div`
   font-style: normal;
   font-weight: 400;
   line-height: 1.25;
+  cursor: pointer;
+
+  &:hover{
+      color: var(--secondary-color-5);
+    }
+
+  &:hover ${OutlineCss}{
+    stroke: var(--secondary-color-5);
+  }
 `;
+
 export const BoxCss = styled.div`
   display: flex;
   flex-direction: row;
@@ -51,16 +71,12 @@ export const BoxCss = styled.div`
   font-weight: 400;
   line-height: 1.25;
   cursor: pointer;
-`;
 
-export const OutlineCss = styled(Outline)`
-  width: 16px;
-  height: 16px;
-  stroke: var(--primery-blue);
-`;
+&:hover{
+    color: var(--secondary-color-5);
+  }
 
-export const ArrowCss = styled(Arrow)`
-  width: 16px;
-  height: 16px;
-  stroke: var(--primery-blue);
+  &:hover ${ArrowCss}{
+    stroke: var(--secondary-color-5);
+  }
 `;

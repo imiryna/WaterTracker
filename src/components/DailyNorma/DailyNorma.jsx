@@ -11,11 +11,6 @@ import { selectDailyNorm, selectUserData } from 'Store/currentUser/currentUserSe
 export const DailyNorma = () => {
   const dispatch = useDispatch();
 
-  // const GENDER = {
-  //   male: 'male',
-  //   female: 'female',
-  // };
-
   const dailyNorma = useSelector(selectDailyNorm);
 
   const {gender: userGender} = useSelector(selectUserData)
@@ -36,13 +31,13 @@ export const DailyNorma = () => {
 
   return (
     <StyledDalyNorma>
-      <p className="title">Today daily norma</p>
+      <p className="title">My daily norma</p>
       <div className="norma-edit-box">
         
         <span className='norma-amount'>
           {dailyNorma / 1000} L
         </span>
-        <button class="edit-btn" onClick={() => toggleModal()}>Edit</button>
+        <button className="edit-btn" onClick={() => toggleModal()}>Edit</button>
       </div>
       {editNormaModalVisibility && (
         <Modal toggleModal={toggleModal}>

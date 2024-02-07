@@ -39,14 +39,13 @@ margin: 0 auto;
 `
 
 export const StyledItem = styled.li`
-cursor: pointer;
 display: flex;
 flex-direction: column;
 justify-content: center;
 font-size: 14px;
 font-family: var(--primery-font);
 max-width: 32px;
-
+cursor: ${props => props.$quantity === null ? 'default' : 'pointer'};
 @media (min-width: 768px){
     font-size: 16px;
     max-width: 34px;
@@ -76,7 +75,7 @@ border: 1px solid black;
 width: 34px;
 height: 34px;
 background-color: var(--primery-white);
-border-color:  ${props => props.$percentage < 100 ? 'orange' : 'transparent'}
+border-color:  ${props => props.$percentage < 100 ? '#FF9D43' : 'transparent'};
 `
 
 
@@ -121,6 +120,10 @@ background-color: transparent;
 transform: rotate(90deg);
 width: 14px;
 height: 14px;
+
+&:hover{
+    color: var(--secondary-color-5)
+}
 `
 
 export const StyledRightArrow = styled(Arrow)`
@@ -129,6 +132,10 @@ background-color: transparent;
 transform: rotate(-90deg);
 width: 14px;
 height: 14px;
+
+&:hover{
+    color: var(--secondary-color-5)
+}
 `
 
 export const StyledArrowButtonLeft = styled.button`
@@ -137,7 +144,8 @@ border: none;
 outline: none;
 width: 14px;
 height: 14px;
-visibility: ${props => props.$hideButton ? 'hidden' : 'visible'}
+visibility: ${props => props.$hideButton ? 'hidden' : 'visible'};
+cursor: pointer;
 `
 
 export const StyledArrowButtonRight = styled.button`
@@ -146,11 +154,13 @@ border: none;
 outline: none;
 width: 14px;
 height: 14px;
-visibility: ${props => props.$hideButton ? 'hidden' : 'visible'}
+visibility: ${props => props.$hideButton ? 'hidden' : 'visible'};
+cursor: pointer;
 `
 
 export const StyledDate = styled.span`
 color: var(--primery-blue);
+font-family: var(--primery-font);
 font-size: 16px;
 font-weight: 400;
 margin-left: 12px;

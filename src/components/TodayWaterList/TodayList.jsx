@@ -9,7 +9,6 @@ import { DeleteConfirmDialog } from './DeleteDialog';
 import { StyledBackdrop } from './DeleteDialog.styled';
 import { EditWaterModal } from './modals/EditWaterModal';
 import { PlusSvg } from './StyledTodayListIcons';
-// import { parseUtcTime } from 'services/helpers/getUtcTime';
 import { Modal } from 'components/Modal/Modal';
 import { AddWaterModal } from './modals/AddWaterModal';
 import {

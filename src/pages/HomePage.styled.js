@@ -41,12 +41,13 @@ export const SectionCss = styled.div`
   background-color: var(--primery-White);
   background-image: url(${BottleImgMob}), url(${BubblesImgMob});
   background-size: contain;
-  background-position: right bottom, left top;
+  /* background-position: right bottom, left top; */
+  background-position: center;
   background-repeat: no-repeat;
   background-color: var(--primery-white);
 
   @media (min-width: 768px) {
-    padding: 104px 32px 74px;
+    padding: 104px 32px 50px 32px;
     background-image: url(${BottleImgTab}), url(${BubblesImgTab});
   }
 
@@ -56,68 +57,55 @@ export const SectionCss = styled.div`
   }
 `;
 
-/** Home page style  */
+// /** Home page style  */
 export const StyledHomePageWrapper = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 72px 20px 64px;
+  padding: 80px 20px 40px;
   background-image: url(${BubblesImgMob});
   background-size: contain;
-  background-position: top bottom;
+  background-position: center;
   background-repeat: no-repeat;
   background-color: var(--primery-white);
 
   @media (min-width: 768px) {
     background-image: url(${BubblesImgTab});
+    background-position: center;
   }
 
   @media (min-width: 1440px) {
     flex-direction: row;
-    gap: 80px;
+    gap: 32px;
     background-image: url(${BubblesImgDesktop});
+    background-position: center;
+    padding-right: 112px;
+    padding-left: 112px;
+
   }
-`;
-
-export const ButtleImgCss = styled.div`
-  width: 280px;
-  height: 208px;
-  background-image: url(${BackButtlMob});
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-
-  @media (min-width: 768px) {
-    width: 518px;
-    height: 386px;
-    background-image: url(${BackButtlTab});
-  }
-
-  @media (min-width: 1440px) {
-    width: 618px;
-    height: 548px;
-    background-image: url(${BackButtlScreen});
-  }
-`;
-
-export const Wraper = styled.div`
-  margin-bottom: 40px;
-
-  @media (min-width: 1440px) {
-    margin-bottom: 0;
-    margin-top: 44px;
-  }
-`;
+`
 export const StyledLeftContainer = styled.div`
+  background-image: url(${BackButtlMob});
+  background-repeat: no-repeat;
+  background-position: center;
+  background-position-y: 30%;
+  
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 0 auto;
+  margin-bottom: 40px;
 
-  @media (min-width: 768px) {
-    padding-left: 112px;
-    padding-top: 52px;
-    padding-bottom: 56px;
+  @media (min-width: 768px){
+    background-image: url(${BackButtlTab});
+
+    margin: 0 auto;
+    margin-bottom: 40px;
+
+  }
+
+  @media (min-width: 1440px) {
+    background-image: url(${BackButtlScreen});
+    margin: 0;
   }
 `;
 
@@ -125,18 +113,21 @@ export const StyledRightContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
-
   padding: 24px 8px;
   max-width: 767px;
   background-color: var(--secondary-color-2);
   box-shadow: 0px 4px 14px 0px rgba(64, 123, 255, 0.3);
 
   @media (min-width: 768px) {
+    margin: 0 auto;
     max-width: 656px;
     padding: 32px 24px;
   }
 
   @media (min-width: 1440px) {
-    max-width: 544px;
+    max-width: 592px;
   }
 `;
+
+
+

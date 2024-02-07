@@ -1,5 +1,5 @@
 import React from 'react';
-import { ProgressBarStyled } from './ProgressBar.styled';
+import { ProgressBarStyled, StyledBarWithComponents, StyledTitle } from './ProgressBar.styled';
 import { ReactComponent as Icon } from './progressBar-icon.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { totalWaterAmmountSelector } from 'Store/water/waterSelectors';
@@ -19,8 +19,9 @@ export const ProgressBar = () => {
   const showAddModal = useSelector(selectAddWater);
 
   const CustomSliderStyles = {
-    width: '256px',
+    width: '100%',
     padding: '0',
+    cursor: 'default',
     '& .MuiSlider-thumb': {
       color: '#ffffff',
       border: '1px solid #407bff',
@@ -38,9 +39,10 @@ export const ProgressBar = () => {
   };
 
   return (
-    <ProgressBarStyled>
-      <div className="progress-bar-block">
-        <h2 className="progress-bar-title">Today</h2>
+    <>
+      <StyledTitle className="progress-bar-title">Today</StyledTitle>
+      <ProgressBarStyled>
+        <StyledBarWithComponents>
         <Slider
           className="progress-bar"
           sx={CustomSliderStyles}
@@ -56,8 +58,7 @@ export const ProgressBar = () => {
           <li className="progress-bar-label-50 progress-bar-label">50%</li>
           <li className="progress-bar-label-100 progress-bar-label">100%</li>
         </ul>
-      </div>
-      <div className="button-block">
+        </StyledBarWithComponents>
         <button
           className="progress-bar-button"
           onClick={() => dispatch(toggleAddWateVisibility())}
@@ -73,7 +74,9 @@ export const ProgressBar = () => {
           </span>
           <span className="button-text">Add water</span>
         </button>
-      </div>
+      
     </ProgressBarStyled>
+    </>
+    
   );
 };

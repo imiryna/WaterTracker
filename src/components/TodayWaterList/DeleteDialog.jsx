@@ -11,7 +11,6 @@ export const DeleteConfirmDialog = ({
       <StyledDeleteDialog
         header="Delete entry"
         visible={visible}
-        // style={}
         onHide={() => setDialogStatus({ visible: false, idToDelete: null })}
       >
         <p className='text'>Are you sure you want to delete the entry?</p>

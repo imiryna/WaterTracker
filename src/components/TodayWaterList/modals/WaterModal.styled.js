@@ -112,6 +112,10 @@ export const StyledWaterModal = styled.div`
       padding: 10px 30px;
       background-color: var(--primery-blue);
       border-radius: 10px;
+
+      &:hover{
+        box-shadow: 0 4px 14px 0 rgba(64, 123, 255, 0.54);
+      }
     }
   }
   .previous-val-box {

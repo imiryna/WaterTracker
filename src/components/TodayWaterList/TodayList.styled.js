@@ -115,5 +115,13 @@ export const StyledWaterList = styled.div`
     &:hover{
       color: var(--secondary-color-5);
     }
+
+    &:hover{
+      color: var(--secondary-color-5);
+    }
+
+    &:hover{
+      color: var(--secondary-color-5);
+    }
   }
 `;

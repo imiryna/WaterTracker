@@ -9,7 +9,6 @@ import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import { forgotPasswordThunk } from 'Store/auth/authOperations';
 
-
  const validationSchema = Yup.object({
   email: Yup
     .string('Enter your email')
@@ -23,18 +22,20 @@ import { forgotPasswordThunk } from 'Store/auth/authOperations';
  const isAuthenticated = useSelector(selectAuthAuthenticated);
 
  const [openSnackbar, setOpenSnackbar] = useState(false);
+ const [openConfirmation, setOpenOpenConfirmation] = useState(false);
+
 
    const formik = useFormik({
      initialValues: {
        email: ''
       },
-
       
       validationSchema: validationSchema,
 
       onSubmit: async (values) => {
         try {
           await dispatch(forgotPasswordThunk({email: values.email}));
+          setOpenOpenConfirmation(true);
           formik.resetForm();
         } catch (error) {
           setOpenSnackbar(true);
@@ -52,6 +53,10 @@ import { forgotPasswordThunk } from 'Store/auth/authOperations';
   const handleCloseSnackbar = () => {
     setOpenSnackbar(false);
   };
+
+  const handleCloseConfirmation = () => {
+    setOpenOpenConfirmation(false);
+  }
 
   if (isAuthenticated) {
     return <Navigate to="/home" />;
@@ -83,6 +88,15 @@ import { forgotPasswordThunk } from 'Store/auth/authOperations';
           <Alert onClose={handleCloseSnackbar} severity="error">
             Please, enter your email
           </Alert>
+        </Snackbar>
+        <Snackbar
+        open={openConfirmation}
+        autoHideDuration={6000}
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        onClose={handleCloseConfirmation}
+        message="Check Your email!"
+        >
+
         </Snackbar>
      </AuthDiv>
    );

@@ -6,8 +6,6 @@ import { Outlet } from 'react-router-dom';
 import { selectAuthenticated } from 'Store/auth/authSelector';
 import { selectUserData } from 'Store/currentUser/currentUserSelectors';
 import { selectUserSettings, selectDropdown } from 'Store/modals/modalSelector';
-// import { selectUser } from 'Store/currentUser/currentUserSelectors';
-// import { getCurrentUserThunk } from 'Store/currentUser/currentUserThunk';
 import { selectLogout } from 'Store/modals/modalSelector';
 import { toggleLogoutVisibility } from 'Store/modals/modalSlice';
 
@@ -34,7 +32,6 @@ import { Modal } from 'components/Modal/Modal';
 import { DropdownMenu } from 'components/DropdownMenu/DropdownMenu';
 import { Setting } from 'components/SettingModal/SettingModal';
 import LogoutConfirmationDialog from 'components/LogOutModal/LogOutModal';
-// import { getCurrentUser } from 'services/api';
 
 export const Navigation = () => {
   const dispatcher = useDispatch();
@@ -82,7 +79,6 @@ export const Navigation = () => {
           <Setting />
         </Modal>
       )}
-      {/* // END OF Temp section */}
 
       <NavCss>
         <WraperCss>

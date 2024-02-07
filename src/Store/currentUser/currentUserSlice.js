@@ -65,14 +65,13 @@ const currentUserSlice = createSlice({
       .addCase(getCurrentUserThunk.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        console.log('GetUser-Fulfield');
         state.user = {
           avatarUrl: action.payload.avatarUrl,
           dailyNorm: action.payload.dailyNorm,
           email: action.payload.email,
           gender: action.payload.gender,
           name: action.payload.name,
-          registerDate: action.payload.created,
+          created: action.payload.created,
         };
       })
       .addCase(getCurrentUserThunk.rejected, (state, { payload }) => {
@@ -83,7 +82,6 @@ const currentUserSlice = createSlice({
       .addCase(updateCurrentUserThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
-        console.log('UpdateUser-Fulfield');
         state.user = {
           avatarUrl: payload.user.avatarUrl,
           dailyNorm: payload.user.dailyNorm,

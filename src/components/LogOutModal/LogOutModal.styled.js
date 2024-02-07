@@ -58,6 +58,10 @@ export const GlobalConfirmDialogStyles = createGlobalStyle`
     stroke: #407BFF;
     width: 15px;
     height: 15px;
+
+    &:hover{
+      stroke: var(--secondary-color-5)
+    }
     
   }
   .p-dialog-footer {
@@ -94,6 +98,11 @@ export const GlobalConfirmDialogStyles = createGlobalStyle`
     border-radius: 10px;
     width: 232px;
     flex-direction: column-reverse;
+    
+    &:hover{
+      box-shadow: 0 4px 14px 0 rgba(239, 80, 80, 0.54);
+
+    }
 
     @media (min-width: 768px) {
       width: 160px;
@@ -124,6 +133,10 @@ export const GlobalConfirmDialogStyles = createGlobalStyle`
     border-radius: 10px;
     width: 232px;
     flex-direction: column-reverse;
+
+    &:hover{
+      box-shadow: 0 4px 14px 0 rgba(215, 227, 255, 0.54);
+    }
 
 
     @media (min-width: 768px) {

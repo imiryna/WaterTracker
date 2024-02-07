@@ -8,7 +8,11 @@ import {
   StyledInput,
   FormButton,
   AuthDataError,
+  IconContainer,
   RedirectButton,
+  ButtonIcon,
+  ShowPassIcon,
+  HidePassIcon,
 } from '../SignIn/SignIn.styled';
 import {
   selectAuthError,
@@ -31,12 +35,14 @@ const validationSchema = Yup.object({
     .required('Password is required'),
 });
 
-export const UpdatePasswordForm = () => {
-  const dispatch = useDispatch();
-  const authError = useSelector(selectAuthError);
-  const isAuthenticated = useSelector(selectAuthAuthenticated);
+ export const UpdatePasswordForm = () => {
 
-  const [openSnackbar, setOpenSnackbar] = useState(false);
+ const dispatch = useDispatch();
+ const authError = useSelector(selectAuthError);
+ const isAuthenticated = useSelector(selectAuthAuthenticated);
+ const [openSnackbar, setOpenSnackbar] = useState(false);
+ const [openConfirmation, setOpenOpenConfirmation] = useState(false);
+
 
   const formik = useFormik({
     initialValues: {
@@ -50,9 +56,11 @@ export const UpdatePasswordForm = () => {
         await dispatch(
           updatePasswordThunk({
             restoreToken,
-            password: { password: values.password },
+            password: { password: values.password }
+            
           })
         );
+        openConfirmation()
         formik.resetForm();
         return redirect('/signin');
       } catch (error) {
@@ -74,9 +82,16 @@ export const UpdatePasswordForm = () => {
     }
   }, [authError]);
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [showRepeatPassword, setShowRepeatPassword] = useState(false);
+
   const handleCloseSnackbar = () => {
     setOpenSnackbar(false);
   };
+
+  const handleCloseConfirmation = () => {
+    setOpenOpenConfirmation(false);
+  }
 
   if (isAuthenticated) {
     return <Navigate to="/signin" />;
@@ -88,14 +103,24 @@ export const UpdatePasswordForm = () => {
         <FormName>Reset password</FormName>
         <InputDiv>
           <label htmlFor="password">Enter your new password</label>
-          <StyledInput
+          <IconContainer>
+             <StyledInput
             id="password"
             name="password"
-            type="password"
+            type={showPassword ? 'text' : 'password'}
             onChange={formik.handleChange}
             value={formik.values.password}
             placeholder="Password"
+            className={formik.errors.password && formik.touched.password ? 'error' : ''}
           />
+          
+            <ButtonIcon
+              type="button" 
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <ShowPassIcon /> : <HidePassIcon />}
+            </ButtonIcon>
+          </IconContainer>
           {formik.errors.password && formik.touched.password ? (
             <AuthDataError>{formik.errors.password}</AuthDataError>
           ) : null}
@@ -103,14 +128,25 @@ export const UpdatePasswordForm = () => {
 
         <InputDiv>
           <label htmlFor="repeatPassword">Repeat your password</label>
-          <StyledInput
+          <IconContainer>
+             <StyledInput
             id="repeatPassword"
             name="repeatPassword"
-            type="password"
+            type={showRepeatPassword ? 'text' : 'password'}
             onChange={formik.handleChange}
             value={formik.values.repeatPassword}
             placeholder="Repeat password"
+            className={formik.errors.password && formik.touched.password ? 'error' : ''}
           />
+          
+          <ButtonIcon
+              type="button" 
+              onClick={() => setShowRepeatPassword(!showRepeatPassword)}
+            >
+              {showRepeatPassword ? <ShowPassIcon /> : <HidePassIcon />}
+            </ButtonIcon>
+
+          </IconContainer>
           {formik.errors.repeatPassword && formik.touched.repeatPassword ? (
             <AuthDataError>{formik.errors.repeatPassword}</AuthDataError>
           ) : null}
@@ -129,6 +165,15 @@ export const UpdatePasswordForm = () => {
           Fill the fields to reset your password
         </Alert>
       </Snackbar>
+      <Snackbar
+        open={openConfirmation}
+        autoHideDuration={6000}
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        onClose={handleCloseConfirmation}
+        message="Password updated!"
+        >
+
+        </Snackbar>
     </AuthDiv>
   );
 };

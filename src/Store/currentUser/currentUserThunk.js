@@ -60,7 +60,6 @@ export const changeDailyNormaThunk = createAsyncThunk(
     try {
       const token = thunkAPI.getState().auth.token;
       newNorma = parseInt(newNorma);
-      console.log(`newNorma:`, newNorma);
       if (newNorma <= 0 || newNorma > 15000 || Number.isNaN(newNorma))
         throw new Error(
           'Water norma must be more then 0ml, less then 15000ml and be a number'
