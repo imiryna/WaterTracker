@@ -35,8 +35,10 @@ import { waterArrSelector } from 'Store/water/waterSelectors';
 export const Calendar = () => {
   const dispatch = useDispatch();
 
-
+  //* User data */
   const userData = useSelector(selectUserData);
+  const registerYear = Number(userData.created.split('-')[0]);
+  const registerMonth = Number(userData.created.split('-')[1]);
 
   //check device screen width
   const isDesktop = useMediaQuery('(min-width: 768px)');
@@ -46,22 +48,15 @@ export const Calendar = () => {
   const [month, setMonth] = useState(new Date().getMonth()+1);
   const [year, setYear] = useState(new Date().getFullYear());
 
-  // Fetch month statistic
+  // Get month statistic
+  const stats = useSelector(selectMonthStat);
   const waterServings = useSelector(waterArrSelector);
 
   useEffect(() => {
     dispatch(getMonthStat({ month, year }));
   }, [dispatch, month, year, waterServings, userData]);
 
-  //* User data */
-  const registerYear = Number(userData.created.split('-')[0]);
-  const registerMonth = Number(userData.created.split('-')[1]);
-  
-  // Get month statistic
-  const stats = useSelector(selectMonthStat);
-  // const monthStat = tempMonthStat;
-
-
+ 
   /** PopOver Logic */
 
   // set anchor and popOver content hooks
@@ -69,7 +64,7 @@ export const Calendar = () => {
   const [popOverData, setPopOverData] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
 
-
+  // Check popover open
   const id = isOpen ? 'simple-popover' : undefined;
 
   // close popover handlers and eventlisteners clear
@@ -96,20 +91,27 @@ export const Calendar = () => {
 
 
   // Open and close popover logic
+
+  const closePopOver = () => {
+    setIsOpen(false);
+    setAnchor(null);
+    setPopOverData(null);
+  
+};
+
   const openPopOver = (event, item) => {
     if (item.quantity === null) return;
     
       setIsOpen(true);
       setAnchor(event.currentTarget);
       setPopOverData(item);
+
+      if(event.currentTarget === anchor){
+        closePopOver();
+      }
   };
 
-  const closePopOver = (event, reason) => {
-      setIsOpen(false);
-      setAnchor(null);
-      setPopOverData(null);
-    
-  };
+  
 
   //* Pagination logic */
 
@@ -149,16 +151,12 @@ export const Calendar = () => {
     }
   }
 
-  
-
   // Get month name
 
   const date = new Date(); 
   date.setMonth(month - 1);
   const monthName = date.toLocaleString('en-US', { month: 'long' });
-
-
-
+  
   // Render
 
   return (
@@ -185,6 +183,7 @@ export const Calendar = () => {
               key={item.date.day}
               aria-owns={isOpen ? 'calendar-popover' : undefined}
               aria-haspopup="true"
+              $quantity = {item.quantity}
               onClick={event => {
                 openPopOver(event, item);
               }}

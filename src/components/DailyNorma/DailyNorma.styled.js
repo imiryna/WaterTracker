@@ -17,6 +17,7 @@ export const StyledDalyNorma = styled.div`
   }
 
   .title {
+    font-family: var(--primery-font);
     font-size: 18px;
     line-height: 1.3;
   }
@@ -24,6 +25,7 @@ export const StyledDalyNorma = styled.div`
     display: flex;
     gap: 12px;
     .norma-amount {
+      font-family: var(--primery-font);
       font-size: 24px;
       font-weight: 700;
       color: var(--primery-blue);
@@ -32,6 +34,7 @@ export const StyledDalyNorma = styled.div`
       }
     }
     .edit-btn {
+      font-family: var(--primery-font);
       font-size: 16px;
       color: var(--secondary-color-4);
       background: none;

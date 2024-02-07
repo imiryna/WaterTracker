@@ -36,7 +36,7 @@ export const DailyNorma = () => {
 
   return (
     <StyledDalyNorma>
-      <p className="title">Today daily norma</p>
+      <p className="title">My daily norma</p>
       <div className="norma-edit-box">
         
         <span className='norma-amount'>

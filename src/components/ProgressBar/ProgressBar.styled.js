@@ -171,12 +171,14 @@ export const ProgressBarStyled = styled.div`
     .progress-bar-button {
       font-size: 18px;
       line-height: 24px;
+      margin-top: 0;
     }
   }
 
   @media (min-width: 1440px) {
     .progress-bar-button {
       min-width: 178px;
+      margin-top: 0;
     }
   }
 
