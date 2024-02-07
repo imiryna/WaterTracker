@@ -6,6 +6,7 @@ import { logOutThunk } from 'Store/auth/authOperations';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { selectAuthAuthenticated } from 'Store/auth/authSelector';
+import { toggleDropdownVisibility } from 'Store/modals/modalSlice';
 
 const LogoutConfirmationDialog = ({ visible, onHide }) => {
   const dispatch = useDispatch();
@@ -18,6 +19,10 @@ const LogoutConfirmationDialog = ({ visible, onHide }) => {
 
   const onClose = () => {
     onHide();
+  };
+
+  const onReject = () => {
+    dispatch(toggleDropdownVisibility());
   };
 
   const onKeyDown = e => {
@@ -43,7 +48,7 @@ const LogoutConfirmationDialog = ({ visible, onHide }) => {
             acceptLabel="Log out"
             rejectLabel="Cancel"
             accept={onConfirm}
-            reject={onHide}
+            reject={onReject}
             onKeyDown={onKeyDown}
             className="custom-confirm-dialog"
             contentClassName="custom-confirm-dialog-content"
