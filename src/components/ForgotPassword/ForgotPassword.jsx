@@ -1,13 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import { Navigate} from 'react-router-dom';
 import { AuthStyledForm, AuthDiv, FormName, InputDiv, StyledInput, FormButton, AuthDataError, RedirectButton } from '../SignIn/SignIn.styled';
-import { selectAuthError, selectAuthAuthenticated } from 'Store/auth/authSelector';
+import { selectAuthError, selectAuthAuthenticated, selectAuthIsLoading } from 'Store/auth/authSelector';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from "yup";
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import { forgotPasswordThunk } from 'Store/auth/authOperations';
+import { Loading } from 'components/Loader/Loader.styled';
 
  const validationSchema = Yup.object({
   email: Yup
@@ -17,6 +18,7 @@ import { forgotPasswordThunk } from 'Store/auth/authOperations';
 });
 
  export const ForgotPasswordForm = () => {
+  const isLoading = useSelector(selectAuthIsLoading);
  const dispatch = useDispatch();
  const authError = useSelector(selectAuthError);
  const isAuthenticated = useSelector(selectAuthAuthenticated);
@@ -62,7 +64,9 @@ import { forgotPasswordThunk } from 'Store/auth/authOperations';
     return <Navigate to="/home" />;
   }
 
-   return (
+   return isLoading ? 
+   <Loading/>
+   :
     <AuthDiv>
 
      <AuthStyledForm onSubmit={formik.handleSubmit}>
@@ -99,7 +103,7 @@ import { forgotPasswordThunk } from 'Store/auth/authOperations';
 
         </Snackbar>
      </AuthDiv>
-   );
+   ;
  };
 
 export default ForgotPasswordForm;

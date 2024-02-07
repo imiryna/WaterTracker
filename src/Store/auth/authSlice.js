@@ -4,6 +4,8 @@ import {
   registerThunk,
   logOutThunk,
   refreshUserThunk,
+  updatePasswordThunk,
+  forgotPasswordThunk,
 } from './authOperations';
 
 const INITIAL_STATE = {
@@ -43,6 +45,30 @@ const authSlice = createSlice({
         state.token = action.payload.token;
         state.isRefreshing = false;
         state.authenticated = true;
+      })
+      .addCase(forgotPasswordThunk.pending, (state, action) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(forgotPasswordThunk.fulfilled, (state, action) =>{
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(forgotPasswordThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload
+      })
+      .addCase(updatePasswordThunk.pending, (state, action) => {
+        state.isLoading = true;
+        state.error = false;
+      })
+      .addCase(updatePasswordThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(updatePasswordThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
       })
 
       .addMatcher(
