@@ -58,6 +58,10 @@ export const UserForm = () => {
       toast.error('Current Password is necessary!!!');
       return;
     }
+    if (values.newPassword !== values.repeatPassword) {
+      toast.error('Passwords must match!!!');
+      return;
+    }
     const uploadData = {
       name: values.name,
       email: values.email,
@@ -95,12 +99,14 @@ export const UserForm = () => {
     name: string().min(3).max(40).required('Name is required'),
     email: string().email().required('Email is required'),
     currentPassword: string().min(8),
-    newPassword: string().matches(
-      /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/gu,
-      'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number'
-    ),
+    newPassword: string()
+      .matches(
+        /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/gu,
+        'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number'
+      )
+      .oneOf([ref('repeatPassword')], 'Passwords must match'),
     repeatPassword: string().oneOf(
-      [ref('newPassword'), null],
+      [ref('newPassword')],
       'Passwords must match'
     ),
   });

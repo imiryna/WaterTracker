@@ -72,7 +72,7 @@ const currentUserSlice = createSlice({
           email: action.payload.email,
           gender: action.payload.gender,
           name: action.payload.name,
-          registerDate: action.payload.created,
+          created: action.payload.created,
         };
       })
       .addCase(getCurrentUserThunk.rejected, (state, { payload }) => {
@@ -90,7 +90,7 @@ const currentUserSlice = createSlice({
           email: payload.user.email,
           gender: payload.user.gender,
           name: payload.user.name,
-          registerDate: payload.user.created,
+          created: payload.user.created,
         };
       })
       .addCase(updateCurrentUserThunk.rejected, (state, { payload }) => {
