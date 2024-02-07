@@ -94,7 +94,7 @@ import { forgotPasswordThunk } from 'Store/auth/authOperations';
         autoHideDuration={6000}
         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
         onClose={handleCloseConfirmation}
-        message="Password updated!"
+        message="Check Your email!"
         >
 
         </Snackbar>

@@ -28,4 +28,3 @@ const monthStatSlice = createSlice({
 })
 export default monthStatSlice.reducer;
 export const monthStatReducer = monthStatSlice.reducer;
-// export const{setMonth, setYear} = monthStatSlice.actions;

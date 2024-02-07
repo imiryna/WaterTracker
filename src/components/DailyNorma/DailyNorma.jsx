@@ -11,11 +11,6 @@ import { selectDailyNorm, selectUserData } from 'Store/currentUser/currentUserSe
 export const DailyNorma = () => {
   const dispatch = useDispatch();
 
-  // const GENDER = {
-  //   male: 'male',
-  //   female: 'female',
-  // };
-
   const dailyNorma = useSelector(selectDailyNorm);
 
   const {gender: userGender} = useSelector(selectUserData)

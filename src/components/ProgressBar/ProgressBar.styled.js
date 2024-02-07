@@ -86,16 +86,6 @@ export const ProgressBarStyled = styled.div`
     margin-bottom: 0;
   }
 
-  @media (min-width: 768px) {
-    .progress-bar-labels {
-    }
-  }
-
-  @media (min-width: 1440px) {
-    .progress-bar-labels {
-    }
-  }
-
   .progress-bar-label {
     display: block;
     font-family: Roboto;

@@ -93,10 +93,7 @@ export const removeWaterServing = async (servingId, token) => {
 };
 
 export const editWaterServing = async (servingId, servingData, token) => {
-  console.log(`Id:`, servingId);
   setToken(token);
-  // const water = await getWaterServingById(servingId);
-  // const updatedWater = { ...water, ...servingData };
   const { data } = await waterTrackerInstance.put(
     `/water/${servingId}`,
     servingData

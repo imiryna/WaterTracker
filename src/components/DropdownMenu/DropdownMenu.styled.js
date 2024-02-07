@@ -4,7 +4,6 @@ import { ReactComponent as Arrow } from 'Images/Icons/logout.svg';
 
 export const DropdownCss = styled.div`
   position: relative;
-  /* padding: 16px; */
 `;
 
 export const MenuCss = styled.div`

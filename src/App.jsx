@@ -8,10 +8,8 @@ import {
   selectIsRefreshing,
 } from 'Store/auth/authSelector';
 import { refreshUserThunk } from 'Store/auth/authOperations';
-// ZooBeeN added
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import { getCurrentUserThunk } from 'Store/currentUser/currentUserThunk';
 
 const Home = lazy(() => import('pages/HomePage'));
 const Welcome = lazy(() => import('pages/WelcomePage'));
@@ -28,10 +26,6 @@ export const App = () => {
   useEffect(() => {
     dispatch(refreshUserThunk());
   }, [dispatch]);
-
-  // useEffect(() => {
-  //   dispatch(getCurrentUserThunk())
-  // }, [isAuthed])
 
   return isRefreshing ? (
     <CircularProgress />
@@ -57,7 +51,6 @@ export const App = () => {
           <Route path="/updatepassword" element={<UpdatePassword />} />
         </Route>
       </Routes>
-      {/* ZooBeeN added */}
       <ToastContainer autoClose={2000} />
     </Suspense>
   );
