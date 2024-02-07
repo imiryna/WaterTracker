@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Navigate, redirect } from 'react-router-dom';
 import {
   AuthStyledForm,
@@ -15,7 +15,6 @@ import {
   HidePassIcon,
 } from '../SignIn/SignIn.styled';
 import {
-  selectAuthError,
   selectAuthAuthenticated,
   selectAuthIsLoading,
 } from 'Store/auth/authSelector';
