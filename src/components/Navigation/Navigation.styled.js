@@ -7,6 +7,7 @@ import { ReactComponent as Arrow } from 'Images/Icons/arrow-down.svg';
 export const LogoIcon = styled(Logo)`
   width: 40px;
   height: 48px;
+  margin-right: 4px;
 `;
 export const UserIcon = styled(User)`
   width: 28px;
@@ -83,6 +84,7 @@ export const TextCss = styled.p`
   font-weight: 400;
   line-height: 1.3;
   text-align: right;
+  margin-right: 8px;
   
   @media (min-width: 768px) {
     font-size: 18px;
