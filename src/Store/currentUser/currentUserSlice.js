@@ -88,7 +88,7 @@ const currentUserSlice = createSlice({
           email: payload.user.email,
           gender: payload.user.gender,
           name: payload.user.name,
-          registerDate: payload.user.created,
+          created: payload.user.created,
         };
       })
       .addCase(updateCurrentUserThunk.rejected, (state, { payload }) => {
