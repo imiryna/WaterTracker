@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Navigate, redirect } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import {
   AuthStyledForm,
   AuthDiv,
@@ -26,6 +26,7 @@ import Alert from '@mui/material/Alert';
 import { updatePasswordThunk } from 'Store/auth/authOperations';
 import { Loading } from 'components/Loader/Loader.styled';
 
+
 const validationSchema = Yup.object({
   password: Yup.string('Enter your password')
     .min(8, 'Password should be of minimum 8 characters length')
@@ -42,8 +43,8 @@ const validationSchema = Yup.object({
  const isAuthenticated = useSelector(selectAuthAuthenticated);
  const isLoading = useSelector(selectAuthIsLoading);
  const [openSnackbar, setOpenSnackbar] = useState(false);
- const [openConfirmation, setOpenOpenConfirmation] = useState(false);
-
+ const [openConfirmation, setOpenConfirmation] = useState(false);
+ const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -61,9 +62,9 @@ const validationSchema = Yup.object({
             
           })
         );
-        openConfirmation()
+        setOpenConfirmation(true)
         formik.resetForm();
-        redirect('/signin');
+        navigate('/signin');
       } catch (error) {
         setOpenSnackbar(true);
       }
@@ -85,7 +86,7 @@ const validationSchema = Yup.object({
   };
 
   const handleCloseConfirmation = () => {
-    setOpenOpenConfirmation(false);
+    setOpenConfirmation(false);
   }
 
   if (isAuthenticated) {
