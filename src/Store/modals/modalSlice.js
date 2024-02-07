@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { logOutThunk } from 'Store/auth/authOperations';
 
 const INITIAL_STATE = {
   addWaterShowing: false,
@@ -34,6 +35,11 @@ const modalSlice = createSlice({
       state.confirmLogoutShowing = !state.confirmLogoutShowing;
     },
   },
+  extraReducers: build => {
+    build.addCase(logOutThunk.fulfilled, () => {
+      return INITIAL_STATE
+    })
+  }
 });
 
 export const {

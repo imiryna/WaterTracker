@@ -51,8 +51,6 @@ export const Navigation = () => {
     shownName = name ? name : email;
   }
 
-  console.log(`isauthed: ${isAuthed}`);
-
   const getRandomHexColor = () =>
     `#${Math.floor(Math.random() * 16777215)
       .toString(16)
