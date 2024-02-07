@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Navigate, redirect } from 'react-router-dom';
 import {
   AuthStyledForm,
@@ -15,8 +15,8 @@ import {
   HidePassIcon,
 } from '../SignIn/SignIn.styled';
 import {
-  selectAuthError,
   selectAuthAuthenticated,
+  selectAuthIsLoading,
 } from 'Store/auth/authSelector';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
@@ -24,6 +24,7 @@ import * as Yup from 'yup';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import { updatePasswordThunk } from 'Store/auth/authOperations';
+import { Loading } from 'components/Loader/Loader.styled';
 
 const validationSchema = Yup.object({
   password: Yup.string('Enter your password')
@@ -38,8 +39,8 @@ const validationSchema = Yup.object({
  export const UpdatePasswordForm = () => {
 
  const dispatch = useDispatch();
- const authError = useSelector(selectAuthError);
  const isAuthenticated = useSelector(selectAuthAuthenticated);
+ const isLoading = useSelector(selectAuthIsLoading);
  const [openSnackbar, setOpenSnackbar] = useState(false);
  const [openConfirmation, setOpenOpenConfirmation] = useState(false);
 
@@ -62,7 +63,7 @@ const validationSchema = Yup.object({
         );
         openConfirmation()
         formik.resetForm();
-        return redirect('/signin');
+        redirect('/signin');
       } catch (error) {
         setOpenSnackbar(true);
       }
@@ -75,12 +76,6 @@ const validationSchema = Yup.object({
   const pathname = urlObject.search;
   const segment = pathname.split('=');
   const restoreToken = segment[1];
-
-  useEffect(() => {
-    if (authError) {
-      setOpenSnackbar(true);
-    }
-  }, [authError]);
 
   const [showPassword, setShowPassword] = useState(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
@@ -97,7 +92,9 @@ const validationSchema = Yup.object({
     return <Navigate to="/signin" />;
   }
 
-  return (
+  return isLoading 
+    ? <Loading/> 
+    :
     <AuthDiv>
       <AuthStyledForm onSubmit={formik.handleSubmit}>
         <FormName>Reset password</FormName>
@@ -175,7 +172,7 @@ const validationSchema = Yup.object({
 
         </Snackbar>
     </AuthDiv>
-  );
+  ;
 };
 
 export default UpdatePasswordForm;
