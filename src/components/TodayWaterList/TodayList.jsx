@@ -16,9 +16,8 @@ import {
   toggleEditWateVisibility,
 } from 'Store/modals/modalSlice';
 import { selectAddWater, selectEditWater } from 'Store/modals/modalSelector';
-import { selectAuthToken } from 'Store/auth/authSelector';
-import { setWater } from 'Store/water/waterReducer';
-
+// import { selectAuthToken } from 'Store/auth/authSelector';
+// import { setWater } from 'Store/water/waterReducer';
 
 export const TodayList = () => {
   const dispatch = useDispatch();
@@ -42,17 +41,16 @@ export const TodayList = () => {
     fetchWater();
   }, [dispatch]);
 
-  
   const showAddModal = useSelector(selectAddWater);
   const showEditModal = useSelector(selectEditWater);
   const waterArr = useSelector(waterArrSelector);
-  const token = useSelector(selectAuthToken)
-  
-  useEffect(() =>{
-    return () => {
-      dispatch(setWater([]))
-    }
-  }, [token, dispatch]) 
+  // const token = useSelector(selectAuthToken);
+
+  // useEffect(() =>{
+  //   return () => {
+  //     dispatch(setWater([]))
+  //   }
+  // }, [token, dispatch])
 
   const markup = waterArr.map(item => {
     const waterCardId = item._id;
@@ -69,7 +67,7 @@ export const TodayList = () => {
       dialogStatus,
       setDialogStatus,
       setCurrentEditObj,
-      dispatch
+      dispatch,
     });
   });
 

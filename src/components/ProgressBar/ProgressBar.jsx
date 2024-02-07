@@ -1,5 +1,9 @@
 import React from 'react';
-import { ProgressBarStyled, StyledBarWithComponents, StyledTitle } from './ProgressBar.styled';
+import {
+  ProgressBarStyled,
+  StyledBarWithComponents,
+  StyledTitle,
+} from './ProgressBar.styled';
 import { ReactComponent as Icon } from './progressBar-icon.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { totalWaterAmmountSelector } from 'Store/water/waterSelectors';
@@ -12,8 +16,8 @@ import { selectAddWater } from 'Store/modals/modalSelector';
 
 export const ProgressBar = () => {
   const waterAmount = useSelector(totalWaterAmmountSelector);
-  const waterNorma = useSelector(selectDailyNorm);
-  const progress = (waterAmount / waterNorma) * 100;
+  const waterNorma = useSelector(selectDailyNorm) || 0;
+  const progress = waterNorma > 0 ? (waterAmount / waterNorma) * 100 : 0;
   const dispatch = useDispatch();
 
   const showAddModal = useSelector(selectAddWater);
@@ -37,27 +41,26 @@ export const ProgressBar = () => {
       color: '#9ebbff',
     },
   };
-
   return (
     <>
       <StyledTitle className="progress-bar-title">Today</StyledTitle>
       <ProgressBarStyled>
         <StyledBarWithComponents>
-        <Slider
-          className="progress-bar"
-          sx={CustomSliderStyles}
-          value={progress}
-        />
-        <ul className="progress-bar-lines">
-          <li className="progress-bar-line"></li>
-          <li className="progress-bar-line"></li>
-          <li className="progress-bar-line"></li>
-        </ul>
-        <ul className="progress-bar-labels">
-          <li className="progress-bar-label-0 progress-bar-label">0%</li>
-          <li className="progress-bar-label-50 progress-bar-label">50%</li>
-          <li className="progress-bar-label-100 progress-bar-label">100%</li>
-        </ul>
+          <Slider
+            className="progress-bar"
+            sx={CustomSliderStyles}
+            value={progress}
+          />
+          <ul className="progress-bar-lines">
+            <li className="progress-bar-line"></li>
+            <li className="progress-bar-line"></li>
+            <li className="progress-bar-line"></li>
+          </ul>
+          <ul className="progress-bar-labels">
+            <li className="progress-bar-label-0 progress-bar-label">0%</li>
+            <li className="progress-bar-label-50 progress-bar-label">50%</li>
+            <li className="progress-bar-label-100 progress-bar-label">100%</li>
+          </ul>
         </StyledBarWithComponents>
         <button
           className="progress-bar-button"
@@ -74,9 +77,7 @@ export const ProgressBar = () => {
           </span>
           <span className="button-text">Add water</span>
         </button>
-      
-    </ProgressBarStyled>
+      </ProgressBarStyled>
     </>
-    
   );
 };

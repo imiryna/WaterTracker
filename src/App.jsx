@@ -41,11 +41,11 @@ export const App = () => {
 
           <Route
             path="/signup"
-            element={!isAuthed ? <Signup /> : <Navigate to={'/'} />}
+            element={!isAuthed ? <Signup /> : <Navigate to="/" />}
           />
           <Route
             path="/signin"
-            element={!isAuthed ? <Signin /> : <Navigate to={'/'} />}
+            element={!isAuthed ? <Signin /> : <Navigate to="/" />}
           />
           <Route path="/forgotpassword" element={<ForgotPassword />} />
           <Route path="/updatepassword" element={<UpdatePassword />} />

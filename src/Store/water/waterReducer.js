@@ -1,6 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addWaterThunk,  changeWaterThunk, delWaterThunk, getDailyWaterThunk } from './waterThunks';
+import {
+  addWaterThunk,
+  changeWaterThunk,
+  delWaterThunk,
+  getDailyWaterThunk,
+} from './waterThunks';
 
+import { logOutThunk } from 'Store/auth/authOperations';
 /*
   water card exemple:
   {
@@ -10,12 +16,11 @@ import { addWaterThunk,  changeWaterThunk, delWaterThunk, getDailyWaterThunk } f
   }
 */
 const INITIAL_STATE = {
-  waterArr:  [],
+  waterArr: [],
   isLoading: false,
   error: null,
   totalWaterAmmount: 0,
 };
-
 
 export const waterSlice = createSlice({
   name: 'waterArr',
@@ -27,20 +32,20 @@ export const waterSlice = createSlice({
   },
   extraReducers: builder =>
     builder
-    //? GET WATER
-    .addCase(getDailyWaterThunk.pending, state => {
-      state.isLoading = true;
+      //? GET WATER
+      .addCase(getDailyWaterThunk.pending, state => {
+        state.isLoading = true;
         state.error = null;
-    })
-    .addCase(getDailyWaterThunk.fulfilled, (state, action) => {
-      state.waterArr = action.payload.dailyList
-      state.totalWaterAmmount = recalculateTodayDrinkedWater(state.waterArr)
-      state.isLoading = false
-    })
-    .addCase(getDailyWaterThunk.rejected, (state, action) => {
-      state.isLoading = false
-      state.error = action.payload
-    })
+      })
+      .addCase(getDailyWaterThunk.fulfilled, (state, action) => {
+        state.waterArr = action.payload.dailyList;
+        state.totalWaterAmmount = recalculateTodayDrinkedWater(state.waterArr);
+        state.isLoading = false;
+      })
+      .addCase(getDailyWaterThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
       //?DEL WATER
       .addCase(delWaterThunk.pending, state => {
         state.isLoading = true;
@@ -51,14 +56,14 @@ export const waterSlice = createSlice({
 
         // Searching for item to delete
         state.waterArr = state.waterArr.filter(
-          item => item._id !== action.payload["Removed waterId"]
+          item => item._id !== action.payload['Removed waterId']
         );
         // Recalculating total today drinked water
         state.totalWaterAmmount = recalculateTodayDrinkedWater(state.waterArr);
       })
       .addCase(delWaterThunk.rejected, (state, action) => {
-        state.isLoading = false
-        state.error = action.payload
+        state.isLoading = false;
+        state.error = action.payload;
       })
       //?CHANGE WATER
       .addCase(changeWaterThunk.pending, state => {
@@ -71,14 +76,12 @@ export const waterSlice = createSlice({
         // Searching for water card to change
         state.waterArr = state.waterArr.map(item => {
           if (item._id === action.payload._id) {
-            
             // Rewriting water card info
             item.amount = action.payload.amount || item.amount;
             item.time = action.payload.time || item.time;
           }
           return item;
         });
-
 
         // Recalculating total today drinked water
         state.totalWaterAmmount = recalculateTodayDrinkedWater(state.waterArr);
@@ -106,7 +109,9 @@ export const waterSlice = createSlice({
         state.isLoading = false;
         state.error = action.payload;
       })
-     
+      .addCase(logOutThunk.fulfilled, () => {
+        return INITIAL_STATE;
+      }),
 });
 
 const recalculateTodayDrinkedWater = waterArr => {
