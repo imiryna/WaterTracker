@@ -43,7 +43,7 @@ const LogoutConfirmationDialog = ({ visible, onHide }) => {
             acceptLabel="Log out"
             rejectLabel="Cancel"
             accept={onConfirm}
-            reject={onClose}
+            reject={onHide}
             onKeyDown={onKeyDown}
             className="custom-confirm-dialog"
             contentClassName="custom-confirm-dialog-content"
