@@ -75,7 +75,7 @@ border: 1px solid black;
 width: 34px;
 height: 34px;
 background-color: var(--primery-white);
-border-color:  ${props => props.$percentage < 100 ? 'orange' : 'transparent'};
+border-color:  ${props => props.$percentage < 100 ? '#FF9D43' : 'transparent'};
 `
 
 
